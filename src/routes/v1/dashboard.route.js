@@ -17,9 +17,20 @@ router
   .route('/filter/districtlist')
   .post(validate(dashboardValidation.getDistrictList), dashboardController.getDistrictList);
 
-router
-  .route('/filter/getblockList')
-  .post(validate(dashboardValidation.getBlockList), dashboardController.getBlockList);
+router.route('/filter/getblockList').post(validate(dashboardValidation.getBlockList), dashboardController.getBlockList);
+router.get(
+  '/filtercount/division/:masterProjectId/:surveyId/:surveyFormId/:division',
+  dashboardController.getLocationCountsByDivisionController
+);
+router.get(
+  '/filtercount/district/:masterProjectId/:surveyId/:surveyFormId/:district',
+  dashboardController.getLocationCountsByDistrict
+);
+router.get(
+  '/filtercount/block/:masterProjectId/:surveyId/:surveyFormId/:block',
+  dashboardController.getLocationCountsByBlock
+);
+router.get('/filtercount', dashboardController.getLocationCountsByFiltersController);
 
 module.exports = router;
 
@@ -162,6 +173,193 @@ module.exports = router;
  *                   type: array
  *                   items:
  *                     type: string
+ *       500:
+ *         description: Internal Server Error
+ */
+
+/**
+ * @swagger
+ * /dashboard/filtercount/division/{masterProjectId}/{surveyId}/{surveyFormId}/{division}:
+ *   get:
+ *     summary: Get counts of locations, surveyed locations, and pending locations based on masterProjectId, surveyId, surveyFormId, and division
+ *     tags: [Dashboard]
+ *     parameters:
+ *       - in: path
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyFormId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: division
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Counts retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalLocations:
+ *                   type: number
+ *                 totalSurveyed:
+ *                   type: number
+ *                 totalPending:
+ *                   type: number
+ *       500:
+ *         description: Internal Server Error
+ */
+
+// /**
+//  * @swagger
+//  * /dashboard/filtercount:
+//  *   get:
+//  *     summary: Get counts of locations, surveyed locations, and pending locations based on masterProjectId, surveyId, surveyFormId, and optional filters
+//  *     tags: [Dashboard]
+//  *     parameters:
+//  *       - in: path
+//  *         name: masterProjectId
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *       - in: path
+//  *         name: surveyId
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *       - in: path
+//  *         name: surveyFormId
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *       - in: query
+//  *         name: division
+//  *         schema:
+//  *           type: string
+//  *       - in: query
+//  *         name: district
+//  *         schema:
+//  *           type: string
+//  *       - in: query
+//  *         name: blockName
+//  *         schema:
+//  *           type: string
+//  *     responses:
+//  *       200:
+//  *         description: Counts retrieved successfully
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               properties:
+//  *                 totalLocations:
+//  *                   type: number
+//  *                 totalSurveyed:
+//  *                   type: number
+//  *                 totalPending:
+//  *                   type: number
+//  *       500:
+//  *         description: Internal Server Error
+//  */
+
+/**
+ * @swagger
+ * /dashboard/filtercount/district/{masterProjectId}/{surveyId}/{surveyFormId}/{district}:
+ *   get:
+ *     summary: Get counts of locations, surveyed locations, and pending locations based on masterProjectId, surveyId, surveyFormId, and district
+ *     tags: [Dashboard]
+ *     parameters:
+ *       - in: path
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyFormId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: district
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Counts retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalLocations:
+ *                   type: number
+ *                 totalSurveyed:
+ *                   type: number
+ *                 totalPending:
+ *                   type: number
+ *       500:
+ *         description: Internal Server Error
+ */
+
+/**
+ * @swagger
+ * /dashboard/filtercount/block/{masterProjectId}/{surveyId}/{surveyFormId}/{block}:
+ *   get:
+ *     summary: Get counts of locations, surveyed locations, and pending locations based on masterProjectId, surveyId, surveyFormId, and block
+ *     tags: [Dashboard]
+ *     parameters:
+ *       - in: path
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: surveyFormId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: path
+ *         name: block
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Counts retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalLocations:
+ *                   type: number
+ *                 totalSurveyed:
+ *                   type: number
+ *                 totalPending:
+ *                   type: number
  *       500:
  *         description: Internal Server Error
  */

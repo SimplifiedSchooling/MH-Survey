@@ -23,14 +23,14 @@ router.route('/bulkupload').post(uploads.single('file'), userController.bulkUplo
 
 router
   .route('/')
-  .post( validate(userValidation.createUser), userController.createUser)
-  .get( validate(userValidation.getUsers), userController.getUsers);
+  .post(validate(userValidation.createUser), userController.createUser)
+  .get(validate(userValidation.getUsers), userController.getUsers);
 
 router
   .route('/:userId')
-  .get( validate(userValidation.getUser), userController.getUser)
-  .patch( validate(userValidation.updateUser), userController.updateUser)
-  .delete( validate(userValidation.deleteUser), userController.deleteUser);
+  .get(validate(userValidation.getUser), userController.getUser)
+  .patch(validate(userValidation.updateUser), userController.updateUser)
+  .delete(validate(userValidation.deleteUser), userController.deleteUser);
 
 router.route('/checkuser').post(validate(userValidation.checkUser), userController.checkUser);
 module.exports = router;

@@ -22,11 +22,7 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage });
 router
   .route('/bulkupload-school')
-  .post(
-    uploads.single('file'),
-    validate(schoolValidation.schoolValidationSchema),
-    SchoolController.bulkUploadFile
-  );
+  .post(uploads.single('file'), validate(schoolValidation.schoolValidationSchema), SchoolController.bulkUploadFile);
 router
   .route('/')
   .get(

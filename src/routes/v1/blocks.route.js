@@ -22,11 +22,7 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage });
 router
   .route('/bulkupload-block')
-  .post(
-    uploads.single('file'),
-    validate(blockValidation.blockShema),
-    blockController.bulkUploadFile
-  );
+  .post(uploads.single('file'), validate(blockValidation.blockShema), blockController.bulkUploadFile);
 router
   .route('/')
   .post(
