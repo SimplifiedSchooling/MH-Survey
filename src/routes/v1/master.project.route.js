@@ -147,6 +147,8 @@ module.exports = router;
  *     post:
  *       summary: Create a Master Survey Project with Sub Surveys
  *       tags: [Master Survey Project]
+ *       security:
+ *       - bearerAuth: []
  *       requestBody:
  *         $ref: '#/components/requestBodies/MasterSurveyRequest'
  *       responses:
