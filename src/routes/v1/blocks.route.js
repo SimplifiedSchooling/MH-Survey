@@ -23,7 +23,6 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload-block')
   .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     validate(blockValidation.blockShema),
     blockController.bulkUploadFile
