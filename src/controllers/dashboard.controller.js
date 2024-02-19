@@ -13,6 +13,39 @@ const getLocationCounts = catchAsync(async (req, res, next) => {
   }
 });
 
+const getDivisionList = catchAsync(async (req, res) => {
+    const { masterProjectId } = req.params;
+    const data = await DashboardServices.getDivisionList(masterProjectId);
+    if(!data){
+ 
+      res.status((new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Internal Server Error', error)));
+    }
+    res.status(httpStatus.OK).json(data);
+});
+
+const getDistrictList = catchAsync(async (req, res) => {
+  const { masterProjectId, division} = req.body;
+  const data = await DashboardServices.getDistrictList(masterProjectId, division);
+  if(!data){
+
+    res.status((new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Internal Server Error', error)));
+  }
+  res.status(httpStatus.OK).json(data);
+});
+
+const getBlockList = catchAsync(async (req, res) => {
+  const { masterProjectId, district} = req.body;
+  const data = await DashboardServices.getBlockList(masterProjectId, district);
+  if(!data){
+
+    res.status((new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Internal Server Error', error)));
+  }
+  res.status(httpStatus.OK).json(data);
+});
+
 module.exports = {
   getLocationCounts,
+  getDivisionList,
+  getDistrictList,
+  getBlockList,
 };
