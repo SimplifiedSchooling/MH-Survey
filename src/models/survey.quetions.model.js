@@ -5,6 +5,9 @@ const surveyQuetionsSchema = new mongoose.Schema({
   title: {
     type: String,
   },
+  file: {
+    type: String,
+  },
   description: {
     type: String,
   },

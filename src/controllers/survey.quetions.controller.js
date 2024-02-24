@@ -5,6 +5,7 @@ const catchAsync = require('../utils/catchAsync');
 const { surveyQuetionsService } = require('../services');
 
 const createSurveyQuetions = catchAsync(async (req, res) => {
+  req.body.file = req.fileUrl;
   const quetion = await surveyQuetionsService.createSurveyQuetions(req.body);
   res.status(httpStatus.CREATED).send(quetion);
 });
