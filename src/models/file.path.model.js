@@ -9,6 +9,15 @@ const filePathSchema = new mongoose.Schema({
   },
   questionName: { type: String, required: true },
   file: { type: String, required: true },
+  surveyId: {
+    type: String,
+  },
+  masterProjectId: {
+    type: String,
+  },
+  udise_sch_code: {
+    type: Number,
+  },
 });
 
 // add plugin that converts mongoose to json
