@@ -13,3 +13,4 @@ module.exports.surveyAnswerController = require('./survey.answer.controller');
 module.exports.officerController = require('./officer.controller');
 module.exports.smeSurveyAnswerController = require('./sme.survey.answer.controller');
 module.exports.dashboardController = require('./dashboard.controller');
+module.exports.filePathController = require('./file.path.controller');

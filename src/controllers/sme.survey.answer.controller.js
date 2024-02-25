@@ -2,9 +2,25 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
+const { SurveyAnswer } = require('../models');
 const { smeSurveyAnswerService } = require('../services');
 
+/* eslint-disable camelcase */
 const createSurveyAnswers = catchAsync(async (req, res) => {
+  const { questionId, masterProjectId, udise_sch_code, surveyFormId } = req.body;
+  const filter = {
+    questionId,
+    masterProjectId,
+    udise_sch_code,
+    surveyFormId,
+  };
+  const update = {
+    status: 'Audited',
+  };
+  const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, { new: true });
+  if (!updatedDocument) {
+    console.log('Survey not found');
+  }
   const quetion = await smeSurveyAnswerService.createSurveyAnswers(req.body);
   res.status(httpStatus.CREATED).send(quetion);
 });
