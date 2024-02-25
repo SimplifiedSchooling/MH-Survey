@@ -16,3 +16,4 @@ module.exports.DivisionOfficer = require('./divisionofficer.model');
 module.exports.SMEOfficer = require('./smeofficer.model');
 module.exports.SMESurveyAnswers = require('./sme.sruvey.asnwer.model');
 module.exports.FilePath = require('./file.path.model');
+module.exports.SMEFilePath = require('./sme.file.path.model');
