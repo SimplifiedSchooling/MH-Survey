@@ -81,6 +81,15 @@ module.exports = router;
  *               questionName:
  *                 type: string
  *                 description: The name of the question
+ *               surveyId:
+ *                 type: string
+ *                 description: The id of the survey
+ *               masterProjectId:
+ *                 type: string
+ *                 description: The id of the masterProject
+ *               udise_sch_code:
+ *                 type: number
+ *                 description: The  udise_sch_code
  *               file:
  *                 type: string
  *                 format: binary
