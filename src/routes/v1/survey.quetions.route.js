@@ -1,30 +1,14 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const { v4: uuidv4 } = require('node-uuid');
 const validate = require('../../middlewares/validate');
 const auth = require('../../middlewares/auth');
-const { uploadFileMiddleware } = require('../../middlewares/bucket');
 const { surveyQuetionsValidation } = require('../../validations');
 const { surveyQuetionsController } = require('../../controllers');
 
 const router = express.Router();
-
-const storageMulter = multer.diskStorage({
-  destination: '/home/ubuntu/MH-Survey/src/uploads',
-  filename: (req, file, callback) => {
-    const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
-    callback(null, uniqueFileName);
-  },
-});
-
-const upload = multer({ storageMulter });
-
 router
   .route('/')
   .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin', 'user'), 
-    upload.single('file'), uploadFileMiddleware,
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin', 'user'),
     validate(surveyQuetionsValidation.createSurveyQuetions),
     surveyQuetionsController.createSurveyQuetions
   )
@@ -34,55 +18,31 @@ router
     surveyQuetionsController.getSurveyQuetions
   );
 
-// router
-//   .route('/')
-//   .post(
-//     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin', 'user'), 
-//     upload.single('file'), uploadFileMiddleware,
-//     // validate(surveyQuetionsValidation.createSurveyQuetions),
-//     surveyQuetionsController.createSurveyQuetions
-//   );
-  // .get(
-  //   auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-  //   validate(surveyQuetionsValidation.getSurveyQuetions),
-  //   surveyQuetionsController.getSurveyQuetions
-  // );
+router
+  .route('/:surveyId')
+  .get(
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    validate(surveyQuetionsValidation.getSurveyQuetionById),
+    surveyQuetionsController.getSurveyQuetion
+  )
+  .patch(
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    validate(surveyQuetionsValidation.updateSurveyQuetion),
+    surveyQuetionsController.updateSurveyQuetions
+  )
+  .delete(
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    validate(surveyQuetionsValidation.deleteSurveyQuetion),
+    surveyQuetionsController.deleteSurveyQuetions
+  );
 
-// router
-//   .route('/')
-//   .post(
-//     upload.single('file'), // Use multer middleware to handle file upload
-//     uploadFileMiddleware, // Upload file to GCS middleware
-//     surveyQuetionsValidation.createSurveyQuetions,
-//     surveyQuetionsController.createSurveyQuetions
-//   );
-
-
-// router
-//   .route('/:surveyId')
-//   .get(
-//     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     validate(surveyQuetionsValidation.getSurveyQuetionById),
-//     surveyQuetionsController.getSurveyQuetion
-//   )
-//   .patch(
-//     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     validate(surveyQuetionsValidation.updateSurveyQuetion),
-//     surveyQuetionsController.updateSurveyQuetions
-//   )
-//   .delete(
-//     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     validate(surveyQuetionsValidation.deleteSurveyQuetion),
-//     surveyQuetionsController.deleteSurveyQuetions
-//   );
-
-// router
-//   .route('/get-created-by/:createdById')
-//   .get(
-//     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     // validate(surveyQuetionsValidation.getSurveyQuetionByCreatedById),
-//     surveyQuetionsController.getSurveyQuetionsBycreatedById
-//   );
+router
+  .route('/get-created-by/:createdById')
+  .get(
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    validate(surveyQuetionsValidation.getSurveyQuetionByCreatedById),
+    surveyQuetionsController.getSurveyQuetionsBycreatedById
+  );
 
 module.exports = router;
 
@@ -126,9 +86,6 @@ module.exports = router;
  *                       type: string
  *               createdById:
  *                 type: string
- *               file:
- *                 type: string
- *                 format: binary
  *             example:
  *               title: "fake name"
  *               description: "fake description"

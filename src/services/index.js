@@ -15,3 +15,4 @@ module.exports.surveyAnswerService = require('./survey.answer.service');
 module.exports.smeSurveyAnswerService = require('./sme.survey.answer.service');
 module.exports.OfficersService = require('./officers.service');
 module.exports.DashboardServices = require('./dashboard.service');
+module.exports.filePathService = require('./file.path.service');
