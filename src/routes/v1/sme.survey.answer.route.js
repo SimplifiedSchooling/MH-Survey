@@ -9,12 +9,12 @@ const router = express.Router();
 router
   .route('/')
   .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(SMESurveyAnswersValidation.createSurveyAnswers),
     smeSurveyAnswerController.createSurveyAnswers
   )
   .get(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(SMESurveyAnswersValidation.getSurveyAnswers),
     smeSurveyAnswerController.getSurveyAnswers
   );
@@ -110,8 +110,8 @@ module.exports = router;
  *               surveyFormId: "65b8e8428bc57009fe403698"
  *               surveyConductEmail: "john@example.com"
  *               udise_sch_code : 27040108712
- *               Longitude : 0.000000   
- *               Latitude : 0.000000
+ *               Longitude : "73.8567" 
+ *               Latitude : "73.8567"
  *     responses:
  *       "201":
  *         description: Created
