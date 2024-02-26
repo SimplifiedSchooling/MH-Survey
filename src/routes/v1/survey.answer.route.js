@@ -75,6 +75,8 @@ module.exports = router;
  *               - surveyFormId
  *               - surveyConductEmail
  *               - udise_sch_code
+ *               - Latitude
+ *               - Longitude
  *             properties:
  *               surveyQuetions:
  *                 type: array
@@ -95,6 +97,10 @@ module.exports = router;
  *                 type: string
  *               udise_sch_code:
  *                 type: number
+ *               Longitude:
+ *                 type: string
+ *               Latitude:
+ *                 type: string
  *             example:
  *               surveyQuetions:
  *                 - quetion: "What is your name?"
@@ -104,6 +110,8 @@ module.exports = router;
  *               surveyFormId: "65b8e8428bc57009fe403698"
  *               surveyConductEmail: "john@example.com"
  *               udise_sch_code : 27040108712
+ *               Longitude : 0.000000   
+ *               Latitude : 0.000000
  *     responses:
  *       "201":
  *         description: Created
