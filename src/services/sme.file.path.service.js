@@ -1,16 +1,16 @@
-const { FilePath } = require('../models');
+const { SMEFilePath } = require('../models');
 
 /**
- * Create a FilePath
+ * Create a sme file Path
  * @param {Object} filePathnBody
- * @returns {Promise<FilePath>}
+ * @returns {Promise<SMEFilePath>}
  */
 const createFilePath = async (filePathnBody) => {
-  return FilePath.create(filePathnBody);
+  return SMEFilePath.create(filePathnBody);
 };
 
 /**
- * Query for file Path
+ * Query for sme file Path
  * @param {Object} filter - Mongo filter
  * @param {Object} options - Query options
  * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
@@ -19,17 +19,17 @@ const createFilePath = async (filePathnBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryFilePath = async (filter, options) => {
-  const filePath = await FilePath.paginate(filter, options);
+  const filePath = await SMEFilePath.paginate(filter, options);
   return filePath;
 };
 
 /**
- * Get filepath by questionId
+ * Get sme file path by questionId
  * @param {ObjectId} questionId
- * @returns {Promise<FilePath>}
+ * @returns {Promise<SMEFilePath>}
  */
 const getFilePathById = async (questionId) => {
-  return FilePath.find(questionId);
+  return SMEFilePath.find(questionId);
 };
 
 module.exports = {

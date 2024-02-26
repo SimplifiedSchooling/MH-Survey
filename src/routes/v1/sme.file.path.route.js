@@ -1,12 +1,12 @@
 const express = require('express');
-// const validate = require('../../middlewares/validate');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('node-uuid');
+const validate = require('../../middlewares/validate');
 // const auth = require('../../middlewares/auth');
 const { filePathController } = require('../../controllers');
 const { uploadFileMiddleware } = require('../../middlewares/bucket');
-// const { divisionValidation } = require('../../validations');
+const { smeFilePathValidation } = require('../../validations');
 
 const storageMulter = multer.diskStorage({
   destination: '/home/ubuntu/MH-Survey/src/uploads',
@@ -26,18 +26,18 @@ router
     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     upload.single('file'),
     uploadFileMiddleware,
-    // validate(divisionValidation.createDivision),
+    validate(smeFilePathValidation.createSmeFilePath),
     filePathController.createFilePath
   )
   .get(
     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    // validate(divisionValidation.getDivisions),
+    validate(smeFilePathValidation.getSmeFilePaths),
     filePathController.queryFilePath
   );
 
 router.route('/:questionId').get(
   //   auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-  // validate(divisionValidation.getDivision),
+  validate(smeFilePathValidation.getSmeFilePath),
   filePathController.getFilepath
 );
 //   .put(
@@ -56,16 +56,16 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: File Path
+ *   name: SME File Path
  *   description: File Path management
  */
 
 /**
  * @swagger
- * /file-path:
+ * /sme-file-path:
  *   post:
  *     summary: Upload a File Path
- *     tags: [File Path]
+ *     tags: [SME File Path]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -103,15 +103,15 @@ module.exports = router;
  *         content:
  *           application/json:
  *             schema:
- *                $ref: '#/components/schemas/FilePath'
+ *                $ref: '#/components/schemas/SMEFilePath'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get query Division
- *     tags: [File Path]
+ *     summary: Get query Sme file path
+ *     tags: [SME File Path]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -149,7 +149,7 @@ module.exports = router;
  *                 results:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Division'
+ *                     $ref: '#/components/schemas/SMEFilePath'
  *                 page:
  *                   type: integer
  *                   example: 1
@@ -170,10 +170,10 @@ module.exports = router;
 
 /**
  * @swagger
- * /file-path/{questionId}:
+ * /sme-file-path/{questionId}:
  *   get:
  *     summary: Get a question
- *     tags: [File Path]
+ *     tags: [SME File Path]
  *     security:
  *       - bearerAuth: []
  *     parameters:
