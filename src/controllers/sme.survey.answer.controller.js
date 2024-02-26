@@ -26,32 +26,24 @@ const { smeSurveyAnswerService } = require('../services');
 // });
 
 const createSurveyAnswers = catchAsync(async (req, res) => {
-  const {masterProjectId, udise_sch_code, surveyFormId, surveyId } = req.body;
+  const { masterProjectId, udise_sch_code, surveyFormId, surveyId } = req.body;
 
-const filter = {
-  surveyId,
-  masterProjectId,
-  udise_sch_code,
-  surveyFormId,
-};
-const existingDocument = await SurveyAnswers.findOne(filter);
+  const filter = {
+    surveyId,
+    masterProjectId,
+    udise_sch_code,
+    surveyFormId,
+  };
+  const existingDocument = await SurveyAnswers.findOne(filter);
 
-if (existingDocument) {
-  // Document exists, update it
-  existingDocument.status = 'Auditted';
-  await existingDocument.save();
-} else {
-  // Document doesn't exist, create a new one
-  const newDocument = new SurveyAnswer({
-    ...filter,
-    status: 'Auditted',
-  });
-  await newDocument.save();
-}
-
-// Continue with additional actions if needed
-const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
-res.status(httpStatus.CREATED).send(question);
+  if (existingDocument) {
+    // Document exists, update it
+    existingDocument.status = 'Auditted';
+    await existingDocument.save();
+  }
+  // Continue with additional actions if needed
+  const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
+  res.status(httpStatus.CREATED).send(question);
 });
 
 const getSurveyAnswers = catchAsync(async (req, res) => {

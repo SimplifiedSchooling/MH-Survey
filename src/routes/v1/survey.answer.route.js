@@ -110,7 +110,7 @@ module.exports = router;
  *               surveyFormId: "65b8e8428bc57009fe403698"
  *               surveyConductEmail: "john@example.com"
  *               udise_sch_code : 27040108712
- *               Longitude : "73.8567" 
+ *               Longitude : "73.8567"
  *               Latitude : "73.8567"
  *     responses:
  *       "201":
