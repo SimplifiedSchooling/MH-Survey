@@ -15,6 +15,8 @@ const createSurveyAnswers = {
     surveyFormId: Joi.string().required(),
     udise_sch_code: Joi.number().required(),
     surveyConductEmail: Joi.string().required(),
+    Latitude: Joi.string().allow(''),
+    Longitude: Joi.string().allow(''),
   }),
 };
 

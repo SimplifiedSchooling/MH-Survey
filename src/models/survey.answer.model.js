@@ -33,6 +33,12 @@ const surveyAnswerSchema = new mongoose.Schema(
       type: String,
       default: 'Surveyed',
     },
+    Latitude: {
+      type: String,
+    },
+    Longitude: {
+      type: String,
+    },
   },
   {
     timestamps: true,
