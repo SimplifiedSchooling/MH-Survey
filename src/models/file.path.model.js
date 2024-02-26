@@ -18,6 +18,12 @@ const filePathSchema = new mongoose.Schema({
   udise_sch_code: {
     type: Number,
   },
+  Longitude: {
+    type: String,
+  },
+  Latitude: {
+    type: String,
+  },
 });
 
 // add plugin that converts mongoose to json

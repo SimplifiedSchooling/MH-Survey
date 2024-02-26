@@ -87,6 +87,12 @@ module.exports = router;
  *               masterProjectId:
  *                 type: string
  *                 description: The id of the masterProject
+ *               Longitude:
+ *                 type: string
+ *                 description: The Longitude
+ *               Latitude:
+ *                 type: string
+ *                 description: The Latitude
  *               udise_sch_code:
  *                 type: number
  *                 description: The  udise_sch_code

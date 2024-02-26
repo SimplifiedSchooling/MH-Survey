@@ -16,6 +16,7 @@ const smeAnswersRoute = require('./sme.survey.answer.route');
 const dashboardRoute = require('./dashboard.route');
 const filePathRoute = require('./file.path.route');
 const smeFilePathRoute = require('./sme.file.path.route');
+const districtofficerDashboardRoute = require('./district.officer.dashboard.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -90,6 +91,10 @@ const defaultRoutes = [
   {
     path: '/sme-file-path',
     route: smeFilePathRoute,
+  },
+  {
+    path: '/districtofficer-dashboard',
+    route: districtofficerDashboardRoute,
   },
 ];
 

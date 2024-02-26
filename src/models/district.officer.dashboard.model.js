@@ -1,16 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const smeSurveyAnswerSchema = new mongoose.Schema(
+const distictOfficerAnswerSchema = new mongoose.Schema(
   {
-    surveyQuetions: [
-      {
-        quetion: {
-          type: String,
-        },
-        answer: Array,
-      },
-    ],
     surveyId: {
       type: String,
     },
@@ -29,13 +21,19 @@ const smeSurveyAnswerSchema = new mongoose.Schema(
     surveyConductEmail: {
       type: String,
     },
+    auditConductEmail: {
+      type: String,
+    },
+    remark: {
+      type: String,
+    },
+    status: {
+      type: String,
+    },
     Latitude: {
       type: String,
     },
     Longitude: {
-      type: String,
-    },
-    remark: {
       type: String,
     },
   },
@@ -45,10 +43,10 @@ const smeSurveyAnswerSchema = new mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-smeSurveyAnswerSchema.plugin(toJSON);
-smeSurveyAnswerSchema.plugin(paginate);
+distictOfficerAnswerSchema.plugin(toJSON);
+distictOfficerAnswerSchema.plugin(paginate);
 /* eslint-disable camelcase */
-const SME_SurveyAnswer = mongoose.model('SME-SurveyAnswer', smeSurveyAnswerSchema);
+const DistrictOfficerSurveyAnswer = mongoose.model('DistrictOfficer-SurveyAnswer', distictOfficerAnswerSchema);
 
-module.exports = SME_SurveyAnswer;
+module.exports = DistrictOfficerSurveyAnswer;
 /* eslint-enable camelcase */

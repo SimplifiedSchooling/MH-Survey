@@ -90,6 +90,12 @@ module.exports = router;
  *               udise_sch_code:
  *                 type: number
  *                 description: The  udise_sch_code
+ *               Longitude:
+ *                 type: string
+ *                 description: The Longitude
+ *               Latitude:
+ *                 type: string
+ *                 description: The Latitude
  *               file:
  *                 type: string
  *                 format: binary

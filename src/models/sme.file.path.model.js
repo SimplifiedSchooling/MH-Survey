@@ -15,6 +15,12 @@ const smeFilePathSchema = new mongoose.Schema({
   masterProjectId: {
     type: String,
   },
+  Longitude: {
+    type: String,
+  },
+  Latitude: {
+    type: String,
+  },
   udise_sch_code: {
     type: Number,
   },

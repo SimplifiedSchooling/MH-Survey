@@ -87,12 +87,12 @@ const uploadFileMiddleware = async (req, res, next) => {
     // File upload successful
     const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
     req.fileUrl = publicUrl; // Attach file URL to request object
-     console.log(req.fileUrl)
+    console.log(req.fileUrl);
 
     await setDefaultObjectAcl(); // Set default object ACL
     next();
   });
- 
+
   // Pipe the file data to the bucket
   blobStream.end(file.buffer);
 };
