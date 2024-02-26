@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { SurveyAnswer } = require('../models');
+const { SurveyAnswers } = require('../models');
 const { smeSurveyAnswerService } = require('../services');
 
 /* eslint-disable camelcase */
@@ -24,32 +24,34 @@ const { smeSurveyAnswerService } = require('../services');
 //   const quetion = await smeSurveyAnswerService.createSurveyAnswers(req.body);
 //   res.status(httpStatus.CREATED).send(quetion);
 // });
+
 const createSurveyAnswers = catchAsync(async (req, res) => {
-  const { questionId, masterProjectId, udise_sch_code, surveyFormId } = req.body;
-  const filter = {
-    questionId,
-    masterProjectId,
-    udise_sch_code,
-    surveyFormId,
-  };
+  const {masterProjectId, udise_sch_code, surveyFormId, surveyId } = req.body;
 
-  const update = {
-    $set: {
-      status: 'Audited',
-    },
-  };
+const filter = {
+  surveyId,
+  masterProjectId,
+  udise_sch_code,
+  surveyFormId,
+};
+const existingDocument = await SurveyAnswers.findOne(filter);
 
-  const options = {
-    new: true, // Return the modified document
-    upsert: true, // Create the document if it doesn't exist
-  };
+if (existingDocument) {
+  // Document exists, update it
+  existingDocument.status = 'Auditted';
+  await existingDocument.save();
+} else {
+  // Document doesn't exist, create a new one
+  const newDocument = new SurveyAnswer({
+    ...filter,
+    status: 'Auditted',
+  });
+  await newDocument.save();
+}
 
-  const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, options);
-  
-  // If you need to perform additional actions after the update, you can do so here.
-
-  const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
-  res.status(httpStatus.CREATED).send(question);
+// Continue with additional actions if needed
+const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
+res.status(httpStatus.CREATED).send(question);
 });
 
 const getSurveyAnswers = catchAsync(async (req, res) => {
