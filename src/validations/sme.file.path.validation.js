@@ -9,6 +9,8 @@ const createSmeFilePath = {
     surveyId: Joi.string(),
     masterProjectId: Joi.string(),
     udise_sch_code: Joi.string(),
+    Latitude: Joi.string().allow(''),
+    Longitude: Joi.string().allow(''),
   }),
 };
 

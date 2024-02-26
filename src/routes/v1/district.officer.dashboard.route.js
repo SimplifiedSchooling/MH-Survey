@@ -1,8 +1,8 @@
 const express = require('express');
 const validate = require('../../middlewares/validate');
 const auth = require('../../middlewares/auth');
-const { SMESurveyAnswersValidation } = require('../../validations');
-const { smeSurveyAnswerController } = require('../../controllers');
+const { districtOfficerDashboardValidation } = require('../../validations');
+const { distictOfficerAnswerController } = require('../../controllers');
 
 const router = express.Router();
 
@@ -10,38 +10,38 @@ router
   .route('/')
   .post(
     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.createSurveyAnswers),
-    smeSurveyAnswerController.createSurveyAnswers
+    validate(districtOfficerDashboardValidation.districtOfficerAnswerValidation),
+    distictOfficerAnswerController.createSurveyAnswers
   )
   .get(
     // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.getSurveyAnswers),
-    smeSurveyAnswerController.getSurveyAnswers
+    validate(districtOfficerDashboardValidation.getSurveyAnswers),
+    distictOfficerAnswerController.getSurveyAnswers
   );
 
 router
   .route('/:answerId')
   .get(
     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.getSurveyAnswerById),
-    smeSurveyAnswerController.getSurveyAnswer
+    validate(districtOfficerDashboardValidation.getSurveyAnswerById),
+    distictOfficerAnswerController.getSurveyAnswer
   )
   .patch(
     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.updateSurveyAnswer),
-    smeSurveyAnswerController.updateSurveyAnswers
+    validate(districtOfficerDashboardValidation.updateSurveyAnswer),
+    distictOfficerAnswerController.updateSurveyAnswers
   )
   .delete(
     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.deleteSurveyAnswer),
-    smeSurveyAnswerController.deleteSurveyAnswers
+    validate(districtOfficerDashboardValidation.deleteSurveyAnswer),
+    distictOfficerAnswerController.deleteSurveyAnswers
   );
 router
   .route('/filters/:surveyId/:masterProjectId/:surveyFormId/:udise_sch_code')
   .get(
     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    validate(SMESurveyAnswersValidation.filterSurveyAnswer),
-    smeSurveyAnswerController.filterSurveyAnswersController
+    validate(districtOfficerDashboardValidation.filterSurveyAnswer),
+    distictOfficerAnswerController.filterSurveyAnswersController
   );
 
 module.exports = router;
@@ -49,17 +49,17 @@ module.exports = router;
 /**
  * @swagger
  * tags:
- *   name: SME Answers
- *   description: SME Survey Answers management and retrieval
+ *   name: districtOfficer Dashboard
+ *   description: districtofficer Survey Answers management and retrieval
  */
 
 /**
  * @swagger
- * /sme-answers:
+ * /districtofficer-dashboard:
  *   post:
- *     summary: Create a Survey Answers
+ *     summary: Create a districtofficer Answers
  *     description: Only admins can create other Survey Questions.
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -69,25 +69,24 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - surveyQuetions
  *               - surveyId
+ *               - remark
+ *               - status
  *               - masterProjectId
  *               - surveyFormId
  *               - surveyConductEmail
+ *               - auditConductEmail
  *               - udise_sch_code
  *               - Latitude
  *               - Longitude
  *             properties:
- *               surveyQuetions:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     quetion:
- *                       type: string
- *                     answer:
- *                       type: array
  *               surveyId:
+ *                 type: string
+ *               remark:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *               auditConductEmail:
  *                 type: string
  *               masterProjectId:
  *                 type: string
@@ -101,20 +100,17 @@ module.exports = router;
  *                 type: string
  *               Latitude:
  *                 type: string
- *               remark:
- *                 type: string
  *             example:
- *               surveyQuetions:
- *                 - quetion: "What is your name?"
- *                   answer: ["John"]
+ *               remark: "remark for this survey"
+ *               status: "Approved , Rejected , reinited"
  *               surveyId: "password1"
  *               masterProjectId: "projectId1"
  *               surveyFormId: "65b8e8428bc57009fe403698"
  *               surveyConductEmail: "john@example.com"
+ *               auditConductEmail: "john@example.com"
  *               udise_sch_code : 27040108712
  *               Longitude : "73.8567"
  *               Latitude : "73.8567"
- *               remark : "73.8567"
  *     responses:
  *       "201":
  *         description: Created
@@ -128,9 +124,9 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all Survey Answers
+ *     summary: Get all District Officer Survey Answers
  *     description: Only admins can retrieve all Survey Answers.
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -185,11 +181,11 @@ module.exports = router;
 
 /**
  * @swagger
- * /sme-answers/{answerId}:
+ * /districtofficer-dashboard/{answerId}:
  *   get:
- *     summary: Get a Survey Answers
+ *     summary: Get a District Survey Answers
  *     description: Logged-in Survey Answers can fetch only their own user information. Only admins can fetch other Survey Questions.
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -214,9 +210,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a Survey Answers
+ *     summary: Update a District Survey Answers
  *     description: Logged-in Survey Answers can only update their information. Only admins can update other Survey Questions.
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -273,9 +269,9 @@ module.exports = router;
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a Survey Answers
+ *     summary: Delete a District Survey Answers
  *     description: Logged-in Survey Answers can delete only themselves. Only admins can delete other Survey Questions.
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -298,11 +294,11 @@ module.exports = router;
 
 /**
  * @swagger
- * /sme-answers/filters/{surveyId}/{masterProjectId}/{surveyFormId}/{udise_sch_code}:
+ * /districtofficer-dashboard/filters/{surveyId}/{masterProjectId}/{surveyFormId}/{udise_sch_code}:
  *   get:
- *     summary: Get Survey Answers by surveyId, masterProjectId, surveyFormId, udise_sch_code
+ *     summary: Get District Survey Answers by surveyId, masterProjectId, surveyFormId, udise_sch_code
  *     description: Get Survey Answers by surveyId, masterProjectId, surveyFormId, surveyConduct
- *     tags: [SME Answers]
+ *     tags: [districtOfficer Dashboard]
  *     security:
  *       - bearerAuth: []
  *     parameters:

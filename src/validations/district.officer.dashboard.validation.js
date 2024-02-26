@@ -1,23 +1,17 @@
 const Joi = require('joi');
 
-const createSurveyAnswers = {
+const districtOfficerAnswerValidation = {
   body: Joi.object().keys({
-    surveyQuetions: Joi.array()
-      .items(
-        Joi.object({
-          quetion: Joi.string().required(),
-          answer: Joi.array().required(),
-        })
-      )
-      .required(),
-    surveyId: Joi.string().required(),
-    masterProjectId: Joi.string().required(),
-    surveyFormId: Joi.string().required(),
-    udise_sch_code: Joi.number().required(),
-    surveyConductEmail: Joi.string().required(),
+    surveyId: Joi.string(),
+    masterProjectId: Joi.string(),
+    udise_sch_code: Joi.number(),
+    surveyFormId: Joi.string(),
+    surveyConductEmail: Joi.string(),
+    auditConductEmail: Joi.string(),
+    remark: Joi.string(),
+    status: Joi.string(),
     Latitude: Joi.string().allow(''),
     Longitude: Joi.string().allow(''),
-    remark: Joi.string(),
   }),
 };
 
@@ -71,7 +65,7 @@ const filterSurveyAnswer = {
 };
 
 module.exports = {
-  createSurveyAnswers,
+  districtOfficerAnswerValidation,
   getSurveyAnswers,
   getSurveyAnswerById,
   updateSurveyAnswer,
