@@ -6,25 +6,6 @@ const { SurveyAnswers } = require('../models');
 const { smeSurveyAnswerService } = require('../services');
 
 /* eslint-disable camelcase */
-// const createSurveyAnswers = catchAsync(async (req, res) => {
-//   const { questionId, masterProjectId, udise_sch_code, surveyFormId } = req.body;
-//   const filter = {
-//     questionId,
-//     masterProjectId,
-//     udise_sch_code,
-//     surveyFormId,
-//   };
-//   const update = {
-//     status: 'Audited',
-//   };
-//   const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, { new: true });
-//   if (!updatedDocument) {
-//     console.log('Survey not found');
-//   }
-//   const quetion = await smeSurveyAnswerService.createSurveyAnswers(req.body);
-//   res.status(httpStatus.CREATED).send(quetion);
-// });
-
 const createSurveyAnswers = catchAsync(async (req, res) => {
   const { masterProjectId, udise_sch_code, surveyFormId, surveyId } = req.body;
 
@@ -37,11 +18,9 @@ const createSurveyAnswers = catchAsync(async (req, res) => {
   const existingDocument = await SurveyAnswers.findOne(filter);
 
   if (existingDocument) {
-    // Document exists, update it
     existingDocument.status = 'Auditted';
     await existingDocument.save();
   }
-  // Continue with additional actions if needed
   const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
   res.status(httpStatus.CREATED).send(question);
 });

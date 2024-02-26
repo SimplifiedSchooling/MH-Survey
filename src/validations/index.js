@@ -12,3 +12,4 @@ module.exports.masterProjectValidation = require('./master.project.validation');
 module.exports.surveyAnswersValidation = require('./survey.answer.validation');
 module.exports.SMESurveyAnswersValidation = require('./sme.survey,answer.validation');
 module.exports.dashboardValidation = require('./dashboard.validation');
+module.exports.smeFilePathValidation = require('./sme.file.path.validation');
