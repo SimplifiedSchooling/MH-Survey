@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "survey-management-qc",
+  "private_key_id": "c4d95fc7a086c1782d5a25c152efc8b96653c068",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJ2atbggm5G6ix\nWtKcrFozzyDY2XS5Tj909mxPzbaLKM5ZBVQdAG+tTrOweW3Eofo8AMYELDKLobB+\nhlK0Iz71KaoBWPdI8JsarQNq3pUkGBH8C6NaicXv1uLlJVfRL4UE6XphP9eK07Jt\nqJ4rxggCES7U3JyNEpafjUCCFlUALzD154f5y1QP9rFyyoiyJwlr9P8hR0ySflLW\nr8YL50oxNQCCb7XzVgGn+M4WTh5sjEb9Q41/H0y8yDc5Ih3RjiTi36b8Jm2IX3kc\n5FF0WoS72sdaK3xewJJ4FqmmXAM1CmkMmH+zeyijeF2niV0P7Bk8apCq0GfWNVyq\nGsa2V3rPAgMBAAECggEAL9Dto/bRINWph6IRRGYb1CwcBuK0oPUlWSrLC7iapqqa\n/0Gg5GHnErITJRoO48bPRYmVXwWtT6CU89QUIXI8Bs3A5SLTKac9xvr3VUi3Id7F\n2+RR5S/AAQnxpADNpdNQ+pHomMML52ow2YNZPNtjqEGzy18bgtvFbLSEdIyfxDP9\n7iqYhi8PZQPIunH2i6ZgmAbhY8D0LgPvXGzGbsGErWpB56/P1rEOr/9joOFtnVpr\n5Uj9TWKyMwZ1pmdcZj7Fa+3e8V6RCnJMD/rVqptL89vhJtR2BvQaKnt8N+kJQV9o\nPh7GflOHw+Mz/0PXrZ9ZVjsiFRrpxHfncytgxuyeEQKBgQDq40T/zizKh4LNlpbf\nexjIbolh0etFfgl3ZaZX6nFZsnt5JaNyXVlW69wbrLtoSRFTzN9XynzKbLJm8OB4\nL5TwAVNhzr+hJduoHhy70BOECohvjhnOYAbkHTzFSr5PBPYEdgq/wViemxw902wx\nO2bD9bNan40PV0rWRxiK99xXeQKBgQDb/jZQ81js5dBAj39hjtSrHCHusR7JYGfG\nWHLd2uLlJrzWfyZ4NlEBMENaxB2+ONmg9eer0F7G4YMUH1iBNr09WFmmQ4Wo9xBE\nDfwTmRThvT8RB2NndmNB6Prs7Qh0US4B7CrE/W4LEqZcs0DBresbcBi91NTJFHtJ\ntD0vMMeqhwKBgQCpECoCwSBmKgFQ/rnbYxukcEM8AD8KRryDjsua7ejmOdw7h4bM\nczoxoRRNaxd86VKqcYS0CM+nV3NVOr0mZIEb+qhMduZhFAG1UO83k33ohThMqwgS\nDfYHzK+IBdNSxuxYq6ny+TRS/KvoKDvwd6PxGfEdIkgCqb742jVlGSAkaQKBgCon\nhiTw3GNYjhUw6gm5osq+80mXqvyPepMpM6mLXdrnF1xKtQZn8hG2O9HSrphasGkF\ndcUYgnC9ma5razwnTw/INDWFzsDXxsgjnd/rf3LaHpGWxtd2egKRMDPiH7KaM6Su\nqmtg3ItGoZY1yvzR5LE3Q6Zsd/Gn+Q/gd7DpOflVAoGAdOKdracNCZxR5YyWLAcv\nO5DdrJvpIxh+GzJDBFKbfqWB3tOnnSBZjEWb5KJrHsq2GoYjacdKOvxCOo5Kqxn4\nIXt6e+ZiYShftiBIXLSKc6qx/bAYZOeJ0OhC63KfEfvGrzSsl206KTJG/swbUF8M\nd5+qJaVNBpleBNIz0kbb+Q8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "gcp-bucket-surveymng@survey-management-qc.iam.gserviceaccount.com",
+  "client_id": "101629088792620934762",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gcp-bucket-surveymng%40survey-management-qc.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
