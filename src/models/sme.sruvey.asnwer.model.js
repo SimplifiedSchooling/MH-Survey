@@ -28,7 +28,18 @@ const smeSurveyAnswerSchema = new mongoose.Schema({
   surveyConductEmail: {
     type: String,
   },
-});
+  Latitude: {
+    type: String,
+  },
+  Longitude: {
+    type: String,
+  },
+},
+{
+  timestamps: true,
+}
+
+);
 
 // add plugin that converts mongoose to json
 smeSurveyAnswerSchema.plugin(toJSON);

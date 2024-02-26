@@ -6,6 +6,24 @@ const { SurveyAnswer } = require('../models');
 const { smeSurveyAnswerService } = require('../services');
 
 /* eslint-disable camelcase */
+// const createSurveyAnswers = catchAsync(async (req, res) => {
+//   const { questionId, masterProjectId, udise_sch_code, surveyFormId } = req.body;
+//   const filter = {
+//     questionId,
+//     masterProjectId,
+//     udise_sch_code,
+//     surveyFormId,
+//   };
+//   const update = {
+//     status: 'Audited',
+//   };
+//   const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, { new: true });
+//   if (!updatedDocument) {
+//     console.log('Survey not found');
+//   }
+//   const quetion = await smeSurveyAnswerService.createSurveyAnswers(req.body);
+//   res.status(httpStatus.CREATED).send(quetion);
+// });
 const createSurveyAnswers = catchAsync(async (req, res) => {
   const { questionId, masterProjectId, udise_sch_code, surveyFormId } = req.body;
   const filter = {
@@ -14,15 +32,24 @@ const createSurveyAnswers = catchAsync(async (req, res) => {
     udise_sch_code,
     surveyFormId,
   };
+
   const update = {
-    status: 'Audited',
+    $set: {
+      status: 'Audited',
+    },
   };
-  const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, { new: true });
-  if (!updatedDocument) {
-    console.log('Survey not found');
-  }
-  const quetion = await smeSurveyAnswerService.createSurveyAnswers(req.body);
-  res.status(httpStatus.CREATED).send(quetion);
+
+  const options = {
+    new: true, // Return the modified document
+    upsert: true, // Create the document if it doesn't exist
+  };
+
+  const updatedDocument = await SurveyAnswer.findOneAndUpdate(filter, update, options);
+  
+  // If you need to perform additional actions after the update, you can do so here.
+
+  const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);
+  res.status(httpStatus.CREATED).send(question);
 });
 
 const getSurveyAnswers = catchAsync(async (req, res) => {
