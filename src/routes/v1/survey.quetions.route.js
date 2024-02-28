@@ -73,8 +73,6 @@ module.exports = router;
  *                 type: string
  *               description:
  *                 type: string
- *               visibleIf:
- *                 type: string
  *               questions:
  *                 type: array
  *                 items:
@@ -86,16 +84,18 @@ module.exports = router;
  *                       type: string
  *                     title:
  *                       type: string
+ *                     visibleIf:
+ *                 type: string
  *               createdById:
  *                 type: string
  *             example:
  *               title: "fake name"
- *               visibleIf: "string"
  *               description: "fake description"
  *               questions:
  *                 - type: "text"
  *                   name: "name"
  *                   title: "What is your name?"
+ *                     visibleIf: "string"
  *               createdById: "password1"
  *     responses:
  *       "201":

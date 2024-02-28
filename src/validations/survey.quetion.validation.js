@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createSurveyQuetions = {
   body: Joi.object().keys({
     title: Joi.string().required(),
-    visibleIf: Joi.string().allow(''),
+   
     description: Joi.string().required(),
     questions: Joi.array()
       .items(
@@ -13,6 +13,7 @@ const createSurveyQuetions = {
           title: Joi.string().required(),
           choices: Joi.array().items(Joi.string()),
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
+          visibleIf: Joi.string().allow('')
         })
       )
       .required(),
