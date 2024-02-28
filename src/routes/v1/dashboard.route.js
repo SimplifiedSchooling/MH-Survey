@@ -8,7 +8,7 @@ const { dashboardValidation } = require('../../validations');
 
 router
   .route('/count/:masterProjectId/:surveyId/:surveyFormId')
-  .get(auth('surveyadmin'), validate(dashboardValidation.getCounts), dashboardController.getLocationCounts);
+  .get(validate(dashboardValidation.getCounts), dashboardController.getLocationCounts);
 router
   .route('/getdivisionlist/:masterProjectId')
   .get(validate(dashboardValidation.getDivisionList), dashboardController.getDivisionList);
