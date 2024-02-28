@@ -73,6 +73,8 @@ module.exports = router;
  *                 type: string
  *               description:
  *                 type: string
+ *               visibleif:
+ *                 type: string
  *               questions:
  *                 type: array
  *                 items:
@@ -88,6 +90,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               title: "fake name"
+ *               visibleif: " string "
  *               description: "fake description"
  *               questions:
  *                 - type: "text"
