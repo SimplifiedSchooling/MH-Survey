@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createSurveyQuetions = {
   body: Joi.object().keys({
     title: Joi.string().required(),
-    visibleIf: Joi.string(),
+    visibleIf: Joi.string().allow(''),
     description: Joi.string().required(),
     questions: Joi.array()
       .items(
