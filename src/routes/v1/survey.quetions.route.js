@@ -73,7 +73,7 @@ module.exports = router;
  *                 type: string
  *               description:
  *                 type: string
- *               visibleif:
+ *               visibleIf:
  *                 type: string
  *               questions:
  *                 type: array
@@ -90,7 +90,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               title: "fake name"
- *               visibleif: " string "
+ *               visibleIf: " string "
  *               description: "fake description"
  *               questions:
  *                 - type: "text"
