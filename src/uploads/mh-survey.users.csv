@@ -1,3 +1,16 @@
-role,isEmailVerified,name,email,password,mobNumber,roleAssingedTo
-superadmin,true,super admin,superadmin@gmail.com,password1,9823525745,1234
-admin,true,Admin,admin@gmail.com,password1,9823525745,1235
+role,name,email,password,mobNumber,roleAssingedTo
+block,fake name,fake@example.com,$2a$08$J9KfpIdosPYhqcUUgztFk.B3900NiW3paNX4lDSp37ynXtr15nHGm,9823525745,270702
+block,fake name,fake2@example.com,$2a$08$o2UG7MhJm/HKzljtJMM9Je4lU6Obi0/K68IoI/X8iaphEhNtr50em,9823525745,270702
+district,fake name,district@example.com,$2a$08$1wrQKVenxw4hlvTbaOuVJ.lYFJIgWlj4FqlCvXUHsZcTKsTqo0J/K,9823525745,2707
+district,fake name,district2@example.com,$2a$08$DWN7LRtnimJdSpwIQxKqjOSgQINVl2j6hgpYYrecL.8tviSW20Nd6,9823525745,2707
+division,fake name,division@example.com,$2a$08$DTbyk83oybiuinC.O4Ob..5lUcIyGZ11Yn7Zz1E0H364IRwKPCTde,9823525745,Pune
+division,fake name,division2@example.com,$2a$08$L9LNPRpDBy8rJ7FD6e56zuOSbv59pAntXql/h8cfNBDjOGWY9vIrq,9823525745,Nagpur
+SME,fake name,sme@example.com,$2a$08$elug0OKE0YijcuYStdVgX.XK5mfPKN5/Dj7UmifaDzaQ5DaQUm3Cm,9823525745,270702
+SME,fake name,sme2@example.com,$2a$08$mHhdtPyd3LbDNlatVR95ROqmgMdjW5J62Zpp.eRmX.lS7BD8msQMy,9823525745,270702
+surveyadmin,fake name,surveyadmin@example.com,$2a$08$kwUXL55Awl/lcWmoH0aor.V0RUPY0kt/iSyXF9.KQYfx31DupP0kC,9823525745,
+superadmin,Amit Mishra,superadmin@example.com,$2a$08$5gEqw1lns54bywY4xdKwe.nGMlvct3RUwszcRSVHaPBZ7T6lUxxcq,9823525745,
+superadmin,super admin,superadmin@gmail.com,$2a$08$h67AYBC4vnfIWo5jbPQvO.iAe22v1wMNV7u6BV7z4Pmu1PGw.i7Nm,9823525745,270702
+block,yogesh patil,yogeshpatil@gmail.com,$2a$08$wwtlzwrRnH5Pz5gUJvG1nuXVtzJhsH0Z0y18bokoyTz0yu/QyqCci,9823525745,270702
+district,pravin pawar,pravinpawar@gmail.com,$2a$08$PihynyEq79oEJiL1JXzLv.x4G6Tq4El2hIyxUzdexyJGle4KgXzqG,9823525745,
+block,abcd,abcd@gmail.com,$2a$08$iLEKC33fWbP0U9DqCeYRtelpNiHjw2yHUstP6NJASRAc5onOBpXLy,9823525745,270702
+block,fake name,abcd123@gmail.com,$2a$08$sTwRvIXxbNI0Dw14HTURuuVqP/N9NICPgPjtYWd22ZxkFLQWpV0me,9823525745,270702

@@ -19,12 +19,45 @@ const getLocationCounts = async (masterProjectId, surveyId, surveyFormId) => {
     surveyId,
     surveyFormId,
     udise_sch_code: { $in: udiseCodes },
+    status: 'Surveyed',
+  });
+
+  const totalAuditted = await SurveyAnswers.countDocuments({
+    masterProjectId,
+    surveyId,
+    surveyFormId,
+    udise_sch_code: { $in: udiseCodes },
+    status: 'Auditted',
+  });
+
+  const totalApproved = await SurveyAnswers.countDocuments({
+    masterProjectId,
+    surveyId,
+    surveyFormId,
+    udise_sch_code: { $in: udiseCodes },
+    status: 'Approved',
+  });
+
+  const totalRejected = await SurveyAnswers.countDocuments({
+    masterProjectId,
+    surveyId,
+    surveyFormId,
+    udise_sch_code: { $in: udiseCodes },
+    status: 'Rejected',
+  });
+
+  const totalReinited = await SurveyAnswers.countDocuments({
+    masterProjectId,
+    surveyId,
+    surveyFormId,
+    udise_sch_code: { $in: udiseCodes },
+    status: 'Reinited',
   });
 
   // Calculate total pending locations
-  const totalPending = totalLocations - totalSurveyed;
+  const totalPending = totalLocations - totalSurveyed - totalAuditted - totalApproved - totalRejected - totalReinited;
 
-  return { totalLocations, totalSurveyed, totalPending };
+  return { totalLocations, totalSurveyed, totalAuditted, totalApproved, totalPending, totalRejected, totalReinited };
 };
 
 /**
@@ -116,17 +149,60 @@ const getLocationCountsByDivision = async (masterProjectId, surveyId, surveyForm
     const totalLocations = new Set(udiseCodes).size;
 
     // Get total surveyed locations based on the provided division
+    // const totalSurveyed = await SurveyAnswers.countDocuments({
+    //   masterProjectId,
+    //   surveyId,
+    //   surveyFormId,
+    //   udise_sch_code: { $in: udiseCodes },
+    // });
+
+    // // Calculate total pending locations
+    // const totalPending = totalLocations - totalSurveyed;
+
     const totalSurveyed = await SurveyAnswers.countDocuments({
       masterProjectId,
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
+      status: 'Surveyed',
+    });
+
+    const totalAuditted = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Auditted',
+    });
+
+    const totalApproved = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Approved',
+    });
+
+    const totalRejected = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Rejected',
+    });
+
+    const totalReinited = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Reinited',
     });
 
     // Calculate total pending locations
-    const totalPending = totalLocations - totalSurveyed;
+    const totalPending = totalLocations - totalSurveyed - totalAuditted - totalApproved - totalRejected - totalReinited;
 
-    return { totalLocations, totalSurveyed, totalPending };
+    return { totalLocations, totalSurveyed, totalAuditted, totalApproved, totalPending, totalRejected, totalReinited };
   } catch (error) {
     // Handle errors if needed
     throw new Error('Error fetching location counts by division');
@@ -161,12 +237,45 @@ const getLocationCountsByDistrict = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
+      status: 'Surveyed',
+    });
+
+    const totalAuditted = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Auditted',
+    });
+
+    const totalApproved = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Approved',
+    });
+
+    const totalRejected = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Rejected',
+    });
+
+    const totalReinited = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Reinited',
     });
 
     // Calculate total pending locations
-    const totalPending = totalLocations - totalSurveyed;
+    const totalPending = totalLocations - totalSurveyed - totalAuditted - totalApproved - totalRejected - totalReinited;
 
-    return { totalLocations, totalSurveyed, totalPending };
+    return { totalLocations, totalSurveyed, totalAuditted, totalApproved, totalPending, totalRejected, totalReinited };
   } catch (error) {
     // Handle errors if needed
     throw new Error('Error fetching location counts by division');
@@ -185,97 +294,68 @@ const getLocationCountsByBlock = async (masterProjectId, surveyId, surveyFormId,
   try {
     // Get schools data for the master project
     const schools = await getSchoolDataBySurveyId(masterProjectId);
-
     // Filter schools based on the provided division
     const schoolsMatchingDivision = schools.filter((school) => school.Block_Name === block);
-
     // Extract udise_sch_code from the filtered schools
     const udiseCodes = schoolsMatchingDivision.map((school) => school.udise_sch_code);
-
     // Get total locations based on the provided division
     const totalLocations = new Set(udiseCodes).size;
-
     // Get total surveyed locations based on the provided division
     const totalSurveyed = await SurveyAnswers.countDocuments({
       masterProjectId,
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
+      status: 'Surveyed',
+    });
+
+    const totalAuditted = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Auditted',
+    });
+
+    const totalApproved = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Approved',
+    });
+
+    const totalRejected = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Rejected',
+    });
+
+    const totalReinited = await SurveyAnswers.countDocuments({
+      masterProjectId,
+      surveyId,
+      surveyFormId,
+      udise_sch_code: { $in: udiseCodes },
+      status: 'Reinited',
     });
 
     // Calculate total pending locations
-    const totalPending = totalLocations - totalSurveyed;
+    const totalPending = totalLocations - totalSurveyed - totalAuditted - totalApproved - totalRejected - totalReinited;
 
-    return { totalLocations, totalSurveyed, totalPending };
+    return { totalLocations, totalSurveyed, totalAuditted, totalApproved, totalPending, totalRejected, totalReinited };
   } catch (error) {
     // Handle errors if needed
     throw new Error('Error fetching location counts by division');
   }
 };
 
-// /**
-//  * Get counts of locations, surveyed locations, and pending locations based on masterProjectId and optional filters
-//  * @param {String} masterProjectId - ID of the master project
-//  * @param {String} surveyId - ID of the master project
-//  * @param {String} surveyFormId - ID of the master project
-//  * @param {Object} filters - Optional filters for counting data (e.g., { division: 'Division1', district: 'District1', blockName: 'Block1' })
-//  * @returns {Promise<{ totalLocations: number, totalSurveyed: number, totalPending: number }>}
-//  */
-// const getLocationCountsByFilters = async (masterProjectId, surveyId, surveyFormId, filters = {}) => {
-//   try {
-//     // Get schools data for the master project
-//     const schools = await getSchoolDataBySurveyId(masterProjectId);
-
-//     // Apply optional filters
-//     const filterQuery = {
-//       masterProjectId,
-//       surveyId,
-//       surveyFormId,
-//       ...(filters.division && { Division: filters.division }),
-//       ...(filters.district && { District: filters.district }),
-//       ...(filters.blockName && { Block_Name: filters.blockName }),
-//     };
-
-//     // Filter schools based on optional filters
-//     const filteredSchools = schools.filter((school) => {
-//       for (const key in filterQuery) {
-//         if (filterQuery[key] && school[key] !== filterQuery[key]) {
-//           return false;
-//         }
-//       }
-//       return true;
-//     });
-
-//     // Extract udise_sch_code from the filtered schools
-//     const udiseCodes = filteredSchools.map((school) => school.udise_sch_code);
-
-//     // Get total locations based on optional filters
-//     const totalLocations = new Set(udiseCodes).size;
-
-//     // Get total surveyed locations based on optional filters
-//     const totalSurveyed = await SurveyAnswers.countDocuments({
-//       masterProjectId,
-//       surveyId,
-//       surveyFormId,
-//       udise_sch_code: { $in: udiseCodes },
-//     });
-
-//     // Calculate total pending locations
-//     const totalPending = totalLocations - totalSurveyed;
-
-//     return { totalLocations, totalSurveyed, totalPending };
-//   } catch (error) {
-//     // Handle errors if needed
-//     throw new Error('Error fetching location counts by filters');
-//   }
-// };
-
 module.exports = {
   getLocationCounts,
   getDivisionList,
   getDistrictList,
   getBlockList,
-  // getLocationCountsByFilters,
   getLocationCountsByDivision,
   getLocationCountsByDistrict,
   getLocationCountsByBlock,
