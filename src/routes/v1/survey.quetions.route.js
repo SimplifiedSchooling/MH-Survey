@@ -90,7 +90,7 @@ module.exports = router;
  *                 type: string
  *             example:
  *               title: "fake name"
- *               visibleIf: " string "
+ *               visibleIf: "string"
  *               description: "fake description"
  *               questions:
  *                 - type: "text"
