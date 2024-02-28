@@ -8,6 +8,9 @@ const surveyQuetionsSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  visibleif: {
+    type: String,
+  },
   questions: [{ type: mongoose.Schema.Types.Mixed }],
   createdById: {
     type: String,
