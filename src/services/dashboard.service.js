@@ -51,7 +51,7 @@ const getLocationCounts = async (masterProjectId, surveyId, surveyFormId) => {
     surveyId,
     surveyFormId,
     udise_sch_code: { $in: udiseCodes },
-    status: 'Reinitiate',
+    status: 'Reinitiated',
   });
 
   // Calculate total pending locations
@@ -196,7 +196,7 @@ const getLocationCountsByDivision = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Reinitiate',
+      status: 'Reinitiated',
     });
 
     // Calculate total pending locations
@@ -269,7 +269,7 @@ const getLocationCountsByDistrict = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Reinitiate',
+      status: 'Reinitiated',
     });
 
     // Calculate total pending locations
