@@ -27,7 +27,7 @@ const getLocationCounts = async (masterProjectId, surveyId, surveyFormId) => {
     surveyId,
     surveyFormId,
     udise_sch_code: { $in: udiseCodes },
-    status: 'Auditted',
+    status: 'Audited',
   });
 
   const totalApproved = await SurveyAnswers.countDocuments({
@@ -51,7 +51,7 @@ const getLocationCounts = async (masterProjectId, surveyId, surveyFormId) => {
     surveyId,
     surveyFormId,
     udise_sch_code: { $in: udiseCodes },
-    status: 'Reinited',
+    status: 'Reinitiate',
   });
 
   // Calculate total pending locations
@@ -172,7 +172,7 @@ const getLocationCountsByDivision = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Auditted',
+      status: 'Audited',
     });
 
     const totalApproved = await SurveyAnswers.countDocuments({
@@ -196,7 +196,7 @@ const getLocationCountsByDivision = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Reinited',
+      status: 'Reinitiate',
     });
 
     // Calculate total pending locations
@@ -245,7 +245,7 @@ const getLocationCountsByDistrict = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Auditted',
+      status: 'Audited',
     });
 
     const totalApproved = await SurveyAnswers.countDocuments({
@@ -269,7 +269,7 @@ const getLocationCountsByDistrict = async (masterProjectId, surveyId, surveyForm
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Reinited',
+      status: 'Reinitiate',
     });
 
     // Calculate total pending locations
@@ -314,7 +314,7 @@ const getLocationCountsByBlock = async (masterProjectId, surveyId, surveyFormId,
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Auditted',
+      status: 'Audited',
     });
 
     const totalApproved = await SurveyAnswers.countDocuments({
@@ -338,7 +338,7 @@ const getLocationCountsByBlock = async (masterProjectId, surveyId, surveyFormId,
       surveyId,
       surveyFormId,
       udise_sch_code: { $in: udiseCodes },
-      status: 'Reinited',
+      status: 'Reinitiate',
     });
 
     // Calculate total pending locations
