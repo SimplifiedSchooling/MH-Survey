@@ -46,7 +46,7 @@ const distictOfficerAnswerSchema = new mongoose.Schema(
 distictOfficerAnswerSchema.plugin(toJSON);
 distictOfficerAnswerSchema.plugin(paginate);
 /* eslint-disable camelcase */
-const DistrictOfficerSurveyAnswer = mongoose.model('DistrictOfficer-SurveyAnswer', distictOfficerAnswerSchema);
+const DistrictOfficerSurveyAnswer = mongoose.model('DistrictOfficerSurveyAnswer', distictOfficerAnswerSchema);
 
 module.exports = DistrictOfficerSurveyAnswer;
 /* eslint-enable camelcase */

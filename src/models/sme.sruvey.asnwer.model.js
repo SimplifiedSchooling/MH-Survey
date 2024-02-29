@@ -48,7 +48,7 @@ const smeSurveyAnswerSchema = new mongoose.Schema(
 smeSurveyAnswerSchema.plugin(toJSON);
 smeSurveyAnswerSchema.plugin(paginate);
 /* eslint-disable camelcase */
-const SME_SurveyAnswer = mongoose.model('SME-SurveyAnswer', smeSurveyAnswerSchema);
+const SME_SurveyAnswer = mongoose.model('SMESurveyAnswer', smeSurveyAnswerSchema);
 
 module.exports = SME_SurveyAnswer;
 /* eslint-enable camelcase */
