@@ -7,6 +7,7 @@ const createSurveyAnswers = {
         Joi.object({
           quetion: Joi.string().required(),
           answer: Joi.array().required(),
+          isVisible: Joi.boolean(),
         })
       )
       .required(),

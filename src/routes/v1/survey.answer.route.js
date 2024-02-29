@@ -87,6 +87,8 @@ module.exports = router;
  *                       type: string
  *                     answer:
  *                       type: array
+ *                     isVisible:
+ *                       type: boolean
  *               surveyId:
  *                 type: string
  *               masterProjectId:
@@ -101,10 +103,13 @@ module.exports = router;
  *                 type: string
  *               Latitude:
  *                 type: string
+ *               remark:
+ *                 type: string
  *             example:
  *               surveyQuetions:
  *                 - quetion: "What is your name?"
  *                   answer: ["John"]
+ *                   isVisible: "true, false"
  *               surveyId: "password1"
  *               masterProjectId: "projectId1"
  *               surveyFormId: "65b8e8428bc57009fe403698"
@@ -112,6 +117,7 @@ module.exports = router;
  *               udise_sch_code : 27040108712
  *               Longitude : "73.8567"
  *               Latitude : "73.8567"
+ *               remark : "73.8567"
  *     responses:
  *       "201":
  *         description: Created
