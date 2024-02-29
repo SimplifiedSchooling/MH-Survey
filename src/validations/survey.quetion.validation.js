@@ -13,7 +13,8 @@ const createSurveyQuetions = {
           title: Joi.string().required(),
           choices: Joi.array().items(Joi.string()),
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
-          visibleIf: Joi.string().allow('')
+          visibleIf: Joi.string().allow(''),
+          label: Joi.string()
         })
       )
       .required(),

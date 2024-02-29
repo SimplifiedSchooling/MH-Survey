@@ -87,6 +87,8 @@ module.exports = router;
  *                       type: string
  *                     answer:
  *                       type: array
+ *                     isVisible:
+ *                       type: boolean
  *               surveyId:
  *                 type: string
  *               masterProjectId:
@@ -107,6 +109,7 @@ module.exports = router;
  *               surveyQuetions:
  *                 - quetion: "What is your name?"
  *                   answer: ["John"]
+ *                   isVisible: "true, false"
  *               surveyId: "password1"
  *               masterProjectId: "projectId1"
  *               surveyFormId: "65b8e8428bc57009fe403698"
