@@ -18,7 +18,7 @@ const createSurveyAnswers = catchAsync(async (req, res) => {
   const existingDocument = await SurveyAnswers.findOne(filter);
 
   if (existingDocument) {
-    existingDocument.status = 'Auditted';
+    existingDocument.status = 'Audited';
     await existingDocument.save();
   }
   const question = await smeSurveyAnswerService.createSurveyAnswers(req.body);

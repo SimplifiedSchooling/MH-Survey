@@ -85,7 +85,7 @@ module.exports = router;
  *                     title:
  *                       type: string
  *                     visibleIf:
- *                 type: string
+ *                       type: string
  *               createdById:
  *                 type: string
  *             example:
@@ -95,7 +95,7 @@ module.exports = router;
  *                 - type: "text"
  *                   name: "name"
  *                   title: "What is your name?"
- *                     visibleIf: "string"
+ *                   visibleIf: "string"
  *               createdById: "password1"
  *     responses:
  *       "201":
