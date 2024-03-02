@@ -52,7 +52,7 @@ const updateNewSurvey = {
       masterProjectEndDate: Joi.string().allow(''),
       masterProjectOwnerName: Joi.string().allow(''),
       masterProjectOwnerEmailId: Joi.string().email().allow(''),
-      masterProjectOwnerMoNumber: Joi.number().allow(''),
+      masterProjectOwnerMoNumber: Joi.number().allow(null),
       masterProjectConductBy: Joi.string().allow(''),
       masterProjectRequireAudit: Joi.boolean().allow(''),
       masterProjectAuditBy: Joi.string().allow(''),
