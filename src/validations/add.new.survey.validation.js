@@ -3,13 +3,13 @@ const { objectId } = require('./custom.validation');
 
 const createNewSurvey = {
   body: Joi.object().keys({
-    surveyName: Joi.string().required(),
+    surveyName: Joi.string(),
     surveyId: Joi.string(),
-    surveyPurpose: Joi.string().required(),
-    surveyStartDate: Joi.date().required(),
-    surveyEndDate: Joi.date().required(),
-    masterProjectOwnerEmailId: Joi.string().required(),
-    masterProjectId: Joi.string().required(),
+    surveyPurpose: Joi.string(),
+    surveyStartDate: Joi.date(),
+    surveyEndDate: Joi.date(),
+    masterProjectOwnerEmailId: Joi.string(),
+    masterProjectId: Joi.string(),
     actualStartDate: Joi.date(),
     actualEndDate: Joi.date(),
   }),

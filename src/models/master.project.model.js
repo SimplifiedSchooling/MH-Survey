@@ -12,27 +12,21 @@ const newMasterSurveySchema = new mongoose.Schema({
   },
   masterProjectPurpose: {
     type: String,
-    required: true,
   },
   masterProjectStartDate: {
     type: Date,
-    required: true,
   },
   masterProjectEndDate: {
     type: Date,
-    required: true,
   },
   masterProjectOwnerName: {
     type: String,
-    required: true,
   },
   masterProjectOwnerEmailId: {
     type: String,
-    required: true,
   },
   masterProjectOwnerMoNumber: {
     type: Number,
-    required: true,
   },
   masterProjectConductBy: {
     type: String,

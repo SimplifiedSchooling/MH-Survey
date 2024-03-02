@@ -4,12 +4,12 @@ const { objectId } = require('./custom.validation');
 const createNewMasterSurvey = {
   body: Joi.object().keys({
     masterProjectName: Joi.string().required(),
-    masterProjectPurpose: Joi.string().required(),
-    masterProjectStartDate: Joi.date().required(),
-    masterProjectEndDate: Joi.date().required(),
-    masterProjectOwnerName: Joi.string().required(),
-    masterProjectOwnerEmailId: Joi.string().email().required(),
-    masterProjectOwnerMoNumber: Joi.number().required(),
+    masterProjectPurpose: Joi.string(),
+    masterProjectStartDate: Joi.date(),
+    masterProjectEndDate: Joi.date(),
+    masterProjectOwnerName: Joi.string(),
+    masterProjectOwnerEmailId: Joi.string().email(),
+    masterProjectOwnerMoNumber: Joi.number(),
     masterProjectConductBy: Joi.string().allow(''),
     masterProjectRequireAudit: Joi.boolean().default(false),
     masterProjectAuditBy: Joi.string().allow(''),
