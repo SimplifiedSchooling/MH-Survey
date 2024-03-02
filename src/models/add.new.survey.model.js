@@ -9,27 +9,21 @@ const newSurveySchema = new mongoose.Schema({
   },
   masterProjectId: {
     type: String,
-    required: true,
   },
   surveyName: {
     type: String,
-    required: true,
   },
   surveyId: {
     type: String,
-    unique: true,
   },
   surveyPurpose: {
     type: String,
-    required: true,
   },
   surveyStartDate: {
     type: Date,
-    required: true,
   },
   surveyEndDate: {
     type: Date,
-    required: true,
   },
   surveyFormId: {
     type: String,
