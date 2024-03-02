@@ -48,8 +48,8 @@ const updateNewSurvey = {
     .keys({
       masterProjectName: Joi.string().allow(''),
       masterProjectPurpose: Joi.string().allow(''),
-      masterProjectStartDate: Joi.date().allow(''),
-      masterProjectEndDate: Joi.date().allow(''),
+      masterProjectStartDate: Joi.string().allow(''),
+      masterProjectEndDate: Joi.string().allow(''),
       masterProjectOwnerName: Joi.string().allow(''),
       masterProjectOwnerEmailId: Joi.string().email().allow(''),
       masterProjectOwnerMoNumber: Joi.number().allow(''),
