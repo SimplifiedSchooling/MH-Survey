@@ -9,7 +9,7 @@ const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer } = req
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = await csv().fromFile(csvFilePath);
+  const smeOfficers = csvFilePath
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -72,7 +72,7 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = await csv().fromFile(csvFilePath);
+  const smeOfficers = csvFilePath
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -134,7 +134,7 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = await csv().fromFile(csvFilePath);
+  const smeOfficers = csvFilePath
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -196,7 +196,7 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = await csv().fromFile(csvFilePath);
+  const smeOfficers = csvFilePath
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
