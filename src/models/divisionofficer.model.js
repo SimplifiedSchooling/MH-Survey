@@ -16,7 +16,7 @@ const divisionOfficerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  division_code: {
+  division_name: {
     type: Number,
   },
 });
