@@ -231,6 +231,30 @@ const getSmeCoordinatorsDetails = catchAsync(async (req, res) => {
   res.json(coordinatorsDetails);
 });
 
+const getBlockCodeByEmailAndMasterProjectId = catchAsync(async (req, res) => {
+  const { masterProjectId, email } = req.body;
+  const blockCode = await OfficersService.getBlockCodeByEmailAndMasterProjectId(masterProjectId, email);
+  res.json(blockCode);
+});
+
+const getDistrictCodeByEmailAndMasterProjectId = catchAsync(async (req, res) => {
+  const { masterProjectId, email } = req.body;
+  const blockCode = await OfficersService.getDistrictCodeByEmailAndMasterProjectId(masterProjectId, email);
+  res.json(blockCode);
+});
+
+const getSmeBlockCodeByEmailAndMasterProjectId = catchAsync(async (req, res) => {
+  const { masterProjectId, email } = req.body;
+  const blockCode = await OfficersService.getSmeBlockCodeByEmailAndMasterProjectId(masterProjectId, email);
+  res.json(blockCode);
+});
+
+const getDivisionNameByEmailAndMasterProjectId = catchAsync(async (req, res) => {
+  const { masterProjectId, email } = req.body;
+  const blockCode = await OfficersService.getDivisionNameByEmailAndMasterProjectId(masterProjectId, email);
+  res.json(blockCode);
+});
+
 module.exports = {
   smeOfficerBulkUpload,
   blockOfficerBulkUpload,
@@ -240,4 +264,8 @@ module.exports = {
   getDistrictCoordinatorsDetails,
   getBlockCoordinatorsDetails,
   getSmeCoordinatorsDetails,
+  getBlockCodeByEmailAndMasterProjectId,
+  getDistrictCodeByEmailAndMasterProjectId,
+  getSmeBlockCodeByEmailAndMasterProjectId,
+  getDivisionNameByEmailAndMasterProjectId,
 };

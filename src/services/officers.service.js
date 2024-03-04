@@ -73,7 +73,7 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
  */
 const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
   const smeOfficers = csvFilePath
-
+  console.log(smeOfficers);
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
   }
@@ -313,6 +313,50 @@ const getSMECoordinatorsDetails = async (masterProjectId) => {
   return coordinatorsDetails;
 };
 
+/**
+ * get  a Userlist based on emails assigned to  Project
+ * @param {Object} masterProjectId - Data for Master Project
+ * @param {String} email - Data for Master Project
+ * @returns {Promise<BlockOfficer>}
+ */
+const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
+  const blockCode = await BlockOfficer.findOne({ masterProjectId, block_Coordinator_EmailId:email });
+  return blockCode;
+};
+
+/**
+ * get  a Userlist based on emails assigned to  Project
+ * @param {Object} masterProjectId - Data for Master Project
+ * @param {String} email - Data for Master Project
+ * @returns {Promise<SMEOfficer>}
+ */
+const getSmeBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
+  const blockCode = await SMEOfficer.findOne({ masterProjectId, sme_EmailId:email });
+  return blockCode;
+};
+
+/**
+ * get  a Userlist based on emails assigned to  Project
+ * @param {Object} masterProjectId - Data for Master Project
+ * @param {String} email - Data for Master Project
+ * @returns {Promise<SMEOfficer>}
+ */
+const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) => {
+  const blockCode = await DivisionOfficer.findOne({ masterProjectId, division_Coordinator_EmailId:email });
+  // const getDivisionName = await Division.findOne({blockCode.division_code});
+  return blockCode;
+};
+/**
+ * get  a Userlist based on emails assigned to  Project
+ * @param {Object} masterProjectId - Data for Master Project
+ * @param {String} email - Data for Master Project
+ * @returns {Promise<DistrictOfficer>}
+ */
+const getDistrictCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
+  const blockCode = await DistrictOfficer.findOne({ masterProjectId, district_Coordinator_EmailId:email });
+  return blockCode;
+};
+
 module.exports = {
   smeOfficerBulkUpload,
   blockOfficerBulkUpload,
@@ -322,4 +366,8 @@ module.exports = {
   getDistrictCoordinatorsDetails,
   getBlockCoordinatorsDetails,
   getSMECoordinatorsDetails,
+  getBlockCodeByEmailAndMasterProjectId,
+  getDistrictCodeByEmailAndMasterProjectId,
+  getSmeBlockCodeByEmailAndMasterProjectId,
+  getDivisionNameByEmailAndMasterProjectId,
 };

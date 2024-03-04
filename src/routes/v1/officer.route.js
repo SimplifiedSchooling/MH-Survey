@@ -21,7 +21,7 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload-sme')
   .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     officerController.smeOfficerBulkUpload
   );
@@ -70,6 +70,10 @@ router
     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     officerController.getSmeCoordinatorsDetails
   );
+router.post('/blockCode', officerController.getBlockCodeByEmailAndMasterProjectId);
+router.post('/districtCode', officerController.getDistrictCodeByEmailAndMasterProjectId);
+router.post('/sme/blockCode', officerController.getSmeBlockCodeByEmailAndMasterProjectId);
+router.post('/division/divisionName', officerController.getDivisionNameByEmailAndMasterProjectId);
 
 module.exports = router;
 /**
@@ -302,6 +306,178 @@ module.exports = router;
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "201":
+ *         description: Data not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Data not found
+ */
+
+/**
+ * @swagger
+ * /officer/blockCode:
+ *   post:
+ *     summary: Get block code by email and master project ID
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: Request body containing masterProjectId and email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               masterProjectId:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *             required:
+ *               - masterProjectId
+ *               - email
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 blockCode:
+ *                   type: string
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
+ *         description: Data not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Data not found
+ */
+
+/**
+ * @swagger
+ * /officer/districtCode:
+ *   post:
+ *     summary: Get district code by email and master project ID
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: Request body containing masterProjectId and email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               masterProjectId:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *             required:
+ *               - masterProjectId
+ *               - email
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 blockCode:
+ *                   type: string
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
+ *         description: Data not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Data not found
+ */
+
+/**
+ * @swagger
+ * /officer/sme/blockCode:
+ *   post:
+ *     summary: Get  Sme block code by email and master project ID
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: Request body containing masterProjectId and email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               masterProjectId:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *             required:
+ *               - masterProjectId
+ *               - email
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 blockCode:
+ *                   type: string
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
+ *         description: Data not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Data not found
+ */
+
+/**
+ * @swagger
+ * /officer/division/divisionName:
+ *   post:
+ *     summary: Get  divisionName by email and master project ID
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: Request body containing masterProjectId and email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               masterProjectId:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *             required:
+ *               - masterProjectId
+ *               - email
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 blockCode:
+ *                   type: string
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
  *         description: Data not found
  *         content:
  *           application/json:
