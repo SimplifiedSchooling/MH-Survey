@@ -1,5 +1,5 @@
 const csv = require('csvtojson');
-const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer } = require('../models');
+const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer, Division} = require('../models');
 // const smeOfficer = require('../models/smeofficer.model');
 
 /**
@@ -341,11 +341,21 @@ const getSmeBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) 
  * @param {String} email - Data for Master Project
  * @returns {Promise<SMEOfficer>}
  */
+
 const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await DivisionOfficer.findOne({ masterProjectId, division_Coordinator_EmailId:email });
-  // const getDivisionName = await Division.findOne({blockCode.division_code});
-  return blockCode;
+  const blockCode = await DivisionOfficer.findOne(
+    { masterProjectId, division_Coordinator_EmailId: email },
+    { division_code: 1, _id: 0 }
+  ).lean();
+  // Access the division_code property correctly
+  const code = blockCode.division_code;
+  // Find the division based on division code from the division officer
+  const division = await Division.findOne({ divisionCode: code });
+  return division;
 };
+
+
+
 /**
  * get  a Userlist based on emails assigned to  Project
  * @param {Object} masterProjectId - Data for Master Project
