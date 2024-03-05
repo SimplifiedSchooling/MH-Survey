@@ -1,6 +1,4 @@
-const csv = require('csvtojson');
-const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer, Division} = require('../models');
-// const smeOfficer = require('../models/smeofficer.model');
+const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer, Division } = require('../models');
 
 /**
  * Create a Master Survey Project with Sub Surveys
@@ -9,7 +7,7 @@ const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer, Divisi
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath
+  const smeOfficers = csvFilePath;
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -71,8 +69,9 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
  * @param {Array} subSurveyData - Data for Sub Survey Projects
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
+
 const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath
+  const smeOfficers = csvFilePath;
   console.log(smeOfficers);
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -134,7 +133,7 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath
+  const smeOfficers = csvFilePath;
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -196,7 +195,7 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath
+  const smeOfficers = csvFilePath;
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -320,7 +319,7 @@ const getSMECoordinatorsDetails = async (masterProjectId) => {
  * @returns {Promise<BlockOfficer>}
  */
 const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await BlockOfficer.findOne({ masterProjectId, block_Coordinator_EmailId:email });
+  const blockCode = await BlockOfficer.findOne({ masterProjectId, block_Coordinator_EmailId: email });
   return blockCode;
 };
 
@@ -331,7 +330,7 @@ const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => 
  * @returns {Promise<SMEOfficer>}
  */
 const getSmeBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await SMEOfficer.findOne({ masterProjectId, sme_EmailId:email });
+  const blockCode = await SMEOfficer.findOne({ masterProjectId, sme_EmailId: email });
   return blockCode;
 };
 
@@ -354,8 +353,6 @@ const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) 
   return division;
 };
 
-
-
 /**
  * get  a Userlist based on emails assigned to  Project
  * @param {Object} masterProjectId - Data for Master Project
@@ -363,8 +360,61 @@ const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) 
  * @returns {Promise<DistrictOfficer>}
  */
 const getDistrictCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await DistrictOfficer.findOne({ masterProjectId, district_Coordinator_EmailId:email });
+  const blockCode = await DistrictOfficer.findOne({ masterProjectId, district_Coordinator_EmailId: email });
   return blockCode;
+};
+
+/**
+ * Query for school
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getAllBlockOficer = async (filter, options) => {
+  const schools = await BlockOfficer.paginate(filter, options);
+  return schools;
+};
+/**
+ * Query for school
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getAllDistrictOficer = async (filter, options) => {
+  const schools = await DistrictOfficer.paginate(filter, options);
+  return schools;
+};
+/**
+ * Query for school
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getAllDivisionOficer = async (filter, options) => {
+  const schools = await DivisionOfficer.paginate(filter, options);
+  return schools;
+};
+/**
+ * Query for school
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getAllSmeOficer = async (filter, options) => {
+  const schools = await SMEOfficer.paginate(filter, options);
+  return schools;
 };
 
 module.exports = {
@@ -380,4 +430,8 @@ module.exports = {
   getDistrictCodeByEmailAndMasterProjectId,
   getSmeBlockCodeByEmailAndMasterProjectId,
   getDivisionNameByEmailAndMasterProjectId,
+  getAllBlockOficer,
+  getAllSmeOficer,
+  getAllDivisionOficer,
+  getAllDistrictOficer,
 };
