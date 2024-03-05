@@ -74,8 +74,37 @@ router.post('/blockCode', officerController.getBlockCodeByEmailAndMasterProjectI
 router.post('/districtCode', officerController.getDistrictCodeByEmailAndMasterProjectId);
 router.post('/sme/blockCode', officerController.getSmeBlockCodeByEmailAndMasterProjectId);
 router.post('/division/divisionName', officerController.getDivisionNameByEmailAndMasterProjectId);
+router
+  .route('/getallblockofficer')
+  .get(
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //validate(schoolValidation.getAllSchools),
+    officerController.getAllBlockOficer
+  );
+  router
+  .route('/getalldistrictofficer')
+  .get(
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //validate(schoolValidation.getAllSchools),
+    officerController.getAllDistrictOficer
+  );
+  router
+  .route('/getalldivisionofficer')
+  .get(
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //validate(schoolValidation.getAllSchools),
+    officerController.getAllDivisionOficer
+  );
+  router
+  .route('/getallsmeofficer')
+  .get(
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //validate(schoolValidation.getAllSchools),
+    officerController.getAllSmeOficer
+  );
 
 module.exports = router;
+
 /**
  * @swagger
  * tags:
@@ -483,4 +512,261 @@ module.exports = router;
  *           application/json:
  *             example:
  *               message: Data not found
+ */
+/**
+ * @swagger
+ * /officer/getallblockofficer:
+ *   get:
+ *     summary: Get all blockofficer
+ *     description: Only admins can retrieve all blockofficer.
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         description: school name
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of school
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/School'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
+ * /officer/getalldistrictofficer:
+ *   get:
+ *     summary: Get all district officer
+ *     description: Only admins can retrieve all district officers.
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         description: school name
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of school
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/School'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
+
+/**
+ * @swagger
+ * /officer/getalldivisionofficer:
+ *   get:
+ *     summary: Get all division officer
+ *     description: Only admins can retrieve all division officers.
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         description: school name
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of school
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/School'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
+
+/**
+ * @swagger
+ * /officer/getallsmeofficer:
+ *   get:
+ *     summary: Get all sme officer
+ *     description: Only admins can retrieve all sme officers.
+ *     tags: [Officer]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: masterProjectId
+ *         schema:
+ *           type: string
+ *         description: school name
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *         description: sort by query in the form of field:desc/asc (ex. name:asc)
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         default: 10
+ *         description: Maximum number of school
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/School'
+ *                 page:
+ *                   type: integer
+ *                   example: 1
+ *                 limit:
+ *                   type: integer
+ *                   example: 10
+ *                 totalPages:
+ *                   type: integer
+ *                   example: 1
+ *                 totalResults:
+ *                   type: integer
+ *                   example: 1
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
  */

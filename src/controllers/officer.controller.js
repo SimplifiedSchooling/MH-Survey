@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const { join } = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const catchAsync = require('../utils/catchAsync');
+const pick = require('../utils/pick');
 const { OfficersService } = require('../services');
 const ApiError = require('../utils/ApiError');
 const csv = require('csvtojson');
@@ -255,6 +256,30 @@ const getDivisionNameByEmailAndMasterProjectId = catchAsync(async (req, res) => 
   res.json(blockCode);
 });
 
+const getAllBlockOficer = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['masterProjectId']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await OfficersService.getAllBlockOficer(filter, options);
+  res.send(result);
+});
+const getAllDistrictOficer = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['masterProjectId']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await OfficersService.getAllDistrictOficer(filter, options);
+  res.send(result);
+});
+const getAllDivisionOficer = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['masterProjectId']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await OfficersService.getAllDivisionOficer(filter, options);
+  res.send(result);
+});
+const getAllSmeOficer = catchAsync(async (req, res) => {
+  const filter = pick(req.query, ['masterProjectId']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await OfficersService.getAllSmeOficer(filter, options);
+  res.send(result);
+});
 module.exports = {
   smeOfficerBulkUpload,
   blockOfficerBulkUpload,
@@ -268,4 +293,8 @@ module.exports = {
   getDistrictCodeByEmailAndMasterProjectId,
   getSmeBlockCodeByEmailAndMasterProjectId,
   getDivisionNameByEmailAndMasterProjectId,
+  getAllBlockOficer,
+  getAllSmeOficer,
+  getAllDivisionOficer,
+  getAllDistrictOficer,
 };
