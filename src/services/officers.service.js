@@ -6,9 +6,85 @@ const { BlockOfficer, DistrictOfficer, DivisionOfficer, User, SMEOfficer, Divisi
  * @param {Array} subSurveyData - Data for Sub Survey Projects
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
-const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath;
+// const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
+//   const smeOfficers = csvFilePath;
+//   console.log(smeOfficers);
 
+//   if (!smeOfficers || !smeOfficers.length) {
+//     throw new Error('No valid SME Officers found in the CSV file');
+//   }
+
+//   const results = await Promise.all(
+//     smeOfficers.map(async (smeOfficer) => {
+//       try {
+//         const smeOfficerFound = await SMEOfficer.findOne({
+//           sme_EmailId: smeOfficer.sme_EmailId,
+//           block_code: smeOfficer.block_code,
+//           masterProjectId,
+//         });
+
+//         // Check if the email exists in the User model
+//         const userFound = await User.findOne({
+//           email: smeOfficer.sme_EmailId,
+//           role: 'SME',
+//         });
+
+//         if (smeOfficerFound || !userFound) {
+//           // Email is either in SMEOfficer or User collection
+//           return { duplicate: true, data: smeOfficer };
+//         }
+
+//         // Email is not in both SMEOfficer and User collections
+//         const data = await new SMEOfficer({ ...smeOfficer, surveyAdmin, masterProjectId }).save();
+//         return { duplicate: false, data };
+//       } catch (error) {
+//         return { error: true, data: smeOfficer, errorMessage: error.message };
+//       }
+//     })
+//   );
+
+//   const duplicates = {
+//     totalDuplicates: results.filter((result) => result.duplicate).length,
+//     data: results.filter((result) => result.duplicate),
+//   };
+
+//   // Fetch non-duplicate SME Officer data from the User collection
+//   const nonDuplicates = await Promise.all(
+//     results
+//       .filter((result) => !result.duplicate)
+//       .map(async (result) => {
+//         const user = await User.findOne({ email: result.data.sme_EmailId, role: 'SME' });
+//         return { smeOfficer: result.data, user };
+//       })
+//   );
+
+//   const errors = results.filter((result) => result.error);
+//   if (errors.length > 0) {
+//     throw new Error(`Some SME Officers failed to process: ${JSON.stringify(errors)}`);
+//   }
+//   return { duplicates, nonDuplicates };
+// };
+function filterUniqueEntries(dataArray, uniqueFields) {
+  const uniqueEntries = new Map();
+  const duplicateEntries = [];
+
+  dataArray.forEach((entry) => {
+    const key = uniqueFields.map((field) => entry[field]).join('-');
+
+    if (uniqueEntries.has(key)) {
+      // Duplicate entry found
+      duplicateEntries.push(entry);
+    } else {
+      // Unique entry, add to the map
+      uniqueEntries.set(key, entry);
+    }
+  });
+
+  return { uniqueEntries: Array.from(uniqueEntries.values()), duplicateEntries };
+}
+const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['sme_EmailId', 'block_code', 'masterProjectId']);
+  const smeOfficers = uniqueEntries;
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
   }
@@ -18,6 +94,7 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
       try {
         const smeOfficerFound = await SMEOfficer.findOne({
           sme_EmailId: smeOfficer.sme_EmailId,
+          block_code: smeOfficer.block_code,
           masterProjectId,
         });
 
@@ -43,7 +120,13 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),
+    data: results.filter((result) => result.duplicate),duplicateEntries,
+    get () {
+      return this._;
+    },
+    set (value) {
+      this._ = value;
+    },
   };
 
   // Fetch non-duplicate SME Officer data from the User collection
@@ -71,8 +154,8 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
  */
 
 const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath;
-  console.log(smeOfficers);
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['block_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const smeOfficers = uniqueEntries;
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
   }
@@ -82,6 +165,7 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
       try {
         const smeOfficerFound = await BlockOfficer.findOne({
           block_Coordinator_EmailId: smeOfficer.block_Coordinator_EmailId,
+          block_code: smeOfficer.block_code,
           masterProjectId,
         });
 
@@ -106,7 +190,13 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),
+    data: results.filter((result) => result.duplicate),duplicateEntries,
+    get () {
+      return this._;
+    },
+    set (value) {
+      this._ = value;
+    },
   };
 
   const nonDuplicates = await Promise.all(
@@ -133,7 +223,8 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath;
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['district_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const smeOfficers = uniqueEntries;
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -144,6 +235,7 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
       try {
         const smeOfficerFound = await DistrictOfficer.findOne({
           district_Coordinator_EmailId: smeOfficer.district_Coordinator_EmailId,
+          district_code: smeOfficer.district_code,
           masterProjectId,
         });
 
@@ -168,9 +260,14 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),
+    data: results.filter((result) => result.duplicate),duplicateEntries,
+    get () {
+      return this._;
+    },
+    set (value) {
+      this._ = value;
+    },
   };
-
   const nonDuplicates = await Promise.all(
     results
       .filter((result) => !result.duplicate)
@@ -195,7 +292,8 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const smeOfficers = csvFilePath;
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['division_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const smeOfficers = uniqueEntries;
 
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -206,6 +304,7 @@ const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectI
       try {
         const smeOfficerFound = await DivisionOfficer.findOne({
           division_Coordinator_EmailId: smeOfficer.division_Coordinator_EmailId,
+          division_code: smeOfficer.division_code,
           masterProjectId,
         });
 
@@ -230,7 +329,13 @@ const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectI
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),
+    data: results.filter((result) => result.duplicate),duplicateEntries,
+    get () {
+      return this._;
+    },
+    set (value) {
+      this._ = value;
+    },
   };
 
   const nonDuplicates = await Promise.all(

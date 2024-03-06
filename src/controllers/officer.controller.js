@@ -11,24 +11,6 @@ const xlsx = require('xlsx');
 const staticFolder = join(__dirname, '../');
 const uploadsFolder = join(staticFolder, 'uploads');
 
-// const smeOfficerBulkUpload = catchAsync(async (req, res) => {
-//   try {
-//     if (req.file) {
-//       if (req.file.mimetype !== 'text/csv') {
-//         throw new ApiError(httpStatus.BAD_REQUEST, 'Uploaded file must be in CSV format.');
-//       }
-//       const { surveyAdmin, masterProjectId } = req.body;
-//       const csvFilePath = join(uploadsFolder, req.file.filename);
-//       const result = await OfficersService.smeOfficerBulkUpload(csvFilePath, surveyAdmin, masterProjectId);
-
-//       res.status(httpStatus.CREATED).send(result);
-//     } else {
-//       throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
-//     }
-//   } catch (error) {
-//     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
-//   }
-// });
 const smeOfficerBulkUpload = catchAsync(async (req, res) => {
   try {
     if (req.file) {
@@ -47,8 +29,6 @@ const smeOfficerBulkUpload = catchAsync(async (req, res) => {
       } else {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Uploaded file must be in CSV or XLSX format.');
       }
-
-      // Your service logic for Officer upload using dataArray
       const { surveyAdmin, masterProjectId } = req.body;
       const result = await OfficersService.smeOfficerBulkUpload(dataArray, surveyAdmin, masterProjectId);
 
