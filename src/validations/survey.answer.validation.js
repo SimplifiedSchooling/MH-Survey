@@ -8,6 +8,7 @@ const createSurveyAnswers = {
           quetion: Joi.string().required(),
           answer: Joi.array().required(),
           isVisible: Joi.boolean(),
+          panel:Joi.string(),
         })
       )
       .required(),
