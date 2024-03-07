@@ -10,6 +10,7 @@ const surveyAnswerSchema = new mongoose.Schema(
         },
         answer: Array,
         isVisible : Boolean,
+        panel: String
       },
     ],
     surveyId: {
