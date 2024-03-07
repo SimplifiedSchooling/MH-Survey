@@ -21,28 +21,28 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload-sme')
   .post(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     officerController.smeOfficerBulkUpload
   );
 router
   .route('/bulkupload-block')
   .post(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     officerController.blockOfficerBulkUpload
   );
 router
   .route('/bulkupload-district')
   .post(
-   // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     officerController.districtOfficerBulkUpload
   );
 router
   .route('/bulkupload-division')
   .post(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     uploads.single('file'),
     officerController.divisinOfficerBulkUpload
   );

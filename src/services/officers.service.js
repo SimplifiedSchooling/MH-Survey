@@ -417,6 +417,17 @@ const getSMECoordinatorsDetails = async (masterProjectId) => {
   return coordinatorsDetails;
 };
 
+// /**
+//  * get  a Userlist based on emails assigned to  Project
+//  * @param {Object} masterProjectId - Data for Master Project
+//  * @param {String} email - Data for Master Project
+//  * @returns {Promise<BlockOfficer>}
+//  */
+// const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
+//   const blockCode = await BlockOfficer.findOne({ masterProjectId, block_Coordinator_EmailId: email });
+//   return blockCode;
+// };
+
 /**
  * get  a Userlist based on emails assigned to  Project
  * @param {Object} masterProjectId - Data for Master Project
