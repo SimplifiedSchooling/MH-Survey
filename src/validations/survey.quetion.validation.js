@@ -14,7 +14,8 @@ const createSurveyQuetions = {
           choices: Joi.array().items(Joi.string()),
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
           visibleIf: Joi.string().allow(''),
-          label: Joi.string()
+          label: Joi.string(),
+          panel:Joi.string(),
         })
       )
       .required(),

@@ -88,6 +88,8 @@ module.exports = router;
  *                       type: string
  *                     label:
  *                       type: string
+ *                     panel:
+ *                       type: string
  *               createdById:
  *                 type: string
  *             example:
@@ -99,6 +101,7 @@ module.exports = router;
  *                   title: "What is your name?"
  *                   visibleIf: "string"
  *                   label: "string"
+ *                   panel: "string"
  *               createdById: "password1"
  *     responses:
  *       "201":
