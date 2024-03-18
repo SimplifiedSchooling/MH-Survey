@@ -32,8 +32,8 @@ const buildFilter = (search) => {
     $or: [
       { Division: { $regex: search || '', $options: 'i' } },
       { District: { $regex: search || '', $options: 'i' } },
-      { Block_Name: { $regex: search || '', $options: 'i' } }
-    ]
+      { Block_Name: { $regex: search || '', $options: 'i' } },
+    ],
   };
 
   // If search is a number, include it in the filter for numerical fields
@@ -46,11 +46,9 @@ const buildFilter = (search) => {
   return filter;
 };
 
-
-
 const getAllBlocks = catchAsync(async (req, res) => {
   const { search } = req.query;
-  const query = await buildFilter(search)
+  const query = await buildFilter(search);
   const filter = query || {};
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await blockService.queryBlock(filter, options);

@@ -222,11 +222,13 @@ module.exports = router;
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
  *               title:
+ *                 type: string
+ *               description:
  *                 type: string
  *               questions:
  *                 type: array
@@ -239,14 +241,24 @@ module.exports = router;
  *                       type: string
  *                     title:
  *                       type: string
+ *                     visibleIf:
+ *                       type: string
+ *                     label:
+ *                       type: string
+ *                     panel:
+ *                       type: string
  *               createdById:
  *                 type: string
  *             example:
  *               title: "fake name"
+ *               description: "fake description"
  *               questions:
  *                 - type: "text"
  *                   name: "name"
  *                   title: "What is your name?"
+ *                   visibleIf: "string"
+ *                   label: "string"
+ *                   panel: "string"
  *               createdById: "password1"
  *     responses:
  *       "200":
