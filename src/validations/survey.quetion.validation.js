@@ -50,6 +50,8 @@ const updateSurveyQuetion = {
   body: Joi.object()
     .keys({
       title: Joi.string(),
+   
+      description: Joi.string(),
       questions: Joi.array().items(
         Joi.object({
           // type: Joi.string(),
