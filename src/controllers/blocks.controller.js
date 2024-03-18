@@ -28,12 +28,35 @@ const createBlock = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send(Block);
 });
 
+const buildFilter = (search) => {
+  const filter = {
+    $or: [
+      { Division: { $regex: search, $options: 'i' } },
+      { District: { $regex: search, $options: 'i' } },
+      { Block_Name: { $regex: search, $options: 'i' } }
+    ]
+  };
+
+  const searchNumber = search;
+
+  if (!isNaN(searchNumber)) {
+    filter.$or.push(
+      { district_cd: searchNumber },
+      { block_cd_1: searchNumber },
+      { block_cd_2: searchNumber }
+    );
+  }
+  return filter;
+};
+
 const getAllBlocks = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['Block_Name', 'role']);
+  const { search } = req.query;
+  const filter = buildFilter(search); 
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await blockService.queryBlock(filter, options);
   res.send(result);
 });
+
 const getBlock = catchAsync(async (req, res) => {
   const Block = await blockService.getBlockById(req.params.blockId);
   if (!Block) {

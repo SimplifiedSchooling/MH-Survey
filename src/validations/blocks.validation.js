@@ -13,13 +13,13 @@ const blockShema = Joi.object({
 
 const getAllblocks = {
   query: Joi.object().keys({
-    Block_Name: Joi.string(),
-    role: Joi.string(),
+    search: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
   }),
 };
+
 const getblock = {
   params: Joi.object().keys({
     blockId: Joi.string().custom(objectId),
