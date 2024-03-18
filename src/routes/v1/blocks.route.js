@@ -31,7 +31,7 @@ router
     blockController.createBlock
   )
   .get(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(blockValidation.getAllblocks),
     blockController.getAllBlocks
   );
@@ -144,10 +144,10 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: Block_Name
+ *         name: search
  *         schema:
  *           type: string
- *         description: Block_Name
+ *         description: search by block name, district , division , district code , block code 
  *       - in: query
  *         name: sortBy
  *         schema:
