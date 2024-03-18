@@ -52,11 +52,19 @@ const updateSurveyQuetion = {
       title: Joi.string(),
       questions: Joi.array().items(
         Joi.object({
-          type: Joi.string(),
-          name: Joi.string(),
-          title: Joi.string(),
+          // type: Joi.string(),
+          // name: Joi.string(),
+          // title: Joi.string(),
+          // choices: Joi.array().items(Joi.string()),
+          // isRequired: Joi.boolean(), // Add this line if 'choices' is optional
+          type: Joi.string().required(),
+          name: Joi.string().required(),
+          title: Joi.string().required(),
           choices: Joi.array().items(Joi.string()),
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
+          visibleIf: Joi.string().allow(''),
+          label: Joi.string(),
+          panel:Joi.string(),
         })
       ),
       createdById: Joi.string(),
