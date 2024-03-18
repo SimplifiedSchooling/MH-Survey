@@ -33,25 +33,21 @@ const buildFilter = (search) => {
     $or: [
       { Division: { $regex: search, $options: 'i' } },
       { District: { $regex: search, $options: 'i' } },
-      { Block_Name: { $regex: search, $options: 'i' } }
-    ]
+      { Block_Name: { $regex: search, $options: 'i' } },
+    ],
   };
 
   const searchNumber = search;
 
   if (!isNaN(searchNumber)) {
-    filter.$or.push(
-      { district_cd: searchNumber },
-      { block_cd_1: searchNumber },
-      { block_cd_2: searchNumber }
-    );
+    filter.$or.push({ district_cd: searchNumber }, { block_cd_1: searchNumber }, { block_cd_2: searchNumber });
   }
   return filter;
 };
 
 const getAllBlocks = catchAsync(async (req, res) => {
   const { search } = req.query;
-  const filter = buildFilter(search); 
+  const filter = buildFilter(search);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await blockService.queryBlock(filter, options);
   res.send(result);
