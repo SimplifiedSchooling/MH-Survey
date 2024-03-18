@@ -27,27 +27,31 @@ const createBlock = catchAsync(async (req, res) => {
   const Block = await blockService.createBlock(req.body);
   res.status(httpStatus.CREATED).send(Block);
 });
-
 const buildFilter = (search) => {
   const filter = {
     $or: [
-      { Division: { $regex: search, $options: 'i' } },
-      { District: { $regex: search, $options: 'i' } },
-      { Block_Name: { $regex: search, $options: 'i' } },
-    ],
+      { Division: { $regex: search || '', $options: 'i' } },
+      { District: { $regex: search || '', $options: 'i' } },
+      { Block_Name: { $regex: search || '', $options: 'i' } }
+    ]
   };
 
-  const searchNumber = search;
-
-  if (!isNaN(searchNumber)) {
-    filter.$or.push({ district_cd: searchNumber }, { block_cd_1: searchNumber }, { block_cd_2: searchNumber });
+  // If search is a number, include it in the filter for numerical fields
+  if (!isNaN(search)) {
+    filter.$or.push({ district_cd: search });
+    filter.$or.push({ block_cd_1: search });
+    filter.$or.push({ block_cd_2: search });
   }
+
   return filter;
 };
 
+
+
 const getAllBlocks = catchAsync(async (req, res) => {
   const { search } = req.query;
-  const filter = buildFilter(search);
+  const query = await buildFilter(search)
+  const filter = query || {};
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await blockService.queryBlock(filter, options);
   res.send(result);
