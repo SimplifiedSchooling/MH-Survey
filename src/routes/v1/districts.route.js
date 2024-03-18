@@ -137,10 +137,10 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: District
+ *         name: search
  *         schema:
  *           type: string
- *         description: districtName
+ *         description: search by parameters
  *       - in: query
  *         name: sortBy
  *         schema:

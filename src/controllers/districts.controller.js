@@ -23,13 +23,32 @@ const bulkUploadFile = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
   }
 });
+
 const createDistrict = catchAsync(async (req, res) => {
   const district = await districtService.createDistrict(req.body);
   res.status(httpStatus.CREATED).send(district);
 });
 
+const buildFilter = (search) => {
+  const filter = {
+    $or: [
+      { Division: { $regex: search || '', $options: 'i' } },
+      { District: { $regex: search || '', $options: 'i' } },
+    ],
+  };
+
+  // If search is a number, include it in the filter for numerical fields
+  if (!isNaN(search)) {
+    filter.$or.push({ district_cd: search });
+  }
+
+  return filter;
+};
+
 const getAllDistricts = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['District', 'role']);
+  const { search } = req.query;
+  const query = await buildFilter(search);
+  const filter = query || {};
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await districtService.queryDistrict(filter, options);
   res.send(result);

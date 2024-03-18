@@ -134,8 +134,7 @@ const schoolValidationSchema = Joi.object({
 
 const getAllSchools = {
   query: Joi.object().keys({
-    school_name: Joi.string(),
-    role: Joi.string(),
+    search: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
