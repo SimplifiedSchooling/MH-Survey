@@ -10,8 +10,7 @@ const districtShema = Joi.object({
 
 const getAllDistricts = {
   query: Joi.object().keys({
-    District: Joi.string(),
-    role: Joi.string(),
+    search: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),

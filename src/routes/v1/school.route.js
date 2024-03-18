@@ -73,10 +73,10 @@ module.exports = router;
  *       - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: school_name
+ *         name: search
  *         schema:
  *           type: string
- *         description: school name
+ *         description: search 
  *       - in: query
  *         name: sortBy
  *         schema:

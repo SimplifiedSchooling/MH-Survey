@@ -25,9 +25,28 @@ const bulkUploadFile = catchAsync(async (req, res) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
   }
 });
+const buildFilter = (search) => {
+  const filter = {
+    $or: [
+      { Division: { $regex: search || '', $options: 'i' } },
+      { Block_Name: { $regex: search || '', $options: 'i' } },
+      { District: { $regex: search || '', $options: 'i' } },
+      { school_name: { $regex: search || '', $options: 'i' } },
+    ],
+  };
+
+  // If search is a number, include it in the filter for numerical fields
+  if (!isNaN(search)) {
+    filter.$or.push({ district_cd: search },{ udise_sch_code: search },{ block_cd_1: search },);
+  }
+
+  return filter;
+};
 
 const getAllSchools = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['school_name', 'role']);
+  const { search } = req.query;
+  const query = await buildFilter(search);
+  const filter = query || {};
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await schoolService.getAllSchools(filter, options);
   res.send(result);
