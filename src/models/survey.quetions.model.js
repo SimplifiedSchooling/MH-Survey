@@ -13,6 +13,10 @@ const surveyQuetionsSchema = new mongoose.Schema({
   createdById: {
     type: String,
   },
+  finalSubmit: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // add plugin that converts mongoose to json

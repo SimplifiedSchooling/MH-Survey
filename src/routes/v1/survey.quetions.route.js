@@ -71,6 +71,8 @@ module.exports = router;
  *             properties:
  *               title:
  *                 type: string
+ *               finalSubmit:
+ *                 type: boolean
  *               description:
  *                 type: string
  *               questions:
@@ -95,6 +97,7 @@ module.exports = router;
  *             example:
  *               title: "fake name"
  *               description: "fake description"
+ *               finalSubmit: true, false
  *               questions:
  *                 - type: "text"
  *                   name: "name"
@@ -228,6 +231,8 @@ module.exports = router;
  *             properties:
  *               title:
  *                 type: string
+ *               finalSubmit:
+ *                 type: boolean
  *               description:
  *                 type: string
  *               questions:
@@ -252,6 +257,7 @@ module.exports = router;
  *             example:
  *               title: "fake name"
  *               description: "fake description"
+ *               finalSubmit: true, false
  *               questions:
  *                 - type: "text"
  *                   name: "name"
