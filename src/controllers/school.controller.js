@@ -25,6 +25,7 @@ const bulkUploadFile = catchAsync(async (req, res) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
   }
 });
+
 const buildFilter = (search) => {
   const filter = {
     $or: [
@@ -51,6 +52,7 @@ const getAllSchools = catchAsync(async (req, res) => {
   const result = await schoolService.getAllSchools(filter, options);
   res.send(result);
 });
+
 module.exports = {
   getAllSchools,
   bulkUploadFile,

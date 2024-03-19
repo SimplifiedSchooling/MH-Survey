@@ -3,7 +3,7 @@ const Joi = require('joi');
 const createSurveyQuetions = {
   body: Joi.object().keys({
     title: Joi.string().required(),
-   
+    finalSubmit: Joi.boolean().default(false),
     description: Joi.string().required(),
     questions: Joi.array()
       .items(
@@ -50,7 +50,7 @@ const updateSurveyQuetion = {
   body: Joi.object()
     .keys({
       title: Joi.string(),
-   
+      finalSubmit: Joi.boolean(),
       description: Joi.string(),
       questions: Joi.array().items(
         Joi.object({
