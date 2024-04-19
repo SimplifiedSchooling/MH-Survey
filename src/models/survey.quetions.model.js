@@ -9,7 +9,7 @@ const surveyQuetionsSchema = new mongoose.Schema({
     type: String,
   },
 
-  questions: [{ type: mongoose.Schema.Types.Mixed}],
+  questions: [{ type: mongoose.Schema.Types.Mixed }],
   createdById: {
     type: String,
   },

@@ -31,7 +31,7 @@ router
     blockController.createBlock
   )
   .get(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(blockValidation.getAllblocks),
     blockController.getAllBlocks
   );
@@ -147,7 +147,7 @@ module.exports = router;
  *         name: search
  *         schema:
  *           type: string
- *         description: search by block name, district , division , district code , block code 
+ *         description: search by block name, district , division , district code , block code
  *       - in: query
  *         name: sortBy
  *         schema:

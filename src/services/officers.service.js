@@ -83,7 +83,11 @@ function filterUniqueEntries(dataArray, uniqueFields) {
   return { uniqueEntries: Array.from(uniqueEntries.values()), duplicateEntries };
 }
 const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['sme_EmailId', 'block_code', 'masterProjectId']);
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, [
+    'sme_EmailId',
+    'block_code',
+    'masterProjectId',
+  ]);
   const smeOfficers = uniqueEntries;
   if (!smeOfficers || !smeOfficers.length) {
     throw new Error('No valid SME Officers found in the CSV file');
@@ -120,11 +124,12 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),duplicateEntries,
-    get () {
+    data: results.filter((result) => result.duplicate),
+    duplicateEntries,
+    get() {
       return this._;
     },
-    set (value) {
+    set(value) {
       this._ = value;
     },
   };
@@ -154,10 +159,14 @@ const smeOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) =
  */
 
 const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['block_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, [
+    'block_Coordinator_EmailId',
+    'block_code',
+    'masterProjectId',
+  ]);
   const smeOfficers = uniqueEntries;
   if (!smeOfficers || !smeOfficers.length) {
-    throw new Error('No valid SME Officers found in the CSV file');
+    throw new Error('No valid Block Officers found in the CSV file');
   }
 
   const results = await Promise.all(
@@ -190,11 +199,12 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),duplicateEntries,
-    get () {
+    data: results.filter((result) => result.duplicate),
+    duplicateEntries,
+    get() {
       return this._;
     },
-    set (value) {
+    set(value) {
       this._ = value;
     },
   };
@@ -210,7 +220,7 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
 
   const errors = results.filter((result) => result.error);
   if (errors.length > 0) {
-    throw new Error(`Some SME Officers failed to process: ${JSON.stringify(errors)}`);
+    throw new Error(`Some Block Officers failed to process: ${JSON.stringify(errors)}`);
   }
 
   return { duplicates, nonDuplicates };
@@ -223,11 +233,15 @@ const blockOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId)
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['district_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, [
+    'district_Coordinator_EmailId',
+    'district_code',
+    'masterProjectId',
+  ]);
   const smeOfficers = uniqueEntries;
 
   if (!smeOfficers || !smeOfficers.length) {
-    throw new Error('No valid SME Officers found in the CSV file');
+    throw new Error('No valid District Officers found in the CSV file');
   }
 
   const results = await Promise.all(
@@ -260,11 +274,12 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),duplicateEntries,
-    get () {
+    data: results.filter((result) => result.duplicate),
+    duplicateEntries,
+    get() {
       return this._;
     },
-    set (value) {
+    set(value) {
       this._ = value;
     },
   };
@@ -279,7 +294,7 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
 
   const errors = results.filter((result) => result.error);
   if (errors.length > 0) {
-    throw new Error(`Some SME Officers failed to process: ${JSON.stringify(errors)}`);
+    throw new Error(`Some District Officers failed to process: ${JSON.stringify(errors)}`);
   }
 
   return { duplicates, nonDuplicates };
@@ -292,11 +307,15 @@ const districtOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProject
  * @returns {Promise<{ masterProject: MasterProject, subSurveys: NewSurvey[] }>}
  */
 const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectId) => {
-  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, ['division_Coordinator_EmailId', 'block_code', 'masterProjectId']);
+  const { uniqueEntries, duplicateEntries } = filterUniqueEntries(csvFilePath, [
+    'division_Coordinator_EmailId',
+    'division_code',
+    'masterProjectId',
+  ]);
   const smeOfficers = uniqueEntries;
 
   if (!smeOfficers || !smeOfficers.length) {
-    throw new Error('No valid SME Officers found in the CSV file');
+    throw new Error('No valid Division Officers found in the CSV file');
   }
 
   const results = await Promise.all(
@@ -329,11 +348,12 @@ const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectI
 
   const duplicates = {
     totalDuplicates: results.filter((result) => result.duplicate).length,
-    data: results.filter((result) => result.duplicate),duplicateEntries,
-    get () {
+    data: results.filter((result) => result.duplicate),
+    duplicateEntries,
+    get() {
       return this._;
     },
-    set (value) {
+    set(value) {
       this._ = value;
     },
   };
@@ -349,7 +369,7 @@ const divisinOfficerBulkUpload = async (csvFilePath, surveyAdmin, masterProjectI
 
   const errors = results.filter((result) => result.error);
   if (errors.length > 0) {
-    throw new Error(`Some SME Officers failed to process: ${JSON.stringify(errors)}`);
+    throw new Error(`Some Division Officers failed to process: ${JSON.stringify(errors)}`);
   }
 
   return { duplicates, nonDuplicates };
@@ -435,7 +455,7 @@ const getSMECoordinatorsDetails = async (masterProjectId) => {
  * @returns {Promise<BlockOfficer>}
  */
 const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await BlockOfficer.findOne({ masterProjectId, block_Coordinator_EmailId: email });
+  const blockCode = await BlockOfficer.find({ masterProjectId, block_Coordinator_EmailId: email });
   return blockCode;
 };
 
@@ -446,27 +466,48 @@ const getBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => 
  * @returns {Promise<SMEOfficer>}
  */
 const getSmeBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await SMEOfficer.findOne({ masterProjectId, sme_EmailId: email });
+  const blockCode = await SMEOfficer.find({ masterProjectId, sme_EmailId: email });
   return blockCode;
 };
 
+// /**
+//  * get  a Userlist based on emails assigned to  Project
+//  * @param {Object} masterProjectId - Data for Master Project
+//  * @param {String} email - Data for Master Project
+//  * @returns {Promise<SMEOfficer>}
+//  */
+
+// const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) => {
+//   const blockCode = await DivisionOfficer.findOne(
+//     { masterProjectId, division_Coordinator_EmailId: email },
+//     { division_code: 1, _id: 0 }
+//   ).lean();
+//   // Access the division_code property correctly
+//   const code = blockCode.division_code;
+//   // Find the division based on division code from the division officer
+//   const division = await Division.findOne({ divisionCode: code });
+//   return division;
+// };
 /**
- * get  a Userlist based on emails assigned to  Project
+ * Get division names by email and masterProjectId
  * @param {Object} masterProjectId - Data for Master Project
  * @param {String} email - Data for Master Project
- * @returns {Promise<SMEOfficer>}
+ * @returns {Promise<Division[]>} Array of Division documents
  */
-
 const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await DivisionOfficer.findOne(
+  // Find division codes based on email and masterProjectId
+  const divisionCodes = await DivisionOfficer.find(
     { masterProjectId, division_Coordinator_EmailId: email },
     { division_code: 1, _id: 0 }
   ).lean();
-  // Access the division_code property correctly
-  const code = blockCode.division_code;
-  // Find the division based on division code from the division officer
-  const division = await Division.findOne({ divisionCode: code });
-  return division;
+
+  // Extract division codes from the result
+  const codes = divisionCodes.map((item) => item.division_code);
+
+  // Find divisions based on division codes
+  const divisions = await Division.find({ divisionCode: { $in: codes } });
+
+  return divisions;
 };
 
 /**
@@ -476,7 +517,7 @@ const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) 
  * @returns {Promise<DistrictOfficer>}
  */
 const getDistrictCodeByEmailAndMasterProjectId = async (masterProjectId, email) => {
-  const blockCode = await DistrictOfficer.findOne({ masterProjectId, district_Coordinator_EmailId: email });
+  const blockCode = await DistrictOfficer.find({ masterProjectId, district_Coordinator_EmailId: email });
   return blockCode;
 };
 

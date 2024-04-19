@@ -18,34 +18,26 @@ const storage = multer.diskStorage({
 });
 
 const uploads = multer({ storage });
-router
-  .route('/bulkupload-sme')
-  .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    uploads.single('file'),
-    officerController.smeOfficerBulkUpload
-  );
-router
-  .route('/bulkupload-block')
-  .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    uploads.single('file'),
-    officerController.blockOfficerBulkUpload
-  );
-router
-  .route('/bulkupload-district')
-  .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    uploads.single('file'),
-    officerController.districtOfficerBulkUpload
-  );
-router
-  .route('/bulkupload-division')
-  .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    uploads.single('file'),
-    officerController.divisinOfficerBulkUpload
-  );
+router.route('/bulkupload-sme').post(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  uploads.single('file'),
+  officerController.smeOfficerBulkUpload
+);
+router.route('/bulkupload-block').post(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  uploads.single('file'),
+  officerController.blockOfficerBulkUpload
+);
+router.route('/bulkupload-district').post(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  uploads.single('file'),
+  officerController.districtOfficerBulkUpload
+);
+router.route('/bulkupload-division').post(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  uploads.single('file'),
+  officerController.divisinOfficerBulkUpload
+);
 router
   .route('/filterby/division/:masterProjectId')
   .get(
@@ -74,34 +66,26 @@ router.post('/blockCode', officerController.getBlockCodeByEmailAndMasterProjectI
 router.post('/districtCode', officerController.getDistrictCodeByEmailAndMasterProjectId);
 router.post('/sme/blockCode', officerController.getSmeBlockCodeByEmailAndMasterProjectId);
 router.post('/division/divisionName', officerController.getDivisionNameByEmailAndMasterProjectId);
-router
-  .route('/getallblockofficer')
-  .get(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    //validate(schoolValidation.getAllSchools),
-    officerController.getAllBlockOficer
-  );
-  router
-  .route('/getalldistrictofficer')
-  .get(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    //validate(schoolValidation.getAllSchools),
-    officerController.getAllDistrictOficer
-  );
-  router
-  .route('/getalldivisionofficer')
-  .get(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    //validate(schoolValidation.getAllSchools),
-    officerController.getAllDivisionOficer
-  );
-  router
-  .route('/getallsmeofficer')
-  .get(
-    //auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    //validate(schoolValidation.getAllSchools),
-    officerController.getAllSmeOficer
-  );
+router.route('/getallblockofficer').get(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  // validate(schoolValidation.getAllSchools),
+  officerController.getAllBlockOficer
+);
+router.route('/getalldistrictofficer').get(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  // validate(schoolValidation.getAllSchools),
+  officerController.getAllDistrictOficer
+);
+router.route('/getalldivisionofficer').get(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  // validate(schoolValidation.getAllSchools),
+  officerController.getAllDivisionOficer
+);
+router.route('/getallsmeofficer').get(
+  // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+  // validate(schoolValidation.getAllSchools),
+  officerController.getAllSmeOficer
+);
 
 module.exports = router;
 
@@ -641,7 +625,6 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  */
 
-
 /**
  * @swagger
  * /officer/getalldivisionofficer:
@@ -705,7 +688,6 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  */
-
 
 /**
  * @swagger
