@@ -32,7 +32,7 @@ router
 router
   .route('/getschoolslist') // Define this route before routes with dynamic paths
   .post(
-    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     surveyLocationsController.getSchoolDataByMasterProjectIdAndCodeController
   );
 
@@ -307,6 +307,51 @@ module.exports = router;
 //  *               message: Internal Server Error
 //  */
 
+// /**
+//  * @swagger
+//  * /surveylocation/getschoolslist:
+//  *   post:
+//  *     summary: Get school data by masterProjectId, role, and code
+//  *     tags: [SurveyLocation]
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             type: object
+//  *             properties:
+//  *               masterProjectId:
+//  *                 type: string
+//  *                 description: Master Project Id
+//  *               role:
+//  *                 type: string
+//  *                 description: Role of the user
+//  *               code:
+//  *                 type: string
+//  *                 description: code for block , district and name for division
+//  *               surveyId:
+//  *                 type: string
+//  *                 description: code for block , district and name for division
+//  *     responses:
+//  *       "200":
+//  *         description: OK
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               properties:
+//  *                 schools:
+//  *                   type: array
+//  *                   items:
+//  *                     $ref: '#/components/schemas/School'
+//  *       "401":
+//  *         $ref: '#/components/responses/Unauthorized'
+//  *       "403":
+//  *         $ref: '#/components/responses/Forbidden'
+//  *       "404":
+//  *         description: Not Found
+//  */
+
 /**
  * @swagger
  * /surveylocation/getschoolslist:
@@ -327,11 +372,13 @@ module.exports = router;
  *                 type: string
  *                 description: Role of the user
  *               code:
- *                 type: string
- *                 description: code for block , district and name for division
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of codes for block, district, or name for division
  *               surveyId:
  *                 type: string
- *                 description: code for block , district and name for division
+ *                 description: Survey Id
  *     responses:
  *       "200":
  *         description: OK

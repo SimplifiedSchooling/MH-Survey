@@ -203,7 +203,7 @@ const getUsersBySurveyId = async (masterProjectId) => {
   const emailArrays = ['blockCoordinatorEmails', 'districtCoordinatorEmails', 'divisionCoordinatorEmails', 'smeEmails'];
 
   const users = [];
-/* eslint-disable */
+  /* eslint-disable */
   for (const emailArray of emailArrays) {
     const emailIds = coordinatorAssignment[emailArray];
     const usersWithEmails = await User.find({ email: { $in: emailIds } });
@@ -220,33 +220,7 @@ const getUsersBySurveyId = async (masterProjectId) => {
  * @returns {Promise<Array>} - Array of assigned projects
  */
 
-// const getAssignedProjects = async (email, role) => {
-//   let OfficerModel;
-//   switch (role) {
-//     case 'block':
-//       OfficerModel = require('../models/blockOfficer.model');
-//       break;
-//     case 'district':
-//       OfficerModel = require('../models/distictOfficer.model');
-//       break;
-//     case 'division':
-//       OfficerModel = require('../models/divisionofficer.model');
-//       break;
-//     case 'SME':
-//       OfficerModel = require('../models/smeofficer.model');
-//       break;
-//     default:
-//       throw new Error('Invalid role');
-//   }
-
-//   // Fetch data from Officer collection
-//   const coordinatorAssignments = await OfficerModel.find({ email }).exec();
-
-//   const masterProjectIds = coordinatorAssignments.map(({ masterProjectId }) => masterProjectId);
-//   const projects = await MasterProject.find({ masterProjectId: { $in: masterProjectIds } });
-
-//   return projects;
-// };
+/* eslint-disable global-require */
 const getAssignedProjects = async (email, role) => {
   let OfficerModel;
   let coordinatorField;
@@ -282,6 +256,7 @@ const getAssignedProjects = async (email, role) => {
 
   return projects;
 };
+/* eslint-enable global-require */
 
 module.exports = {
   bulkUpload,

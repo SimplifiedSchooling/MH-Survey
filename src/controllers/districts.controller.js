@@ -31,10 +31,7 @@ const createDistrict = catchAsync(async (req, res) => {
 
 const buildFilter = (search) => {
   const filter = {
-    $or: [
-      { Division: { $regex: search || '', $options: 'i' } },
-      { District: { $regex: search || '', $options: 'i' } },
-    ],
+    $or: [{ Division: { $regex: search || '', $options: 'i' } }, { District: { $regex: search || '', $options: 'i' } }],
   };
 
   // If search is a number, include it in the filter for numerical fields

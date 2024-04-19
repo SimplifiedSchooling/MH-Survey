@@ -19,7 +19,6 @@ const divisionOfficerSchema = new mongoose.Schema({
   division_code: {
     type: Number,
   },
-  
 });
 
 // add plugin that converts mongoose to json

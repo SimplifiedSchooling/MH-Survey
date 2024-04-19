@@ -79,14 +79,15 @@ const getSchoolDataBySurveyId = async (masterProjectId) => {
   return schools;
 };
 
-/**
- * Get school data by masterProjectId, role, and code
- * @param {String} masterProjectId
- * @param {String} role - Role of the coordinator (block, district, division, etc.)
- * @param {String} code - Code associated with the role (block_cd_1, district_cd, Division name, etc.)
- * @returns {Promise<School[]>}
- */
-// const getSchoolDataByMasterProjectIdAndCode = async (masterProjectId, role, code) => {
+// /**
+//  * Get school data by masterProjectId, role, and code
+//  * @param {String} masterProjectId
+//  * @param {String} role - Role of the coordinator (block, district, division, etc.)
+//  * @param {String} code - Code associated with the role (block_cd_1, district_cd, Division name, etc.)
+//  * @returns {Promise<School[]>}
+//  */
+
+// const getSchoolDataByMasterProjectIdAndCode = async (masterProjectId, role, code, surveyId) => {
 //   const surveyLocation = await SurveyLocation.findOne({ masterProjectId });
 //   if (!surveyLocation) {
 //     throw new Error('Survey location not found');
@@ -95,30 +96,59 @@ const getSchoolDataBySurveyId = async (masterProjectId) => {
 //   let filteredSchools = [];
 //   const udiseSchCodes = surveyLocation.surveyLocations.map((location) => location.udise_sch_code);
 //   const schools = await School.find({ udise_sch_code: { $in: udiseSchCodes } });
-//   let data;
+
 //   switch (role.toLowerCase()) {
 //     case 'block':
-//       data = Number(code);
-//       filteredSchools = schools.filter((school) => school.block_cd_1 === data);
+//       // Filter schools based on block code
+//       filteredSchools = schools.filter((school) => school.block_cd_1 === Number(code));
 //       break;
 //     case 'district':
-//       data = Number(code);
-//       filteredSchools = schools.filter((school) => school.district_cd === data);
+//       // Filter schools based on district code
+//       filteredSchools = schools.filter((school) => school.district_cd === Number(code));
 //       break;
 //     case 'division':
+//       // Filter schools based on division code
 //       filteredSchools = schools.filter((school) => school.Division.toLowerCase() === code.toLowerCase());
 //       break;
-//     case 'SME':
-//       filteredSchools = schools.filter((school) => school.block_cd_1 === data);
+//     case 'sme':
+//       // Filter schools based on SME code
+//       filteredSchools = schools.filter((school) => school.block_cd_1 === Number(code));
 //       break;
-//     // Add more cases as needed for other roles
 //     default:
 //       // Handle default case
 //       break;
 //   }
-//   return filteredSchools;
+
+//   // Retrieve status from surveyAnswer collection for each school
+//   const schoolsWithStatus = await Promise.all(
+//     filteredSchools.map(async (school) => {
+//       const surveyStatus = await SurveyAnswers.findOne({
+//         udise_sch_code: school.udise_sch_code,
+//         masterProjectId,
+//         surveyId, // Assuming surveyId is available in the School model
+//       })
+//         .select('status')
+//         .exec();
+
+//       return { ...school.toObject(), status: surveyStatus ? surveyStatus.status : 'Pending' };
+//     })
+//   );
+
+//   return schoolsWithStatus;
 // };
-const getSchoolDataByMasterProjectIdAndCode = async (masterProjectId, role, code, surveyId) => {
+
+/**
+ * Get school data by masterProjectId, role, and code
+ * @param {String} masterProjectId
+ * @param {String} role - Role of the coordinator (block, district, division, etc.)
+ * @param {String[]} codes - Array of codes associated with the role (block_cd_1, district_cd, Division name, etc.)
+ * @returns {Promise<School[]>}
+ */
+const getSchoolDataByMasterProjectIdAndCode = async (masterProjectId, role, codes, surveyId) => {
+  if (!Array.isArray(codes)) {
+    throw new Error('Invalid input: codes must be an array');
+  }
+
   const surveyLocation = await SurveyLocation.findOne({ masterProjectId });
   if (!surveyLocation) {
     throw new Error('Survey location not found');
@@ -131,19 +161,19 @@ const getSchoolDataByMasterProjectIdAndCode = async (masterProjectId, role, code
   switch (role.toLowerCase()) {
     case 'block':
       // Filter schools based on block code
-      filteredSchools = schools.filter((school) => school.block_cd_1 === Number(code));
+      filteredSchools = schools.filter((school) => codes.includes(String(school.block_cd_1)));
       break;
     case 'district':
       // Filter schools based on district code
-      filteredSchools = schools.filter((school) => school.district_cd === Number(code));
+      filteredSchools = schools.filter((school) => codes.includes(String(school.district_cd)));
       break;
     case 'division':
       // Filter schools based on division code
-      filteredSchools = schools.filter((school) => school.Division.toLowerCase() === code.toLowerCase());
+      filteredSchools = schools.filter((school) => codes.includes(school.Division));
       break;
     case 'sme':
       // Filter schools based on SME code
-      filteredSchools = schools.filter((school) => school.block_cd_1 === Number(code));
+      filteredSchools = schools.filter((school) => codes.includes(String(school.block_cd_1)));
       break;
     default:
       // Handle default case

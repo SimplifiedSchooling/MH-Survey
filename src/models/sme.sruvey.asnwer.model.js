@@ -9,7 +9,7 @@ const smeSurveyAnswerSchema = new mongoose.Schema(
           type: String,
         },
         answer: Array,
-        isVisible : Boolean,
+        isVisible: Boolean,
       },
     ],
     surveyId: {

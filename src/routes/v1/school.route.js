@@ -76,7 +76,7 @@ module.exports = router;
  *         name: search
  *         schema:
  *           type: string
- *         description: search 
+ *         description: search
  *       - in: query
  *         name: sortBy
  *         schema:

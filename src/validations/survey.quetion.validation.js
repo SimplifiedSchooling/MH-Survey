@@ -15,7 +15,7 @@ const createSurveyQuetions = {
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
           visibleIf: Joi.string().allow(''),
           label: Joi.string(),
-          panel:Joi.string(),
+          panel: Joi.string(),
         })
       )
       .required(),
@@ -43,6 +43,7 @@ const getSurveyQuetionByCreatedById = {
     createdById: Joi.string(),
   }),
 };
+
 const updateSurveyQuetion = {
   params: Joi.object().keys({
     surveyId: Joi.string(),
@@ -66,7 +67,7 @@ const updateSurveyQuetion = {
           isRequired: Joi.boolean(), // Add this line if 'choices' is optional
           visibleIf: Joi.string().allow(''),
           label: Joi.string(),
-          panel:Joi.string(),
+          panel: Joi.string(),
         })
       ),
       createdById: Joi.string(),

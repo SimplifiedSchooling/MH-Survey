@@ -9,8 +9,8 @@ const surveyAnswerSchema = new mongoose.Schema(
           type: String,
         },
         answer: Array,
-        isVisible : Boolean,
-        panel: String
+        isVisible: Boolean,
+        panel: String,
       },
     ],
     surveyId: {

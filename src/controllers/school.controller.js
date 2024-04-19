@@ -38,7 +38,7 @@ const buildFilter = (search) => {
 
   // If search is a number, include it in the filter for numerical fields
   if (!isNaN(search)) {
-    filter.$or.push({ district_cd: search },{ udise_sch_code: search },{ block_cd_1: search },);
+    filter.$or.push({ district_cd: search }, { udise_sch_code: search }, { block_cd_1: search });
   }
 
   return filter;
