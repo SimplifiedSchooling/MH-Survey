@@ -14,3 +14,6 @@ module.exports.SMESurveyAnswersValidation = require('./sme.survey,answer.validat
 module.exports.dashboardValidation = require('./dashboard.validation');
 module.exports.smeFilePathValidation = require('./sme.file.path.validation');
 module.exports.districtOfficerDashboardValidation = require('./district.officer.dashboard.validation');
+module.exports.departmentValidation = require('./nonacademics/department.validation');
+module.exports.subDepartmentValidation = require('./nonacademics/sub.department.validation');
+module.exports.subSubDepartmentValidation = require('./nonacademics/sub.sub.department.validation');

@@ -17,6 +17,13 @@ const dashboardRoute = require('./dashboard.route');
 const filePathRoute = require('./file.path.route');
 const smeFilePathRoute = require('./sme.file.path.route');
 const districtofficerDashboardRoute = require('./district.officer.dashboard.route');
+const departmentRoute = require('./nonacademics/department.route');
+const subDepartmentRoute = require('./nonacademics/sub.department.route');
+const subSubDepartmentRoute = require('./nonacademics/sub.sub.department.route');
+const locationRoute = require('./nonacademics/location.route');
+const categoryRoute = require('./nonacademics/category.route');
+const subCategoryRoute = require('./nonacademics/su.category.route');
+const auditParameterRoute = require('./nonacademics/audit.parameters.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -35,6 +42,34 @@ const defaultRoutes = [
   {
     path: '/school',
     route: SchoolRoute,
+  },
+  {
+    path: '/department',
+    route: departmentRoute,
+  },
+  {
+    path: '/subdepartment',
+    route: subDepartmentRoute,
+  },
+  {
+    path: '/subsubdepartment',
+    route: subSubDepartmentRoute,
+  },
+  {
+    path: '/category',
+    route: categoryRoute,
+  },
+  {
+    path: '/subcategory',
+    route: subCategoryRoute,
+  },
+  {
+    path: '/location',
+    route: locationRoute,
+  },
+  {
+    path: '/auditparameter',
+    route: auditParameterRoute,
   },
   {
     path: '/newsurvey',

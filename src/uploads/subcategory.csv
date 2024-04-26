@@ -1,0 +1,11 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage,CategoryCode,CategoryDescription,CategoryWeightage,CategoryDisplayOrder,SubCategoryCode,SubCategoryDescription,SubCategoryWeightage,SubCategoryDisplayOrder
+NON ACADEMIC,HR,Human Resources and Development,20,TA,Talent Acquisition,20,SC,School,20,SC_CT1,Category 1,50,1,SC_CT1_SUBCT1,Sub Category 1,40,1
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT1,Category 1,50,1,SC_CT1_SUBCT1,Sub Category 1,40,1
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT1,Category 1,50,1,SC_CT1_SUBCT1,Sub Category 2,60,2
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT2,Category 2,50,2,SC_CT1_SUBCT1,Sub Category 1,40,1
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,BC,Business Corporate-Schools,20,SC_CT1,Category 1,50,1,SC_CT1_SUBCT1,Sub Category 1,40,1
+NON ACADEMIC,HR,Human Resources and Development,20,FA,Function Analytics,20,SC,School,20,SC_CT1,Category 1,50,1,SC_CT1_SUBCT1,Sub Category 1,60,1
+NON ACADEMIC,HR,Human Resources and Development,20,LD,Learning and Development,20,SC,School,20,SC_CT1,Category 1,50,2,SC_CT1_SUBCT1,Sub Category 1,40,1
+NON ACADEMIC,HR,Human Resources and Development,20,PC,Payroll and Compliance,20,SC,School,20,SC_CT2,Category 2,50,1,SC_CT1_SUBCT1,Sub Category 1,40,2
+NON ACADEMIC,HR,Human Resources and Development,20,TM,Talent Management,20,SC,School,20,SC_CT2,Category 2,50,1,SC_CT1_SUBCT1,Sub Category 1,60,1
+NON ACADEMIC,HR,Human Resources and Development,20,HP,HR Operation,20,BC,Business Corporate-Schools,20,SC_CT2,Category 2,50,2,SC_CT1_SUBCT1,Sub Category 1,60,1
