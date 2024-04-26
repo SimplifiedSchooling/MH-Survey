@@ -470,24 +470,6 @@ const getSmeBlockCodeByEmailAndMasterProjectId = async (masterProjectId, email) 
   return blockCode;
 };
 
-// /**
-//  * get  a Userlist based on emails assigned to  Project
-//  * @param {Object} masterProjectId - Data for Master Project
-//  * @param {String} email - Data for Master Project
-//  * @returns {Promise<SMEOfficer>}
-//  */
-
-// const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) => {
-//   const blockCode = await DivisionOfficer.findOne(
-//     { masterProjectId, division_Coordinator_EmailId: email },
-//     { division_code: 1, _id: 0 }
-//   ).lean();
-//   // Access the division_code property correctly
-//   const code = blockCode.division_code;
-//   // Find the division based on division code from the division officer
-//   const division = await Division.findOne({ divisionCode: code });
-//   return division;
-// };
 /**
  * Get division names by email and masterProjectId
  * @param {Object} masterProjectId - Data for Master Project
@@ -500,11 +482,7 @@ const getDivisionNameByEmailAndMasterProjectId = async (masterProjectId, email) 
     { masterProjectId, division_Coordinator_EmailId: email },
     { division_code: 1, _id: 0 }
   ).lean();
-
-  // Extract division codes from the result
   const codes = divisionCodes.map((item) => item.division_code);
-
-  // Find divisions based on division codes
   const divisions = await Division.find({ divisionCode: { $in: codes } });
 
   return divisions;
