@@ -53,8 +53,12 @@ const categorySchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-
     CategoryCode: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    CategoryDescription: {
       type: String,
       required: true,
       trim: true,
