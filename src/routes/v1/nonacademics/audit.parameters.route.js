@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const Excel = require('exceljs');
 const path = require('path');
 const auditParameterController = require('../../../controllers/nonacademics/audit.parameters.controller');
 
@@ -18,78 +17,18 @@ const storage = multer.diskStorage({
 
 const uploads = multer({ storage });
 
-// router
-//   // .route('/bulkupload')
-//   // .post(uploads.single('file'), auditParameterController.createAuditParameter)
-//   .get(auditParameterController.getAllAuditParameter);
+router
+  .route('/bulkupload')
+  .post(uploads.single('file'), auditParameterController.createAuditParameter)
+  .get(auditParameterController.getAllAuditParameter);
 
-// router
-//   .route('/:auditParameterId')
-//   .get(auditParameterController.getAuditParameterById)
-//   .patch(auditParameterController.updateAuditParameterById)
-//   .delete(auditParameterController.deleteistrictById);
+router
+  .route('/:auditParameterId')
+  .get(auditParameterController.getAuditParameterById)
+  .patch(auditParameterController.updateAuditParameterById)
+  .delete(auditParameterController.deleteistrictById);
 
-;
-
-
-router.route('/bulkupload').post(uploads.single('file'), async (req, res) => {
-    try {
-        // Read uploaded Excel file
-        const workbook = new Excel.Workbook();
-        console.log(workbook);
-
-        await workbook.xlsx.readFile(req.file.path);
-     
-        const worksheet = workbook.getWorksheet(1);
-
-        // Loop through each row in the worksheet
-        worksheet.eachRow({ includeEmpty: true }, async function(row, rowNumber) {
-            if (rowNumber > 1) {
-                const roles = [];
-                let col = 21; // Starting column number for roles data
-
-                // Loop through role data columns
-                while (row.getCell(col).value !== undefined) {
-                     console.log(row)
-                    const role = {
-                        RoleCode: row.getCell(col).value,
-                        RoleDescription: row.getCell(col + 1).value,
-                        Frequency: row.getCell(col + 2).value,
-                        Criticality: row.getCell(col + 3).value
-                    };
-
-                    roles.push(role);
-                    col += 4; // Move to the next set of role data columns
-                }
-
-                const rowData = {
-                    Question: `Is ${row.getCell(16).value} maintained`,
-                    AllowedResponse: 'YES_NO',
-                    DisplayOrder: row.getCell(17).value,
-                    EvidenceRequired: true,
-                    DepartmentCode: row.getCell(2).value,
-                    SubDepartmentCode: row.getCell(5).value,
-                    SubSubDepartmentCode: row.getCell(8).value || '',
-                    Category: row.getCell(12).value,
-                    SubCategory: row.getCell(14).value,
-                    IsOnsite: true,
-                    Roles: roles
-                };
-                
-
-                // Save the data to MongoDB
-               console.log(rowData)
-                const newData = new Data(rowData);
-                await newData.save();
-            }
-        });
-        console.log(worksheet)
-        res.status(200).send('Data saved to MongoDB' );
-    } catch (error) {
-        console.error(error);
-        // res.status(500).send('Internal Server Error');
-    }
-});
+router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 module.exports = router;
 
 /**
@@ -233,6 +172,82 @@ module.exports = router;
  *         description: AuditParameter not found
  */
 
+// /**
+//  * @swagger
+//  * /auditparameter/getquestionlist/byrolcode:
+//  *   get:
+//  *     summary: Get questions by role code
+//  *     tags: [AuditParameter]
+//  *     parameters:
+//  *       - in: query
+//  *         name: roleCode
+//  *         required: true
+//  *         description: Role code to filter questions
+//  *         schema:
+//  *           type: string
+//  *     responses:
+//  *       "200":
+//  *         description: List of questions grouped by category
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               example:
+//  *                 Safety:
+//  *                   - What is the safety procedure?
+//  *                   - How often is the safety inspection conducted?
+//  *                 Compliance:
+//  *                   - Are we compliant with regulations?
+//  */
+/**
+ * @swagger
+ * /auditparameter/getquestionlist/byrolcode:
+ *   get:
+ *     summary: Get questions by role code, department, sub-department, and sub-sub-department
+ *     tags: [AuditParameter]
+ *     parameters:
+ *       - in: query
+ *         name: roleCode
+ *         required: true
+ *         description: Role code to filter questions
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: DepartmentCode
+ *         required: true
+ *         description: Department code to filter questions
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: SubDepartmentCode
+ *         required: true
+ *         description: Sub-department code to filter questions
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: SubSubDepartmentCode
+ *         required: true
+ *         description: Sub-sub-department code to filter questions
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: List of questions grouped by category
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:
+ *                 Safety:
+ *                   - Question: "What is the safety procedure?"
+ *                     AllowedResponse: "Yes"
+ *                   - Question: "How often is the safety inspection conducted?"
+ *                     AllowedResponse: "Monthly"
+ *                 Compliance:
+ *                   - Question: "Are we compliant with regulations?"
+ *                     AllowedResponse: "Yes"
+ */
+
 /**
  * @swagger
  * components:
@@ -318,3 +333,4 @@ module.exports = router;
  *         SubSubCategory: Sub Sub Category 1
  *         OnsiteorOffsites: Onsite
  */
+

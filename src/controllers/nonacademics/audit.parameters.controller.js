@@ -1,7 +1,8 @@
 const httpStatus = require('http-status');
 // eslint-disable-next-line import/no-extraneous-dependencies
-
 const { join } = require('path');
+const xlsxFile = require('read-excel-file/node');
+const { AuditParameter } = require('../../models');
 const catchAsync = require('../../utils/catchAsync');
 const pick = require('../../utils/pick');
 const auditParameterService = require('../../services/nonacademics/audit.parameters.service');
@@ -12,17 +13,54 @@ const uploadsFolder = join(staticFolder, 'uploads');
 
 const createAuditParameter = catchAsync(async (req, res) => {
   try {
-    if (req.file) {
-      if (req.file.mimetype !== 'text/csv') {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'Uploaded file must be in CSV format.');
-      }
-      const csvFilePath = join(uploadsFolder, req.file.filename);
-      await auditParameterService.createAuditParameter(null, csvFilePath);
-
-      res.status(httpStatus.CREATED).send({ message: 'Data uploaded successfully.' });
-    } else {
-      throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
+    if (!req.file) {
+      throw new Error('No file uploaded');
     }
+    const filePath = req.file.path;
+    const sheetName = 'Sheet1'; // Use the available sheet name
+    const rows = await xlsxFile(filePath, { sheet: sheetName });
+
+    const auditParams = [];
+    for (let i = 3; i < rows.length; i++) {
+      const auditParam = {};
+      let add = false;
+      for (let j = 11; j < rows[0].length; j += 2) {
+        let freq = rows[i][j];
+        if (freq != null) {
+          auditParam["Question"] = rows[i][0];
+          auditParam["AllowedResponse"] = rows[i][1];
+          auditParam["DisplayOrder"] = rows[i][2];
+          auditParam["EvidenceRequired"] = rows[i][3];
+          auditParam["DepartmentCode"] = rows[i][4];
+          auditParam["SubDepartmentCode"] = rows[i][5];
+          auditParam["SubSubDepartmentCode"] = rows[i][6];
+          auditParam["Category"] = rows[i][7];
+          auditParam["SubCategory"] = rows[i][8];
+          auditParam["SubSubCategory"] = rows[i][9];
+          auditParam["OnsiteorOffsite"] = rows[i][10];
+          let crit = rows[i][j + 1];
+          let roleCode = rows[0][j];
+          let roleDesc = rows[1][j];
+          let role = {
+            crit: crit,
+            freq: freq,
+            roleCode: roleCode,
+            roleDesc: roleDesc
+          };
+          auditParam["roles"] = auditParam["roles"] || [];
+          auditParam["roles"].push(role);
+          add = true;
+        }
+      }
+      if (add) {
+        auditParams.push(auditParam);
+      }
+    }
+
+    // Create instances of AuditParameter model from auditParams
+    const createdAuditParams = await AuditParameter.create(auditParams);
+
+    res.status(200).json({ message: 'Excel file data processed successfully', auditParams: createdAuditParams });
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
   }
@@ -72,10 +110,16 @@ const deleteistrictById = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send(deleteAuditParameter);
 });
 
+const getQuestionsByRoleCode = catchAsync(async (req, res) => {
+  const { roleCode, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode } = req.query;
+  const questions = await auditParameterService.getQuestionsByRoleCode(roleCode, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode);
+  res.status(httpStatus.OK).json(questions);
+});
 module.exports = {
   createAuditParameter,
   getAllAuditParameter,
   getAuditParameterById,
   updateAuditParameterById,
   deleteistrictById,
+  getQuestionsByRoleCode,
 };
