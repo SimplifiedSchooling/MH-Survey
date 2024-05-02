@@ -177,13 +177,19 @@ module.exports = router;
  * @swagger
  * /auditparameter/getquestionlist/byrolcode:
  *   get:
- *     summary: Get questions by role code, department, sub-department, and sub-sub-department
+ *     summary: Get questions by role code,Frequency , department, sub-department, and sub-sub-department
  *     tags: [AuditParameter]
  *     parameters:
  *       - in: query
  *         name: roleCode
  *         required: true
  *         description: Role code to filter questions
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: frequency
+ *         required: true
+ *         description: frequency to filter questions
  *         schema:
  *           type: string
  *       - in: query
