@@ -106,9 +106,10 @@ const deleteistrictById = catchAsync(async (req, res) => {
 });
 
 const getQuestionsByRoleCode = catchAsync(async (req, res) => {
-  const { roleCode, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode } = req.query;
+  const { roleCode, frequency, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode } = req.query;
   const questions = await auditParameterService.getQuestionsByRoleCode(
     roleCode,
+    frequency,
     DepartmentCode,
     SubDepartmentCode,
     SubSubDepartmentCode
