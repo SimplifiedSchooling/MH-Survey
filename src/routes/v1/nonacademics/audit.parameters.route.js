@@ -29,6 +29,8 @@ router
   .delete(auditParameterController.deleteistrictById);
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
+router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
+
 module.exports = router;
 
 /**
@@ -171,34 +173,6 @@ module.exports = router;
  *       404:
  *         description: AuditParameter not found
  */
-
-// /**
-//  * @swagger
-//  * /auditparameter/getquestionlist/byrolcode:
-//  *   get:
-//  *     summary: Get questions by role code
-//  *     tags: [AuditParameter]
-//  *     parameters:
-//  *       - in: query
-//  *         name: roleCode
-//  *         required: true
-//  *         description: Role code to filter questions
-//  *         schema:
-//  *           type: string
-//  *     responses:
-//  *       "200":
-//  *         description: List of questions grouped by category
-//  *         content:
-//  *           application/json:
-//  *             schema:
-//  *               type: object
-//  *               example:
-//  *                 Safety:
-//  *                   - What is the safety procedure?
-//  *                   - How often is the safety inspection conducted?
-//  *                 Compliance:
-//  *                   - Are we compliant with regulations?
-//  */
 /**
  * @swagger
  * /auditparameter/getquestionlist/byrolcode:
@@ -246,6 +220,61 @@ module.exports = router;
  *                 Compliance:
  *                   - Question: "Are we compliant with regulations?"
  *                     AllowedResponse: "Yes"
+ */
+
+// /**
+//  * @swagger
+//  * /auditparameter/departmentlist/byrolecode:
+//  *   get:
+//  *     summary: Get questions by role code, department, sub-department, and sub-sub-department
+//  *     tags: [AuditParameter]
+//  *     parameters:
+//  *       - in: query
+//  *         name: roleCode
+//  *         required: true
+//  *         description: Role code to filter questions
+//  *         schema:
+//  *           type: string
+//  *     responses:
+//  *       "200":
+//  *         description: List of questions grouped by category
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               example:
+//  *                 Safety:
+//  *                   - Question: "What is the safety procedure?"
+//  *                     AllowedResponse: "Yes"
+//  *                   - Question: "How often is the safety inspection conducted?"
+//  *                     AllowedResponse: "Monthly"
+//  *                 Compliance:
+//  *                   - Question: "Are we compliant with regulations?"
+//  *                     AllowedResponse: "Yes"
+//  */
+
+/**
+ * @swagger
+ * /auditparameter/departmentlist/byrolecode:
+ *   get:
+ *     summary: Get questions by role code
+ *     tags: [AuditParameter]
+ *     parameters:
+ *       - in: query
+ *         name: roleCode
+ *         required: true
+ *         description: Role code to filter questions
+ *         schema:
+ *           type: string
+ *     responses:
+ *       "200":
+ *         description: List of questions with corresponding department, sub-department, and sub-sub-department
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/QuestionResponse'
  */
 
 /**
@@ -333,4 +362,3 @@ module.exports = router;
  *         SubSubCategory: Sub Sub Category 1
  *         OnsiteorOffsites: Onsite
  */
-

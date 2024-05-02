@@ -47,27 +47,27 @@ const auditParameterSchema = mongoose.Schema(
       type: String,
       trim: true,
     },
-    roles:[
+    roles: [
       {
         _id: false,
-        roleCode:{
+        roleCode: {
           type: String,
           trim: true,
         },
-        roleDesc:{
+        roleDesc: {
           type: String,
           trim: true,
         },
-        freq:{
+        freq: {
           type: String,
           trim: true,
         },
-        crit:{
+        crit: {
           type: String,
           trim: true,
         },
-      }
-    ]
+      },
+    ],
   },
   {
     timestamps: true,

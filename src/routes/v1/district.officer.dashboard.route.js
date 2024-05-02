@@ -9,12 +9,12 @@ const router = express.Router();
 router
   .route('/')
   .post(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(districtOfficerDashboardValidation.districtOfficerAnswerValidation),
     distictOfficerAnswerController.createSurveyAnswers
   )
   .get(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(districtOfficerDashboardValidation.getSurveyAnswers),
     distictOfficerAnswerController.getSurveyAnswers
   );
