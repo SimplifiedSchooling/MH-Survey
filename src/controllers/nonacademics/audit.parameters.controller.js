@@ -25,30 +25,30 @@ const createAuditParameter = catchAsync(async (req, res) => {
       const auditParam = {};
       let add = false;
       for (let j = 11; j < rows[0].length; j += 2) {
-        let freq = rows[i][j];
+        const freq = rows[i][j];
         if (freq != null) {
-          auditParam["Question"] = rows[i][0];
-          auditParam["AllowedResponse"] = rows[i][1];
-          auditParam["DisplayOrder"] = rows[i][2];
-          auditParam["EvidenceRequired"] = rows[i][3];
-          auditParam["DepartmentCode"] = rows[i][4];
-          auditParam["SubDepartmentCode"] = rows[i][5];
-          auditParam["SubSubDepartmentCode"] = rows[i][6];
-          auditParam["Category"] = rows[i][7];
-          auditParam["SubCategory"] = rows[i][8];
-          auditParam["SubSubCategory"] = rows[i][9];
-          auditParam["OnsiteorOffsite"] = rows[i][10];
-          let crit = rows[i][j + 1];
-          let roleCode = rows[0][j];
-          let roleDesc = rows[1][j];
-          let role = {
-            crit: crit,
-            freq: freq,
-            roleCode: roleCode,
-            roleDesc: roleDesc
+          auditParam.Question = rows[i][0];
+          auditParam.AllowedResponse = rows[i][1];
+          auditParam.DisplayOrder = rows[i][2];
+          auditParam.EvidenceRequired = rows[i][3];
+          auditParam.DepartmentCode = rows[i][4];
+          auditParam.SubDepartmentCode = rows[i][5];
+          auditParam.SubSubDepartmentCode = rows[i][6];
+          auditParam.Category = rows[i][7];
+          auditParam.SubCategory = rows[i][8];
+          auditParam.SubSubCategory = rows[i][9];
+          auditParam.OnsiteorOffsite = rows[i][10];
+          const crit = rows[i][j + 1];
+          const roleCode = rows[0][j];
+          const roleDesc = rows[1][j];
+          const role = {
+            crit,
+            freq,
+            roleCode,
+            roleDesc,
           };
-          auditParam["roles"] = auditParam["roles"] || [];
-          auditParam["roles"].push(role);
+          auditParam.roles = auditParam.roles || [];
+          auditParam.roles.push(role);
           add = true;
         }
       }
@@ -56,10 +56,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
         auditParams.push(auditParam);
       }
     }
-
-    // Create instances of AuditParameter model from auditParams
     const createdAuditParams = await AuditParameter.create(auditParams);
-
     res.status(200).json({ message: 'Excel file data processed successfully', auditParams: createdAuditParams });
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
@@ -68,7 +65,6 @@ const createAuditParameter = catchAsync(async (req, res) => {
 
 const buildFilter = (search) => {
   const filter = {};
-
   // Construct the filter based on the search query
   if (search) {
     filter.$or = [
@@ -79,7 +75,6 @@ const buildFilter = (search) => {
       { SubCategoryCode: { $regex: new RegExp(search, 'i') } },
     ];
   }
-
   return filter;
 };
 
@@ -112,9 +107,21 @@ const deleteistrictById = catchAsync(async (req, res) => {
 
 const getQuestionsByRoleCode = catchAsync(async (req, res) => {
   const { roleCode, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode } = req.query;
-  const questions = await auditParameterService.getQuestionsByRoleCode(roleCode, DepartmentCode, SubDepartmentCode, SubSubDepartmentCode);
+  const questions = await auditParameterService.getQuestionsByRoleCode(
+    roleCode,
+    DepartmentCode,
+    SubDepartmentCode,
+    SubSubDepartmentCode
+  );
   res.status(httpStatus.OK).json(questions);
 });
+
+const getDepartmentByRoleCode = catchAsync(async (req, res) => {
+  const { roleCode } = req.query;
+  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode);
+  res.status(httpStatus.OK).json(questions);
+});
+
 module.exports = {
   createAuditParameter,
   getAllAuditParameter,
@@ -122,4 +129,5 @@ module.exports = {
   updateAuditParameterById,
   deleteistrictById,
   getQuestionsByRoleCode,
+  getDepartmentByRoleCode,
 };

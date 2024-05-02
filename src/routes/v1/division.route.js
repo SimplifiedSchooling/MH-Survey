@@ -9,12 +9,12 @@ const router = express.Router();
 router
   .route('/')
   .post(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(divisionValidation.createDivision),
     divisionController.createDivision
   )
   .get(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
+    auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     validate(divisionValidation.getDivisions),
     divisionController.queryDivision
   );
