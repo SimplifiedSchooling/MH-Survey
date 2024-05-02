@@ -228,37 +228,6 @@ module.exports = router;
  *                     AllowedResponse: "Yes"
  */
 
-// /**
-//  * @swagger
-//  * /auditparameter/departmentlist/byrolecode:
-//  *   get:
-//  *     summary: Get questions by role code, department, sub-department, and sub-sub-department
-//  *     tags: [AuditParameter]
-//  *     parameters:
-//  *       - in: query
-//  *         name: roleCode
-//  *         required: true
-//  *         description: Role code to filter questions
-//  *         schema:
-//  *           type: string
-//  *     responses:
-//  *       "200":
-//  *         description: List of questions grouped by category
-//  *         content:
-//  *           application/json:
-//  *             schema:
-//  *               type: object
-//  *               example:
-//  *                 Safety:
-//  *                   - Question: "What is the safety procedure?"
-//  *                     AllowedResponse: "Yes"
-//  *                   - Question: "How often is the safety inspection conducted?"
-//  *                     AllowedResponse: "Monthly"
-//  *                 Compliance:
-//  *                   - Question: "Are we compliant with regulations?"
-//  *                     AllowedResponse: "Yes"
-//  */
-
 /**
  * @swagger
  * /auditparameter/departmentlist/byrolecode:
