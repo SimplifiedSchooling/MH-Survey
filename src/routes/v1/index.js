@@ -24,6 +24,7 @@ const locationRoute = require('./nonacademics/location.route');
 const categoryRoute = require('./nonacademics/category.route');
 const subCategoryRoute = require('./nonacademics/su.category.route');
 const auditParameterRoute = require('./nonacademics/audit.parameters.route');
+const auditAnswerRoute = require('./nonacademics/audit.answer.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -70,6 +71,10 @@ const defaultRoutes = [
   {
     path: '/auditparameter',
     route: auditParameterRoute,
+  },
+  {
+    path: '/auditanswer',
+    route: auditAnswerRoute,
   },
   {
     path: '/newsurvey',

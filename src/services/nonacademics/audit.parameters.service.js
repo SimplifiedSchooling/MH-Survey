@@ -369,17 +369,82 @@ const getDepartmentByRoleCode = async (roleCode) => {
 //   }
 // };
 
-const getQuestionsByRoleCode = async (roleCode, frequency, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+// const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+//   try {
+//     // Find questions based on roleCode and other query parameters
+//     const query = {
+//       'roles.roleCode': roleCode,
+//       'roles.freq': freq,
+//       DepartmentCode: departmentCode,
+//       SubDepartmentCode: subDepartmentCode,
+//       SubSubDepartmentCode: subSubDepartmentCode,
+//     };
+//     const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder roles').lean();
+
+//     // Retrieve category display order
+//     const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
+
+//     // Initialize an object to store grouped questions
+//     const groupedQuestions = {};
+
+//     // Group questions by Category and SubCategory
+//     questions.forEach((question) => {
+//       if (!groupedQuestions[question.Category]) {
+//         groupedQuestions[question.Category] = {};
+//       }
+//       if (!groupedQuestions[question.Category][question.SubCategory]) {
+//         groupedQuestions[question.Category][question.SubCategory] = [];
+//       }
+//       groupedQuestions[question.Category][question.SubCategory].push({
+//         Question: question.Question,
+//         AllowedResponse: question.AllowedResponse,
+//         DisplayOrder: question.DisplayOrder, // Include DisplayOrder in question details
+//       });
+//     });
+
+//     // Sort categories by CategoryDisplayOrder
+//     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
+
+//     // Initialize an array to store sorted grouped questions
+//     const sortedGroupedQuestions = [];
+
+//     // Iterate over categories and build the result
+//     categories.forEach((category) => {
+//       if (groupedQuestions[category.CategoryDescription]) {
+//         const sortedSubCategories = [];
+//         Object.keys(groupedQuestions[category.CategoryDescription])
+//           .sort((a, b) => a - b)
+//           .forEach((subCategory) => {
+//             sortedSubCategories.push({
+//               SubCategory: subCategory,
+//               Questions: groupedQuestions[category.CategoryDescription][subCategory].sort((a, b) => a.DisplayOrder - b.DisplayOrder), // Sort questions within the subcategory by DisplayOrder
+//             });
+//           });
+
+//         sortedGroupedQuestions.push({
+//           Category: category.CategoryDescription,
+//           CategoryDisplayOrder: category.CategoryDisplayOrder, // Include CategoryDisplayOrder
+//           SubCategories: sortedSubCategories,
+//         });
+//       }
+//     });
+
+//     return sortedGroupedQuestions;
+//   } catch (error) {
+//     throw new Error('Error fetching questions by role code');
+//   }
+// };
+const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     // Find questions based on roleCode and other query parameters
     const query = {
       'roles.roleCode': roleCode,
-      'roles.freq': frequency,
+      'roles.freq': freq,
       DepartmentCode: departmentCode,
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
     };
-    const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder').lean();
+    const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder roles.crit').lean();
 
     // Retrieve category display order
     const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
@@ -398,7 +463,8 @@ const getQuestionsByRoleCode = async (roleCode, frequency, departmentCode, subDe
       groupedQuestions[question.Category][question.SubCategory].push({
         Question: question.Question,
         AllowedResponse: question.AllowedResponse,
-        DisplayOrder: question.DisplayOrder, // Include DisplayOrder in question details
+        DisplayOrder: question.DisplayOrder,
+        Crit: question.roles[0].crit, // Include Crit field
       });
     });
 
@@ -417,13 +483,13 @@ const getQuestionsByRoleCode = async (roleCode, frequency, departmentCode, subDe
           .forEach((subCategory) => {
             sortedSubCategories.push({
               SubCategory: subCategory,
-              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort((a, b) => a.DisplayOrder - b.DisplayOrder), // Sort questions within the subcategory by DisplayOrder
+              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort((a, b) => a.DisplayOrder - b.DisplayOrder),
             });
           });
 
         sortedGroupedQuestions.push({
           Category: category.CategoryDescription,
-          CategoryDisplayOrder: category.CategoryDisplayOrder, // Include CategoryDisplayOrder
+          CategoryDisplayOrder: category.CategoryDisplayOrder,
           SubCategories: sortedSubCategories,
         });
       }

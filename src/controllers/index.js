@@ -22,3 +22,4 @@ module.exports.locationController = require('./nonacademics/location.controller'
 module.exports.categoryController = require('./nonacademics/category.controller');
 module.exports.subCategoryController = require('./nonacademics/sub.category.controller');
 module.exports.auditParameterController = require('./nonacademics/audit.parameters.controller');
+module.exports.auditAnswerController = require('./nonacademics/audit.answer.controller');

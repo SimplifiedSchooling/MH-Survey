@@ -25,3 +25,4 @@ module.exports.locationService = require('./nonacademics/location.service');
 module.exports.categoryService = require('./nonacademics/category.service');
 module.exports.subCategoryService = require('./nonacademics/sub.category.service');
 module.exports.auditParameterService = require('./nonacademics/audit.parameters.service');
+module.exports.auditAnswerService = require('./nonacademics/audit.answer.service');
