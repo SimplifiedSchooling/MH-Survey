@@ -187,9 +187,9 @@ module.exports = router;
  *         schema:
  *           type: string
  *       - in: query
- *         name: frequency
+ *         name: freq
  *         required: true
- *         description: frequency to filter questions
+ *         description: freq to filter questions
  *         schema:
  *           type: string
  *       - in: query
