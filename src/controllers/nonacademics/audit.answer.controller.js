@@ -9,6 +9,14 @@ const createAuditAnswer = catchAsync(async (req, res) => {
     res.status(httpStatus.CREATED).send(auditAnswer);
 });
 
+const createOrUpdateAuditAnswer = catchAsync(async (req, res) => {
+  const { schoolId, deptCode, subDeptCode, subSubDeptCode, OnsiteorOffsite, frequency, roleCode, finalSubmit, answers } = req.body;
+  const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode };
+  const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, finalSubmit, answers };
+  const auditAnswer = await AuditAnswerService.createOrUpdateAuditAnswer(filter, data);
+  res.status(httpStatus.OK).json(auditAnswer);
+});
+
 const buildFilter = (search) => {
   const filter = {};
 
@@ -60,4 +68,5 @@ module.exports = {
   getAuditAnswerById,
   updateAuditAnswerById,
   deleteistrictById,
+  createOrUpdateAuditAnswer,
 };

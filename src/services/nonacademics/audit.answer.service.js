@@ -13,6 +13,24 @@ const createAuditAnswer = async (auditAnswerBody) => {
 };
 
 /**
+ * Create or update audit answers
+ * @param {Object} filter - Filter object for finding the audit answer
+ * @param {Object} data - Data to be updated or inserted
+ * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
+ */
+
+const createOrUpdateAuditAnswer = async (filter, data) => {
+  let auditAnswer = await AuditAnswer.findOne(filter);
+  if (!auditAnswer) {
+    auditAnswer = await AuditAnswer.create(data);
+  } else {
+    Object.assign(auditAnswer, data);
+    await auditAnswer.save();
+  }
+  return auditAnswer;
+};
+
+/**
  * Query for AuditAnswer
  * @param {Object} filter - Mongo filter
  * @param {Object} options - Query options
@@ -67,6 +85,7 @@ const deleteAuditAnswerById = async (AuditAnswerId) => {
 
 module.exports = {
   createAuditAnswer,
+  createOrUpdateAuditAnswer,
   queryAuditAnswer,
   getAuditAnswerById,
   updateAuditAnswerById,
