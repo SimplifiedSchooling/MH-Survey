@@ -28,6 +28,10 @@ const answerSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    OnsiteorOffsite: {
+      type: String,
+      trim: true,
+    },
     category: {
       type: String,
       trim: true,
@@ -63,11 +67,6 @@ const auditAnswers = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-    },
-
-    OnsiteorOffsite: {
-      type: String,
-      trim: true,
     },
     frequency: {
       type: String,

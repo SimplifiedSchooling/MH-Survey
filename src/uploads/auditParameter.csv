@@ -1,7 +1,0 @@
-Question,AllowedResponse,DisplayOrder,EvidenceRequired,DepartmentCode,SubDepartmentCode,SubSubDepartmentCode,Category,SubCategory,SubSubCategory,OnsiteorOffsite,RoleCode,RoleDescription,Frequency,Criticality
-,,,,,,,,,,,,,,
-Is External vendor case ID in excel file maintained,"YES/NO
-YES/NO/NOT APPLICABLE
-YES/NO/NOT APPLICABLE/NOT OBSERVED",1,Yes,IT,IA,NA,Infra,Records & Files,Records & Files,ONSITE,201PT037,School Procurement & Stores Lead,DAILY,MEDIUM
-,,,,,,,,,,,201PT037,201PT037,DAILY,MEDIUM
-,,,,,,,,,,,201PT037,School Procurement & Stores Lead,Weekly,Hard

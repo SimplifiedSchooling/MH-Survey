@@ -11,6 +11,8 @@ router
   .patch(auditAnswercontroller.updateAuditAnswerById)
   .delete(auditAnswercontroller.deleteistrictById);
 
+router.route('/createorupdate').post(auditAnswercontroller.createOrUpdateAuditAnswer);
+
 module.exports = router;
 
 /**

@@ -445,8 +445,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
     };
-    const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder roles.crit').lean();
-
+    const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit').lean();
     // Retrieve category display order
     const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
 
@@ -466,6 +465,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         AllowedResponse: question.AllowedResponse,
         DisplayOrder: question.DisplayOrder,
         Crit: question.roles[0].crit, // Include Crit field
+        OnsiteorOffsite: question.OnsiteorOffsite, // Include Crit field
       });
     });
 
