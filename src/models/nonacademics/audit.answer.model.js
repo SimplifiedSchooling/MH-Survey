@@ -16,7 +16,7 @@ const answerSchema = new mongoose.Schema(
     imageLink: {
       type: String,
       trim: true,
-      required: true,
+      // required: true,
     },
     criticality: {
       type: String,
@@ -26,7 +26,7 @@ const answerSchema = new mongoose.Schema(
     comment: {
       type: String,
       trim: true,
-      required: true,
+      // required: true,
     },
     OnsiteorOffsite: {
       type: String,

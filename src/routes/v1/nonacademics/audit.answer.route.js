@@ -24,6 +24,33 @@ module.exports = router;
 
 /**
  * @swagger
+ * /auditanswer/createorupdate:
+ *   post:
+ *     summary: Create a AuditAnswer
+ *     tags: [AuditAnswer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/AuditAnswer'
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/AuditAnswer'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
  * /auditanswer:
  *   post:
  *     summary: Create a AuditAnswer
@@ -58,7 +85,7 @@ module.exports = router;
  *     security:
  *       - bearerAuth: []
  *     parameters:
-*       - in: query
+ *       - in: query
  *         name: search
  *         schema:
  *           type: string
@@ -222,7 +249,7 @@ module.exports = router;
  *           description: The role code associated with the audit.
  *         finalSubmit:
  *           type: boolean
- *           description: final submit of the form 
+ *           description: final submit of the form
  *         answers:
  *           type: array
  *           description: The array of answers provided for the audit.
