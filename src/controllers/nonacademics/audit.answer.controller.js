@@ -5,12 +5,12 @@ const AuditAnswerService = require('../../services/nonacademics/audit.answer.ser
 const ApiError = require('../../utils/ApiError');
 
 const createAuditAnswer = catchAsync(async (req, res) => {
-    const auditAnswer = await AuditAnswerService.createAuditAnswer(req.body);
-    res.status(httpStatus.CREATED).send(auditAnswer);
+  const auditAnswer = await AuditAnswerService.createAuditAnswer(req.body);
+  res.status(httpStatus.CREATED).send(auditAnswer);
 });
 
 const createOrUpdateAuditAnswer = catchAsync(async (req, res) => {
-  const { schoolId, deptCode, subDeptCode, subSubDeptCode, OnsiteorOffsite, frequency, roleCode, finalSubmit, answers } = req.body;
+  const { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, finalSubmit, answers } = req.body;
   const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode };
   const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, finalSubmit, answers };
   const auditAnswer = await AuditAnswerService.createOrUpdateAuditAnswer(filter, data);
@@ -19,8 +19,6 @@ const createOrUpdateAuditAnswer = catchAsync(async (req, res) => {
 
 const buildFilter = (search) => {
   const filter = {};
-
-  // Construct the filter based on the search query
   if (search) {
     filter.$or = [
       { deptCode: { $regex: new RegExp(search, 'i') } },
@@ -31,7 +29,6 @@ const buildFilter = (search) => {
       { SubSubCategory: { $regex: new RegExp(search, 'i') } },
     ];
   }
-
   return filter;
 };
 

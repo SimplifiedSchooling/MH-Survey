@@ -173,36 +173,21 @@ const getAuditParameterByName = async (AuditParameterName) => {
 // };
 const getDepartmentByRoleCode = async (roleCode) => {
   try {
-    // Fetch audit parameters matching the provided roleCode
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
-
-    // Initialize a Map to store unique questions by department, sub-department, sub-sub-department, and freq property
     const uniqueQuestions = new Map();
-
-    // Iterate through the audit parameters
     for (const auditParam of auditParameters) {
-      // Construct a key for the Map based on department, sub-department, sub-sub-department codes, and freq property
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${auditParam.roles[0].freq}`;
-
-      // Check if the combination already exists in the Map
       if (!uniqueQuestions.has(key)) {
-        // Fetch department details based on the DepartmentCode
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
-
-        // Fetch sub-department details based on the SubDepartmentCode
         const subDepartment = await SubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
         });
-
-        // Fetch sub-sub-department details based on the SubSubDepartmentCode
         const subSubDepartment = await SubSubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
         });
-
-        // Format the question object
         const formattedQuestion = {
           question: auditParam.Question,
           department: department ? department.toObject() : null,
@@ -210,15 +195,10 @@ const getDepartmentByRoleCode = async (roleCode) => {
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
           freq: auditParam.roles[0].freq,
         };
-
-        // Add the formatted question object to the Map
         uniqueQuestions.set(key, formattedQuestion);
       }
     }
-
-    // Convert the Map values to an array of unique question objects
     const formattedQuestions = Array.from(uniqueQuestions.values());
-
     return formattedQuestions;
   } catch (error) {
     throw new Error(`Error fetching questions: ${error.message}`);
@@ -445,14 +425,12 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
     };
-    const questions = await AuditParameter.find(query, 'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit').lean();
-    // Retrieve category display order
+    const questions = await AuditParameter.find(
+      query,
+      'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
+    ).lean();
     const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
-
-    // Initialize an object to store grouped questions
     const groupedQuestions = {};
-
-    // Group questions by Category and SubCategory
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
         groupedQuestions[question.Category] = {};
@@ -464,18 +442,12 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         Question: question.Question,
         AllowedResponse: question.AllowedResponse,
         DisplayOrder: question.DisplayOrder,
-        Crit: question.roles[0].crit, // Include Crit field
-        OnsiteorOffsite: question.OnsiteorOffsite, // Include Crit field
+        Crit: question.roles[0].crit,
+        OnsiteorOffsite: question.OnsiteorOffsite,
       });
     });
-
-    // Sort categories by CategoryDisplayOrder
     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
-
-    // Initialize an array to store sorted grouped questions
     const sortedGroupedQuestions = [];
-
-    // Iterate over categories and build the result
     categories.forEach((category) => {
       if (groupedQuestions[category.CategoryDescription]) {
         const sortedSubCategories = [];
@@ -484,7 +456,9 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
           .forEach((subCategory) => {
             sortedSubCategories.push({
               SubCategory: subCategory,
-              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort((a, b) => a.DisplayOrder - b.DisplayOrder),
+              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
+                (a, b) => a.DisplayOrder - b.DisplayOrder
+              ),
             });
           });
 
