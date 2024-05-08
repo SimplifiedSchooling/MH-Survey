@@ -78,6 +78,11 @@ const auditAnswers = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    userId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     finalSubmit: {
       type: Boolean,
       default: false,

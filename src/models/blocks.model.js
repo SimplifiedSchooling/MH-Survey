@@ -19,7 +19,7 @@ const blockSchema = new mongoose.Schema({
   },
   Block_Name: {
     type: String,
-    unique: true,
+    // unique: true,
   },
   block_cd_1: {
     type: Number,
