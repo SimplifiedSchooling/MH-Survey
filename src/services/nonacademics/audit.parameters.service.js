@@ -434,6 +434,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
 //     throw new Error('Error fetching questions by role code');
 //   }
 // };
+
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     // Find questions based on roleCode and other query parameters

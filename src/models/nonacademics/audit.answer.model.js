@@ -28,6 +28,16 @@ const answerSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    category: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    subCategory: {
+      type: String,
+      trim: true,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -54,20 +64,7 @@ const auditAnswers = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    category: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    subCategory: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    SubSubCategory: {
-      type: String,
-      trim: true,
-    },
+
     OnsiteorOffsite: {
       type: String,
       trim: true,

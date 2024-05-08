@@ -212,15 +212,6 @@ module.exports = router;
  *         subSubDeptCode:
  *           type: string
  *           description: The sub-sub-department code.
- *         category:
- *           type: string
- *           description: The category of the audit.
- *         subCategory:
- *           type: string
- *           description: The sub-category of the audit.
- *         SubSubCategory:
- *           type: string
- *           description: The sub-sub-category of the audit.
  *         OnsiteorOffsite:
  *           type: string
  *           description: Indicates if the audit is onsite or offsite.
@@ -243,8 +234,6 @@ module.exports = router;
  *         - deptCode
  *         - subDeptCode
  *         - subSubDeptCode
- *         - category
- *         - subCategory
  *         - frequency
  *         - roleCode
  *         - finalSubmit
@@ -267,10 +256,18 @@ module.exports = router;
  *         comment:
  *           type: string
  *           description: The criticality of the answer.
+ *         category:
+ *           type: string
+ *           description: The category of the audit.
+ *         subCategory:
+ *           type: string
+ *           description: The sub-category of the audit.
  *       required:
  *         - question
  *         - answer
  *         - imageLink
  *         - criticality
  *         - comment
+ *         - category
+ *         - subCategory
  */
