@@ -214,9 +214,6 @@ module.exports = router;
  *         subSubDeptCode:
  *           type: string
  *           description: The sub-sub-department code.
- *         OnsiteorOffsite:
- *           type: string
- *           description: Indicates if the audit is onsite or offsite.
  *         frequency:
  *           type: string
  *           description: The frequency of the audit.
@@ -258,6 +255,9 @@ module.exports = router;
  *         comment:
  *           type: string
  *           description: The criticality of the answer.
+ *         OnsiteorOffsite:
+ *           type: string
+ *           description: Indicates if the audit is onsite or offsite.
  *         category:
  *           type: string
  *           description: The category of the audit.
@@ -270,6 +270,7 @@ module.exports = router;
  *         - imageLink
  *         - criticality
  *         - comment
+ *         - OnsiteorOffsite
  *         - category
  *         - subCategory
  */
