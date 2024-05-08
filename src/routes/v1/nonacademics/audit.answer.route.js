@@ -250,6 +250,9 @@ module.exports = router;
  *         finalSubmit:
  *           type: boolean
  *           description: final submit of the form
+ *         userId:
+ *           type: string
+ *           description: user object id
  *         answers:
  *           type: array
  *           description: The array of answers provided for the audit.
@@ -263,6 +266,7 @@ module.exports = router;
  *         - frequency
  *         - roleCode
  *         - finalSubmit
+ *         - userId
  *
  *     Answer:
  *       type: object
