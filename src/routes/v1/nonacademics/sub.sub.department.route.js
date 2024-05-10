@@ -25,7 +25,7 @@ router
   .get(validate(departmentValidation.getAlldepartment), departmentcontroller.getAllSubSubDepartment);
 
 router
-  .route('/:subSubDepartmentId')
+  .route('/:subsubdepartmentId')
   .get(validate(departmentValidation.getdepartmentById), departmentcontroller.getSubSubDepartmentById)
   .patch(validate(departmentValidation.updatedepartmentbyId), departmentcontroller.updateSubSubDepartmentById)
   .delete(validate(departmentValidation.deleteDepartmentById), departmentcontroller.deleteistrictById);
@@ -124,7 +124,7 @@ module.exports = router;
  *     tags: [SubSubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubSubDepartmentId
+ *         name: subsubdepartmentId
  *         required: true
  *         schema:
  *           type: string
@@ -146,7 +146,7 @@ module.exports = router;
  *     tags: [SubSubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubSubDepartmentId
+ *         name: subsubdepartmentId
  *         required: true
  *         schema:
  *           type: string
@@ -161,7 +161,7 @@ module.exports = router;
  *     tags: [SubSubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubSubDepartmentId
+ *         name: subsubdepartmentId
  *         required: true
  *         schema:
  *           type: string

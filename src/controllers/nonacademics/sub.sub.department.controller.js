@@ -62,7 +62,7 @@ const getAllSubSubDepartment = catchAsync(async (req, res) => {
 });
 
 const getSubSubDepartmentById = catchAsync(async (req, res) => {
-  const singleSubSubDepartment = await SubSubDepartmentService.getSubSubDepartmentById(req.params.subSubDepartmentId);
+  const singleSubSubDepartment = await SubSubDepartmentService.getSubSubDepartmentById(req.params.subsubdepartmentId);
   if (!singleSubSubDepartment) {
     throw new ApiError(httpStatus.NOT_FOUND, 'SubSubDepartment not found');
   }
@@ -71,14 +71,14 @@ const getSubSubDepartmentById = catchAsync(async (req, res) => {
 
 const updateSubSubDepartmentById = catchAsync(async (req, res) => {
   const updateSubSubDepartment = await SubSubDepartmentService.updateSubSubDepartmentById(
-    req.params.subSubDepartmentId,
+    req.params.subsubdepartmentId,
     req.body
   );
   res.send(updateSubSubDepartment);
 });
 
 const deleteistrictById = catchAsync(async (req, res) => {
-  const deleteSubSubDepartment = await SubSubDepartmentService.deleteSubSubDepartmentById(req.params.subSubDepartmentId);
+  const deleteSubSubDepartment = await SubSubDepartmentService.deleteSubSubDepartmentById(req.params.subsubdepartmentId);
   res.status(httpStatus.NO_CONTENT).send(deleteSubSubDepartment);
 });
 
