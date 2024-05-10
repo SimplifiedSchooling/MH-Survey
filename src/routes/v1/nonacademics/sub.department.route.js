@@ -118,13 +118,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /subSubDepartment/{SubDepartmentId}:
+ * /subdepartment/{subDepartmentId}:
  *   patch:
  *     summary: Update a single subSubDepartment by ID
  *     tags: [SubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubDepartmentId
+ *         name: subDepartmentId
  *         required: true
  *         schema:
  *           type: string
@@ -146,11 +146,11 @@ module.exports = router;
  *     tags: [SubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubDepartmentId
+ *         name: subDepartmentId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the SubDepartment
+ *         description: ID of the subDepartmentId
  *     responses:
  *       204:
  *         description: No content
@@ -161,11 +161,11 @@ module.exports = router;
  *     tags: [SubDepartment]
  *     parameters:
  *       - in: path
- *         name: SubDepartmentId
+ *         name: subDepartmentId
  *         required: true
  *         schema:
  *           type: string
- *         description: ID of the SubDepartment
+ *         description: ID of the subDepartmentId
  *     responses:
  *       200:
  *         description: Successful response
