@@ -122,6 +122,12 @@ const getDepartmentByRoleCode = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json(questions);
 });
 
+const filterDataByParameters = catchAsync(async (req, res) => {
+  const { roleCode, ...filters } = req.body;
+  const filteredData = await auditParameterService.filterDataByParameters(roleCode, filters);
+    res.json(filteredData);
+});
+
 module.exports = {
   createAuditParameter,
   getAllAuditParameter,
@@ -130,4 +136,5 @@ module.exports = {
   deleteistrictById,
   getQuestionsByRoleCode,
   getDepartmentByRoleCode,
+  filterDataByParameters,
 };

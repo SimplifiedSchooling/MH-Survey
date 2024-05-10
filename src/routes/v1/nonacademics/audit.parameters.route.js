@@ -30,6 +30,7 @@ router
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
+router.route('/data/filter').post(auditParameterController.filterDataByParameters);
 
 module.exports = router;
 
@@ -250,6 +251,44 @@ module.exports = router;
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/QuestionResponse'
+ */
+
+/**
+ * @swagger
+ * /auditparameter/data/filter:
+ *   post:
+ *     summary: Filter audit data by parameters
+ *     tags: [AuditParameter]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               roleCode:
+ *                 type: string
+ *               DepartmentCode:
+ *                 type: string
+ *               SubDepartmentCode:
+ *                 type: string
+ *               SubSubDepartmentCode:
+ *                 type: string
+ *               freq:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Successfully retrieved filtered data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/AuditParameter'
+ *       '400':
+ *         description: Invalid request body
+ *       '500':
+ *         description: Internal server error
  */
 
 /**
