@@ -25,7 +25,7 @@ router
   .get(validate(departmentValidation.getAlldepartment), departmentcontroller.getAllDepartment);
 
 router
-  .route('/:departmentId')
+  .route('/:departmentid')
   .get(validate(departmentValidation.getdepartmentById), departmentcontroller.getDepartmentById)
   .patch(validate(departmentValidation.updatedepartmentbyId), departmentcontroller.updateDepartmentById)
   .delete(validate(departmentValidation.deleteDepartmentById), departmentcontroller.deleteistrictById);
@@ -118,13 +118,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /department/{departmentId}:
+ * /department/{departmentid}:
  *   patch:
  *     summary: Update a single department by ID
  *     tags: [Department]
  *     parameters:
  *       - in: path
- *         name: departmentId
+ *         name: departmentid
  *         required: true
  *         schema:
  *           type: string
@@ -146,7 +146,7 @@ module.exports = router;
  *     tags: [Department]
  *     parameters:
  *       - in: path
- *         name: departmentId
+ *         name: departmentid
  *         required: true
  *         schema:
  *           type: string
@@ -161,7 +161,7 @@ module.exports = router;
  *     tags: [Department]
  *     parameters:
  *       - in: path
- *         name: departmentId
+ *         name: departmentid
  *         required: true
  *         schema:
  *           type: string

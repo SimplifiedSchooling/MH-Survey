@@ -54,7 +54,7 @@ const getAllsubCategory = catchAsync(async (req, res) => {
 });
 
 const getsubCategoryById = catchAsync(async (req, res) => {
-  const singlesubCategory = await subCategoryService.getSubCategoryById(req.params.subCategoryId);
+  const singlesubCategory = await subCategoryService.getSubCategoryById(req.params.subcategoryid);
   if (!singlesubCategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'subCategory not found');
   }
@@ -62,12 +62,12 @@ const getsubCategoryById = catchAsync(async (req, res) => {
 });
 
 const updatesubCategoryById = catchAsync(async (req, res) => {
-  const updatesubCategory = await subCategoryService.updateSubCategoryById(req.params.subCategoryId, req.body);
+  const updatesubCategory = await subCategoryService.updateSubCategoryById(req.params.subcategoryid, req.body);
   res.send(updatesubCategory);
 });
 
 const deleteistrictById = catchAsync(async (req, res) => {
-  const deletesubCategory = await subCategoryService.deleteSubCategoryById(req.params.subCategoryId);
+  const deletesubCategory = await subCategoryService.deleteSubCategoryById(req.params.subcategoryid);
   res.status(httpStatus.NO_CONTENT).send(deletesubCategory);
 });
 
