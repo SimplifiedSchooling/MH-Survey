@@ -1,0 +1,3 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage
+NON ACADEMIC,OP,OP,20,PT,PT ,20
+NON ACADEMIC,OP,OP ,15,FY,FY  ,30
