@@ -85,7 +85,8 @@ const getDepartmentByRoleCode = async (roleCode) => {
       }
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
-        const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+        const department = await Department.findOne({ DepartmentCode:auditParam.DepartmentCode});
+        console.log(department);
         const subDepartment = await SubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
@@ -121,11 +122,17 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
     };
+    const query2 = {
+      DepartmentCode: departmentCode,
+      SubDepartmentCode: subDepartmentCode,
+      SubSubDepartmentCode: subSubDepartmentCode,
+    };
     const questions = await AuditParameter.find(
       query,
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
-    const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
+    // console.log(questions);
+    const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {

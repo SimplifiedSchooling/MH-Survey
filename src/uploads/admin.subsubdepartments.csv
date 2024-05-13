@@ -1,0 +1,9 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage
+NON ACADEMIC,OP,OP ,20,PT,PT ,20,NA,PT NA sub sub department,30
+NON ACADEMIC,OP,OP ,20,FY,FY  ,30,SU,SU ,15
+NON ACADEMIC,OP,OP ,20,FY,FY ,30,AN,AN ,30
+NON ACADEMIC,OP,OP ,20,FY,FY ,30,CA,CA ,20
+NON ACADEMIC,OP,OP ,20,FY,FY ,30,ME,ME,35
+NON ACADEMIC,OP,OP ,20,FY,FY,30,HE,HE,40
+NON ACADEMIC,OP,OP ,20,FY,FY,30,HC,HC,50
+NON ACADEMIC,OP,OP ,20,PT,PT ,20,SU,SU,30
