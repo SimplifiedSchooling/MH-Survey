@@ -23,7 +23,7 @@ router
   .get(subcategorycontroller.getAllsubCategory);
 
 router
-  .route('/:subCategoryId')
+  .route('/:subcategoryid')
   .get(subcategorycontroller.getsubCategoryById)
   .patch(subcategorycontroller.updatesubCategoryById)
   .delete(subcategorycontroller.deleteistrictById);
@@ -116,13 +116,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /subcategory/{subcategoryId}:
+ * /subcategory/{subcategoryid}:
  *   patch:
  *     summary: Update a single subcategory by ID
  *     tags: [SubCategory]
  *     parameters:
  *       - in: path
- *         name: subCategoryId
+ *         name: subcategoryid
  *         required: true
  *         schema:
  *           type: string
@@ -144,7 +144,7 @@ module.exports = router;
  *     tags: [SubCategory]
  *     parameters:
  *       - in: path
- *         name: subCategoryId
+ *         name: subcategoryid
  *         required: true
  *         schema:
  *           type: string
@@ -159,7 +159,7 @@ module.exports = router;
  *     tags: [SubCategory]
  *     parameters:
  *       - in: path
- *         name: subCategoryId
+ *         name: subcategoryid
  *         required: true
  *         schema:
  *           type: string

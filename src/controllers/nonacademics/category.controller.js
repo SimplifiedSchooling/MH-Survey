@@ -51,7 +51,7 @@ const getAllcategory = catchAsync(async (req, res) => {
 });
 
 const getcategoryById = catchAsync(async (req, res) => {
-  const singlecategory = await categoryService.getCategoryById(req.params.categoryId);
+  const singlecategory = await categoryService.getCategoryById(req.params.categoryid);
   if (!singlecategory) {
     throw new ApiError(httpStatus.NOT_FOUND, 'category not found');
   }
@@ -59,12 +59,12 @@ const getcategoryById = catchAsync(async (req, res) => {
 });
 
 const updatecategoryById = catchAsync(async (req, res) => {
-  const updatecategory = await categoryService.updateCategoryById(req.params.categoryId, req.body);
+  const updatecategory = await categoryService.updateCategoryById(req.params.categoryid, req.body);
   res.send(updatecategory);
 });
 
 const deleteistrictById = catchAsync(async (req, res) => {
-  const deletecategory = await categoryService.deleteCategoryById(req.params.categoryId);
+  const deletecategory = await categoryService.deleteCategoryById(req.params.categoryid);
   res.status(httpStatus.NO_CONTENT).send(deletecategory);
 });
 
