@@ -78,8 +78,8 @@ const getDepartmentByRoleCode = async (roleCode) => {
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
       let frequency = null;
-      for(const role of auditParam.roles){
-        if(role.roleCode === roleCode){
+      for (const role of auditParam.roles) {
+        if (role.roleCode === roleCode) {
           frequency = role.freq;
           break;
         }
@@ -87,6 +87,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+        console.log(department);
         const subDepartment = await SubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
@@ -130,8 +131,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
           department: department ? department.toObject() : null,
           subDepartment: subDepartment ? subDepartment.toObject() : null,
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
-          freq: frequency ,
-          date: dueDate
+          freq: frequency,
         };
         uniqueQuestions.set(key, formattedQuestion);
       }
@@ -146,8 +146,12 @@ const getDepartmentByRoleCode = async (roleCode) => {
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     const query = {
-      'roles.roleCode': roleCode,
-      'roles.freq': freq,
+      roles: { $elemMatch: { roleCode: roleCode, freq: freq } },
+      DepartmentCode: departmentCode,
+      SubDepartmentCode: subDepartmentCode,
+      SubSubDepartmentCode: subSubDepartmentCode,
+    };
+    const query2 = {
       DepartmentCode: departmentCode,
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
@@ -156,7 +160,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       query,
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
-    const categories = await Category.find({}, 'CategoryDescription CategoryDisplayOrder').lean();
+    const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -209,7 +213,6 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
  * @param {Object} filters
  * @returns {Promise<AuditParameter>}
  */
-
 const filterDataByParameters = async (roleCode, filters) => {
   try {
     const filterObj = { 'roles.roleCode': roleCode };
@@ -225,39 +228,89 @@ const filterDataByParameters = async (roleCode, filters) => {
     if (filters.freq) {
       filterObj['roles.freq'] = filters.freq;
     }
-    const auditParameters = await AuditParameter.find(filterObj);
+    const auditParameters = await AuditParameter.aggregate([
+      { $match: filterObj },
+      {
+        $lookup: {
+          from: 'departments',
+          localField: 'DepartmentCode',
+          foreignField: 'DepartmentCode',
+          as: 'department',
+        },
+      },
+      {
+        $lookup: {
+          from: 'subdepartments',
+          let: { departmentCode: '$DepartmentCode', subDepartmentCode: '$SubDepartmentCode' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$DepartmentCode', '$$departmentCode'] },
+                    { $eq: ['$SubDepartmentCode', '$$subDepartmentCode'] },
+                  ],
+                },
+              },
+            },
+            { $limit: 1 },
+          ],
+          as: 'subDepartment',
+        },
+      },
+      {
+        $lookup: {
+          from: 'subsubdepartments',
+          let: {
+            departmentCode: '$DepartmentCode',
+            subDepartmentCode: '$SubDepartmentCode',
+            subSubDepartmentCode: '$SubSubDepartmentCode',
+          },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$DepartmentCode', '$$departmentCode'] },
+                    { $eq: ['$SubDepartmentCode', '$$subDepartmentCode'] },
+                    { $eq: ['$SubSubDepartmentCode', '$$subSubDepartmentCode'] },
+                  ],
+                },
+              },
+            },
+            { $limit: 1 },
+          ],
+          as: 'subSubDepartment',
+        },
+      },
+      {
+        $project: {
+          Question: 1,
+          department: { $arrayElemAt: ['$department', 0] },
+          subDepartment: { $arrayElemAt: ['$subDepartment', 0] },
+          subSubDepartment: { $arrayElemAt: ['$subSubDepartment', 0] },
+          freq: '$roles.freq',
+        },
+      },
+    ]);
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
-      const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${auditParam.roles[0].freq}`;
+      const key = `${auditParam.department.DepartmentCode}-${auditParam.subDepartment.SubDepartmentCode}-${auditParam.subSubDepartment.SubSubDepartmentCode}-${auditParam.freq}`;
       if (!uniqueQuestions.has(key)) {
-        const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
-        const subDepartment = await SubDepartment.findOne({
-          DepartmentCode: auditParam.DepartmentCode,
-          SubDepartmentCode: auditParam.SubDepartmentCode,
-        });
-        const subSubDepartment = await SubSubDepartment.findOne({
-          DepartmentCode: auditParam.DepartmentCode,
-          SubDepartmentCode: auditParam.SubDepartmentCode,
-          SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
-        });
-        const formattedQuestion = {
+        uniqueQuestions.set(key, {
           question: auditParam.Question,
-          department: department ? department.toObject() : null,
-          subDepartment: subDepartment ? subDepartment.toObject() : null,
-          subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
-          freq: auditParam.roles[0].freq,
-        };
-        uniqueQuestions.set(key, formattedQuestion);
+          department: auditParam.department ? auditParam.department.toObject() : null,
+          subDepartment: auditParam.subDepartment ? auditParam.subDepartment.toObject() : null,
+          subSubDepartment: auditParam.subSubDepartment ? auditParam.subSubDepartment.toObject() : null,
+          freq: auditParam.freq,
+        });
       }
     }
-
-    const formattedQuestions = Array.from(uniqueQuestions.values());
-    return formattedQuestions;
+    return Array.from(uniqueQuestions.values());
   } catch (error) {
     throw new Error(`Error filtering questions: ${error.message}`);
   }
 };
-
 module.exports = {
   queryAuditParameter,
   getAuditParameterById,

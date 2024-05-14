@@ -17,3 +17,4 @@ module.exports.districtOfficerDashboardValidation = require('./district.officer.
 module.exports.departmentValidation = require('./nonacademics/department.validation');
 module.exports.subDepartmentValidation = require('./nonacademics/sub.department.validation');
 module.exports.subSubDepartmentValidation = require('./nonacademics/sub.sub.department.validation');
+module.exports.auditParametersValidation = require('./nonacademics/audit.parameter.validation');
