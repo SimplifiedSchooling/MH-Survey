@@ -42,6 +42,12 @@ const answerSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    DisplayOrder: {
+      type: Number,
+      trim: true,
+      required: true,
+    },
+    
   },
   { timestamps: true }
 );

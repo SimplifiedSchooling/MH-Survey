@@ -1,5 +1,7 @@
 const express = require('express');
+const validate = require('../../../middlewares/validate');
 const auditAnswercontroller = require('../../../controllers/nonacademics/audit.answer.controller');
+const auditAnswerValidation = require('../../../validations/nonacademics/audit.answer.validation');
 
 const router = express.Router();
 
@@ -12,6 +14,8 @@ router
   .delete(auditAnswercontroller.deleteistrictById);
 
 router.route('/createorupdate').post(auditAnswercontroller.createOrUpdateAuditAnswer);
+
+router.route('/getanswers/byfilters').post(validate(auditAnswerValidation.getAuditAnswers),auditAnswercontroller.getAuditAnswers);
 
 module.exports = router;
 
@@ -47,6 +51,64 @@ module.exports = router;
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
+ */
+
+/**
+ * @swagger
+ * /auditanswer/getanswers/byfilters:
+ *   post:
+ *     summary: Get all Audit answers for filters
+ *     tags: [AuditAnswer]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               departmentCode:
+ *                 type: string
+ *               subDepartmentCode:
+ *                 type: string
+ *               subSubDepartmentCode:
+ *                 type: string
+ *               frequency:
+ *                 type: string
+ *               roleCode:
+ *                 type: string
+ *               userId:
+ *                 type: string
+ *               schoolId:
+ *                 type: string
+ *             required:
+ *               - departmentCode
+ *               - subDepartmentCode
+ *               - subSubDepartmentCode
+ *               - frequency
+ *               - roleCode
+ *               - userId
+ *               - schoolId
+ *     responses:
+ *       "201":
+ *         description: Created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuditAnswer'
+ *       "401":
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         description: Forbidden
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/responses/Forbidden'
  */
 
 /**

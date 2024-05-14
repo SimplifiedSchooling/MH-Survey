@@ -95,6 +95,33 @@ const deleteAuditAnswerById = async (AuditAnswerId) => {
   return auditAnswer;
 };
 
+const getAuditAnswersByFilters = async (filters) => {
+  const query = {
+    schoolId: filters.schoolId,
+    deptCode: filters.departmentCode,
+    subDeptCode: filters.subDepartmentCode,
+    subSubDeptCode: filters.subSubDepartmentCode,
+    roleCode: filters.roleCode,
+    frequency: filters.frequency,
+    userId: filters.userId,
+  };
+  const auditAnswers = await AuditAnswer.find(query).lean();
+  const groupedAnswers = {};
+  auditAnswers.forEach((answer) => {
+    answer.answers.forEach((individualAnswer) => {
+      const { category, subCategory } = individualAnswer;
+      if (!groupedAnswers[category]) {
+        groupedAnswers[category] = {};
+      }
+      if (!groupedAnswers[category][subCategory]) {
+        groupedAnswers[category][subCategory] = [];
+      }
+      groupedAnswers[category][subCategory].push(individualAnswer);
+    });
+  });
+  return groupedAnswers;
+};
+
 module.exports = {
   createAuditAnswer,
   createOrUpdateAuditAnswer,
@@ -102,4 +129,5 @@ module.exports = {
   getAuditAnswerById,
   updateAuditAnswerById,
   deleteAuditAnswerById,
+  getAuditAnswersByFilters,
 };
