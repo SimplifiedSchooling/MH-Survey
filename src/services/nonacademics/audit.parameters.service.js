@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const moment = require('moment');
 const { AuditParameter, Category, Department, SubDepartment, SubSubDepartment } = require('../../models');
 const ApiError = require('../../utils/ApiError');
@@ -299,9 +300,9 @@ const filterDataByParameters = async (roleCode, filters) => {
       if (!uniqueQuestions.has(key)) {
         uniqueQuestions.set(key, {
           question: auditParam.Question,
-          department: auditParam.department ? auditParam.department.toObject() : null,
-          subDepartment: auditParam.subDepartment ? auditParam.subDepartment.toObject() : null,
-          subSubDepartment: auditParam.subSubDepartment ? auditParam.subSubDepartment.toObject() : null,
+          department: auditParam.department instanceof mongoose.Document ? auditParam.department.toObject() : auditParam.department,
+          subDepartment: auditParam.subDepartment instanceof mongoose.Document ? auditParam.subDepartment.toObject() : auditParam.subDepartment,
+          subSubDepartment: auditParam.subSubDepartment instanceof mongoose.Document ? auditParam.subSubDepartment.toObject() : auditParam.subSubDepartment,
           freq: auditParam.freq,
         });
       }
@@ -311,6 +312,7 @@ const filterDataByParameters = async (roleCode, filters) => {
     throw new Error(`Error filtering questions: ${error.message}`);
   }
 };
+
 module.exports = {
   queryAuditParameter,
   getAuditParameterById,
