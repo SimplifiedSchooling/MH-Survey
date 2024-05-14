@@ -160,7 +160,10 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       query,
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
+
+    console.log(questions);
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+    
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
