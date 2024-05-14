@@ -8,7 +8,6 @@ const pick = require('../../utils/pick');
 const auditParameterService = require('../../services/nonacademics/audit.parameters.service');
 const ApiError = require('../../utils/ApiError');
 
-const staticFolder = join(__dirname, '../../');
 // const uploadsFolder = join(staticFolder, 'uploads');
 
 const createAuditParameter = catchAsync(async (req, res) => {
