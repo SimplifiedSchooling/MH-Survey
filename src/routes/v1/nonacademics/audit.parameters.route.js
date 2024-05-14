@@ -1,7 +1,9 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const validate = require('../../../middlewares/validate');
 const auditParameterController = require('../../../controllers/nonacademics/audit.parameters.controller');
+const auditParametersValidation = require('../../../validations/nonacademics/audit.parameter.validation');
 
 const router = express.Router();
 const uploadDir = path.join(__dirname, '../../../uploads');
@@ -20,13 +22,13 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload')
   .post(uploads.single('file'), auditParameterController.createAuditParameter)
-  .get(auditParameterController.getAllAuditParameter);
+  .get(validate(auditParametersValidation.getAllAuditParameter),auditParameterController.getAllAuditParameter);
 
 router
-  .route('/:auditParameterId')
-  .get(auditParameterController.getAuditParameterById)
+  .route('/:auditparameterid')
+  .get(validate(auditParametersValidation.getAuditParameterById),auditParameterController.getAuditParameterById)
   .patch(auditParameterController.updateAuditParameterById)
-  .delete(auditParameterController.deleteistrictById);
+  .delete(validate(auditParametersValidation.deleteAuditParameterById),auditParameterController.deleteistrictById);
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
@@ -120,13 +122,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /auditparameter/{auditParameterId}:
+ * /auditparameter/{auditparameterid}:
  *   patch:
  *     summary: Update a single AuditParameter by ID
  *     tags: [AuditParameter]
  *     parameters:
  *       - in: path
- *         name: auditParameterId
+ *         name: auditparameterid
  *         required: true
  *         schema:
  *           type: string
@@ -148,7 +150,7 @@ module.exports = router;
  *     tags: [AuditParameter]
  *     parameters:
  *       - in: path
- *         name: auditParameterId
+ *         name: auditparameterid
  *         required: true
  *         schema:
  *           type: string
@@ -163,7 +165,7 @@ module.exports = router;
  *     tags: [AuditParameter]
  *     parameters:
  *       - in: path
- *         name: auditParameterId
+ *         name: auditparameterid
  *         required: true
  *         schema:
  *           type: string
