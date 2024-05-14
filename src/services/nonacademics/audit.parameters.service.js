@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const moment = require('moment');
 const { AuditParameter, Category, Department, SubDepartment, SubSubDepartment } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
@@ -88,12 +89,42 @@ const getDepartmentByRoleCode = async (roleCode) => {
           SubDepartmentCode: auditParam.SubDepartmentCode,
           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
         });
+        let dueDate = ""
+        const currentDate = moment();
+        if(auditParam.roles[0].freq === "DAILY") {
+          dueDate = moment().format("DD/MM/YYYY")
+        } else if(auditParam.roles[0].freq === "Monthly") {
+          const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
+          const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
+          dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
+        } else if(auditParam.roles[0].freq === "Annual") {
+          const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
+          dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
+        } else if(auditParam.roles[0].freq === "Quaterly") {
+          const quarterlyConstant = [
+            { start: '04-01', end: '06-30' },
+            { start: '07-01', end: '09-30' },
+            { start: '10-01', end: '12-31' },
+            { start: '01-01', end: '03-31' }
+          ]
+          const currentQuarter = quarterlyConstant.find(quarter => {
+            const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
+            const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
+            return currentDate.isBetween(start, end, null, '[)');
+          });
+          dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
+        } else if(auditParam.roles[0].freq === "Weekly") {
+          const startOfWeek = currentDate.clone().startOf('week');
+          const endOfWeek = startOfWeek.clone().endOf('week');
+          dueDate = endOfWeek.format('DD/MM/YYYY');
+        }
         const formattedQuestion = {
           question: auditParam.Question,
           department: department ? department.toObject() : null,
           subDepartment: subDepartment ? subDepartment.toObject() : null,
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
           freq: auditParam.roles[0].freq,
+          date: dueDate
         };
         uniqueQuestions.set(key, formattedQuestion);
       }
