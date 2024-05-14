@@ -98,16 +98,16 @@ const getDepartmentByRoleCode = async (roleCode) => {
         });
         let dueDate = ""
         const currentDate = moment();
-        if(auditParam.roles[0].freq === "DAILY") {
+        if(frequency === "DAILY") {
           dueDate = moment().format("DD/MM/YYYY")
-        } else if(auditParam.roles[0].freq === "Monthly") {
+        } else if(frequency === "Monthly") {
           const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
           const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
           dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
-        } else if(auditParam.roles[0].freq === "Annual") {
+        } else if(frequency === "Annual") {
           const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
           dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
-        } else if(auditParam.roles[0].freq === "Quaterly") {
+        } else if(frequency === "Quaterly") {
           const quarterlyConstant = [
             { start: '04-01', end: '06-30' },
             { start: '07-01', end: '09-30' },
@@ -120,7 +120,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
             return currentDate.isBetween(start, end, null, '[)');
           });
           dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
-        } else if(auditParam.roles[0].freq === "Weekly") {
+        } else if(frequency === "Weekly") {
           const startOfWeek = currentDate.clone().startOf('week');
           const endOfWeek = startOfWeek.clone().endOf('week');
           dueDate = endOfWeek.format('DD/MM/YYYY');
