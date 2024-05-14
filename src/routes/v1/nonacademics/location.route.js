@@ -24,7 +24,7 @@ router
   .get(locationcontroller.getAllLocation);
 
 router
-  .route('/:locationId')
+  .route('/:locationid')
   .get(locationcontroller.getLocationById)
   .patch(locationcontroller.updateLocationById)
   .delete(locationcontroller.deleteistrictById);
@@ -117,13 +117,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /location/{locationId}:
+ * /location/{locationid}:
  *   patch:
  *     summary: Update a single subSubLocation by ID
  *     tags: [Location]
  *     parameters:
  *       - in: path
- *         name: locationId
+ *         name: locationid
  *         required: true
  *         schema:
  *           type: string
@@ -145,7 +145,7 @@ module.exports = router;
  *     tags: [Location]
  *     parameters:
  *       - in: path
- *         name: locationId
+ *         name: locationid
  *         required: true
  *         schema:
  *           type: string
@@ -160,7 +160,7 @@ module.exports = router;
  *     tags: [Location]
  *     parameters:
  *       - in: path
- *         name: locationId
+ *         name: locationid
  *         required: true
  *         schema:
  *           type: string

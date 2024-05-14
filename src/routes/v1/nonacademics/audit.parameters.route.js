@@ -45,7 +45,7 @@ module.exports = router;
  * @swagger
  * /auditparameter/bulkupload:
  *   post:
- *     summary: Create a new AuditParameter
+ *     summary: Create a new AuditParameter by uploading excel file 
  *     tags: [AuditParameter]
  *     requestBody:
  *       required: true
@@ -59,7 +59,7 @@ module.exports = router;
  *                 format: binary
  *     responses:
  *       201:
- *         description: Successfully added CSV file
+ *         description: Successfully added Excel file
  *       404:
  *         description: Missing file
  *   get:

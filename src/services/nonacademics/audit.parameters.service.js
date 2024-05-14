@@ -77,7 +77,14 @@ const getDepartmentByRoleCode = async (roleCode) => {
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
-      const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${auditParam.roles[0].freq}`;
+      let frequency = null;
+      for(const role of auditParam.roles){
+        if(role.roleCode === roleCode){
+          frequency = role.freq;
+          break;
+        }
+      }
+      const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
         const subDepartment = await SubDepartment.findOne({
@@ -123,7 +130,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
           department: department ? department.toObject() : null,
           subDepartment: subDepartment ? subDepartment.toObject() : null,
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
-          freq: auditParam.roles[0].freq,
+          freq: frequency ,
           date: dueDate
         };
         uniqueQuestions.set(key, formattedQuestion);

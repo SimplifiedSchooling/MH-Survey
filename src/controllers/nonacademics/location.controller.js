@@ -50,7 +50,7 @@ const getAllLocation = catchAsync(async (req, res) => {
 });
 
 const getLocationById = catchAsync(async (req, res) => {
-  const singleLocation = await locationService.getLocationById(req.params.locationId);
+  const singleLocation = await locationService.getLocationById(req.params.locationid);
   if (!singleLocation) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Location not found');
   }
@@ -58,12 +58,12 @@ const getLocationById = catchAsync(async (req, res) => {
 });
 
 const updateLocationById = catchAsync(async (req, res) => {
-  const updateLocation = await locationService.updateLocationById(req.params.locationId, req.body);
+  const updateLocation = await locationService.updateLocationById(req.params.locationid, req.body);
   res.send(updateLocation);
 });
 
 const deleteistrictById = catchAsync(async (req, res) => {
-  const deleteLocation = await locationService.deleteLocationById(req.params.locationId);
+  const deleteLocation = await locationService.deleteLocationById(req.params.locationid);
   res.status(httpStatus.NO_CONTENT).send(deleteLocation);
 });
 

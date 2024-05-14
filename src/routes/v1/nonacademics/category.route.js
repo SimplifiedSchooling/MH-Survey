@@ -23,7 +23,7 @@ router
   .get(categorycontroller.getAllcategory);
 
 router
-  .route('/:categoryId')
+  .route('/:categoryid')
   .get(categorycontroller.getcategoryById)
   .patch(categorycontroller.updatecategoryById)
   .delete(categorycontroller.deleteistrictById);
@@ -116,13 +116,13 @@ module.exports = router;
  *       "403":
  *         $ref: '#/components/responses/Forbidden'
  *
- * /category/{categoryId}:
+ * /category/{categoryid}:
  *   patch:
  *     summary: Update a single category by ID
  *     tags: [Category]
  *     parameters:
  *       - in: path
- *         name: categoryId
+ *         name: categoryid
  *         required: true
  *         schema:
  *           type: string
@@ -144,7 +144,7 @@ module.exports = router;
  *     tags: [Category]
  *     parameters:
  *       - in: path
- *         name: categoryId
+ *         name: categoryid
  *         required: true
  *         schema:
  *           type: string
@@ -159,7 +159,7 @@ module.exports = router;
  *     tags: [Category]
  *     parameters:
  *       - in: path
- *         name: categoryId
+ *         name: categoryid
  *         required: true
  *         schema:
  *           type: string

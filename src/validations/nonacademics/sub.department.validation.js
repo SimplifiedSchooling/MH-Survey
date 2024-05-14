@@ -20,13 +20,13 @@ const getAlldepartment = {
 
 const deleteDepartmentById = {
   params: Joi.object().keys({
-    subDepartmentId: Joi.string().custom(objectId),
+    subdepartmentid: Joi.string().custom(objectId),
   }),
 };
 
 const updatedepartmentbyId = {
   params: Joi.object().keys({
-    subDepartmentId: Joi.required().custom(objectId),
+    subdepartmentid: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
@@ -38,7 +38,7 @@ const updatedepartmentbyId = {
 };
 const getdepartmentById = {
   params: Joi.object().keys({
-    subDepartmentId: Joi.string().custom(objectId),
+    subdepartmentid: Joi.string().custom(objectId),
   }),
 };
 
