@@ -88,7 +88,6 @@ const getDepartmentByRoleCode = async (roleCode) => {
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
-        console.log(department);
         const subDepartment = await SubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
