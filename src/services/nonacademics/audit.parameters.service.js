@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const moment = require('moment');
 const { AuditParameter, Category, Department, SubDepartment, SubSubDepartment } = require('../../models');
 const ApiError = require('../../utils/ApiError');
@@ -87,7 +88,6 @@ const getDepartmentByRoleCode = async (roleCode) => {
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
-        console.log(department);
         const subDepartment = await SubDepartment.findOne({
           DepartmentCode: auditParam.DepartmentCode,
           SubDepartmentCode: auditParam.SubDepartmentCode,
@@ -163,7 +163,10 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       query,
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
+
+    console.log("questions ==> ", questions);
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+    console.log("categories ==> ", categories);
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -180,6 +183,8 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         OnsiteorOffsite: question.OnsiteorOffsite,
       });
     });
+    console.log("groupedQuestions ==> ", groupedQuestions['SICK BAY']['OBSERVATIONS']);
+
     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
     const sortedGroupedQuestions = [];
     categories.forEach((category) => {
@@ -201,6 +206,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
           CategoryDisplayOrder: category.CategoryDisplayOrder,
           SubCategories: sortedSubCategories,
         });
+        console.log("sortedGroupedQuestions ==> ", sortedGroupedQuestions)
       }
     });
 
@@ -302,16 +308,16 @@ const filterDataByParameters = async (roleCode, filters) => {
       if (!uniqueQuestions.has(key)) {
         uniqueQuestions.set(key, {
           question: auditParam.Question,
-          department: auditParam.department ? auditParam.department.toObject() : null,
-          subDepartment: auditParam.subDepartment ? auditParam.subDepartment.toObject() : null,
-          subSubDepartment: auditParam.subSubDepartment ? auditParam.subSubDepartment.toObject() : null,
+          department: auditParam.department instanceof mongoose.Document ? auditParam.department.toObject() : auditParam.department,
+          subDepartment: auditParam.subDepartment instanceof mongoose.Document ? auditParam.subDepartment.toObject() : auditParam.subDepartment,
+          subSubDepartment: auditParam.subSubDepartment instanceof mongoose.Document ? auditParam.subSubDepartment.toObject() : auditParam.subSubDepartment,
           freq: auditParam.freq,
         });
       }
     }
     return Array.from(uniqueQuestions.values());
   } catch (error) {
-    throw new Error(`Error filtering questions: ${error.message}`);
+    throw new Error(Error `filtering questions: ${error.message}`);
   }
 };
 module.exports = {
