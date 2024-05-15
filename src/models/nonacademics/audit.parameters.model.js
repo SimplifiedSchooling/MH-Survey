@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
-// Define enum arrays for freq and crit
-const freqEnum = ['DAILY', 'WEEKLY', 'MONTHLY', 'QUARTERLY', 'YEARLY'];
-const critEnum = ['HIGH', 'MEDIUM', 'LOW'];
-
 const auditParameterSchema = mongoose.Schema(
   {
     Question: {
@@ -14,7 +10,6 @@ const auditParameterSchema = mongoose.Schema(
     AllowedResponse: {
       type: String,
       trim: true,
-      uppercase: true,
     },
     DisplayOrder: {
       type: Number,
@@ -23,42 +18,40 @@ const auditParameterSchema = mongoose.Schema(
     EvidenceRequired: {
       type: String,
       trim: true,
-      uppercase: true,
     },
     DepartmentCode: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     SubDepartmentCode: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     SubSubDepartmentCode: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     Category: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     SubCategory: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     SubSubCategory: {
       type: String,
       trim: true,
-      uppercase: true,
+      // uppercase: true,
     },
     OnsiteorOffsite: {
       type: String,
       trim: true,
-      uppercase: true,
     },
     roles: [
       {
@@ -74,24 +67,12 @@ const auditParameterSchema = mongoose.Schema(
         freq: {
           type: String,
           trim: true,
-          uppercase: true,
-          validate: {
-            validator: function(value) {
-              return freqEnum.includes(value);
-            },
-            message: 'Invalid frequency value',
-          },
+          // uppercase: true,
         },
         crit: {
           type: String,
           trim: true,
-          uppercase: true,
-          validate: {
-            validator: function(value) {
-              return critEnum.includes(value);
-            },
-            message: 'Invalid crit value',
-          },
+          // uppercase: true,
         },
       },
     ],
@@ -101,7 +82,7 @@ const auditParameterSchema = mongoose.Schema(
   }
 );
 
-// Add plugin that converts mongoose to JSON
+// add plugin that converts mongoose to json
 auditParameterSchema.plugin(toJSON);
 auditParameterSchema.plugin(paginate);
 
