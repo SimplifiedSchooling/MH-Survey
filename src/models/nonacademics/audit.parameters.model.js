@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
 
-// Define enum arrays for freq and crit
 const freqEnum = ['DAILY', 'WEEKLY', 'MONTHLY', 'QUARTERLY', 'YEARLY'];
 const critEnum = ['HIGH', 'MEDIUM', 'LOW'];
 
@@ -108,7 +107,5 @@ auditParameterSchema.plugin(paginate);
 /**
  * @typedef AuditParameter
  */
-
 const AuditParameter = mongoose.model('AuditParameter', auditParameterSchema);
-
 module.exports = AuditParameter;
