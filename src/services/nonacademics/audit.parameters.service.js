@@ -164,9 +164,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
 
-    console.log("questions ==> ", questions);
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
-    console.log("categories ==> ", categories);
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -183,8 +181,6 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         OnsiteorOffsite: question.OnsiteorOffsite,
       });
     });
-    console.log("groupedQuestions ==> ", groupedQuestions['SICK BAY']['OBSERVATIONS']);
-
     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
     const sortedGroupedQuestions = [];
     categories.forEach((category) => {
@@ -206,7 +202,6 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
           CategoryDisplayOrder: category.CategoryDisplayOrder,
           SubCategories: sortedSubCategories,
         });
-        console.log("sortedGroupedQuestions ==> ", sortedGroupedQuestions)
       }
     });
 
