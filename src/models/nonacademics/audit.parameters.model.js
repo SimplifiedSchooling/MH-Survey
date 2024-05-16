@@ -3,6 +3,10 @@ const { toJSON, paginate } = require('../plugins');
 
 const auditParameterSchema = mongoose.Schema(
   {
+    QuestionNumber: {
+      type: String,
+      trim: true
+    },
     Question: {
       type: String,
       trim: true,

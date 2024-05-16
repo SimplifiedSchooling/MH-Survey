@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const fs = require('fs');
 const { join } = require('path');
 const csv = require('csvtojson');
 const pick = require('../utils/pick');
@@ -16,6 +17,31 @@ const bulkUploadFile = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
   }
 });
+
+
+const bulkUploadNonAcademicFile = catchAsync(async (req, res) => {
+  if (req.file) {
+    const csvFilePath = join(req.file.path);
+    const csvJsonArray = await csv().fromFile(csvFilePath);
+    const jsonArray = [];
+    console.log("csvJsonArray ",csvJsonArray.length)
+    for(const csvData of csvJsonArray) {
+      const normalizedData = {};
+      for (let key in csvData) {
+        normalizedData[normalizeHeaders(key)] = csvData[key];
+      }
+      jsonArray.push(normalizedData);
+    }
+    // const csvJsonArray = await parseCsvFile(csvFilePath);
+    console.log("jsonArray ==> ", jsonArray)
+
+    const user = await userService.bulkUploadNonAcademicUsers(null, jsonArray);
+    res.status(httpStatus.CREATED).send(user);
+  } else {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');
+  }
+});
+
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -56,6 +82,20 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const normalizeHeaders = (header) => {
+  // return header.trim().toLowerCase();
+  const words = header.trim().toLowerCase().split(/[\s_-]+/);
+  const camelCaseHeader = words.map((word, index) => {
+    if (index === 0) {
+      return word;
+    } else {
+      return word.charAt(0).toUpperCase() + word.slice(1); // Capitalize the first letter of each word
+    }
+  });
+
+  return camelCaseHeader.join('');
+};
+
 module.exports = {
   bulkUploadFile,
   createUser,
@@ -64,4 +104,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  bulkUploadNonAcademicFile
 };

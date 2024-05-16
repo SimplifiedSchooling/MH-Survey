@@ -25,6 +25,7 @@ const categoryRoute = require('./nonacademics/category.route');
 const subCategoryRoute = require('./nonacademics/su.category.route');
 const auditParameterRoute = require('./nonacademics/audit.parameters.route');
 const auditAnswerRoute = require('./nonacademics/audit.answer.route');
+const nonAcademicUser = require('../v1/nonacademics/user.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -135,6 +136,10 @@ const defaultRoutes = [
   {
     path: '/districtofficer-dashboard',
     route: districtofficerDashboardRoute,
+  },  
+  {
+    path: '/nonAcademic',
+    route: nonAcademicUser,
   },
 ];
 

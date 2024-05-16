@@ -1,5 +1,6 @@
 module.exports.Token = require('./token.model');
 module.exports.User = require('./user.model');
+module.exports.NonAcademicsUser = require('./nonacademics/user.model');
 module.exports.School = require('./school.model');
 module.exports.NewSurvey = require('./add.new.survey.model');
 module.exports.MasterProject = require('./master.project.model');
@@ -26,3 +27,4 @@ module.exports.Category = require('./nonacademics/category.model');
 module.exports.SubCategory = require('./nonacademics/sub.category.model');
 module.exports.AuditParameter = require('./nonacademics/audit.parameters.model');
 module.exports.AuditAnswer = require('./nonacademics/audit.answer.model');
+module.exports.NonAcademicsUserRole = require('./nonacademics/user.role.model')

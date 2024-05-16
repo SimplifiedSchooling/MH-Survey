@@ -20,6 +20,8 @@ const uploads = multer({ storage });
 
 router.route('/bulkupload').post(uploads.single('file'), userController.bulkUploadFile);
 
+router.route('/nonacademic/bulkupload').post(uploads.single('file'), userController.bulkUploadNonAcademicFile);
+
 router
   .route('/')
   .post(validate(userValidation.createUser), userController.createUser)
@@ -44,6 +46,29 @@ module.exports = router;
 /**
  * @swagger
  * /users/bulkupload:
+ *   post:
+ *     summary: Upload a CSV file for bulk upload user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
+ */
+
+/**
+ * @swagger
+ * /users/nonacademic/bulkupload:
  *   post:
  *     summary: Upload a CSV file for bulk upload user
  *     tags: [Users]

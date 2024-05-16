@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { User } = require('../models');
+const { User, NonAcademicsUser } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -182,6 +182,47 @@ const getUsersByEmails = async (emails) => {
   return users;
 };
 
+/**
+ * Create a user in bulk
+ * @param {Object} userArray
+ * @returns {Promise<NonAcademicsUser>}
+ */
+
+const bulkUploadNonAcademicUsers = async (userArray, csvFilePath = []) => {
+  let modifiedUserArray = userArray;
+  if (csvFilePath.length) {
+    modifiedUserArray = csvFilePath ;
+  }
+  if (!modifiedUserArray || !modifiedUserArray.length) return { error: true, message: 'missing array' };
+
+  const records = [];
+  const dups = [];
+  await Promise.all(
+    modifiedUserArray.map(async (user) => {
+      const studentFound = await getUserFilterEmail({ email: user.email });
+      if (studentFound) {
+        dups.push(user);
+      } else {
+        let record = new NonAcademicsUser(user);
+        record = await record.save();
+        if (record) {
+          records.push(user);
+        }
+      }
+    })
+  );
+
+  const duplicates = {
+    totalDuplicates: dups.length ? dups.length : 0,
+    data: dups.length ? dups : [],
+  };
+  const nonduplicates = {
+    totalNonDuplicates: records.length ? records.length : 0,
+    data: records.length ? records : [],
+  };
+  return { nonduplicates, duplicates };
+};
+
 module.exports = {
   createUser,
   queryUsers,
@@ -193,4 +234,5 @@ module.exports = {
   checkEmailAndRole,
   checkUserByEmailAndRole,
   getUsersByEmails,
+  bulkUploadNonAcademicUsers
 };
