@@ -7,71 +7,71 @@ const { toJSON, paginate } = require('../plugins');
 const nonAcademicUserSchema = mongoose.Schema(
   {
     userId: {
-        type: String,
-        trim: true
+      type: String,
+      trim: true,
     },
     role: {
       type: String,
-      default: 'user'
+      default: 'user',
     },
     uniqueRoleCode: {
-        type: String,
+      type: String,
     },
     uniqueRoleName: {
-        type: String,
+      type: String,
     },
     username: {
-        type: String,
-        // required: true,
-        trim: true,
+      type: String,
+      // required: true,
+      trim: true,
     },
     email: {
-        type: String,
-        // required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-        // validate(value) {
-        //   if (!validator.isEmail(value)) {
-        //     // throw new Error('Invalid email ==> ', value);
-        //     return false;
-        //   }
-        // },
+      type: String,
+      // required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      // validate(value) {
+      //   if (!validator.isEmail(value)) {
+      //     // throw new Error('Invalid email ==> ', value);
+      //     return false;
+      //   }
+      // },
     },
     contact: {
-        type: String
+      type: String,
     },
     designation: {
-        type: String
+      type: String,
     },
     level: {
-        type: String
+      type: String,
     },
     function: {
-        type: String
+      type: String,
     },
     centreCode: {
-        type: String
+      type: String,
     },
     centreName: {
-        type: String
+      type: String,
     },
     cluster: {
-        type: String
+      type: String,
     },
     password: {
-        type: String,
-        // required: true,
-        trim: true,
-        minlength: 8,
-        // validate(value) {
-        //   if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-        //     // throw new Error('Password must contain at least one letter and one number');
-        //     return false;
-        //   }
-        // },
-        private: true, // used by the toJSON plugin
-    }
+      type: String,
+      // required: true,
+      trim: true,
+      minlength: 8,
+      // validate(value) {
+      //   if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+      //     // throw new Error('Password must contain at least one letter and one number');
+      //     return false;
+      //   }
+      // },
+      private: true, // used by the toJSON plugin
+    },
   },
   {
     timestamps: true,

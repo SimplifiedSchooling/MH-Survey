@@ -19,10 +19,7 @@ router
   .route('/getanswers/byfilters')
   .post(validate(auditAnswerValidation.getAuditAnswers), auditAnswercontroller.getAuditAnswers);
 
-  router
-  .route('/updateProperty')
-  .post(auditAnswercontroller.updateAnswerProperty);
-
+router.route('/updateProperty').post(auditAnswercontroller.updateAnswerProperty);
 
 module.exports = router;
 
@@ -307,6 +304,31 @@ module.exports = router;
  *               filter:
  *                 type: object
  *                 description: Filter to find the audit answer document
+ *                 properties:
+ *                   schoolId:
+ *                     type: string
+ *                   deptCode:
+ *                     type: string
+ *                   subDeptCode:
+ *                     type: string
+ *                   subSubDeptCode:
+ *                     type: string
+ *                   userId:
+ *                     type: string
+ *                   roleCode:
+ *                     type: string
+ *                   frequency:
+ *                     type: string
+ *               filter2:
+ *                 type: object
+ *                 description: Filter to find the question from answer answer
+ *                 properties:
+ *                   question:
+ *                     type: string
+ *                   category:
+ *                     type: string
+ *                   subCategory:
+ *                     type: string
  *               propertyToUpdate:
  *                 type: string
  *                 description: The property in the answer object to update
@@ -315,6 +337,7 @@ module.exports = router;
  *                 description: The new value to set for the property
  *             required:
  *               - filter
+ *               - filter2
  *               - propertyToUpdate
  *               - newValue
  *     responses:

@@ -69,7 +69,7 @@ const getAuditAnswers = catchAsync(async (req, res) => {
 const updateAnswerProperty = async (req, res) => {
   try {
     const { filter, filter2, propertyToUpdate, newValue } = req.body;
-    const updatedAuditAnswer = await AuditAnswerService.updateAnswerProperty(filter,filter2, propertyToUpdate, newValue);
+    const updatedAuditAnswer = await AuditAnswerService.updateAnswerProperty(filter, filter2, propertyToUpdate, newValue);
     res.status(httpStatus.OK).json(updatedAuditAnswer);
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });

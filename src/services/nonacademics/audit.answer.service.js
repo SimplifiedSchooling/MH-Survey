@@ -22,27 +22,25 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
     auditAnswer = await AuditAnswer.create(data);
-  } else {
-    if (Array.isArray(data.answers)) {
-      for (const newData of data.answers) {
-        const existingAnswerIndex = auditAnswer.answers.findIndex(
-          (existingAnswer) =>
-            existingAnswer.question === newData.question &&
-            existingAnswer.category === newData.category &&
-            existingAnswer.subCategory === newData.subCategory &&
-            existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
-            existingAnswer.criticality === newData.criticality
-        );
-        if (existingAnswerIndex !== -1) {
-          auditAnswer.answers[existingAnswerIndex] = newData;
-        } else {
-          auditAnswer.answers.push(newData);
-        }
+  } else if (Array.isArray(data.answers)) {
+    for (const newData of data.answers) {
+      const existingAnswerIndex = auditAnswer.answers.findIndex(
+        (existingAnswer) =>
+          existingAnswer.question === newData.question &&
+          existingAnswer.category === newData.category &&
+          existingAnswer.subCategory === newData.subCategory &&
+          existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
+          existingAnswer.criticality === newData.criticality
+      );
+      if (existingAnswerIndex !== -1) {
+        auditAnswer.answers[existingAnswerIndex] = newData;
+      } else {
+        auditAnswer.answers.push(newData);
       }
-      await auditAnswer.save();
-    } else {
-      console.error('Data.answers is not iterable');
     }
+    await auditAnswer.save();
+  } else {
+    console.error('Data.answers is not iterable');
   }
   return auditAnswer;
 };
@@ -138,7 +136,7 @@ const updateAnswerProperty = async (filter, filter2, propertyToUpdate, newValue)
     if (!auditAnswer) {
       throw new Error('Audit answer not found');
     }
-    const answerIndex = auditAnswer.answers.findIndex(answer => {
+    const answerIndex = auditAnswer.answers.findIndex((answer) => {
       return (
         answer.question === filter2.question &&
         answer.category === filter2.category &&

@@ -7,23 +7,23 @@ const { toJSON, paginate } = require('../plugins');
 const nonAcademicUserRoleSchema = mongoose.Schema(
   {
     designation: {
-        type: String,
+      type: String,
     },
     uniqueRoleCode: {
-        type: String,
+      type: String,
     },
     erpLongRoleCode: {
-        type: String,
+      type: String,
     },
     erpShortRoleCode: {
-        type: String,
-        unique: true,
-        trim: true,
-        lowercase: true,
+      type: String,
+      unique: true,
+      trim: true,
+      lowercase: true,
     },
     uniqueRole: {
-        type: String,
-    }
+      type: String,
+    },
   },
   {
     timestamps: true,

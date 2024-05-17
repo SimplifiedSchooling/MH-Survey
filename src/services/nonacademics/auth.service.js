@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const userService = require('./user.service');
-const ApiError = require('../../utils/ApiError')
+const ApiError = require('../../utils/ApiError');
 
 /**
  * Login with username and password
@@ -14,21 +14,21 @@ const loginUserWithEmailAndPassword = async (email, password) => {
     if (!foundUser || !(await foundUser.isPasswordMatch(password))) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
     }
-    const userCopy = {...foundUser.toObject()};
+    const userCopy = { ...foundUser.toObject() };
     const user = {
       role: userCopy.role,
       roleAssingedTo: userCopy.uniqueRoleCode,
       name: userCopy.username,
       email: userCopy.email,
       mobNumber: userCopy.contact,
-      id: userCopy._id
-    }
+      id: userCopy._id,
+    };
     return user;
-  } catch(err) {
-    throw new Error('Login failed: ' + err.message);
+  } catch (err) {
+    throw new Error(`Login failed: ${err.message}`);
   }
 };
 
 module.exports = {
-    loginUserWithEmailAndPassword
-}
+  loginUserWithEmailAndPassword,
+};

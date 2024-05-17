@@ -9,7 +9,7 @@ const auditParameterSchema = mongoose.Schema(
   {
     QuestionNumber: {
       type: String,
-      trim: true
+      trim: true,
     },
     Question: {
       type: String,
@@ -85,7 +85,7 @@ const auditParameterSchema = mongoose.Schema(
           type: String,
           trim: true,
           validate: {
-            validator: function(value) {
+            validator(value) {
               return freqEnum.includes(value.toUpperCase());
             },
             message: 'Invalid frequency value',
@@ -96,7 +96,7 @@ const auditParameterSchema = mongoose.Schema(
           type: String,
           trim: true,
           validate: {
-            validator: function(value) {
+            validator(value) {
               return critEnum.includes(value.toUpperCase());
             },
             message: 'Invalid crit value',
