@@ -15,7 +15,9 @@ router
 
 router.route('/createorupdate').post(auditAnswercontroller.createOrUpdateAuditAnswer);
 
-router.route('/getanswers/byfilters').post(validate(auditAnswerValidation.getAuditAnswers),auditAnswercontroller.getAuditAnswers);
+router
+  .route('/getanswers/byfilters')
+  .post(validate(auditAnswerValidation.getAuditAnswers), auditAnswercontroller.getAuditAnswers);
 
 module.exports = router;
 

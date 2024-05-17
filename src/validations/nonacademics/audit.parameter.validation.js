@@ -104,15 +104,15 @@ const getAuditParameterById = {
 };
 
 const getAuditAnswers = {
-    body: Joi.object({
-      departmentCode: Joi.string().required(),
-      subDepartmentCode: Joi.string().required(),
-      subSubDepartmentCode: Joi.string().required(),
-      frequency: Joi.string().required(),
-      roleCode: Joi.string().required(),
-      userId: Joi.string().required()
-    })
-  };
+  body: Joi.object({
+    departmentCode: Joi.string().required(),
+    subDepartmentCode: Joi.string().required(),
+    subSubDepartmentCode: Joi.string().required(),
+    frequency: Joi.string().required(),
+    roleCode: Joi.string().required(),
+    userId: Joi.string().required(),
+  }),
+};
 
 module.exports = {
   createAuditParameter,
@@ -123,5 +123,4 @@ module.exports = {
   getDepartmentByRoleCode,
   getQuestionList,
   departmentDataFilter,
-  
 };

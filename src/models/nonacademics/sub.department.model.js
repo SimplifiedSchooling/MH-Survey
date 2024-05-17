@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
+const _ = require('lodash');
 
 const subDepartmentSchema = mongoose.Schema(
   {
@@ -7,57 +8,42 @@ const subDepartmentSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      default: '',
-    },
-    DepartmentGroupCode: {
-      type: String,
-      required: true,
-      trim: true,
-      default: '',
+      uppercase: true,
     },
     DepartmentDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
-      default: '',
-    },
-    DepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
-      default: null,
     },
     SubDepartmentCode: {
       type: String,
+      uppercase: true,
       required: true,
       trim: true,
-      default: '',
     },
     SubDepartmentDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
-      default: '',
     },
     SubDepartmentWeightage: {
       type: Number,
       required: true,
-      trim: true,
+      default: null,
+    },
+    SubDepartmentDisplayOrder: {
+      type: Number,
+      required: true,
       default: null,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// add plugin that converts mongoose to json
 subDepartmentSchema.plugin(toJSON);
 subDepartmentSchema.plugin(paginate);
-
-/**
- * @typedef SubDepartment
- */
 
 const SubDepartment = mongoose.model('SubDepartment', subDepartmentSchema);
 

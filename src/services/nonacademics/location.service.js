@@ -35,14 +35,9 @@ const createLocation = async (schoolArray, csvFilePath = null) => {
       );
     }
   } catch (error) {
-    // Handle any other errors
     throw new Error(`Bulk upload failed: ${error.message}`);
   }
 };
-// const createLocation = async (LocationBody) => {
-//   return Location.create(LocationBody);
-// };
-
 /**
  * Query for Location
  * @param {Object} filter - Mongo filter

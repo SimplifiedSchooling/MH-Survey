@@ -33,7 +33,7 @@ const updatedepartmentbyId = {
       departmentCode: Joi.string(),
       departmentGroupCode: Joi.string(),
       DepartmentDescription: Joi.string(),
-      DepartmentWeightage: Joi.number()
+      DepartmentWeightage: Joi.number(),
     })
     .min(1),
 };

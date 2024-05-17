@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
 const { toJSON, paginate } = require('../plugins');
 
 const freqEnum = ['DAILY', 'WEEKLY', 'MONTHLY', 'QUARTERLY', 'YEARLY'];
@@ -6,18 +7,15 @@ const critEnum = ['HIGH', 'MEDIUM', 'LOW'];
 
 const auditParameterSchema = mongoose.Schema(
   {
-    QuestionNumber: {
-      type: String,
-      trim: true
-    },
     Question: {
       type: String,
       trim: true,
+      required: true,
     },
     AllowedResponse: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
     },
     DisplayOrder: {
       type: Number,
@@ -26,49 +24,54 @@ const auditParameterSchema = mongoose.Schema(
     EvidenceRequired: {
       type: String,
       trim: true,
-      // uppercase: true,
     },
     DepartmentCode: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      uppercase: true,
     },
     SubDepartmentCode: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      uppercase: true,
     },
     SubSubDepartmentCode: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      uppercase: true,
     },
     Category: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubCategory: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubSubCategory: {
       type: String,
       trim: true,
-      // uppercase: true,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     OnsiteorOffsite: {
       type: String,
       trim: true,
-      // uppercase: true,
+      required: true,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     roles: [
       {
-        _id: false,
         roleCode: {
           type: String,
           trim: true,
+          required: true,
         },
         roleDesc: {
           type: String,
@@ -77,24 +80,24 @@ const auditParameterSchema = mongoose.Schema(
         freq: {
           type: String,
           trim: true,
-          // uppercase: true,
-          // validate: {
-          //   validator: function(value) {
-          //     return freqEnum.includes(value);
-          //   },
-          //   message: 'Invalid frequency value',
-          // },
+          validate: {
+            validator: function(value) {
+              return freqEnum.includes(value.toUpperCase());
+            },
+            message: 'Invalid frequency value',
+          },
+          set: (value) => (freqEnum.includes(value.toUpperCase()) ? value.toUpperCase() : ''),
         },
         crit: {
           type: String,
           trim: true,
-          // uppercase: true,
-          // validate: {
-          //   validator: function(value) {
-          //     return critEnum.includes(value);
-          //   },
-          //   message: 'Invalid crit value',
-          // },
+          validate: {
+            validator: function(value) {
+              return critEnum.includes(value.toUpperCase());
+            },
+            message: 'Invalid crit value',
+          },
+          set: (value) => (critEnum.includes(value.toUpperCase()) ? value.toUpperCase() : ''),
         },
       },
     ],

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
+const _ = require('lodash');
 
 const subCategorySchema = mongoose.Schema(
   {
@@ -7,70 +8,29 @@ const subCategorySchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-    },
-    DepartmentGroupCode: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    DepartmentDescription: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    DepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
+      uppercase: true,
     },
     SubDepartmentCode: {
       type: String,
       required: true,
       trim: true,
-    },
-    SubDepartmentDescription: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    SubDepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
+      uppercase: true,
     },
     SubSubDepartmentCode: {
       type: String,
       required: true,
       trim: true,
+      uppercase: true,
     },
-    SubSubDepartmentDescription: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    SubSubDepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-
     CategoryCode: {
       type: String,
       required: true,
       trim: true,
+      uppercase: true,
     },
     CategoryDescription: {
       type: String,
-      required: true,
-      trim: true,
-    },
-    CategoryWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
-    CategoryDisplayOrder: {
-      type: Number,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
     },
@@ -78,9 +38,11 @@ const subCategorySchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      uppercase: true,
     },
     SubCategoryDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
     },
