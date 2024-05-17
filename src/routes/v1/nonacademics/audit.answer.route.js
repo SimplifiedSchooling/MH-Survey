@@ -19,6 +19,11 @@ router
   .route('/getanswers/byfilters')
   .post(validate(auditAnswerValidation.getAuditAnswers), auditAnswercontroller.getAuditAnswers);
 
+  router
+  .route('/updateProperty')
+  .post(auditAnswercontroller.updateAnswerProperty);
+
+
 module.exports = router;
 
 /**
@@ -284,6 +289,51 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /auditAnswer/updateProperty:
+ *   post:
+ *     summary: Update a property in the answer object for multiple questions
+ *     tags: [AuditAnswer]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               filter:
+ *                 type: object
+ *                 description: Filter to find the audit answer document
+ *               propertyToUpdate:
+ *                 type: string
+ *                 description: The property in the answer object to update
+ *               newValue:
+ *                 type: string
+ *                 description: The new value to set for the property
+ *             required:
+ *               - filter
+ *               - propertyToUpdate
+ *               - newValue
+ *     responses:
+ *       '200':
+ *         description: Updated audit answer with the property updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuditAnswer'
+ *       '500':
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
  */
 
 /**
