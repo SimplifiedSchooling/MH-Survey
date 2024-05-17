@@ -11,36 +11,74 @@ const createAuditAnswer = async (auditAnswerBody) => {
   return AuditAnswer.create(auditAnswerBody);
 };
 
+// /**
+//  * Create or update audit answers
+//  * @param {Object} filter - Filter object for finding the audit answer
+//  * @param {Object} data - Data to be updated or inserted
+//  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
+//  */
+
+// const createOrUpdateAuditAnswer = async (filter, data) => {
+//   let auditAnswer = await AuditAnswer.findOne(filter);
+//   if (!auditAnswer) {
+//     auditAnswer = await AuditAnswer.create(data);
+//   } else if (Array.isArray(data.answers)) {
+//     for (const newData of data.answers) {
+//       const existingAnswerIndex = auditAnswer.answers.findIndex(
+//         (existingAnswer) =>
+//           existingAnswer.question === newData.question &&
+//           existingAnswer.category === newData.category &&
+//           existingAnswer.subCategory === newData.subCategory &&
+//           existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
+//           existingAnswer.criticality === newData.criticality
+//       );
+//       if (existingAnswerIndex !== -1) {
+//         auditAnswer.answers[existingAnswerIndex] = newData;
+//       } else {
+//         auditAnswer.answers.push(newData);
+//       }
+//     }
+//     await auditAnswer.save();
+//   } else {
+//     console.error('Data.answers is not iterable');
+//   }
+//   return auditAnswer;
+// };
+
 /**
  * Create or update audit answers
  * @param {Object} filter - Filter object for finding the audit answer
  * @param {Object} data - Data to be updated or inserted
  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
  */
-
 const createOrUpdateAuditAnswer = async (filter, data) => {
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
     auditAnswer = await AuditAnswer.create(data);
-  } else if (Array.isArray(data.answers)) {
-    for (const newData of data.answers) {
-      const existingAnswerIndex = auditAnswer.answers.findIndex(
-        (existingAnswer) =>
-          existingAnswer.question === newData.question &&
-          existingAnswer.category === newData.category &&
-          existingAnswer.subCategory === newData.subCategory &&
-          existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
-          existingAnswer.criticality === newData.criticality
-      );
-      if (existingAnswerIndex !== -1) {
-        auditAnswer.answers[existingAnswerIndex] = newData;
-      } else {
-        auditAnswer.answers.push(newData);
+  } else {
+    if (Array.isArray(data.answers)) {
+      for (const newData of data.answers) {
+        const existingAnswerIndex = auditAnswer.answers.findIndex(
+          (existingAnswer) =>
+            existingAnswer.question === newData.question &&
+            existingAnswer.category === newData.category &&
+            existingAnswer.subCategory === newData.subCategory &&
+            existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
+            existingAnswer.criticality === newData.criticality
+        );
+        if (existingAnswerIndex !== -1) {
+          auditAnswer.answers[existingAnswerIndex] = newData;
+        } else {
+          auditAnswer.answers.push(newData);
+        }
       }
+    } else {
+      console.error('Data.answers is not iterable');
+    }
+    if (data.finalSubmit !== undefined) {
+      auditAnswer.finalSubmit = data.finalSubmit;
     }
     await auditAnswer.save();
-  } else {
-    console.error('Data.answers is not iterable');
   }
   return auditAnswer;
 };
