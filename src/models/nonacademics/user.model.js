@@ -71,6 +71,9 @@ const nonAcademicUserSchema = mongoose.Schema(
         //   }
         // },
         private: true, // used by the toJSON plugin
+    },
+    userLocationCode: {
+      type: String
     }
   },
   {

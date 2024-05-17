@@ -120,6 +120,11 @@ module.exports = router;
  *         schema:
  *           type: string
  *         required: true
+ *       - in: query
+ *         name: centerCode
+ *         schema:
+ *           type: string
+ *         required: true
  *     responses:
  *       201:
  *         description: Details Fetched Successfully

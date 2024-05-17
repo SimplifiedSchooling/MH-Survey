@@ -21,6 +21,8 @@ const loginUserWithEmailAndPassword = async (email, password) => {
       name: userCopy.username,
       email: userCopy.email,
       mobNumber: userCopy.contact,
+      uniqRoleName: userCopy.uniqueRoleName,
+      centreCode: userCopy.centreCode,
       id: userCopy._id
     }
     return user;
