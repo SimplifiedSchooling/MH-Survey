@@ -106,10 +106,10 @@ const getDepartmentByRoleCode = async (roleCode) => {
             const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
             const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
             dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'ANNUAL') {
+          } else if (frequency.toString().toUpperCase() === 'YEARLY') {
             const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
             dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'QUATERLY') {
+          } else if (frequency.toString().toUpperCase() === 'QUARTERLY') {
             const quarterlyConstant = [
               { start: '04-01', end: '06-30' },
               { start: '07-01', end: '09-30' },
