@@ -11,40 +11,6 @@ const createAuditAnswer = async (auditAnswerBody) => {
   return AuditAnswer.create(auditAnswerBody);
 };
 
-// /**
-//  * Create or update audit answers
-//  * @param {Object} filter - Filter object for finding the audit answer
-//  * @param {Object} data - Data to be updated or inserted
-//  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
-//  */
-
-// const createOrUpdateAuditAnswer = async (filter, data) => {
-//   let auditAnswer = await AuditAnswer.findOne(filter);
-//   if (!auditAnswer) {
-//     auditAnswer = await AuditAnswer.create(data);
-//   } else if (Array.isArray(data.answers)) {
-//     for (const newData of data.answers) {
-//       const existingAnswerIndex = auditAnswer.answers.findIndex(
-//         (existingAnswer) =>
-//           existingAnswer.question === newData.question &&
-//           existingAnswer.category === newData.category &&
-//           existingAnswer.subCategory === newData.subCategory &&
-//           existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
-//           existingAnswer.criticality === newData.criticality
-//       );
-//       if (existingAnswerIndex !== -1) {
-//         auditAnswer.answers[existingAnswerIndex] = newData;
-//       } else {
-//         auditAnswer.answers.push(newData);
-//       }
-//     }
-//     await auditAnswer.save();
-//   } else {
-//     console.error('Data.answers is not iterable');
-//   }
-//   return auditAnswer;
-// };
-
 /**
  * Create or update audit answers
  * @param {Object} filter - Filter object for finding the audit answer
@@ -146,6 +112,7 @@ const getAuditAnswersByFilters = async (filters) => {
     userId: filters.userId,
   };
   const auditAnswers = await AuditAnswer.find(query).lean();
+
   const groupedAnswers = [];
   auditAnswers.forEach((answer) => {
     answer.answers.forEach((individualAnswer) => {
@@ -165,7 +132,20 @@ const getAuditAnswersByFilters = async (filters) => {
       });
     });
   });
-  return groupedAnswers;
+  const additionalProperties = auditAnswers.length > 0
+    ? {
+        schoolId: auditAnswers[0].schoolId,
+        deptCode: auditAnswers[0].deptCode,
+        subDeptCode: auditAnswers[0].subDeptCode,
+        subSubDeptCode: auditAnswers[0].subSubDeptCode,
+        frequency: auditAnswers[0].frequency,
+        roleCode: auditAnswers[0].roleCode,
+        userId: auditAnswers[0].userId,
+        finalSubmit: auditAnswers[0].finalSubmit,
+      }
+    : {};
+
+  return { ...additionalProperties, groupedAnswers };
 };
 
 const updateAnswerProperty = async (filter, filter2, propertyToUpdate, newValue) => {
