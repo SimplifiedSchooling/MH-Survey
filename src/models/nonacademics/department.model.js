@@ -20,7 +20,7 @@ const departmentSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: null,
-    }
+    },
   },
   { timestamps: true }
 );

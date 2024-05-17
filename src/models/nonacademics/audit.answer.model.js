@@ -16,6 +16,7 @@ const answerSchema = new mongoose.Schema(
     imageLink: {
       type: String,
       trim: true,
+      default: '',
     },
     criticality: {
       type: String,
@@ -25,6 +26,7 @@ const answerSchema = new mongoose.Schema(
     comment: {
       type: String,
       trim: true,
+      default: '',
     },
     OnsiteorOffsite: {
       type: String,
@@ -61,7 +63,6 @@ const auditAnswers = new mongoose.Schema(
       trim: true,
       required: true,
       uppercase: true,
-      
     },
     subDeptCode: {
       type: String,

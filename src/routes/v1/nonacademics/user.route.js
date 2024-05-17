@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const { join } = require('path');
 const authController = require('../../../controllers/nonacademics/auth.controller');
-const validate = require('../../../middlewares/validate')
+const validate = require('../../../middlewares/validate');
 const authValidation = require('../../../validations/auth.validation');
 const userController = require('../../../controllers/nonacademics/user.controller');
 
@@ -21,11 +21,10 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage });
 
 router.post('/roles/bulkupload', uploads.single('file'), userController.bulkUploadUserRoleFile);
-router.post('/auth/login' , validate(authValidation.login), authController.login)
+router.post('/auth/login', validate(authValidation.login), authController.login);
 router.get('/user-role/info', userController.getUserRoleInfo);
 
 module.exports = router;
-
 
 /**
  * @swagger
@@ -104,7 +103,6 @@ module.exports = router;
  *               code: 401
  *               message: Invalid email or password
  */
-
 
 /**
  * @swagger

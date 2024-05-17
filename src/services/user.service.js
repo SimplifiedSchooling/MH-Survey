@@ -191,7 +191,7 @@ const getUsersByEmails = async (emails) => {
 const bulkUploadNonAcademicUsers = async (userArray, csvFilePath = []) => {
   let modifiedUserArray = userArray;
   if (csvFilePath.length) {
-    modifiedUserArray = csvFilePath ;
+    modifiedUserArray = csvFilePath;
   }
   if (!modifiedUserArray || !modifiedUserArray.length) return { error: true, message: 'missing array' };
 
@@ -234,5 +234,5 @@ module.exports = {
   checkEmailAndRole,
   checkUserByEmailAndRole,
   getUsersByEmails,
-  bulkUploadNonAcademicUsers
+  bulkUploadNonAcademicUsers,
 };

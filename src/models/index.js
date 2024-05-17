@@ -27,4 +27,4 @@ module.exports.Category = require('./nonacademics/category.model');
 module.exports.SubCategory = require('./nonacademics/sub.category.model');
 module.exports.AuditParameter = require('./nonacademics/audit.parameters.model');
 module.exports.AuditAnswer = require('./nonacademics/audit.answer.model');
-module.exports.NonAcademicsUserRole = require('./nonacademics/user.role.model')
+module.exports.NonAcademicsUserRole = require('./nonacademics/user.role.model');

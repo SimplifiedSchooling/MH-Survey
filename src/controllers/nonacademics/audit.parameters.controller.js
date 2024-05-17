@@ -56,7 +56,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
         auditParams.push(auditParam);
       }
     }
-    for(const auditParam of auditParams) {
+    for (const auditParam of auditParams) {
       await AuditParameter.updateOne({ QuestionNumber: auditParam.QuestionNumber }, { $set: auditParam }, { upsert: true });
     }
     res.status(200).json({ message: 'Excel file data processed successfully', auditParams: [] });

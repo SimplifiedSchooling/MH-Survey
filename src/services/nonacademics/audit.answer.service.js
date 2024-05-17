@@ -17,31 +17,6 @@ const createAuditAnswer = async (auditAnswerBody) => {
  * @param {Object} data - Data to be updated or inserted
  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
  */
-// const createOrUpdateAuditAnswer = async (filter, data) => {
-//   let auditAnswer = await AuditAnswer.findOne(filter);
-//   if (!auditAnswer) {
-//     auditAnswer = await AuditAnswer.create(data);
-//   } else {
-//     for (const newData of data.answers) {
-//       const existingAnswerIndex = auditAnswer.answers.findIndex(
-//         (existingAnswer) =>
-//           existingAnswer.question === newData.question &&
-//           existingAnswer.category === newData.category &&
-//           existingAnswer.subCategory === newData.subCategory &&
-//           existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
-//           existingAnswer.criticality === newData.criticality
-//       );
-//       if (existingAnswerIndex !== -1) {
-//         auditAnswer.answers[existingAnswerIndex] = newData;
-//       } else {
-//         auditAnswer.answers.push(newData);
-//       }
-//     }
-//     await auditAnswer.save();
-//   }
-//   return auditAnswer;
-// };
-
 const createOrUpdateAuditAnswer = async (filter, data) => {
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
@@ -63,10 +38,13 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
           auditAnswer.answers.push(newData);
         }
       }
-      await auditAnswer.save();
     } else {
       console.error('Data.answers is not iterable');
     }
+    if (data.finalSubmit !== undefined) {
+      auditAnswer.finalSubmit = data.finalSubmit;
+    }
+    await auditAnswer.save();
   }
   return auditAnswer;
 };
@@ -134,6 +112,7 @@ const getAuditAnswersByFilters = async (filters) => {
     userId: filters.userId,
   };
   const auditAnswers = await AuditAnswer.find(query).lean();
+
   const groupedAnswers = [];
   auditAnswers.forEach((answer) => {
     answer.answers.forEach((individualAnswer) => {
@@ -153,8 +132,47 @@ const getAuditAnswersByFilters = async (filters) => {
       });
     });
   });
-  return groupedAnswers;
+  const additionalProperties = auditAnswers.length > 0
+    ? {
+        schoolId: auditAnswers[0].schoolId,
+        deptCode: auditAnswers[0].deptCode,
+        subDeptCode: auditAnswers[0].subDeptCode,
+        subSubDeptCode: auditAnswers[0].subSubDeptCode,
+        frequency: auditAnswers[0].frequency,
+        roleCode: auditAnswers[0].roleCode,
+        userId: auditAnswers[0].userId,
+        finalSubmit: auditAnswers[0].finalSubmit,
+      }
+    : {};
+
+  return { ...additionalProperties, groupedAnswers };
 };
+
+const updateAnswerProperty = async (filter, filter2, propertyToUpdate, newValue) => {
+  try {
+    const auditAnswer = await AuditAnswer.findOne(filter);
+    if (!auditAnswer) {
+      throw new Error('Audit answer not found');
+    }
+    const answerIndex = auditAnswer.answers.findIndex((answer) => {
+      return (
+        answer.question === filter2.question &&
+        answer.category === filter2.category &&
+        answer.subCategory === filter2.subCategory
+      );
+    });
+    if (answerIndex !== -1) {
+      auditAnswer.answers[answerIndex][propertyToUpdate] = newValue;
+    } else {
+      throw new Error('Answer object matching filter not found');
+    }
+    await auditAnswer.save();
+    return auditAnswer;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createAuditAnswer,
   createOrUpdateAuditAnswer,
@@ -163,4 +181,5 @@ module.exports = {
   updateAuditAnswerById,
   deleteAuditAnswerById,
   getAuditAnswersByFilters,
+  updateAnswerProperty,
 };
