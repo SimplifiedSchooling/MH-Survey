@@ -18,3 +18,4 @@ module.exports.departmentValidation = require('./nonacademics/department.validat
 module.exports.subDepartmentValidation = require('./nonacademics/sub.department.validation');
 module.exports.subSubDepartmentValidation = require('./nonacademics/sub.sub.department.validation');
 module.exports.auditParametersValidation = require('./nonacademics/audit.parameter.validation');
+module.exports.auditAnswerValidation = require('./nonacademics/audit.answer.validation');

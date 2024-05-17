@@ -19,8 +19,6 @@ const createSubCategory = async (schoolArray, csvFilePath = null) => {
       throw new Error('Missing array');
     }
     const jsonArray = await csv().fromFile(modifiedSchoolArray);
-
-    // Split the array into batches
     for (let i = 0; i < jsonArray.length; i += batchSize) {
       const batch = jsonArray.slice(i, i + batchSize);
 
@@ -39,9 +37,6 @@ const createSubCategory = async (schoolArray, csvFilePath = null) => {
     throw new Error(`Bulk upload failed: ${error.message}`);
   }
 };
-// const createSubCategory = async (SubCategoryBody) => {
-//   return SubCategory.create(SubCategoryBody);
-// };
 
 /**
  * Query for SubCategory

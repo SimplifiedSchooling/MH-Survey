@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const _ = require('lodash');
 const { toJSON, paginate } = require('../plugins');
 
 const departmentSchema = mongoose.Schema(
@@ -7,39 +8,25 @@ const departmentSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      default: '',
-    },
-    DepartmentGroupCode: {
-      type: String,
-      required: true,
-      trim: true,
-      default: '',
+      uppercase: true,
     },
     DepartmentDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
-      default: '',
     },
     DepartmentWeightage: {
       type: Number,
       required: true,
-      trim: true,
       default: null,
-    },
+    }
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-// add plugin that converts mongoose to json
 departmentSchema.plugin(toJSON);
 departmentSchema.plugin(paginate);
-
-/**
- * @typedef Department
- */
 
 const Department = mongoose.model('Department', departmentSchema);
 

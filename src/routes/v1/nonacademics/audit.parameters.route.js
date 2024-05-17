@@ -22,13 +22,13 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload')
   .post(uploads.single('file'), auditParameterController.createAuditParameter)
-  .get(validate(auditParametersValidation.getAllAuditParameter),auditParameterController.getAllAuditParameter);
+  .get(validate(auditParametersValidation.getAllAuditParameter), auditParameterController.getAllAuditParameter);
 
 router
   .route('/:auditparameterid')
-  .get(validate(auditParametersValidation.getAuditParameterById),auditParameterController.getAuditParameterById)
+  .get(validate(auditParametersValidation.getAuditParameterById), auditParameterController.getAuditParameterById)
   .patch(auditParameterController.updateAuditParameterById)
-  .delete(validate(auditParametersValidation.deleteAuditParameterById),auditParameterController.deleteistrictById);
+  .delete(validate(auditParametersValidation.deleteAuditParameterById), auditParameterController.deleteistrictById);
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
@@ -47,7 +47,7 @@ module.exports = router;
  * @swagger
  * /auditparameter/bulkupload:
  *   post:
- *     summary: Create a new AuditParameter by uploading excel file 
+ *     summary: Create a new AuditParameter by uploading excel file
  *     tags: [AuditParameter]
  *     requestBody:
  *       required: true
@@ -176,6 +176,7 @@ module.exports = router;
  *       404:
  *         description: AuditParameter not found
  */
+
 /**
  * @swagger
  * /auditparameter/getquestionlist/byrolcode:

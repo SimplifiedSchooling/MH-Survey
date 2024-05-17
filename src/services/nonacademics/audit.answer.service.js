@@ -17,27 +17,56 @@ const createAuditAnswer = async (auditAnswerBody) => {
  * @param {Object} data - Data to be updated or inserted
  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
  */
+// const createOrUpdateAuditAnswer = async (filter, data) => {
+//   let auditAnswer = await AuditAnswer.findOne(filter);
+//   if (!auditAnswer) {
+//     auditAnswer = await AuditAnswer.create(data);
+//   } else {
+//     for (const newData of data.answers) {
+//       const existingAnswerIndex = auditAnswer.answers.findIndex(
+//         (existingAnswer) =>
+//           existingAnswer.question === newData.question &&
+//           existingAnswer.category === newData.category &&
+//           existingAnswer.subCategory === newData.subCategory &&
+//           existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
+//           existingAnswer.criticality === newData.criticality
+//       );
+//       if (existingAnswerIndex !== -1) {
+//         auditAnswer.answers[existingAnswerIndex] = newData;
+//       } else {
+//         auditAnswer.answers.push(newData);
+//       }
+//     }
+//     await auditAnswer.save();
+//   }
+//   return auditAnswer;
+// };
+
 const createOrUpdateAuditAnswer = async (filter, data) => {
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
     auditAnswer = await AuditAnswer.create(data);
   } else {
-    for (const newData of data.answers) {
-      const existingAnswerIndex = auditAnswer.answers.findIndex(
-        (existingAnswer) =>
-          existingAnswer.question === newData.question &&
-          existingAnswer.category === newData.category &&
-          existingAnswer.subCategory === newData.subCategory &&
-          existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
-          existingAnswer.criticality === newData.criticality
-      );
-      if (existingAnswerIndex !== -1) {
-        auditAnswer.answers[existingAnswerIndex] = newData;
-      } else {
-        auditAnswer.answers.push(newData);
+    if (Array.isArray(data.answers)) {
+      for (const newData of data.answers) {
+        const existingAnswerIndex = auditAnswer.answers.findIndex(
+          (existingAnswer) =>
+            existingAnswer.question === newData.question &&
+            existingAnswer.category === newData.category &&
+            existingAnswer.subCategory === newData.subCategory &&
+            existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
+            existingAnswer.criticality === newData.criticality
+        );
+        if (existingAnswerIndex !== -1) {
+          auditAnswer.answers[existingAnswerIndex] = newData;
+        } else {
+          auditAnswer.answers.push(newData);
+        }
       }
+      await auditAnswer.save();
+    } else {
+      console.error('Data.answers is not iterable');
     }
-    await auditAnswer.save();
   }
   return auditAnswer;
 };
@@ -55,7 +84,6 @@ const queryAuditAnswer = async (filter, options) => {
   const auditAnswers = await AuditAnswer.paginate(filter, options);
   return auditAnswers;
 };
-
 /**
  * Get AuditAnswer by id
  * @param {ObjectId} id
@@ -95,6 +123,38 @@ const deleteAuditAnswerById = async (AuditAnswerId) => {
   return auditAnswer;
 };
 
+const getAuditAnswersByFilters = async (filters) => {
+  const query = {
+    schoolId: filters.schoolId,
+    deptCode: filters.departmentCode,
+    subDeptCode: filters.subDepartmentCode,
+    subSubDeptCode: filters.subSubDepartmentCode,
+    roleCode: filters.roleCode,
+    frequency: filters.frequency,
+    userId: filters.userId,
+  };
+  const auditAnswers = await AuditAnswer.find(query).lean();
+  const groupedAnswers = [];
+  auditAnswers.forEach((answer) => {
+    answer.answers.forEach((individualAnswer) => {
+      const { category, subCategory } = individualAnswer;
+      let categoryObj = groupedAnswers.find((cat) => cat.Category === category);
+      if (!categoryObj) {
+        categoryObj = { Category: category, SubCategories: [] };
+        groupedAnswers.push(categoryObj);
+      }
+      let subCategoryObj = categoryObj.SubCategories.find((subCat) => subCat.SubCategory === subCategory);
+      if (!subCategoryObj) {
+        subCategoryObj = { SubCategory: subCategory, Answers: [] };
+        categoryObj.SubCategories.push(subCategoryObj);
+      }
+      subCategoryObj.Answers.push({
+        individualAnswer,
+      });
+    });
+  });
+  return groupedAnswers;
+};
 module.exports = {
   createAuditAnswer,
   createOrUpdateAuditAnswer,
@@ -102,4 +162,5 @@ module.exports = {
   getAuditAnswerById,
   updateAuditAnswerById,
   deleteAuditAnswerById,
+  getAuditAnswersByFilters,
 };

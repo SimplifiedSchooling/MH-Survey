@@ -23,8 +23,6 @@ const createSubDepartment = async (schoolArray, csvFilePath = null) => {
     // Split the array into batches
     for (let i = 0; i < jsonArray.length; i += batchSize) {
       const batch = jsonArray.slice(i, i + batchSize);
-
-      // Use bulk write for efficient insertion
       // eslint-disable-next-line no-await-in-loop
       await SubDepartment.bulkWrite(
         batch.map((doc) => ({
@@ -35,13 +33,9 @@ const createSubDepartment = async (schoolArray, csvFilePath = null) => {
       );
     }
   } catch (error) {
-    // Handle any other errors
     throw new Error(`Bulk upload failed: ${error.message}`);
   }
 };
-// const createSubDepartment = async (SubDepartmentBody) => {
-//   return SubDepartment.create(SubDepartmentBody);
-// };
 
 /**
  * Query for SubDepartment
