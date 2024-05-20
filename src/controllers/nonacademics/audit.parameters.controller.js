@@ -36,7 +36,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
           auditParam.SubSubDepartmentCode = rows[i][7];
           auditParam.Category = rows[i][8];
           auditParam.SubCategory = rows[i][9];
-          auditParam.SubSubCategory = rows[i][10];
+          auditParam.SubSubCategory = rows[i][10] || ' ' ;
           auditParam.OnsiteorOffsite = rows[i][11];
           const crit = rows[i][j + 1];
           const roleCode = rows[0][j];
