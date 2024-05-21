@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const { AuditParameter, Category, Department, SubDepartment, SubSubDepartment } = require('../../models');
+const { AuditParameter,AuditAnswer, Category, Department, SubDepartment, SubSubDepartment } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
@@ -73,10 +73,149 @@ const getAuditParameterByName = async (AuditParameterName) => {
  * @returns {Promise<AuditParameter>}
  */
 
-const getDepartmentByRoleCode = async (roleCode) => {
+// const getDepartmentByRoleCode = async (roleCode) => {
+//   try {
+//     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
+//     const uniqueQuestions = new Map();
+//     for (const auditParam of auditParameters) {
+//       let frequency = null;
+//       for (const role of auditParam.roles) {
+//         if (role.roleCode === roleCode) {
+//           frequency = role.freq;
+//           break;
+//         }
+//       }
+//       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+//       if (!uniqueQuestions.has(key)) {
+//         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+//         const subDepartment = await SubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
+//         });
+//         const subSubDepartment = await SubSubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
+//           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
+//         });
+//         let dueDate = '';
+//         const currentDate = moment();
+//         if (frequency) {
+//           if (frequency.toString().toUpperCase() === 'DAILY') {
+//             dueDate = moment().format('DD/MM/YYYY');
+//           } else if (frequency.toString().toUpperCase() === 'MONTHLY') {
+//             const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
+//             const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
+//             dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
+//           } else if (frequency.toString().toUpperCase() === 'YEARLY') {
+//             const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
+//             dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
+//           } else if (frequency.toString().toUpperCase() === 'QUARTERLY') {
+//             const quarterlyConstant = [
+//               { start: '04-01', end: '06-30' },
+//               { start: '07-01', end: '09-30' },
+//               { start: '10-01', end: '12-31' },
+//               { start: '01-01', end: '03-31' },
+//             ];
+//             const currentQuarter = quarterlyConstant.find((quarter) => {
+//               const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
+//               const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
+//               return currentDate.isBetween(start, end, null, '[)');
+//             });
+//             dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
+//           } else if (frequency.toString().toUpperCase() === 'WEEKLY') {
+//             const startOfWeek = currentDate.clone().startOf('week');
+//             const endOfWeek = startOfWeek.clone().endOf('week');
+//             dueDate = endOfWeek.format('DD/MM/YYYY');
+//           }
+//         }
+//         const formattedQuestion = {
+//           question: auditParam.Question,
+//           department: department ? department.toObject() : null,
+//           subDepartment: subDepartment ? subDepartment.toObject() : null,
+//           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
+//           freq: frequency,
+//           date: dueDate,
+//         };
+//         uniqueQuestions.set(key, formattedQuestion);
+//       }
+//     }
+//     const formattedQuestions = Array.from(uniqueQuestions.values());
+//     return formattedQuestions;
+//   } catch (error) {
+//     throw new Error(`Error fetching questions: ${error.message}`);
+//   }
+// };
+
+// const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+//   try {
+//     const query = {
+//       roles: { $elemMatch: { roleCode, freq } },
+//       DepartmentCode: departmentCode,
+//       SubDepartmentCode: subDepartmentCode,
+//       SubSubDepartmentCode: subSubDepartmentCode,
+//     };
+//     const query2 = {
+//       DepartmentCode: departmentCode,
+//       SubDepartmentCode: subDepartmentCode,
+//       SubSubDepartmentCode: subSubDepartmentCode,
+//     };
+//     const questions = await AuditParameter.find(
+//       query,
+//       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
+//     ).lean();
+
+//     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+//     const groupedQuestions = {};
+//     questions.forEach((question) => {
+//       if (!groupedQuestions[question.Category]) {
+//         groupedQuestions[question.Category] = {};
+//       }
+//       if (!groupedQuestions[question.Category][question.SubCategory]) {
+//         groupedQuestions[question.Category][question.SubCategory] = [];
+//       }
+//       groupedQuestions[question.Category][question.SubCategory].push({
+//         Question: question.Question,
+//         AllowedResponse: question.AllowedResponse,
+//         DisplayOrder: question.DisplayOrder,
+//         Crit: question.roles[0].crit,
+//         OnsiteorOffsite: question.OnsiteorOffsite,
+//       });
+//     });
+//     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
+//     const sortedGroupedQuestions = [];
+//     categories.forEach((category) => {
+//       if (groupedQuestions[category.CategoryDescription]) {
+//         const sortedSubCategories = [];
+//         Object.keys(groupedQuestions[category.CategoryDescription])
+//           .sort((a, b) => a - b)
+//           .forEach((subCategory) => {
+//             sortedSubCategories.push({
+//               SubCategory: subCategory,
+//               Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
+//                 (a, b) => a.DisplayOrder - b.DisplayOrder
+//               ),
+//             });
+//           });
+
+//         sortedGroupedQuestions.push({
+//           Category: category.CategoryDescription,
+//           CategoryDisplayOrder: category.CategoryDisplayOrder,
+//           SubCategories: sortedSubCategories,
+//         });
+//       }
+//     });
+
+//     return sortedGroupedQuestions;
+//   } catch (error) {
+//     throw new Error('Error fetching questions by role code');
+//   }
+// };
+
+const getDepartmentByRoleCode = async (roleCode, userId, schoolId) => {
   try {
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
     const uniqueQuestions = new Map();
+    
     for (const auditParam of auditParameters) {
       let frequency = null;
       for (const role of auditParam.roles) {
@@ -86,6 +225,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
         }
       }
       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+      
       if (!uniqueQuestions.has(key)) {
         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
         const subDepartment = await SubDepartment.findOne({
@@ -97,19 +237,21 @@ const getDepartmentByRoleCode = async (roleCode) => {
           SubDepartmentCode: auditParam.SubDepartmentCode,
           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
         });
+
         let dueDate = '';
         const currentDate = moment();
+
         if (frequency) {
-          if (frequency.toString().toUpperCase() === 'DAILY') {
+          if (frequency.toUpperCase() === 'DAILY') {
             dueDate = moment().format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'MONTHLY') {
+          } else if (frequency.toUpperCase() === 'MONTHLY') {
             const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
             const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
             dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'YEARLY') {
+          } else if (frequency.toUpperCase() === 'YEARLY') {
             const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
             dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'QUARTERLY') {
+          } else if (frequency.toUpperCase() === 'QUARTERLY') {
             const quarterlyConstant = [
               { start: '04-01', end: '06-30' },
               { start: '07-01', end: '09-30' },
@@ -122,12 +264,23 @@ const getDepartmentByRoleCode = async (roleCode) => {
               return currentDate.isBetween(start, end, null, '[)');
             });
             dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
-          } else if (frequency.toString().toUpperCase() === 'WEEKLY') {
+          } else if (frequency.toUpperCase() === 'WEEKLY') {
             const startOfWeek = currentDate.clone().startOf('week');
             const endOfWeek = startOfWeek.clone().endOf('week');
             dueDate = endOfWeek.format('DD/MM/YYYY');
           }
         }
+
+        const auditAnswers = await AuditAnswer.findOne({
+          schoolId: "ABC123",
+          deptCode: auditParam.DepartmentCode,
+          subDeptCode: auditParam.SubDepartmentCode,
+          subSubDeptCode: auditParam.SubSubDepartmentCode,
+          frequency,
+          roleCode,
+          userId:"663db543b1a67a54ef846993",
+        });
+
         const formattedQuestion = {
           question: auditParam.Question,
           department: department ? department.toObject() : null,
@@ -135,10 +288,13 @@ const getDepartmentByRoleCode = async (roleCode) => {
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
           freq: frequency,
           date: dueDate,
+          finalSubmit: auditAnswers ? auditAnswers.finalSubmit : false,
         };
+
         uniqueQuestions.set(key, formattedQuestion);
       }
     }
+
     const formattedQuestions = Array.from(uniqueQuestions.values());
     return formattedQuestions;
   } catch (error) {
@@ -146,25 +302,29 @@ const getDepartmentByRoleCode = async (roleCode) => {
   }
 };
 
+
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     const query = {
       roles: { $elemMatch: { roleCode, freq } },
-      DepartmentCode: departmentCode,
-      SubDepartmentCode: subDepartmentCode,
-      SubSubDepartmentCode: subSubDepartmentCode,
+      DepartmentCode: departmentCode || '', 
+      SubDepartmentCode: subDepartmentCode || '',  
+      SubSubDepartmentCode: subSubDepartmentCode || '',  
     };
+    
     const query2 = {
-      DepartmentCode: departmentCode,
-      SubDepartmentCode: subDepartmentCode,
-      SubSubDepartmentCode: subSubDepartmentCode,
+      DepartmentCode: departmentCode || '',  
+      SubDepartmentCode: subDepartmentCode || '', 
+      SubSubDepartmentCode: subSubDepartmentCode || '', 
     };
+
     const questions = await AuditParameter.find(
       query,
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
 
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -181,6 +341,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         OnsiteorOffsite: question.OnsiteorOffsite,
       });
     });
+
     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
     const sortedGroupedQuestions = [];
     categories.forEach((category) => {
