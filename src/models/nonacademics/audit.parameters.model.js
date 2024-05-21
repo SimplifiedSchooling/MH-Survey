@@ -187,14 +187,16 @@ module.exports = AuditParameter;
 //     SubCategory: {
 //       type: String,
 //       trim: true,
-//       required: true,
+//       default: '',
 //       set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+//       set: setDefaultValue,
 //     },
 //     SubSubCategory: {
 //       type: String,
 //       trim: true,
 //       default: '',
 //       set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+//       set: setDefaultValue,
 //     },
 //     OnsiteorOffsite: {
 //       type: String,

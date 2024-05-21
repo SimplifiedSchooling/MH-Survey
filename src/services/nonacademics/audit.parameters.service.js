@@ -146,70 +146,70 @@ const getAuditParameterByName = async (AuditParameterName) => {
 //   }
 // };
 
-// const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
-//   try {
-//     const query = {
-//       roles: { $elemMatch: { roleCode, freq } },
-//       DepartmentCode: departmentCode,
-//       SubDepartmentCode: subDepartmentCode,
-//       SubSubDepartmentCode: subSubDepartmentCode,
-//     };
-//     const query2 = {
-//       DepartmentCode: departmentCode,
-//       SubDepartmentCode: subDepartmentCode,
-//       SubSubDepartmentCode: subSubDepartmentCode,
-//     };
-//     const questions = await AuditParameter.find(
-//       query,
-//       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
-//     ).lean();
+const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+  try {
+    const query = {
+      roles: { $elemMatch: { roleCode, freq } },
+      DepartmentCode: departmentCode,
+      SubDepartmentCode: subDepartmentCode,
+      SubSubDepartmentCode: subSubDepartmentCode,
+    };
+    const query2 = {
+      DepartmentCode: departmentCode,
+      SubDepartmentCode: subDepartmentCode,
+      SubSubDepartmentCode: subSubDepartmentCode,
+    };
+    const questions = await AuditParameter.find(
+      query,
+      'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
+    ).lean();
 
-//     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
-//     const groupedQuestions = {};
-//     questions.forEach((question) => {
-//       if (!groupedQuestions[question.Category]) {
-//         groupedQuestions[question.Category] = {};
-//       }
-//       if (!groupedQuestions[question.Category][question.SubCategory]) {
-//         groupedQuestions[question.Category][question.SubCategory] = [];
-//       }
-//       groupedQuestions[question.Category][question.SubCategory].push({
-//         Question: question.Question,
-//         AllowedResponse: question.AllowedResponse,
-//         DisplayOrder: question.DisplayOrder,
-//         Crit: question.roles[0].crit,
-//         OnsiteorOffsite: question.OnsiteorOffsite,
-//       });
-//     });
-//     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
-//     const sortedGroupedQuestions = [];
-//     categories.forEach((category) => {
-//       if (groupedQuestions[category.CategoryDescription]) {
-//         const sortedSubCategories = [];
-//         Object.keys(groupedQuestions[category.CategoryDescription])
-//           .sort((a, b) => a - b)
-//           .forEach((subCategory) => {
-//             sortedSubCategories.push({
-//               SubCategory: subCategory,
-//               Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
-//                 (a, b) => a.DisplayOrder - b.DisplayOrder
-//               ),
-//             });
-//           });
+    const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+    const groupedQuestions = {};
+    questions.forEach((question) => {
+      if (!groupedQuestions[question.Category]) {
+        groupedQuestions[question.Category] = {};
+      }
+      if (!groupedQuestions[question.Category][question.SubCategory]) {
+        groupedQuestions[question.Category][question.SubCategory] = [];
+      }
+      groupedQuestions[question.Category][question.SubCategory].push({
+        Question: question.Question,
+        AllowedResponse: question.AllowedResponse,
+        DisplayOrder: question.DisplayOrder,
+        Crit: question.roles[0].crit,
+        OnsiteorOffsite: question.OnsiteorOffsite,
+      });
+    });
+    categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
+    const sortedGroupedQuestions = [];
+    categories.forEach((category) => {
+      if (groupedQuestions[category.CategoryDescription]) {
+        const sortedSubCategories = [];
+        Object.keys(groupedQuestions[category.CategoryDescription])
+          .sort((a, b) => a - b)
+          .forEach((subCategory) => {
+            sortedSubCategories.push({
+              SubCategory: subCategory,
+              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
+                (a, b) => a.DisplayOrder - b.DisplayOrder
+              ),
+            });
+          });
 
-//         sortedGroupedQuestions.push({
-//           Category: category.CategoryDescription,
-//           CategoryDisplayOrder: category.CategoryDisplayOrder,
-//           SubCategories: sortedSubCategories,
-//         });
-//       }
-//     });
+        sortedGroupedQuestions.push({
+          Category: category.CategoryDescription,
+          CategoryDisplayOrder: category.CategoryDisplayOrder,
+          SubCategories: sortedSubCategories,
+        });
+      }
+    });
 
-//     return sortedGroupedQuestions;
-//   } catch (error) {
-//     throw new Error('Error fetching questions by role code');
-//   }
-// };
+    return sortedGroupedQuestions;
+  } catch (error) {
+    throw new Error('Error fetching questions by role code');
+  }
+};
 
 const getDepartmentByRoleCode = async (roleCode, userId, schoolId) => {
   try {
@@ -303,74 +303,74 @@ const getDepartmentByRoleCode = async (roleCode, userId, schoolId) => {
 };
 
 
-const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
-  try {
-    const query = {
-      roles: { $elemMatch: { roleCode, freq } },
-      DepartmentCode: departmentCode || '', 
-      SubDepartmentCode: subDepartmentCode || '',  
-      SubSubDepartmentCode: subSubDepartmentCode || '',  
-    };
+// const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+//   try {
+//     const query = {
+//       roles: { $elemMatch: { roleCode, freq } },
+//       DepartmentCode: departmentCode || '', 
+//       SubDepartmentCode: subDepartmentCode || '',  
+//       SubSubDepartmentCode: subSubDepartmentCode || '',  
+//     };
     
-    const query2 = {
-      DepartmentCode: departmentCode || '',  
-      SubDepartmentCode: subDepartmentCode || '', 
-      SubSubDepartmentCode: subSubDepartmentCode || '', 
-    };
+//     const query2 = {
+//       DepartmentCode: departmentCode || '',  
+//       SubDepartmentCode: subDepartmentCode || '', 
+//       SubSubDepartmentCode: subSubDepartmentCode || '', 
+//     };
 
-    const questions = await AuditParameter.find(
-      query,
-      'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
-    ).lean();
+//     const questions = await AuditParameter.find(
+//       query,
+//       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
+//     ).lean();
 
-    const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+//     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
 
-    const groupedQuestions = {};
-    questions.forEach((question) => {
-      if (!groupedQuestions[question.Category]) {
-        groupedQuestions[question.Category] = {};
-      }
-      if (!groupedQuestions[question.Category][question.SubCategory]) {
-        groupedQuestions[question.Category][question.SubCategory] = [];
-      }
-      groupedQuestions[question.Category][question.SubCategory].push({
-        Question: question.Question,
-        AllowedResponse: question.AllowedResponse,
-        DisplayOrder: question.DisplayOrder,
-        Crit: question.roles[0].crit,
-        OnsiteorOffsite: question.OnsiteorOffsite,
-      });
-    });
+//     const groupedQuestions = {};
+//     questions.forEach((question) => {
+//       if (!groupedQuestions[question.Category]) {
+//         groupedQuestions[question.Category] = {};
+//       }
+//       if (!groupedQuestions[question.Category][question.SubCategory]) {
+//         groupedQuestions[question.Category][question.SubCategory] = [];
+//       }
+//       groupedQuestions[question.Category][question.SubCategory].push({
+//         Question: question.Question,
+//         AllowedResponse: question.AllowedResponse,
+//         DisplayOrder: question.DisplayOrder,
+//         Crit: question.roles[0].crit,
+//         OnsiteorOffsite: question.OnsiteorOffsite,
+//       });
+//     });
 
-    categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
-    const sortedGroupedQuestions = [];
-    categories.forEach((category) => {
-      if (groupedQuestions[category.CategoryDescription]) {
-        const sortedSubCategories = [];
-        Object.keys(groupedQuestions[category.CategoryDescription])
-          .sort((a, b) => a - b)
-          .forEach((subCategory) => {
-            sortedSubCategories.push({
-              SubCategory: subCategory,
-              Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
-                (a, b) => a.DisplayOrder - b.DisplayOrder
-              ),
-            });
-          });
+//     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
+//     const sortedGroupedQuestions = [];
+//     categories.forEach((category) => {
+//       if (groupedQuestions[category.CategoryDescription]) {
+//         const sortedSubCategories = [];
+//         Object.keys(groupedQuestions[category.CategoryDescription])
+//           .sort((a, b) => a - b)
+//           .forEach((subCategory) => {
+//             sortedSubCategories.push({
+//               SubCategory: subCategory,
+//               Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
+//                 (a, b) => a.DisplayOrder - b.DisplayOrder
+//               ),
+//             });
+//           });
 
-        sortedGroupedQuestions.push({
-          Category: category.CategoryDescription,
-          CategoryDisplayOrder: category.CategoryDisplayOrder,
-          SubCategories: sortedSubCategories,
-        });
-      }
-    });
+//         sortedGroupedQuestions.push({
+//           Category: category.CategoryDescription,
+//           CategoryDisplayOrder: category.CategoryDisplayOrder,
+//           SubCategories: sortedSubCategories,
+//         });
+//       }
+//     });
 
-    return sortedGroupedQuestions;
-  } catch (error) {
-    throw new Error('Error fetching questions by role code');
-  }
-};
+//     return sortedGroupedQuestions;
+//   } catch (error) {
+//     throw new Error('Error fetching questions by role code');
+//   }
+// };
 
 /**
  * Get filterData by filters
