@@ -272,13 +272,13 @@ const getDepartmentByRoleCode = async (roleCode, userId, schoolId) => {
         }
 
         const auditAnswers = await AuditAnswer.findOne({
-          schoolId: "ABC123",
+          schoolId,
           deptCode: auditParam.DepartmentCode,
           subDeptCode: auditParam.SubDepartmentCode,
           subSubDeptCode: auditParam.SubSubDepartmentCode,
           frequency,
           roleCode,
-          userId:"663db543b1a67a54ef846993",
+          userId,
         });
 
         const formattedQuestion = {

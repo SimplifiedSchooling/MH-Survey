@@ -119,8 +119,8 @@ const getQuestionsByRoleCode = catchAsync(async (req, res) => {
 });
 
 const getDepartmentByRoleCode = catchAsync(async (req, res) => {
-  const { roleCode } = req.query;
-  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode);
+  const { roleCode, userId, schoolId } = req.query;
+  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode, userId, schoolId);
   res.status(httpStatus.OK).json(questions);
 });
 

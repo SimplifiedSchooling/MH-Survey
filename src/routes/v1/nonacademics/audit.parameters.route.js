@@ -243,6 +243,14 @@ module.exports = router;
  *         name: roleCode
  *         required: true
  *         description: Role code to filter questions
+ *       - in: query
+ *         name: schoolId
+ *         required: true
+ *         description: Role code to filter questions
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         description: Role code to filter questions
  *         schema:
  *           type: string
  *     responses:
