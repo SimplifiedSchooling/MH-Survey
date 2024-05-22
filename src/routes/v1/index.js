@@ -26,6 +26,7 @@ const subCategoryRoute = require('./nonacademics/su.category.route');
 const auditParameterRoute = require('./nonacademics/audit.parameters.route');
 const auditAnswerRoute = require('./nonacademics/audit.answer.route');
 const nonAcademicUser = require('./nonacademics/user.route');
+const schoolsRoute = require('./nonacademics/school.route');
 
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -140,6 +141,10 @@ const defaultRoutes = [
   {
     path: '/nonAcademic',
     route: nonAcademicUser,
+  },
+  {
+    path: '/schools',
+    route: schoolsRoute,
   },
 ];
 
