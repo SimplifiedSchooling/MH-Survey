@@ -23,6 +23,8 @@ const loginUserWithEmailAndPassword = async (email, password) => {
       mobNumber: userCopy.contact,
       uniqRoleName: userCopy.uniqueRoleName,
       centreCode: userCopy.centreCode,
+      level: userCopy.level,
+      cluster: userCopy.cluster,
       id: userCopy._id
     }
     return user;
