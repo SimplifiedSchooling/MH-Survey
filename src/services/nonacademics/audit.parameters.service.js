@@ -203,74 +203,131 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
 //   }
 // };
 
-// const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
+// const getDepartmentByRoleCode = async (roleCode, schoolId) => {
 //   try {
-//     const query = {
-//       roles: { $elemMatch: { roleCode, freq } },
-//       DepartmentCode: departmentCode,
-//       SubDepartmentCode: subDepartmentCode,
-//       SubSubDepartmentCode: subSubDepartmentCode,
-//     };
-//     const query2 = {
-//       DepartmentCode: departmentCode,
-//       SubDepartmentCode: subDepartmentCode,
-//       SubSubDepartmentCode: subSubDepartmentCode,
-//     };
-//     const questions = await AuditParameter.find(
-//       query,
-//       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
-//     ).lean();
-
-//     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
-//     const groupedQuestions = {};
-//     questions.forEach((question) => {
-//       if (!groupedQuestions[question.Category]) {
-//         groupedQuestions[question.Category] = {};
+//     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
+//     const uniqueQuestions = new Map();
+//     for (const auditParam of auditParameters) {
+//       let frequency = null;
+//       for (const role of auditParam.roles) {
+//         if (role.roleCode === roleCode) {
+//           frequency = role.freq;
+//           break;
+//         }
 //       }
-//       if (!groupedQuestions[question.Category][question.SubCategory]) {
-//         groupedQuestions[question.Category][question.SubCategory] = [];
-//       }
-//       groupedQuestions[question.Category][question.SubCategory].push({
-//         Question: question.Question,
-//         AllowedResponse: question.AllowedResponse,
-//         DisplayOrder: question.DisplayOrder,
-//         Crit: question.roles[0].crit,
-//         OnsiteorOffsite: question.OnsiteorOffsite,
-//       });
-//     });
-//     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
-//     const sortedGroupedQuestions = [];
-//     categories.forEach((category) => {
-//       if (groupedQuestions[category.CategoryDescription]) {
-//         const sortedSubCategories = [];
-//         Object.keys(groupedQuestions[category.CategoryDescription])
-//           .sort((a, b) => a - b)
-//           .forEach((subCategory) => {
-//             sortedSubCategories.push({
-//               SubCategory: subCategory,
-//               Questions: groupedQuestions[category.CategoryDescription][subCategory].sort(
-//                 (a, b) => a.DisplayOrder - b.DisplayOrder
-//               ),
-//             });
-//           });
-
-//         sortedGroupedQuestions.push({
-//           Category: category.CategoryDescription,
-//           CategoryDisplayOrder: category.CategoryDisplayOrder,
-//           SubCategories: sortedSubCategories,
+//       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+//       if (!uniqueQuestions.has(key)) {
+//         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+//         const subDepartment = await SubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
 //         });
-//       }
-//     });
+//         const subSubDepartment = await SubSubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
+//           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
+//         });
 
-//     return sortedGroupedQuestions;
+//         let dueDate = '';
+//         let startDate = '';
+//         let endDate = '';
+//         const currentDate = moment();
+
+//         if (frequency) {
+//           if (frequency.toUpperCase() === 'DAILY') {
+//             startDate = currentDate.clone().startOf('day').format('DD/MM/YYYY');
+//             endDate = currentDate.clone().endOf('day').format('DD/MM/YYYY');
+//             dueDate = endDate;
+//           } else if (frequency.toUpperCase() === 'MONTHLY') {
+//             const firstDayOfMonth = currentDate.clone().startOf('month');
+//             const lastDayOfMonth = currentDate.clone().endOf('month');
+//             startDate = firstDayOfMonth.format('DD/MM/YYYY');
+//             endDate = lastDayOfMonth.format('DD/MM/YYYY');
+//             dueDate = endDate;
+//           } else if (frequency.toUpperCase() === 'YEARLY') {
+//             const startOfYear = currentDate.clone().startOf('year');
+//             const endOfYear = currentDate.clone().endOf('year');
+//             startDate = startOfYear.format('DD/MM/YYYY');
+//             endDate = endOfYear.format('DD/MM/YYYY');
+//             dueDate = endDate;
+//           } else if (frequency.toUpperCase() === 'QUARTERLY') {
+//             const quarterlyConstant = [
+//               { start: '04-01', end: '06-30' },
+//               { start: '07-01', end: '09-30' },
+//               { start: '10-01', end: '12-31' },
+//               { start: '01-01', end: '03-31' },
+//             ];
+//             const currentQuarter = quarterlyConstant.find((quarter) => {
+//               const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
+//               const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
+//               return currentDate.isBetween(start, end, null, '[)');
+//             });
+//             startDate = moment(currentQuarter.start, 'MM-DD').year(currentDate.year()).format('DD/MM/YYYY');
+//             endDate = moment(currentQuarter.end, 'MM-DD').year(currentDate.year()).format('DD/MM/YYYY');
+//             dueDate = endDate;
+//           } else if (frequency.toUpperCase() === 'WEEKLY') {
+//             const startOfWeek = currentDate.clone().startOf('week');
+//             const endOfWeek = startOfWeek.clone().endOf('week');
+//             startDate = startOfWeek.format('DD/MM/YYYY');
+//             endDate = endOfWeek.format('DD/MM/YYYY');
+//             dueDate = endDate;
+//           }
+//         }
+
+//         const auditAnswers = await AuditAnswer.findOne({
+//           schoolId,
+//           deptCode: auditParam.DepartmentCode,
+//           subDeptCode: auditParam.SubDepartmentCode,
+//           subSubDeptCode: auditParam.SubSubDepartmentCode,
+//           frequency,
+//           roleCode,
+//           createdAt: { $gte: moment(startDate, 'DD/MM/YYYY').toDate(), $lte: moment(endDate, 'DD/MM/YYYY').toDate() },
+//         });
+//         let status = 'To Do';
+//         if (auditAnswers) {
+//           if (auditAnswers.finalSubmit) {
+//             status = 'Submitted';
+//           } else {
+//             status = 'In Progress';
+//           }
+//         }
+
+//         const formattedQuestion = {
+//           question: auditParam.Question,
+//           department: department ? department.toObject() : null,
+//           subDepartment: subDepartment ? subDepartment.toObject() : null,
+//           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
+//           freq: frequency,
+//           date: dueDate,
+//           finalSubmit: auditAnswers ? auditAnswers.finalSubmit : false,
+//           status: status,
+//         };
+
+//         uniqueQuestions.set(key, formattedQuestion);
+//       }
+//     }
+
+//     const formattedQuestions = Array.from(uniqueQuestions.values());
+//     return formattedQuestions;
 //   } catch (error) {
-//     throw new Error('Error fetching questions by role code');
+//     throw new Error(`Error fetching questions: ${error.message}`);
 //   }
 // };
 
-const getDepartmentByRoleCode = async (roleCode, schoolId) => {
+/**
+ * Get questions by role code with pagination
+ * @param {string} roleCode - Role code
+ * @param {string} schoolId - School ID
+ * @param {Object} options - Pagination options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
+ * @returns {Promise<QueryResult>}
+ */
+const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
   try {
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
+
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
       let frequency = null;
@@ -373,7 +430,35 @@ const getDepartmentByRoleCode = async (roleCode, schoolId) => {
     }
 
     const formattedQuestions = Array.from(uniqueQuestions.values());
-    return formattedQuestions;
+
+    const { sortBy = 'createdAt:desc', limit, page } = options;
+    const sort = {};
+    if (sortBy) {
+      const [key, order] = sortBy.split(':');
+      sort[key] = order === 'desc' ? -1 : 1;
+    }
+
+    let paginatedQuestions;
+    if (limit === undefined || page === undefined) {
+      paginatedQuestions = formattedQuestions;
+    } else {
+      const limitValue = limit || formattedQuestions.length;
+      const pageValue = page || 1;
+      paginatedQuestions = formattedQuestions.slice((pageValue - 1) * limitValue, pageValue * limitValue);
+    }
+
+    const totalResults = formattedQuestions.length;
+    const totalPages = limit ? Math.ceil(totalResults / limit) : 1;
+
+    const result = {
+      results: paginatedQuestions,
+      page: page || 1,
+      limit: limit || totalResults,
+      totalPages,
+      totalResults,
+    };
+
+    return result;
   } catch (error) {
     throw new Error(`Error fetching questions: ${error.message}`);
   }

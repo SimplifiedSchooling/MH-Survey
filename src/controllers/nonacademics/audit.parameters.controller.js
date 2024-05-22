@@ -119,11 +119,15 @@ const getQuestionsByRoleCode = catchAsync(async (req, res) => {
 });
 
 const getDepartmentByRoleCode = catchAsync(async (req, res) => {
-  const { roleCode, schoolId } = req.query;
-  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode, schoolId);
+  const { roleCode, schoolId } = req.params;
+  const options = {
+    sortBy: req.query.sortBy,
+    limit: req.query.limit ? parseInt(req.query.limit, 10) : undefined,
+    page: req.query.page ? parseInt(req.query.page, 10) : undefined,
+  };
+  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode, schoolId, options);
   res.status(httpStatus.OK).json(questions);
 });
-
 const filterDataByParameters = catchAsync(async (req, res) => {
   const { roleCode, ...filters } = req.body;
   const filteredData = await auditParameterService.filterDataByParameters(roleCode, filters);
