@@ -357,7 +357,7 @@ const filterDataByParameters = async (roleCode, filters) => {
 };
 
 const deleteAuditParmeterforDepartmentCode= async (DepartmentCode) => {
-  return AuditParameter.find({DepartmentCode:DepartmentCode});
+  return AuditParameter.deleteMany({DepartmentCode:DepartmentCode});
 };
 
 module.exports = {
