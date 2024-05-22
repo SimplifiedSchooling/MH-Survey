@@ -31,7 +31,7 @@ router
   .delete(validate(auditParametersValidation.deleteAuditParameterById), auditParameterController.deleteistrictById);
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
-router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
+router.route('/departmentlist/byrolecode/:roleCode/:schoolId').get(auditParameterController.getDepartmentByRoleCode);
 router.route('/data/filter').post(auditParameterController.filterDataByParameters);
 
 module.exports = router;
@@ -234,30 +234,6 @@ module.exports = router;
 
 /**
  * @swagger
- * /auditparameter/departmentlist/byrolecode:
- *   get:
- *     summary: Get questions by role code
- *     tags: [AuditParameter]
- *     parameters:
- *       - in: query
- *         name: roleCode
- *         required: true
- *         description: Role code to filter questions
- *         schema:
- *           type: string
- *     responses:
- *       "200":
- *         description: List of questions with corresponding department, sub-department, and sub-sub-department
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/QuestionResponse'
- */
-
-/**
- * @swagger
  * /auditparameter/data/filter:
  *   post:
  *     summary: Filter audit data by parameters
@@ -294,6 +270,66 @@ module.exports = router;
  *         description: Internal server error
  */
 
+/**
+ * @swagger
+ * /auditparameter/departmentlist/byrolecode/{roleCode}/{schoolId}:
+ *   get:
+ *     summary: Get questions by role code
+ *     tags: [AuditParameter]
+ *     parameters:
+ *       - in: path
+ *         name: roleCode
+ *         required: true
+ *         description: Role code to filter questions
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: schoolId
+ *         required: true
+ *         description: School ID to filter questions
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: sortBy
+ *         required: false
+ *         description: Sort option in the format (desc|asc)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: limit
+ *         required: false
+ *         description: Maximum number of results per page
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *       - in: query
+ *         name: page
+ *         required: false
+ *         description: Current page number
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *     responses:
+ *       "200":
+ *         description: List of questions with corresponding department, sub-department, and sub-sub-department
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 results:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/QuestionResponse'
+ *                 page:
+ *                   type: integer
+ *                 limit:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
+ *                 totalResults:
+ *                   type: integer
+ */
 /**
  * @swagger
  * components:
