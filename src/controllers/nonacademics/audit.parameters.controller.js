@@ -36,7 +36,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
           auditParam.SubSubDepartmentCode = rows[i][7];
           auditParam.Category = rows[i][8];
           auditParam.SubCategory = rows[i][9];
-          auditParam.SubSubCategory = rows[i][10] || ' ' ;
+          auditParam.SubSubCategory = rows[i][10] || ' ';
           auditParam.OnsiteorOffsite = rows[i][11];
           const crit = rows[i][j + 1];
           const roleCode = rows[0][j];
@@ -140,12 +140,12 @@ const filterDataByParameters = catchAsync(async (req, res) => {
   res.json(filteredData);
 });
 
-const deletebasedonDepartmentCode=catchAsync(async (req,res)=>{
+const deletebasedonDepartmentCode = catchAsync(async (req, res) => {
   const { auditparameterdepartmentcode } = req.params;
-   const deletedata=await auditParameterService.deleteAuditParmeterforDepartmentCode(auditparameterdepartmentcode);
-   res.json(deletedata);
+  const deletedata = await auditParameterService.deleteAuditParmeterforDepartmentCode(auditparameterdepartmentcode);
+  res.json(deletedata);
   // res.json({message:"Data deleted based on the DepartmentCode"});
-})
+});
 
 module.exports = {
   createAuditParameter,
@@ -157,5 +157,5 @@ module.exports = {
   getDepartmentByRoleCode,
   filterDataByParameters,
   getAuditList,
-  deletebasedonDepartmentCode
+  deletebasedonDepartmentCode,
 };

@@ -82,9 +82,7 @@ const getAuditList = async (query) => {
     if (query.freq) {
       filterObj['roles.freq'] = query.freq;
     }
-    console.log("FILTER",filterObj);
-
-    const auditParameters = await AuditParameter.aggregate([
+  const auditParameters = await AuditParameter.aggregate([
       { $match: filterObj },
       // {
       //   $lookup: {
@@ -95,10 +93,9 @@ const getAuditList = async (query) => {
       //   },
       // },
     ])
-    .skip(Number(query.page)*8)
-    .limit(Number(query.perPage))
+      .skip(Number(query.page) * 8)
+      .limit(Number(query.perPage));
     // .limit(Number(query.perPage)).skip(Number(query.page)*8);
-    console.log("auditParameters",auditParameters)
 
     return auditParameters;
   } catch (error) {
@@ -252,7 +249,6 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
             dueDate = endDate;
           }
         }
-        
 
         const auditAnswers = await AuditAnswer.findOne({
           schoolId,
@@ -283,7 +279,6 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
           status,
         };
         uniqueQuestions.set(key, formattedQuestion);
-       
       }
     }
     const formattedQuestions = Array.from(uniqueQuestions.values());
@@ -433,8 +428,8 @@ const filterDataByParameters = async (roleCode, filters) => {
   }
 };
 
-const deleteAuditParmeterforDepartmentCode= async (DepartmentCode) => {
-  return AuditParameter.deleteMany({DepartmentCode:DepartmentCode});
+const deleteAuditParmeterforDepartmentCode = async (DepartmentCode) => {
+  return AuditParameter.deleteMany({ DepartmentCode });
 };
 
 module.exports = {
@@ -447,5 +442,5 @@ module.exports = {
   getDepartmentByRoleCode,
   filterDataByParameters,
   deleteAuditParmeterforDepartmentCode,
-  getAuditList
+  getAuditList,
 };
