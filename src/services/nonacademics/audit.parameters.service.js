@@ -327,6 +327,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
 const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
   try {
     console.log("DepartmentCode",options)
+    let response=[];
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
 
     const uniqueQuestions = new Map();
@@ -348,16 +349,32 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
         // const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
         const key = `${DepartmentCode}-${SubDepartmentCode}-${SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
-        const department = await Department.findOne({ DepartmentCode: DepartmentCode });
-        const subDepartment = await SubDepartment.findOne({
+         response=await Promise.all([
+          await Department.findOne({ DepartmentCode: DepartmentCode }),
+          await SubDepartment.findOne({
           DepartmentCode: DepartmentCode,
           SubDepartmentCode: SubDepartmentCode,
-        });
-        const subSubDepartment = await SubSubDepartment.findOne({
+        }),
+         await SubSubDepartment.findOne({
           DepartmentCode: DepartmentCode,
           SubDepartmentCode: SubDepartmentCode,
           SubSubDepartmentCode: SubSubDepartmentCode,
-        });
+        })])
+        // console.log("response",response)
+        // const department = await Department.findOne({ DepartmentCode: DepartmentCode });
+        // const subDepartment = await SubDepartment.findOne({
+        //   DepartmentCode: DepartmentCode,
+        //   SubDepartmentCode: SubDepartmentCode,
+        // });
+        // const subSubDepartment = await SubSubDepartment.findOne({
+        //   DepartmentCode: DepartmentCode,
+        //   SubDepartmentCode: SubDepartmentCode,
+        //   SubSubDepartmentCode: SubSubDepartmentCode,
+        // });
+        if (response.some(item => item === null)) {
+          response = []; // Make the array empty if it contains null values
+        }
+        const [department,subDepartment,subSubDepartment]=response
 
         let dueDate = '';
         let startDate = '';
@@ -467,6 +484,10 @@ console.log("ffffff",frequency)
       totalResults,
     };
 
+    let noRecord={message:'No Data Found'};
+    if(response.length==0){
+      return noRecord;
+    }
     return result;
   } catch (error) {
     throw new Error(`Error fetching questions: ${error.message}`);
