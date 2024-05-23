@@ -252,6 +252,7 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
             dueDate = endDate;
           }
         }
+        
 
         const auditAnswers = await AuditAnswer.findOne({
           schoolId,
@@ -281,13 +282,11 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
           finalSubmit: auditAnswers ? auditAnswers.finalSubmit : false,
           status,
         };
-
         uniqueQuestions.set(key, formattedQuestion);
+       
       }
     }
-
     const formattedQuestions = Array.from(uniqueQuestions.values());
-
     const { sortBy = 'createdAt:desc', limit, page } = options;
     const sort = {};
     if (sortBy) {
