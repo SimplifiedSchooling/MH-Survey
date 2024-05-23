@@ -24,15 +24,23 @@ router
   .post(uploads.single('file'), auditParameterController.createAuditParameter)
   .get(validate(auditParametersValidation.getAllAuditParameter), auditParameterController.getAllAuditParameter);
 
+  router
+  .route('/:auditparameterdepartmentcode')
+  .delete(auditParameterController.deletebasedonDepartmentCode);
+
 router
   .route('/:auditparameterid')
   .get(validate(auditParametersValidation.getAuditParameterById), auditParameterController.getAuditParameterById)
   .patch(auditParameterController.updateAuditParameterById)
   .delete(validate(auditParametersValidation.deleteAuditParameterById), auditParameterController.deleteistrictById);
 
+
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 router.route('/departmentlist/byrolecode/:roleCode/:schoolId').get(auditParameterController.getDepartmentByRoleCode);
 router.route('/data/filter').post(auditParameterController.filterDataByParameters);
+
+router.route('/auditList/byrolecode').get(auditParameterController.getAuditList);
+
 
 module.exports = router;
 
@@ -271,6 +279,27 @@ module.exports = router;
  */
 
 /**
+ *  @swagger
+ * /auditparameter/{auditparameterdepartmentcode}:
+ *   delete:
+ *     summary: Delete a multiple AuditParameter by Departmentcode
+ *     tags: [AuditParameter]
+ *     parameters:
+ *       - in: query
+ *         name: auditparameterdepartmentcode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Departmentcode of the AuditParameter
+ *     responses:
+ *       204:
+ *         description: No content
+ *       404:
+ *         description: AuditParameter not found
+ 
+ */
+
+/**
  * @swagger
  * /auditparameter/departmentlist/byrolecode/{roleCode}/{schoolId}:
  *   get:
@@ -415,3 +444,5 @@ module.exports = router;
  *         SubSubCategory: Sub Sub Category 1
  *         OnsiteorOffsites: Onsite
  */
+
+

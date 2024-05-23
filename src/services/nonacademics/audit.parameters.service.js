@@ -67,11 +67,120 @@ const getAuditParameterByName = async (AuditParameterName) => {
   return AuditParameter.find({ AuditParameterName });
 };
 
-/**
- * Get QuestinList by filter
- * @param {ObjectId} AuditParameterName
- * @returns {Promise<AuditParameter>}
- */
+// /**
+//  * Get QuestinList by filter
+//  * @param {ObjectId} AuditParameterName
+//  * @returns {Promise<AuditParameter>}
+//  */
+
+// const getDepartmentByRoleCode = async (roleCode) => {
+//   try {
+//     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
+//     const uniqueQuestions = new Map();
+//     for (const auditParam of auditParameters) {
+//       let frequency = null;
+//       for (const role of auditParam.roles) {
+//         if (role.roleCode === roleCode) {
+//           frequency = role.freq;
+//           break;
+//         }
+//       }
+//       const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+//       if (!uniqueQuestions.has(key)) {
+//         const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+//         const subDepartment = await SubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
+//         });
+//         const subSubDepartment = await SubSubDepartment.findOne({
+//           DepartmentCode: auditParam.DepartmentCode,
+//           SubDepartmentCode: auditParam.SubDepartmentCode,
+//           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
+//         });
+//         let dueDate = ""
+//         const currentDate = moment();
+//         if(frequency === "DAILY") {
+//           dueDate = moment().format("DD/MM/YYYY")
+//         } else if(frequency === "Monthly") {
+//           const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
+//           const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
+//           dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
+//         } else if(frequency === "Annual") {
+//           const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
+//           dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
+//         } else if(frequency === "Quaterly") {
+//           const quarterlyConstant = [
+//             { start: '04-01', end: '06-30' },
+//             { start: '07-01', end: '09-30' },
+//             { start: '10-01', end: '12-31' },
+//             { start: '01-01', end: '03-31' }
+//           ]
+//           const currentQuarter = quarterlyConstant.find(quarter => {
+//             const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
+//             const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
+//             return currentDate.isBetween(start, end, null, '[)');
+//           });
+//           dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
+//         } else if(frequency === "Weekly") {
+//           const startOfWeek = currentDate.clone().startOf('week');
+//           const endOfWeek = startOfWeek.clone().endOf('week');
+//           dueDate = endOfWeek.format('DD/MM/YYYY');
+//         }
+//         const formattedQuestion = {
+//           question: auditParam.Question,
+//           department: department ? department.toObject() : null,
+//           subDepartment: subDepartment ? subDepartment.toObject() : null,
+//           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
+//           freq: frequency,
+//         };
+//         uniqueQuestions.set(key, formattedQuestion);
+//       }
+//     }
+//     const formattedQuestions = Array.from(uniqueQuestions.values());
+//     return formattedQuestions;
+//   } catch (error) {
+//     throw new Error(`Error fetching questions: ${error.message}`);
+//   }
+// };
+
+const getAuditList = async (query) => {
+  try {
+    const filterObj = { 'roles.roleCode': query.roleCode };
+    if (query.DepartmentCode) {
+      filterObj.DepartmentCode = query.DepartmentCode;
+    }
+    if (query.SubDepartmentCode) {
+      filterObj.SubDepartmentCode = query.SubDepartmentCode;
+    }
+    if (query.SubSubDepartmentCode) {
+      filterObj.SubSubDepartmentCode = query.SubSubDepartmentCode;
+    }
+    if (query.freq) {
+      filterObj['roles.freq'] = query.freq;
+    }
+    console.log("FILTER",filterObj);
+
+    const auditParameters = await AuditParameter.aggregate([
+      { $match: filterObj },
+      // {
+      //   $lookup: {
+      //     from: 'departments',
+      //     localField: 'DepartmentCode',
+      //     foreignField: 'DepartmentCode',
+      //     as: 'department',
+      //   },
+      // },
+    ])
+    .skip(Number(query.page)*8)
+    .limit(Number(query.perPage))
+    // .limit(Number(query.perPage)).skip(Number(query.page)*8);
+    console.log("auditParameters",auditParameters)
+
+    return auditParameters;
+  } catch (error) {
+    throw new Error(`Error fetching questions: ${error.message}`);
+  }
+};
 
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
@@ -577,6 +686,10 @@ const filterDataByParameters = async (roleCode, filters) => {
   }
 };
 
+const deleteAuditParmeterforDepartmentCode= async (DepartmentCode) => {
+  return AuditParameter.deleteMany({DepartmentCode:DepartmentCode});
+};
+
 module.exports = {
   queryAuditParameter,
   getAuditParameterById,
@@ -586,4 +699,6 @@ module.exports = {
   getQuestionsByRoleCode,
   getDepartmentByRoleCode,
   filterDataByParameters,
+  deleteAuditParmeterforDepartmentCode,
+  getAuditList
 };
