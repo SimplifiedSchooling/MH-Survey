@@ -1,58 +1,51 @@
-LocationCode,ClusterCode,LocationTypeCode,SchoolName,Address,City,District,State,PinCode,SPOCName,SPOCEmail,SPOCContact
-SC1,CL1,SCHOOL,"VIBGYOR High School, Airoli, Mumbai","Plot No 114, Gothivali Village, Sector No. 8A, Airoli,Â ","Airoli, Mumbai",,Maharashtra,400701,Mr. Bhushan Bhoir,bhushan.bhoir@vgos.org,8850968520
-SC2,CL3,SCHOOL,"VIBGYOR High School, Balewadi, Pune",,"Balewadi, Pune",,Maharashtra,,,,
-SC3,CL1,SCHOOL,"VIBGYOR High School, Borivali, Mumbai","Holy Cross Rd, D-WING, I C Colony, Borivali West,","Borivali, Mumbai",,Maharashtra,400103,Ms. Nilam Naik,nilam.naik@vgos.org,9619879496
-SC4,CL6,SCHOOL,"VIBGYOR High School, Chokkanahalli, Bangalore","Survey No #79/2, 75/9 Chokkanahalli Village Off Thanisandra Main Road Jakkur Post Yelahanka, Uttarahalli Hobli, Bengaluru, Karnataka 560064","Chokkanahalli, Bangalore",,Karnataka,560064,Mr.Stany,stany.gomes@vgos.org,9980271115
-SC5,CL6,SCHOOL,"VIBGYOR High School, Coimbatore","483, Kamarajar Rd, next to Aloft Hotel, ESI, Uppilipalayam, Neelikonampalayam, Tamil Nadu 641015",Coimbatore,,Tamil Nadu,641015,Mr.Harsha,Harshath.J@vgos.org,8122370271
-SC6,CL5,SCHOOL,"VIBGYOR High School - Electronic City, Bangalore","Survey No.45/1 & 112 Village-Vittasandra,  
+Centre code,Cluster ,Location Type Code,Display Name ,School Name,Address,City,District,State,PinCode,SPOC Name,SPOC Email,SPOC Contact
+VH10108,Cluster 1,SCHOOL,Airoli,"VIBGYOR High School, Airoli, Mumbai","Plot No 114, Gothivali Village, Sector No. 8A, Airoli, ","Airoli, Mumbai",,Maharashtra,400701,Mr. Bhushan Bhoir,bhushan.bhoir@vgos.org,8850968520
+VH21,Cluster 1,SCHOOL,Balewadi,"VIBGYOR High School, Balewadi, Pune",,"Balewadi, Pune",,Maharashtra,,,,
+VH10112,Cluster 1,SCHOOL,Borivali,"VIBGYOR High School, Borivali, Mumbai","Holy Cross Rd, D-WING, I C Colony, Borivali West,","Borivali, Mumbai",,Maharashtra,400103,Ms. Nilam Naik,nilam.naik@vgos.org,9619879496
+VH15152,Cluster 1,SCHOOL,Chokkanahalli,"VIBGYOR High School, Chokkanahalli, Bangalore","Survey No #79/2, 75/9 Chokkanahalli Village Off Thanisandra Main Road Jakkur Post Yelahanka, Uttarahalli Hobli, Bengaluru, Karnataka 560064","Chokkanahalli, Bangalore",,Karnataka,560064,Mr.Stany,stany.gomes@vgos.org,9980271115
+VH15701,Cluster 1,SCHOOL,Coimbatore,"VIBGYOR High School, Coimbatore","483, Kamarajar Rd, next to Aloft Hotel, ESI, Uppilipalayam, Neelikonampalayam, Tamil Nadu 641015",Coimbatore,,Tamil Nadu,641015,Mr.Harsha,Harshath.J@vgos.org,8122370271
+VH44,Cluster 1,SCHOOL,Electronic City,"VIBGYOR High School - Electronic City, Bangalore","Survey No.45/1 & 112 Village-Vittasandra,  
 Begur, Hobli, Bengaluru South Taluk,  
 Bengaluru, Karnataka - 560100  ","Electronic City, Bangalore",,Karnataka,560100,Mr. SanthoshKumar K,santhoshkumar.k@vgos.org,8610779519
-SC7,CL4,SCHOOL,"VIBGYOR High School, Gomti Nagar, Lucknow","Viram khand -2 , Near Patrakarpuram Chauraha Gomtinagar ","Gomti Nagar, Lucknow",,Uttar Pradesh,226010,Ms. Shatanshi Jaiswal ,shatanshi.jaiswal@vgos.org,7318558180
-SC8,CL1,SCHOOL,"VIBGYOR High School, Goregaon, Mumbai","Motilal Nagar - 1, Srirang Sabde Marg, Off Link Road, Goregaon West.","Goregaon, Mumbai",,Maharashtra,400104,Ms. Teja Warang,teja.warang@vgos.org,9321049660
-SC9,CL4,SCHOOL,"VIBGYOR High School, Gurugram, Gurgaon","Ansal Esencia, Block-D, Sector-67, Gurugram","Gurugram, Gurgaon",,Haryana,122001,Neeraj Rasganiya,neeraj.rasganiya@vgos.org,9811806531
-SC10,CL5,SCHOOL,"VIBGYOR High School, Haralur, Bangalore","
+VH60,Cluster 1,SCHOOL,Lucknow,"VIBGYOR High School, Gomti Nagar, Lucknow","Viram khand -2 , Near Patrakarpuram Chauraha Gomtinagar ","Gomti Nagar, Lucknow",,Uttar Pradesh,226010,Ms. Shatanshi Jaiswal ,shatanshi.jaiswal@vgos.org,7318558180
+VH10,#N/A,SCHOOL,Goregaon,"VIBGYOR High School, Goregaon, Mumbai","Motilal Nagar - 1, Srirang Sabde Marg, Off Link Road, Goregaon West.","Goregaon, Mumbai",,Maharashtra,400104,Ms. Teja Warang,teja.warang@vgos.org,9321049660
+VH10904,#N/A,SCHOOL,Gurugram,"VIBGYOR High School, Gurugram, Gurgaon","Ansal Esencia, Block-D, Sector-67, Gurugram","Gurugram, Gurgaon",,Haryana,122001,Neeraj Rasganiya,neeraj.rasganiya@vgos.org,9811806531
+VH41,Cluster 1,SCHOOL,Haralur road,"VIBGYOR High School, Haralur, Bangalore","
 107/1, Royal Placid,
 Haralur Road, (HSR Extension),
 Bengaluru -560 102, Karnataka","Haralur, Bangalore",,Karnataka,560102,Mr. Praveen K,praveen.k@vgos.org,9164248525
-SC11,CL6,SCHOOL,"VIBGYOR High School, Hennur, Bangalore","Survey No. 60/1-60/2, Byrathi Village, Blessing Garden Layout, Near Cratis Hospital, Gedhalahalli, Hennur Main Rd, Bengaluru, Karnataka 560077","Hennur, Bangalore",,Karnataka,560077,Mr.Sri Kant,srikanth.d@vgos.org,7619190645
-SC12,CL3,SCHOOL,"VIBGYOR High School, Hinjewadi, Pune",,"Hinjewadi, Pune",,Maharashtra,,,,
-SC13,CL6,SCHOOL,"VIBGYOR High School, Horamavu, Bangalore","Survey No.84/6, Village Horamavu K.R. Puram Hobli, Bengaluru East Taluka, Bengaluru, Karnataka 560043","Horamavu, Bangalore",,Karnataka,560043,Mr.Vengal Rao,vengal.g@vgos.org,8123575012
-SC14,CL5,SCHOOL,"VIBGYOR High School, HSR Layout, Bangalore","24th Main Road,Sector 2, 
+VH15301,#N/A,SCHOOL,Hennur,"VIBGYOR High School, Hennur, Bangalore","Survey No. 60/1-60/2, Byrathi Village, Blessing Garden Layout, Near Cratis Hospital, Gedhalahalli, Hennur Main Rd, Bengaluru, Karnataka 560077","Hennur, Bangalore",,Karnataka,560077,Mr.Sri Kant,srikanth.d@vgos.org,7619190645
+VH10215,#N/A,SCHOOL,Hinjewadi,"VIBGYOR High School, Hinjewadi, Pune",,"Hinjewadi, Pune",,Maharashtra,,,,
+VH43,Cluster 1,SCHOOL,Horamavu,"VIBGYOR High School, Horamavu, Bangalore","Survey No.84/6, Village Horamavu K.R. Puram Hobli, Bengaluru East Taluka, Bengaluru, Karnataka 560043","Horamavu, Bangalore",,Karnataka,560043,Mr.Vengal Rao,vengal.g@vgos.org,8123575012
+VH15139,Cluster 1,SCHOOL,HSR Layout,"VIBGYOR High School, HSR Layout, Bangalore","24th Main Road,Sector 2, 
 Near Hamilton Bailey Hospital,HSR LAYOUT-3, 
 Bengaluru -560 102, Karnataka ","HSR Layout, Bangalore",,Karnataka,560102,Mr.Madipelli Srinivas,madipelli.srinivas@vgos.org,9010034533
-SC15,CL6,SCHOOL,"VIBGYOR High School, Jakkur, Bangalore","Survey No: 55/6 80 Feet Road, North, Taluk, Arkavathy Layout, Jakkur, Bengaluru, Karnataka 560064","Jakkur, Bangalore",,Karnataka,560064,Ms.Gajalakshmi,gajalakshmi.bv@vgos.org,7676935485
-SC16,CL5,SCHOOL,"VIBGYOR High School, Kadugodi, Bangalore","Survey No 9/2, Konadasapura Village Bidarahalli Hobli, 
+VH48,Cluster 1,SCHOOL,Jakkur,"VIBGYOR High School, Jakkur, Bangalore","Survey No: 55/6 80 Feet Road, North, Taluk, Arkavathy Layout, Jakkur, Bengaluru, Karnataka 560064","Jakkur, Bangalore",,Karnataka,560064,Ms.Gajalakshmi,gajalakshmi.bv@vgos.org,7676935485
+VH47,Cluster 1,SCHOOL,Kadugodi,"VIBGYOR High School, Kadugodi, Bangalore","Survey No 9/2, Konadasapura Village Bidarahalli Hobli, 
 Kadugodi Main Road Bengaluru East Taluk, 
 Kadugodi, Bengaluru, Karnataka 560067
 
 ","Kadugodi, Bangalore",,Karnataka,560067,Mr. Mohan Babu,mohan.babu@vgos.org,9611704980
-SC17,CL1,SCHOOL,"Vibgyor High School, Kharghar, Mumbai","Plot No. 35, Sector 15, Kharghar, Navi Mumbai,","Kharghar, Mumbai",,Maharashtra,410210,Ms. Atika Mujawar,atika.mujawar@vgos.org,7738123120
-SC18,CL3,SCHOOL,"VIBGYOR High School, Kolhapur, Maharastra","RS 301, Mudshingi Road, Uchgaon, Near Om Sai Petrol Pump,","Kolhapur, Maharastra",,Maharashtra,416005,Mr. Vaibhav Hasurkar,vaibhav.hasurkar@vgos.org,9561934151
-SC19,CL3,SCHOOL,"VIBGYOR High School, Magarpatta, Pune",,"Magarpatta, Pune",,Maharashtra,,,,
-SC20,CL4,SCHOOL,"VIBGYOR High School, Magdalla Surat, Gujarat",,"Magdalla Surat, Gujarat",,Gujarat,,,,
-SC21,CL1,SCHOOL,"VIBGYOR High School, Malad East, Mumbai","Â Vibgyor High School, Malad East, Opposite Aster Society, Fire Brigade Road, Western Express Hwy, near Oberoi Mall, near Westin Hotel, Dindoshi, Malad East,","Malad East, Mumbai",,Maharashtra,400097,Mr.Rakesh Vishwakarma,rakesh.vishwakarma@vgos.org,9004532001
-SC22,CL6,SCHOOL,"VIBGYOR High School, Marathahalli, Bangalore","Thubarahalli Whitefield Road 58/ 1, Vibgyor High School Road Behind Sriram Samriddhi Apartment, 58/ 1, Vibgyor High School Rd, Behind Sriram Samriddhi Apartment, Bengaluru, Karnataka","Marathahalli, Bangalore",,Karnataka,560066,Mr.Akshay,akshay.n@vgos.org,9583052923
-SC23,CL3,SCHOOL,"VIBGYOR High School, NIBM, Pune",,"NIBM, Pune",,Maharashtra,,,,
-SC24,CL4,SCHOOL,"VIBGYOR High School, Vadodara, Gujarat","Opp. Banco Product, Padra Road, B/H. Bhayali Railway Station, Padra Road, Vadodara.","Vadodara, Gujarat",,Gujarat,391410,Mr. Ajay Padhiyar,ajay.padhiyar@vgos.org,9687054893
-SC25,CL6,SCHOOL,"VIBGYOR High School, Yelahanka, Bangalore","Survey No. 80/2, 81, Singanayakanahalli, Off, Doddaballapur Main Rd, Yelahanka, Bengaluru, Karnataka 560064","Yelahanka, Bangalore",,Karnataka,560064,Ms.Prathima,prathima.s@vgos.org,9886528822
-SC26,CL3,SCHOOL,"VIBGYOR High School, Yerwada, Pune",,"Yerwada, Pune",,Maharashtra,,,,
-SC27,CL5,SCHOOL,"VIBGYOR Roots and Rise, Doddanekkundi, Bangalore",,"Doddanekkundi, Bangalore",,Karnataka,,,,
-SC28,CL1,SCHOOL,"VIBGYOR Roots and Rise, Malad WestTangent , Mumbai","1406/15, Chincholi Bunder Rd, opp. Brand Factory, Malad, Ram Nagar, Malad West,","Malad WestTangent , Mumbai",,Maharashtra,400064,Mr. Abhijeet Shelar,abhijeet.shelar@vgos.org,8108585951
-SC29,CL5,SCHOOL,"VIBGYOR Roots and Rise, Panathur, Bangalore","Survey No. 84/3, Panathur Main Road, Next To Vaswani Reserve Apartment, Panathur Post, Bangalore East Taluk, Bengaluru- 560103","Panathur, Bangalore",,Karnataka,560103,Mr.Chandan SN,chandan.sn@vgos.org,8749002395
-SC30,CL3,SCHOOL,"VIBGYOR Roots and Rise School, Chinchwad, Pune",,"Chinchwad, Pune",,Maharashtra,,,,
-SC31,CL3,SCHOOL,"VIBGYOR Roots and Rise School, Fursungi, Pune",,"Fursungi, Pune",,Maharashtra,,,,
-SC32,CL4,SCHOOL,"VIBGYOR Roots and Rise School, Indore","Plot No 16, Scheme No 78, Part II,
+VH10116,Cluster 1,SCHOOL,Kharghar,"Vibgyor High School, Kharghar, Mumbai","Plot No. 35, Sector 15, Kharghar, Navi Mumbai,","Kharghar, Mumbai",,Maharashtra,410210,Ms. Atika Mujawar,atika.mujawar@vgos.org,7738123120
+VH50,Cluster 1,SCHOOL,Kolhapur,"VIBGYOR High School, Kolhapur, Maharastra","RS 301, Mudshingi Road, Uchgaon, Near Om Sai Petrol Pump,","Kolhapur, Maharastra",,Maharashtra,416005,Mr. Vaibhav Hasurkar,vaibhav.hasurkar@vgos.org,9561934151
+VH10207,#N/A,SCHOOL,Magarpatta,"VIBGYOR High School, Magarpatta, Pune",,"Magarpatta, Pune",,Maharashtra,,,,
+VH10305,Cluster 3,SCHOOL,Surat,"VIBGYOR High School, Magdalla Surat, Gujarat",,"Magdalla Surat, Gujarat",,Gujarat,,,,
+VH11,Cluster 1,SCHOOL,Malad East,"VIBGYOR High School, Malad East, Mumbai"," Vibgyor High School, Malad East, Opposite Aster Society, Fire Brigade Road, Western Express Hwy, near Oberoi Mall, near Westin Hotel, Dindoshi, Malad East,","Malad East, Mumbai",,Maharashtra,400097,Mr.Rakesh Vishwakarma,rakesh.vishwakarma@vgos.org,9004532001
+VH40,#N/A,SCHOOL,Marathahalli,"VIBGYOR High School, Marathahalli, Bangalore","Thubarahalli Whitefield Road 58/ 1, Vibgyor High School Road Behind Sriram Samriddhi Apartment, 58/ 1, Vibgyor High School Rd, Behind Sriram Samriddhi Apartment, Bengaluru, Karnataka","Marathahalli, Bangalore",,Karnataka,560066,Mr.Akshay,akshay.n@vgos.org,9583052923
+VH20,#N/A,SCHOOL,NIBM,"VIBGYOR High School, NIBM, Pune",,"NIBM, Pune",,Maharashtra,,,,
+VH30,Cluster 6,SCHOOL,Vadodara,"VIBGYOR High School, Vadodara, Gujarat","Opp. Banco Product, Padra Road, B/H. Bhayali Railway Station, Padra Road, Vadodara.","Vadodara, Gujarat",,Gujarat,391410,Mr. Ajay Padhiyar,ajay.padhiyar@vgos.org,9687054893
+VH15130,Cluster 6,SCHOOL,Yelahanka,"VIBGYOR High School, Yelahanka, Bangalore","Survey No. 80/2, 81, Singanayakanahalli, Off, Doddaballapur Main Rd, Yelahanka, Bengaluru, Karnataka 560064","Yelahanka, Bangalore",,Karnataka,560064,Ms.Prathima,prathima.s@vgos.org,9886528822
+VH10211,Cluster 3,SCHOOL,Yerwada,"VIBGYOR High School, Yerwada, Pune",,"Yerwada, Pune",,Maharashtra,,,,
+VI15134,Cluster 3,SCHOOL,Doddanekkundi,"VIBGYOR Roots and Rise, Doddanekkundi, Bangalore",,"Doddanekkundi, Bangalore",,Karnataka,,,,
+VI10117,Cluster 6,SCHOOL,Malad West,"VIBGYOR Roots and Rise, Malad WestTangent , Mumbai","1406/15, Chincholi Bunder Rd, opp. Brand Factory, Malad, Ram Nagar, Malad West,","Malad WestTangent , Mumbai",,Maharashtra,400064,Mr. Abhijeet Shelar,abhijeet.shelar@vgos.org,8108585951
+VI15138,Cluster 1,SCHOOL,Panathur,"VIBGYOR Roots and Rise, Panathur, Bangalore","Survey No. 84/3, Panathur Main Road, Next To Vaswani Reserve Apartment, Panathur Post, Bangalore East Taluk, Bengaluru- 560103","Panathur, Bangalore",,Karnataka,560103,Mr.Chandan SN,chandan.sn@vgos.org,8749002395
+VI10216,Cluster 6,SCHOOL,Chinchwad,"VIBGYOR Roots and Rise School, Chinchwad, Pune",,"Chinchwad, Pune",,Maharashtra,,,,
+VI10220,Cluster 6,SCHOOL,Fursungi,"VIBGYOR Roots and Rise School, Fursungi, Pune",,"Fursungi, Pune",,Maharashtra,,,,
+VI10602,Cluster 6,SCHOOL,Indore,"VIBGYOR Roots and Rise School, Indore","Plot No 16, Scheme No 78, Part II,
 Near Brilliant convention center,
-Indore MP â€“ 452010
+Indore MP – 452010
 ",Indore,,Madhya Pradesh,452010,NA,NA,NA
-SC33,CL1,SCHOOL,"VIBGYOR Roots and Rise School, Kalyan","Opp. Mohan Altezza, Tharwani Circle, Vasant Valley Rd, Kalyan West,",Kalyan,,Maharashtra,421301,Ms. Neelam Ghadge,neelam.ghadge@vgos.org,9221960020
-SC34,CL4,SCHOOL,"VIBGYOR Roots and Rise School, Nashik","Â Apartment, Plot No. - 3, Survey No. - 75/2, near Vijay Galaxy, Samarth Nagar, Makhmalabad, Nashik, Maharashtra 422004",Nashik,,Maharashtra,422004,AJIT JAGTAP,AJIT.JAGTAP@VGOS.ORG,7391993311
-SC35,CL3,SCHOOL,"VIBGYOR Roots and Rise School,Pimple Saudagar,Pune",,"Pimple Saudagar,Pune",,Maharashtra,,,,
-SC36,CL3,SCHOOL,"VIBGYOR Roots and Rise School, Wagholi","Near VTP Purvanchal, Wagholi - Kesnand - Wadegaon Road,",Wagholi,,Maharashtra,412207,Ms. Sonali Kale,sonali.kale@vgos.org,9860525916
-CL1,,CLUSTER,,,,,,,,,
-CL2,,CLUSTER,,,,,,,,,
-CL3,,CLUSTER,,,,,,,,,
-CL4,,CLUSTER,,,,,,,,,
-CL5,,CLUSTER,,,,,,,,,
-CL6,,CLUSTER,,,,,,,,,
-VERTEX,,VERTEX,,,,,,,,,
+VI11003,Cluster 6,SCHOOL,Kalyan,"VIBGYOR Roots and Rise School, Kalyan","Opp. Mohan Altezza, Tharwani Circle, Vasant Valley Rd, Kalyan West,",Kalyan,,Maharashtra,421301,Ms. Neelam Ghadge,neelam.ghadge@vgos.org,9221960020
+VI11106,Cluster 6,SCHOOL,Nashik,"VIBGYOR Roots and Rise School, Nashik"," Apartment, Plot No. - 3, Survey No. - 75/2, near Vijay Galaxy, Samarth Nagar, Makhmalabad, Nashik, Maharashtra 422004",Nashik,,Maharashtra,422004,AJIT JAGTAP,AJIT.JAGTAP@VGOS.ORG,7391993311
+VI10224,Cluster 6,SCHOOL,Pimple Saudagar,"VIBGYOR Roots and Rise School,Pimple Saudagar,Pune",,"Pimple Saudagar,Pune",,Maharashtra,,,,
+VI10225,Cluster 6,SCHOOL,Wagholi,"VIBGYOR Roots and Rise School, Wagholi","Near VTP Purvanchal, Wagholi - Kesnand - Wadegaon Road,",Wagholi,,Maharashtra,412207,Ms. Sonali Kale,sonali.kale@vgos.org,9860525916

@@ -146,6 +146,47 @@ const getDepartmentByRoleCode = async (roleCode) => {
   }
 };
 
+const getAuditList = async (query) => {
+  try {
+
+    console.log("reeee",query)
+    const filterObj = { 'roles.roleCode': query.roleCode };
+    if (query.DepartmentCode) {
+      filterObj.DepartmentCode = query.DepartmentCode;
+    }
+    if (query.SubDepartmentCode) {
+      filterObj.SubDepartmentCode = query.SubDepartmentCode;
+    }
+    if (query.SubSubDepartmentCode) {
+      filterObj.SubSubDepartmentCode = query.SubSubDepartmentCode;
+    }
+    if (query.freq) {
+      filterObj['roles.freq'] = query.freq;
+    }
+    console.log("FILTER",filterObj);
+
+    const auditParameters = await AuditParameter.aggregate([
+      { $match: filterObj },
+      // {
+      //   $lookup: {
+      //     from: 'departments',
+      //     localField: 'DepartmentCode',
+      //     foreignField: 'DepartmentCode',
+      //     as: 'department',
+      //   },
+      // },
+    ])
+    .skip(Number(query.page)*8)
+    .limit(Number(query.perPage))
+    // .limit(Number(query.perPage)).skip(Number(query.page)*8);
+    console.log("auditParameters",auditParameters)
+
+    return auditParameters;
+  } catch (error) {
+    throw new Error(`Error fetching questions: ${error.message}`);
+  }
+};
+
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     const query = {
@@ -324,6 +365,10 @@ const filterDataByParameters = async (roleCode, filters) => {
   }
 };
 
+const deleteAuditParmeterforDepartmentCode= async (DepartmentCode) => {
+  return AuditParameter.deleteMany({DepartmentCode:DepartmentCode});
+};
+
 module.exports = {
   queryAuditParameter,
   getAuditParameterById,
@@ -333,4 +378,6 @@ module.exports = {
   getQuestionsByRoleCode,
   getDepartmentByRoleCode,
   filterDataByParameters,
+  deleteAuditParmeterforDepartmentCode,
+  getAuditList
 };
