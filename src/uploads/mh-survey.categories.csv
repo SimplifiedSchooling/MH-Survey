@@ -1,0 +1,30 @@
+DepartmentCode,SubDepartmentCode,SubSubDepartmentCode,CategoryCode,CategoryDescription,CategoryWeightage,CategoryDisplayOrder
+OP,FY,SU,GC,General Checks,20,1
+OP,FY,AN,LI,Library,20,1
+OP,FY,AN,GC,General Checks,20,2
+OP,FY,AN,SI,Site Infra,20,3
+OP,FY,AN,PS,PS,20,4
+OP,FY,AN,RR,Rest Room,20,5
+OP,FY,AN,SE,SEC ELEC ROOM,20,6
+OP,FY,AN,SK,SR KG,20,7
+OP,FY,AN,PE,PRI  ELEC ROOM,20,8
+OP,FY,AN,NU,NUR,20,9
+OP,FY,CA,GC,General Checks,20,1
+OP,FY,HC,SI,Site Infra,20,1
+OP,FY,ME,EQ,Equipments,20,1
+OP,FY,ME,GC,General Checks,20,2
+OP,FY,ME,SI,Site Infra,20,3
+OP,FY,ME,CO,Compliance,20,4
+OP,FY,ME,PS,PS,20,5
+OP,FY,ME,NU,NUR,20,6
+OP,FY,ME,JK,JR KG,20,7
+OP,FY,ME,SK,SR KG,20,8
+OP,FY,ME,SE,SEC ELEC ROOM,20,9
+OP,FY,ME,PE,PRI  ELEC ROOM,20,10
+OP,FY,ME,RR,Rest Room,20,11
+OP,FY,HE,SB,Sick Bay,20,1
+OP,PT,NA,ST,Stores,30,1
+OP,PT,NA,PO,POS,30,2
+OP,PT,NA,GC,General Checks,30,3
+OP,PT,NA,SP,Stores & POS,30,4
+OP,PT,SU,GC,General Checks,30,1

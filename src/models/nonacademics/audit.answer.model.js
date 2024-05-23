@@ -16,7 +16,6 @@ const answerSchema = new mongoose.Schema(
     imageLink: {
       type: String,
       trim: true,
-      // required: true,
     },
     criticality: {
       type: String,
@@ -26,7 +25,6 @@ const answerSchema = new mongoose.Schema(
     comment: {
       type: String,
       trim: true,
-      // required: true,
     },
     OnsiteorOffsite: {
       type: String,
@@ -47,7 +45,6 @@ const answerSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    
   },
   { timestamps: true }
 );
@@ -63,16 +60,20 @@ const auditAnswers = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
+      uppercase: true,
+      
     },
     subDeptCode: {
       type: String,
       trim: true,
       required: true,
+      uppercase: true,
     },
     subSubDeptCode: {
       type: String,
       trim: true,
       required: true,
+      uppercase: true,
     },
     frequency: {
       type: String,

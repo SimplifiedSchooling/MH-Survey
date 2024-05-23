@@ -1,0 +1,82 @@
+DepartmentCode,SubDepartmentCode,SubSubDepartmentCode,CategoryCode,CategoryDescription,SubCategoryCode,SubCategoryDescription,SubCategoryWeightage,SubCategoryDisplayOrder
+OP,FY,SU,GC,General Checks,RF,Records & Files,20,1
+OP,FY,SU,GC,General Checks,PA,Professional appearance,20,2
+OP,FY,SU,GC,General Checks,OB,Observations,20,3
+OP,FY,AN,LI,Library,RF,Records & Files,20,1
+OP,FY,AN,LI,Library,AC,Movable assets / Consumable,20,2
+OP,FY,AN,GC,General Checks,OB,Observations,20,1
+OP,FY,AN,GC,General Checks,DR,Discovery Room,20,2
+OP,FY,AN,GC,General Checks,FO,FOBO,20,3
+OP,FY,AN,GC,General Checks,EP,External periphery,20,4
+OP,FY,AN,GC,General Checks,TE,Terrace,20,5
+OP,FY,AN,GC,General Checks,CS,Corridors & Staircase,20,6
+OP,FY,AN,GC,General Checks,PC,Pest Control,20,7
+OP,FY,AN,GC,General Checks,MV,Manpower Vendor performance,20,8
+OP,FY,AN,GC,General Checks,RF,Records & Files,20,9
+OP,FY,AN,SI,Site Infra,PA,Peripheral area,20,1
+OP,FY,AN,SI,Site Infra,CP,Cricket Pitch,20,2
+OP,FY,AN,SI,Site Infra,FG,Football Ground,20,3
+OP,FY,AN,SI,Site Infra,KP,Kids play area,20,4
+OP,FY,AN,SI,Site Infra,SR,Skating rink,20,5
+OP,FY,AN,SI,Site Infra,BB,Basket Ball court,20,6
+OP,FY,AN,PS,PS,AC,Movable assets / Consumable,20,1
+OP,FY,AN,PS,PS,FA,Fixed Assets,20,2
+OP,FY,AN,RR,Rest Room,GI,Girls,20,1
+OP,FY,AN,RR,Rest Room,BY,Boys,20,2
+OP,FY,AN,RR,Rest Room,SF,Staff Rest Room Her,20,3
+OP,FY,AN,RR,Rest Room,SM,Staff Rest Room His,20,4
+OP,FY,AN,RR,Rest Room,AF,Ancillary Rest Room Her,20,5
+OP,FY,AN,RR,Rest Room,AM,Ancillary Rest Room His,20,6
+OP,FY,AN,SE,SEC ELEC ROOM,AC,Movable assets / Consumable,20,1
+OP,FY,AN,SE,SEC ELEC ROOM,FA,Fixed Assets,20,2
+OP,FY,AN,SK,SR KG,AC,Movable assets / Consumable,20,1
+OP,FY,AN,SK,SR KG,FA,Fixed Assets,20,2
+OP,FY,AN,PE,PRI  ELEC ROOM,AC,Movable assets / Consumable,20,1
+OP,FY,AN,PE,PRI  ELEC ROOM,FA,Fixed Assets,20,2
+OP,FY,AN,NU,NUR,AC,Movable assets / Consumable,20,1
+OP,FY,AN,NU,NUR,FA,Fixed Assets,20,2
+OP,FY,CA,GC,General Checks,RF,Records & files,20,1
+OP,FY,CA,GC,General Checks,OB,Observations,20,2
+OP,FY,CA,GC,General Checks,HY,Hygiene,20,3
+OP,FY,HC,SI,Site Infra,LP,Landscaping & plants,20,1
+OP,FY,HC,SI,Site Infra,PA,Peripheral area,20,2
+OP,FY,ME,EQ,Equipments,EP,Electrical panel,20,1
+OP,FY,ME,EQ,Equipments,OB,Observations,20,2
+OP,FY,ME,EQ,Equipments,RF,Records & files,20,3
+OP,FY,ME,GC,General Checks,OB,Observations,20,1
+OP,FY,ME,GC,General Checks,RF,Records & files,20,2
+OP,FY,ME,SI,Site Infra,OB,Observations,20,1
+OP,FY,ME,SI,Site Infra,CP,Cricket Pitch,20,2
+OP,FY,ME,SI,Site Infra,FG,Football Ground,20,3
+OP,FY,ME,SI,Site Infra,PA,Play area,20,4
+OP,FY,ME,SI,Site Infra,SR,Skating rink,20,5
+OP,FY,ME,SI,Site Infra,BB,Basket Ball court,20,6
+OP,FY,ME,CO,Compliance,RF,Records & files,20,1
+OP,FY,ME,PS,PS,FA,Fixed Assets,20,1
+OP,FY,ME,PS,PS,AC,Movable assets / Consumable,20,2
+OP,FY,ME,NU,NUR,FA,Fixed Assets,20,1
+OP,FY,ME,NU,NUR,AC,Movable assets / Consumable,20,2
+OP,FY,ME,JK,JR KG,FA,Fixed Assets,20,1
+OP,FY,ME,JK,JR KG,AC,Movable assets / Consumable,20,2
+OP,FY,ME,SK,SR KG,FA,Fixed Assets,20,1
+OP,FY,ME,SK,SR KG,AC,Movable assets / Consumable,20,2
+OP,FY,ME,SE,SEC ELEC ROOM,FA,Fixed Assets,20,1
+OP,FY,ME,SE,SEC ELEC ROOM,AC,Movable assets / Consumable,20,2
+OP,FY,ME,PE,PRI  ELEC ROOM,FA,Fixed Assets,20,1
+OP,FY,ME,PE,PRI  ELEC ROOM,AC,Movable assets / Consumable,20,2
+OP,FY,ME,RR,Rest Room,GI,Girls,20,1
+OP,FY,ME,RR,Rest Room,BO,Boys,20,2
+OP,FY,ME,RR,Rest Room,SF,Staff Rest Room Her,20,3
+OP,FY,ME,RR,Rest Room,SM,Staff Rest Room His,20,4
+OP,FY,ME,RR,Rest Room,AF,Ancillary Rest Room Her,20,5
+OP,FY,ME,RR,Rest Room,AM,Ancillary Rest Room His,20,6
+OP,FY,HE,SB,Sick Bay,OB,Observations,20,1
+OP,FY,HE,SB,Sick Bay,RF,Records & Files,20,2
+OP,PT,NA,ST,Stores,RF,Records & Files,30,1
+OP,PT,NA,ST,Stores,OB,Observations,30,2
+OP,PT,NA,PO,POS,RF,Records & Files,30,1
+OP,PT,NA,PO,POS,OB,Observations,30,2
+OP,PT,NA,GC,General Checks,OB,Observations,30,1
+OP,PT,NA,SP,Stores & POS,RF,Records & Files,30,1
+OP,PT,NA,SP,Stores & POS,OB,Observations,30,2
+OP,PT,SU,GC,General Checks,RF,Records & Files,30,1

@@ -97,34 +97,36 @@ const getDepartmentByRoleCode = async (roleCode) => {
           SubDepartmentCode: auditParam.SubDepartmentCode,
           SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
         });
-        let dueDate = ""
+        let dueDate = '';
         const currentDate = moment();
-        if(frequency === "DAILY") {
-          dueDate = moment().format("DD/MM/YYYY")
-        } else if(frequency === "Monthly") {
-          const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
-          const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
-          dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
-        } else if(frequency === "Annual") {
-          const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
-          dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
-        } else if(frequency === "Quaterly") {
-          const quarterlyConstant = [
-            { start: '04-01', end: '06-30' },
-            { start: '07-01', end: '09-30' },
-            { start: '10-01', end: '12-31' },
-            { start: '01-01', end: '03-31' }
-          ]
-          const currentQuarter = quarterlyConstant.find(quarter => {
-            const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
-            const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
-            return currentDate.isBetween(start, end, null, '[)');
-          });
-          dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
-        } else if(frequency === "Weekly") {
-          const startOfWeek = currentDate.clone().startOf('week');
-          const endOfWeek = startOfWeek.clone().endOf('week');
-          dueDate = endOfWeek.format('DD/MM/YYYY');
+        if (frequency) {
+          if (frequency.toString().toUpperCase() === 'DAILY') {
+            dueDate = moment().format('DD/MM/YYYY');
+          } else if (frequency.toString().toUpperCase() === 'MONTHLY') {
+            const firstDayOfNextMonth = currentDate.clone().add(1, 'month').startOf('month');
+            const lastDayOfCurrentMonth = firstDayOfNextMonth.clone().subtract(1, 'day');
+            dueDate = lastDayOfCurrentMonth.format('DD/MM/YYYY');
+          } else if (frequency.toString().toUpperCase() === 'ANNUAL') {
+            const yearForEnd = currentDate.month() < 3 ? currentDate.year() : currentDate.year() + 1;
+            dueDate = moment(`${yearForEnd}-03-31`).endOf('day').format('DD/MM/YYYY');
+          } else if (frequency.toString().toUpperCase() === 'QUATERLY') {
+            const quarterlyConstant = [
+              { start: '04-01', end: '06-30' },
+              { start: '07-01', end: '09-30' },
+              { start: '10-01', end: '12-31' },
+              { start: '01-01', end: '03-31' },
+            ];
+            const currentQuarter = quarterlyConstant.find((quarter) => {
+              const start = moment(quarter.start, 'MM-DD').year(currentDate.year());
+              const end = moment(quarter.end, 'MM-DD').year(currentDate.year());
+              return currentDate.isBetween(start, end, null, '[)');
+            });
+            dueDate = moment(currentQuarter.end, 'MM-DD' + 'T23:59:59.999').format('DD/MM/YYYY');
+          } else if (frequency.toString().toUpperCase() === 'WEEKLY') {
+            const startOfWeek = currentDate.clone().startOf('week');
+            const endOfWeek = startOfWeek.clone().endOf('week');
+            dueDate = endOfWeek.format('DD/MM/YYYY');
+          }
         }
         const formattedQuestion = {
           question: auditParam.Question,
@@ -132,6 +134,7 @@ const getDepartmentByRoleCode = async (roleCode) => {
           subDepartment: subDepartment ? subDepartment.toObject() : null,
           subSubDepartment: subSubDepartment ? subSubDepartment.toObject() : null,
           freq: frequency,
+          date: dueDate,
         };
         uniqueQuestions.set(key, formattedQuestion);
       }
@@ -187,7 +190,7 @@ const getAuditList = async (query) => {
 const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartmentCode, subSubDepartmentCode) => {
   try {
     const query = {
-      roles: { $elemMatch: { roleCode: roleCode, freq: freq } },
+      roles: { $elemMatch: { roleCode, freq } },
       DepartmentCode: departmentCode,
       SubDepartmentCode: subDepartmentCode,
       SubSubDepartmentCode: subSubDepartmentCode,
@@ -202,9 +205,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
       'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
     ).lean();
 
-    console.log(questions);
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
-    
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -257,6 +258,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
  * @param {Object} filters
  * @returns {Promise<AuditParameter>}
  */
+
 const filterDataByParameters = async (roleCode, filters) => {
   try {
     const filterObj = { 'roles.roleCode': roleCode };
@@ -343,16 +345,23 @@ const filterDataByParameters = async (roleCode, filters) => {
       if (!uniqueQuestions.has(key)) {
         uniqueQuestions.set(key, {
           question: auditParam.Question,
-          department: auditParam.department instanceof mongoose.Document ? auditParam.department.toObject() : auditParam.department,
-          subDepartment: auditParam.subDepartment instanceof mongoose.Document ? auditParam.subDepartment.toObject() : auditParam.subDepartment,
-          subSubDepartment: auditParam.subSubDepartment instanceof mongoose.Document ? auditParam.subSubDepartment.toObject() : auditParam.subSubDepartment,
+          department:
+            auditParam.department instanceof mongoose.Document ? auditParam.department.toObject() : auditParam.department,
+          subDepartment:
+            auditParam.subDepartment instanceof mongoose.Document
+              ? auditParam.subDepartment.toObject()
+              : auditParam.subDepartment,
+          subSubDepartment:
+            auditParam.subSubDepartment instanceof mongoose.Document
+              ? auditParam.subSubDepartment.toObject()
+              : auditParam.subSubDepartment,
           freq: auditParam.freq,
         });
       }
     }
     return Array.from(uniqueQuestions.values());
   } catch (error) {
-    throw new Error(`Error filtering questions: ${error.message}`);
+    throw new Error(Error`filtering questions: ${error.message}`);
   }
 };
 

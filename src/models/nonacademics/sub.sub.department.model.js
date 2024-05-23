@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('../plugins');
+const _ = require('lodash');
 
 const subSubDepartmentSchema = mongoose.Schema(
   {
@@ -7,61 +8,47 @@ const subSubDepartmentSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      default: null,
-    },
-    DepartmentGroupCode: {
-      type: String,
-      required: true,
-      trim: true,
-      default: null,
+      uppercase: true,
     },
     DepartmentDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
-      default: null,
-    },
-    DepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
-      default: null,
     },
     SubDepartmentCode: {
       type: String,
       required: true,
       trim: true,
-      default: null,
+      uppercase: true,
     },
     SubDepartmentDescription: {
       type: String,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
-      default: null,
-    },
-    SubDepartmentWeightage: {
-      type: Number,
-      required: true,
-      trim: true,
-      default: null,
     },
     SubSubDepartmentCode: {
       type: String,
       required: true,
       trim: true,
-      default: null,
+      uppercase: true,
     },
     SubSubDepartmentDescription: {
       type: String,
       required: true,
       trim: true,
-      default: null,
+      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubSubDepartmentWeightage: {
       type: Number,
       required: true,
       trim: true,
-      default: null,
+    },
+    SubSubDepartmentDisplayOrder: {
+      type: Number,
+      required: true,
+      trim: true,
     },
   },
   {

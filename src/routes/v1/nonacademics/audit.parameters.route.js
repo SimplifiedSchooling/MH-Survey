@@ -22,7 +22,7 @@ const uploads = multer({ storage });
 router
   .route('/bulkupload')
   .post(uploads.single('file'), auditParameterController.createAuditParameter)
-  .get(validate(auditParametersValidation.getAllAuditParameter),auditParameterController.getAllAuditParameter);
+  .get(validate(auditParametersValidation.getAllAuditParameter), auditParameterController.getAllAuditParameter);
 
   router
   .route('/:auditparameterdepartmentcode')
@@ -31,15 +31,14 @@ router
 
 router
   .route('/:auditparameterid')
-  .get(validate(auditParametersValidation.getAuditParameterById),auditParameterController.getAuditParameterById)
+  .get(validate(auditParametersValidation.getAuditParameterById), auditParameterController.getAuditParameterById)
   .patch(auditParameterController.updateAuditParameterById)
-  .delete(validate(auditParametersValidation.deleteAuditParameterById),auditParameterController.deleteistrictById);
+  .delete(validate(auditParametersValidation.deleteAuditParameterById), auditParameterController.deleteistrictById);
 
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
 router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
 router.route('/data/filter').post(auditParameterController.filterDataByParameters);
-router.route('/data2/filter2').post(auditParameterController.filterDataByParameters);
 
 router.route('/auditList/byrolecode').get(auditParameterController.getAuditList);
 
@@ -58,7 +57,7 @@ module.exports = router;
  * @swagger
  * /auditparameter/bulkupload:
  *   post:
- *     summary: Create a new AuditParameter by uploading excel file 
+ *     summary: Create a new AuditParameter by uploading excel file
  *     tags: [AuditParameter]
  *     requestBody:
  *       required: true
@@ -326,43 +325,6 @@ module.exports = router;
  
  */
 
-/**
- * @swagger
- * /auditparameter/data2/filter2:
- *   post:
- *     summary: Filter audit data by parameters
- *     tags: [AuditParameter]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               roleCode:
- *                 type: string
- *               DepartmentCode:
- *                 type: string
- *               SubDepartmentCode:
- *                 type: string
- *               SubSubDepartmentCode:
- *                 type: string
- *               freq:
- *                 type: string
- *     responses:
- *       '200':
- *         description: Successfully retrieved filtered data
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/AuditParameter'
- *       '400':
- *         description: Invalid request body
- *       '500':
- *         description: Internal server error
- */
 /**
  * @swagger
  * components:
