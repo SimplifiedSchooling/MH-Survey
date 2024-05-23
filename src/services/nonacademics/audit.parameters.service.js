@@ -326,35 +326,44 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
  */
 const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
   try {
+    console.log("DepartmentCode",options)
     const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
 
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
-      let frequency = null;
+      let frequency = options?.freq || null;
+      let DepartmentCode = options?.DepartmentCode || auditParam.DepartmentCode;
+      let SubDepartmentCode = options?.SubDepartmentCode || auditParam.SubDepartmentCode;
+      let SubSubDepartmentCode = options?.SubSubDepartmentCode || auditParam.SubSubDepartmentCode;
+
+
       for (const role of auditParam.roles) {
         if (role.roleCode === roleCode) {
-          frequency = role.freq;
+          frequency = frequency ?? role.freq;
           break;
         }
       }
-      const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+      console.log("fffff",frequency)
+
+        // const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
+        const key = `${DepartmentCode}-${SubDepartmentCode}-${SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
-        const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+        const department = await Department.findOne({ DepartmentCode: DepartmentCode });
         const subDepartment = await SubDepartment.findOne({
-          DepartmentCode: auditParam.DepartmentCode,
-          SubDepartmentCode: auditParam.SubDepartmentCode,
+          DepartmentCode: DepartmentCode,
+          SubDepartmentCode: SubDepartmentCode,
         });
         const subSubDepartment = await SubSubDepartment.findOne({
-          DepartmentCode: auditParam.DepartmentCode,
-          SubDepartmentCode: auditParam.SubDepartmentCode,
-          SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
+          DepartmentCode: DepartmentCode,
+          SubDepartmentCode: SubDepartmentCode,
+          SubSubDepartmentCode: SubSubDepartmentCode,
         });
 
         let dueDate = '';
         let startDate = '';
         let endDate = '';
         const currentDate = moment();
-
+console.log("ffffff",frequency)
         if (frequency) {
           if (frequency.toUpperCase() === 'DAILY') {
             startDate = currentDate.clone().startOf('day').format('DD/MM/YYYY');
@@ -398,9 +407,9 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
 
         const auditAnswers = await AuditAnswer.findOne({
           schoolId,
-          deptCode: auditParam.DepartmentCode,
-          subDeptCode: auditParam.SubDepartmentCode,
-          subSubDeptCode: auditParam.SubSubDepartmentCode,
+          deptCode: DepartmentCode,
+          subDeptCode: SubDepartmentCode,
+          subSubDeptCode: SubSubDepartmentCode,
           frequency,
           roleCode,
           createdAt: { $gte: moment(startDate, 'DD/MM/YYYY').toDate(), $lte: moment(endDate, 'DD/MM/YYYY').toDate() },

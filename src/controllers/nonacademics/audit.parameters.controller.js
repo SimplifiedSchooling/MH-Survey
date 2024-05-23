@@ -40,6 +40,11 @@ const createAuditParameter = catchAsync(async (req, res) => {
           auditParam.OnsiteorOffsite = rows[i][11];
           const crit = rows[i][j + 1];
           const roleCode = rows[0][j];
+          if(!crit)
+            {
+              console.log(auditParam["question"] + ' ' + freq + ' ' + roleCode);
+              continue;
+            }
           const roleDesc = rows[1][j];
           const role = {
             crit,
@@ -47,6 +52,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
             roleCode,
             roleDesc,
           };
+
           auditParam.roles = auditParam.roles || [];
           auditParam.roles.push(role);
           add = true;
@@ -124,6 +130,10 @@ const getDepartmentByRoleCode = catchAsync(async (req, res) => {
     sortBy: req.query.sortBy,
     limit: req.query.limit ? parseInt(req.query.limit, 10) : undefined,
     page: req.query.page ? parseInt(req.query.page, 10) : undefined,
+    DepartmentCode: req.query.DepartmentCode ? req.query.DepartmentCode: undefined,
+    SubDepartmentCode:req.query.SubDepartmentCode ? req.query.SubDepartmentCode: undefined,
+    SubSubDepartmentCode: req.query.SubSubDepartmentCode ? req.query.SubSubDepartmentCode : undefined,
+    freq:req.query.freq ? req.query.freq : undefined,
   };
   const questions = await auditParameterService.getDepartmentByRoleCode(roleCode, schoolId, options);
   res.status(httpStatus.OK).json(questions);
