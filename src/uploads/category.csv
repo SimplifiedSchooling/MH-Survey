@@ -1,0 +1,6 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage,CategoryCode,CategoryDescription,CategoryWeightage,CategoryDisplayOrder
+NON ACADEMIC,HR,Human Resources and Development,20,TA,Talent Acquisition,20,SC,School,20,SC_CT1,Infra,50,1
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT1,Others,50,2
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT1,Grade,50,3
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20,SC_CT2,Grade/Other,50,4
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,BC,Business Corporate-Schools,20,SC_CT1,General checks,50,5

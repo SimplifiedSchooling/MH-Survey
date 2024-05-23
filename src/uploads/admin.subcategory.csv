@@ -1,0 +1,82 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage,CategoryCode,CategoryDescription,CategoryWeightage,CategoryDisplayOrder,SubCategoryCode,SubCategoryDescription,SubCategoryWeightage,SubCategoryDisplayOrder
+NON ACADEMIC,OP,OP,20,FY,FY,20,SU,SU,20,GC,General Checks,20,1,RF,Records & Files,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,SU,SU,20,GC,General Checks,20,1,PA,Professional appearance,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,SU,SU,20,GC,General Checks,20,1,OB,Observations,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,LI,Library,20,1,RF,Records & Files,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,LI,Library,20,1,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,OB,Observations,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,DR,Discovery Room,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,FO,FOBO,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,EP,External periphery,20,4
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,TE,Terrace,20,5
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,CS,Corridors & Staircase,20,6
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,PC,Pest Control,20,7
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,MV,Manpower Vendor performance,20,8
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,GC,General Checks,20,2,RF,Records & Files,20,9
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,PA,Peripheral area,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,CP,Cricket Pitch,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,FG,Football Ground,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,KP,Kids play area,20,4
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,SR,Skating rink,20,5
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SI,Site Infra,20,3,BB,Basket Ball court,20,6
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,PS,PS,20,4,AC,Movable assets / Consumable,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,PS,PS,20,4,FA,Fixed Assets,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,GI,Girls,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,BY,Boys,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,SF,Staff Rest Room Her,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,SM,Staff Rest Room His,20,4
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,AF,Ancillary Rest Room Her,20,5
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,RR,Rest Room,20,5,AM,Ancillary Rest Room His,20,6
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SE,SEC ELEC ROOM,20,6,AC,Movable assets / Consumable,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SE,SEC ELEC ROOM,20,6,FA,Fixed Assets,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SK,SR KG,20,7,AC,Movable assets / Consumable,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,SK,SR KG,20,7,FA,Fixed Assets,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,PE,PRI  ELEC ROOM,20,8,AC,Movable assets / Consumable,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,PE,PRI  ELEC ROOM,20,8,FA,Fixed Assets,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,NU,NUR,20,9,AC,Movable assets / Consumable,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,AN,AN,20,NU,NUR,20,9,FA,Fixed Assets,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,CA,CA,20,GC,General Checks,20,1,RF,Records & files,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,CA,CA,20,GC,General Checks,20,1,OB,Observations,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,CA,CA,20,GC,General Checks,20,1,HY,Hygiene,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,HC,HC,20,SI,Site Infra,20,1,LP,Landscaping & plants,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,HC,HC,20,SI,Site Infra,20,1,PA,Peripheral area,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,EQ,Equipments,20,1,EP,Electrical panel,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,EQ,Equipments,20,1,OB,Observations,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,EQ,Equipments,20,1,RF,Records & files,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,GC,General Checks,20,2,OB,Observations,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,GC,General Checks,20,2,RF,Records & files,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,OB,Observations,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,CP,Cricket Pitch,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,FG,Football Ground,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,PA,Play area,20,4
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,SR,Skating rink,20,5
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SI,Site Infra,20,3,BB,Basket Ball court,20,6
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,CO,Compliance,20,4,RF,Records & files,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,PS,PS,20,5,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,PS,PS,20,5,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,NU,NUR,20,6,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,NU,NUR,20,6,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,JK,JR KG,20,7,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,JK,JR KG,20,7,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SK,SR KG,20,8,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SK,SR KG,20,8,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SE,SEC ELEC ROOM,20,9,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,SE,SEC ELEC ROOM,20,9,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,PE,PRI  ELEC ROOM,20,10,FA,Fixed Assets,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,PE,PRI  ELEC ROOM,20,10,AC,Movable assets / Consumable,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,GI,Girls,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,BO,Boys,20,2
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,SF,Staff Rest Room Her,20,3
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,SM,Staff Rest Room His,20,4
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,AF,Ancillary Rest Room Her,20,5
+NON ACADEMIC,OP,OP,20,FY,FY,20,ME,ME,20,RR,Rest Room,20,11,AM,Ancillary Rest Room His,20,6
+NON ACADEMIC,OP,OP,20,FY,FY,20,HE,HE,20,SB,Sick Bay,20,1,OB,Observations,20,1
+NON ACADEMIC,OP,OP,20,FY,FY,20,HE,HE,20,SB,Sick Bay,20,1,RF,Records & Files,20,2
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,ST,Stores,30,1,RF,Records & Files,30,1
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,ST,Stores,30,1,OB,Observations,30,2
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,PO,POS,30,2,RF,Records & Files,30,1
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,PO,POS,30,2,OB,Observations,30,2
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,GC,General Checks,30,3,OB,Observations,30,1
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,SP,Stores & POS,30,4,RF,Records & Files,30,1
+NON ACADEMIC,OP,OP,30,PT,PT,30,NA,NA,30,SP,Stores & POS,30,4,OB,Observations,30,2
+NON ACADEMIC,OP,OP,30,PT,PT,30,SU,SU,30,GC,General Checks,30,1,RF,Records & Files,30,1

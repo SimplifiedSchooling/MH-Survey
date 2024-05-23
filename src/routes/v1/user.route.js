@@ -1,22 +1,39 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
+const multer = require('multer');
+const { join } = require('path');
 const validate = require('../../middlewares/validate');
-const userValidation = require('../../validations/user.validation');
-const userController = require('../../controllers/user.controller');
+const { userValidation } = require('../../validations');
+const { userController } = require('../../controllers');
 
 const router = express.Router();
 
+const uploadPath = join(__dirname, '../../uploads');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadPath); // Use the correct variable here
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const uploads = multer({ storage });
+
+router.route('/bulkupload').post(uploads.single('file'), userController.bulkUploadFile);
+
+router.route('/nonacademic/bulkupload').post(uploads.single('file'), userController.bulkUploadNonAcademicFile);
+
 router
   .route('/')
-  .post(auth('manageUsers'), validate(userValidation.createUser), userController.createUser)
-  .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
+  .post(validate(userValidation.createUser), userController.createUser)
+  .get(validate(userValidation.getUsers), userController.getUsers);
 
 router
   .route('/:userId')
-  .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
-  .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
-  .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
+  .get(validate(userValidation.getUser), userController.getUser)
+  .patch(validate(userValidation.updateUser), userController.updateUser)
+  .delete(validate(userValidation.deleteUser), userController.deleteUser);
 
+router.route('/checkuser').post(validate(userValidation.checkUser), userController.checkUser);
 module.exports = router;
 
 /**
@@ -24,6 +41,52 @@ module.exports = router;
  * tags:
  *   name: Users
  *   description: User management and retrieval
+ */
+
+/**
+ * @swagger
+ * /users/bulkupload:
+ *   post:
+ *     summary: Upload a CSV file for bulk upload user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
+ */
+
+/**
+ * @swagger
+ * /users/nonacademic/bulkupload:
+ *   post:
+ *     summary: Upload a CSV file for bulk upload user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
  */
 
 /**
@@ -46,6 +109,7 @@ module.exports = router;
  *               - email
  *               - password
  *               - role
+ *               - mobNumber
  *             properties:
  *               name:
  *                 type: string
@@ -61,11 +125,14 @@ module.exports = router;
  *               role:
  *                  type: string
  *                  enum: [user, admin]
+ *               mobNumber:
+ *                  type: number
  *             example:
  *               name: fake name
  *               email: fake@example.com
  *               password: password1
  *               role: user
+ *               mobNumber: 9823525745
  *     responses:
  *       "201":
  *         description: Created
@@ -243,6 +310,42 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: No content
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /users/checkuser:
+ *   post:
+ *     summary: Get a user by email
+ *     description: Logged in users can fetch only their own user information. Only admins can fetch other users.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: User email
+ *             required:
+ *               - email
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/User'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":

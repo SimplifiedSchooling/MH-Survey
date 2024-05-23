@@ -1,0 +1,11 @@
+DepartmentGroupCode,DepartmentCode,DepartmentDescription,DepartmentWeightage,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage
+NON ACADEMIC,HR,Human Resources and Development,20,TA,Talent Acquisition,20,SC,School,20
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,SC,School,20
+NON ACADEMIC,HR,Human Resources and Development,20,HS,HR Services,20,BC,Business Corporate-Schools,20
+NON ACADEMIC,HR,Human Resources and Development,20,FA,Function Analytics,20,SC,Business Corporate-Schools,20
+NON ACADEMIC,HR,Human Resources and Development,20,LD,Learning and Development,20,SC,Business Corporate-Schools,20
+NON ACADEMIC,HR,Human Resources and Development,20,PC,Payroll and Compliance,20,SC,Business Corporate-Schools,20
+NON ACADEMIC,HR,Human Resources and Development,20,TM,Talent Management,20,SC,Business Corporate-Schools,20
+NON ACADEMIC,HR,Human Resources and Development,20,HP,HR Operation,20,SC,Business Corporate-Schools,20

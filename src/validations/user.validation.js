@@ -6,7 +6,10 @@ const createUser = {
     email: Joi.string().required().email(),
     password: Joi.string().required().custom(password),
     name: Joi.string().required(),
-    role: Joi.string().required().valid('user', 'admin'),
+    mobNumber: Joi.number().required(),
+    role: Joi.string(),
+    // .required()
+    // .valid('user', 'surveyadmin', 'superadmin', 'state', 'district', 'division', 'block', 'SME'),
   }),
 };
 
@@ -26,6 +29,12 @@ const getUser = {
   }),
 };
 
+const checkUser = {
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+  }),
+};
+
 const updateUser = {
   params: Joi.object().keys({
     userId: Joi.required().custom(objectId),
@@ -33,8 +42,11 @@ const updateUser = {
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
+      mobNumber: Joi.number(),
       password: Joi.string().custom(password),
       name: Joi.string(),
+      roleAssingedTo: Joi.string(),
+      role: Joi.string().required().valid('user', 'surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
     })
     .min(1),
 };
@@ -49,6 +61,7 @@ module.exports = {
   createUser,
   getUsers,
   getUser,
+  checkUser,
   updateUser,
   deleteUser,
 };

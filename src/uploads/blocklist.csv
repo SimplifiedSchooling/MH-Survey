@@ -1,0 +1,401 @@
+district_cd,District,Division,Budget_district_seq,block_cd_1,Block_Name,block_cd_2
+2735,Sangli,Pune,29,273502,Jath,273502
+2709,Nagpur,Nagpur,19,270908,Parseoni,270908
+2713,Chandrapur,Nagpur,8,271312,Chimur,271312
+2726,Ahmednagar,Nashik,1,272608,Pathardi,272608
+2734,Kolhapur,Pune,15,273413,Kolhapur,273413
+2715,Nanded,Aurangabad,20,271517,Nanded M.C.,271517
+2731,Satara,Pune,30,273106,Mahabaleshwar,273106
+2732,Ratnagiri,Konkan,28,273201,Chiplun,273201
+2707,Amravati,Amravati,3,270710,Dhamangaon Rly,270710
+2720,Nashik,Nashik,22,272004,Dindori,272004
+2703,Jalgaon,Nashik,13,270304,Bodwad,270304
+2732,Ratnagiri,Konkan,28,273203,Guhagar,273203
+2715,Nanded,Aurangabad,20,271502,Ardhapur,271502
+2721,Thane,Konkan,33,272112,Shahapur,272112
+2718,Jalna,Aurangabad,14,271804,Ghansawangi,271804
+2726,Ahmednagar,Nashik,1,272606,Newasa,272606
+2713,Chandrapur,Nagpur,8,271301,Chandrapur,271301
+2724,Raigarh ,Konkan,27,272415,Uran,272415
+2725,Pune,Pune,26,272503,Bhor,272503
+2721,Thane,Konkan,33,272105,Kalyan,272105
+2725,Pune,Pune,26,272515,Yerawada,272518
+2724,Raigarh ,Konkan,27,272404,Mahad,272404
+2701,Nandurbar,Nashik,21,270104,Taloda,270104
+2720,Nashik,Nashik,22,272018,Nashik Urc-2,272016
+2704,Buldana,Amravati,7,270407,Malakapur,270407
+2711,Gondia,Nagpur,11,271107,Sadak Arjuni,271107
+2713,Chandrapur,Nagpur,8,271308,Mul,271308
+2714,Yavatmal,Amravati,36,271411,Pusad,271411
+2705,Akola,Amravati,2,270507,Telhara,270507
+2730,Solapur,Pune,32,273005,Malshiras,273005
+2707,Amravati,Amravati,3,270715,Amravati Mc,270715
+2718,Jalna,Aurangabad,14,271808,Jafrabad,271808
+2720,Nashik,Nashik,22,272012,Sinner,272012
+2726,Ahmednagar,Nashik,1,272603,Kopargaon,272603
+2721,Thane,Konkan,33,272106,Kalyan Dombivli-Urc1,272106
+2721,Thane,Konkan,33,272110,Navi Mumbai-Urc1,272110
+2725,Pune,Pune,26,272517,Hadpasar,272517
+2721,Thane,Konkan,33,272116,Ulhasnagar- Urc1,272116
+2722,Mumbai (BMC),Konkan,17,272207,Urc-7 (Ghatkopar),272202
+2731,Satara,Pune,30,273111,Wai,273111
+2729,Osmanabad,Aurangabad,23,272906,Paranda,272906
+2704,Buldana,Amravati,7,270406,Loanr,270406
+2719,Aurangabad,Aurangabad,4,271909,Phulambri,271909
+2726,Ahmednagar,Nashik,1,272611,Shevgaon,272611
+2711,Gondia,Nagpur,11,271104,Gondia,271104
+2711,Gondia,Nagpur,11,271102,Amgaon,271102
+2722,Mumbai (BMC),Konkan,17,272202,Urc-2 (Kandivali),272202
+2734,Kolhapur,Pune,15,273407,Radhanagari,273407
+2705,Akola,Amravati,2,270504,Barshitakli,270504
+2701,Nandurbar,Nashik,21,270106,Dhadgaon,270106
+2728,Latur,Aurangabad,16,272807,Udgir,272807
+2713,Chandrapur,Nagpur,8,271311,Bramhapuri,271311
+2727,Beed,Aurangabad,5,272702,Ashti,272702
+2731,Satara,Pune,30,273110,Satara,273110
+2713,Chandrapur,Nagpur,8,271310,Nagbhid,271310
+2720,Nashik,Nashik,22,272015,Yeola,272015
+2725,Pune,Pune,26,272519,Pimpri,272519
+2707,Amravati,Amravati,3,270709,Dharni,270709
+2724,Raigarh ,Konkan,27,272408,Panvel,272408
+2730,Solapur,Pune,32,273008,Pandharpur,273008
+2729,Osmanabad,Aurangabad,23,272907,Tuljapur,272907
+2722,Mumbai (BMC),Konkan,17,272203,Urc-3 (Goregaon),272203
+2725,Pune,Pune,26,272508,Khed,272508
+2724,Raigarh ,Konkan,27,272401,Alibag,272401
+2707,Amravati,Amravati,3,270707,Chandur Rly,270707
+2701,Nandurbar,Nashik,21,270101,Nandurbar,270101
+2727,Beed,Aurangabad,5,272709,Patoda,272709
+2717,Parbhani,Aurangabad,25,271709,Sonpeth,271709
+2735,Sangli,Pune,29,273503,Kavathe Mahankal,273503
+2709,Nagpur,Nagpur,19,270918,Urc 5,270914
+2735,Sangli,Pune,29,273506,Palus,273506
+2715,Nanded,Aurangabad,20,271503,Mudkhed,271503
+2708,Wardha,Amravati,34,270802,Ashti,270802
+2703,Jalgaon,Nashik,13,270303,Bhusawal,270303
+2712,Gadchiroli,Nagpur,10,271201,Gadchiroli,271201
+2714,Yavatmal,Amravati,36,271407,Mahagaon,271407
+2714,Yavatmal,Amravati,36,271409,Ner,271409
+2710,Bhandara,Nagpur,6,271006,Lakhandur,271006
+2713,Chandrapur,Nagpur,8,271309,Sindewahi,271309
+2730,Solapur,Pune,32,273007,Mohol,273007
+2721,Thane,Konkan,33,272107,Mira Bhayandar,272107
+2732,Ratnagiri,Konkan,28,273208,Ratnagiri,273208
+2725,Pune,Pune,26,272502,Baramati,272502
+2725,Pune,Pune,26,272509,Maval,272509
+2734,Kolhapur,Pune,15,273412,Chandgad,273412
+2734,Kolhapur,Pune,15,273409,Bhudargad,273409
+2706,Washim,Amravati,35,270602,Malegaon,270602
+2731,Satara,Pune,30,273103,Koregaon,273103
+2727,Beed,Aurangabad,5,272711,Wadwani,272711
+2711,Gondia,Nagpur,11,271106,Salekasa,271106
+2715,Nanded,Aurangabad,20,271512,Umri,271512
+2719,Aurangabad,Aurangabad,4,271906,Sillod,271906
+2726,Ahmednagar,Nashik,1,272615,Mc Ahmednagar,272615
+2731,Satara,Pune,30,273107,Man,273107
+2717,Parbhani,Aurangabad,25,271705,Parhbani,271705
+2720,Nashik,Nashik,22,272009,Nashik,272009
+2709,Nagpur,Nagpur,19,270904,Saoner,270904
+2735,Sangli,Pune,29,273510,Sangli Miraj Kupwad M. Corporation,273510
+2714,Yavatmal,Amravati,36,271416,Zari,271416
+2715,Nanded,Aurangabad,20,271508,Biloli,271508
+2704,Buldana,Amravati,7,270411,Sangrampur,270411
+2728,Latur,Aurangabad,16,272810,Chakur,272810
+2711,Gondia,Nagpur,11,271103,Deori,271103
+2720,Nashik,Nashik,22,272005,Igatpuri,272005
+2708,Wardha,Amravati,34,270806,Samudrapur,270806
+2707,Amravati,Amravati,3,270713,Tiosa,270713
+2710,Bhandara,Nagpur,6,271001,Bhandara,271001
+2717,Parbhani,Aurangabad,25,271703,Manwat,271703
+2703,Jalgaon,Nashik,13,270316,Jalgaon M. Corp.,270316
+2735,Sangli,Pune,29,273509,Walwa,273509
+2715,Nanded,Aurangabad,20,271505,Kandhar,271505
+2702,Dhule,Nashik,9,270202,Sakri,270202
+2716,Hingoli,Aurangabad,12,271603,Basmath,271603
+2707,Amravati,Amravati,3,270705,Chandur Bz,270705
+2709,Nagpur,Nagpur,19,270907,Mouda,270907
+2732,Ratnagiri,Konkan,28,273202,Dapoli,273202
+2703,Jalgaon,Nashik,13,270305,Chalisgaon,270305
+2735,Sangli,Pune,29,273511,Kadegaon,273511
+2703,Jalgaon,Nashik,13,270314,Rawer,270314
+2733,Sindhudurg,Konkan,31,273306,Sawantwadi,273306
+2713,Chandrapur,Nagpur,8,271304,Ballarpur,271304
+2719,Aurangabad,Aurangabad,4,271908,Vaijapur,271908
+2702,Dhule,Nashik,9,270204,Shirpur,270204
+2726,Ahmednagar,Nashik,1,272602,Jamkhed,272602
+2733,Sindhudurg,Konkan,31,273308,Vengurle,273308
+2707,Amravati,Amravati,3,270711,Morshi,270711
+2720,Nashik,Nashik,22,272013,Surgana,272013
+2720,Nashik,Nashik,22,272016,Nashik Urc-1,272016
+2712,Gadchiroli,Nagpur,10,271211,Bhamragad,271211
+2728,Latur,Aurangabad,16,272809,Ahamadpur,272809
+2719,Aurangabad,Aurangabad,4,271904,Khultabad,271904
+2717,Parbhani,Aurangabad,25,271710,Parbhani Urc,271705
+2721,Thane,Konkan,33,272115,Ambernath,272115
+2702,Dhule,Nashik,9,270201,Dhule,270201
+2708,Wardha,Amravati,34,270804,Hinganghat,270804
+2709,Nagpur,Nagpur,19,270912,Kuhi,270912
+2730,Solapur,Pune,32,273011,Solapur South,273011
+2707,Amravati,Amravati,3,270714,Warud,270714
+2730,Solapur,Pune,32,273001,Akkalkot,273001
+2720,Nashik,Nashik,22,272006,Kalwan,272006
+2734,Kolhapur,Pune,15,273411,Gadhinglaj,273411
+2705,Akola,Amravati,2,270502,Akot,270502
+2717,Parbhani,Aurangabad,25,271704,Palam,271704
+2703,Jalgaon,Nashik,13,270302,Bhadgaon,270302
+2712,Gadchiroli,Nagpur,10,271204,Dhanora,271204
+2735,Sangli,Pune,29,273504,Khanapur,273504
+2704,Buldana,Amravati,7,270403,Khamgaon,270403
+2717,Parbhani,Aurangabad,25,271701,Gangakhed,271701
+2719,Aurangabad,Aurangabad,4,271903,Kannad,271903
+2726,Ahmednagar,Nashik,1,272607,Parner,272607
+2724,Raigarh ,Konkan,27,272409,Pen,272409
+2735,Sangli,Pune,29,273507,Shirala,273507
+2730,Solapur,Pune,32,273012,Solapur Urc-1,273012
+2705,Akola,Amravati,2,270505,Murtizapur,270505
+2709,Nagpur,Nagpur,19,270909,Nagpur (Gramin),270909
+2706,Washim,Amravati,35,270601,Karanja Lad,270601
+2715,Nanded,Aurangabad,20,271514,Himayat Nagar,271514
+2717,Parbhani,Aurangabad,25,271706,Pathri,271706
+2715,Nanded,Aurangabad,20,271504,Loha,271504
+2733,Sindhudurg,Konkan,31,273303,Kankavli,273303
+2717,Parbhani,Aurangabad,25,271707,Purna,271707
+2727,Beed,Aurangabad,5,272707,Majalgaon,272707
+2720,Nashik,Nashik,22,272003,Devla,272003
+2720,Nashik,Nashik,22,272001,Baglan,272001
+2721,Thane,Konkan,33,272114,Thane Mnc-Urc1,272114
+2706,Washim,Amravati,35,270604,Manora,270604
+2724,Raigarh ,Konkan,27,272406,Mhasala,272406
+2722,Mumbai (BMC),Konkan,17,272212,Urc-12(Byculla),272201
+2712,Gadchiroli,Nagpur,10,271208,Sironcha,271208
+2719,Aurangabad,Aurangabad,4,271911,Urc2,271910
+2716,Hingoli,Aurangabad,12,271605,Aundha Nagnath,271605
+2721,Thane,Konkan,33,272120,Thane Mnc-Urc2,272120
+2736,Palghar,Konkan,24,273619,Wada,273619
+2701,Nandurbar,Nashik,21,270102,Navapur,270102
+2704,Buldana,Amravati,7,270410,Nandura,270410
+2707,Amravati,Amravati,3,270701,Achalpur,270701
+2732,Ratnagiri,Konkan,28,273204,Khed,273204
+2718,Jalna,Aurangabad,14,271801,Jalna,271801
+2702,Dhule,Nashik,9,270203,Shindkheda,270203
+2735,Sangli,Pune,29,273505,Miraj,273505
+2731,Satara,Pune,30,273109,Phaltan,273109
+2720,Nashik,Nashik,22,272011,Peint,272011
+2734,Kolhapur,Pune,15,273401,Shahuwadi,273401
+2703,Jalgaon,Nashik,13,270313,Parola,270313
+2717,Parbhani,Aurangabad,25,271702,Jintur,271702
+2736,Palghar,Konkan,24,273611,Palghar,273611
+2726,Ahmednagar,Nashik,1,272609,Rahuri,272609
+2713,Chandrapur,Nagpur,8,271302,Bhadrawati,271302
+2724,Raigarh ,Konkan,27,272413,Shrivardhan,272413
+2727,Beed,Aurangabad,5,272705,Georai,272705
+2713,Chandrapur,Nagpur,8,271314,Pomburna,271314
+2729,Osmanabad,Aurangabad,23,272905,Osmanabad,272905
+2725,Pune,Pune,26,272511,Purandar,272511
+2705,Akola,Amravati,2,270506,Patur,270506
+2727,Beed,Aurangabad,5,272708,Parli,272708
+2703,Jalgaon,Nashik,13,270315,Yawal,270315
+2736,Palghar,Konkan,24,273613,Talasari,273613
+2725,Pune,Pune,26,272505,Haveli,272505
+2712,Gadchiroli,Nagpur,10,271207,Etapalli,271207
+2710,Bhandara,Nagpur,6,271002,Mohadi,271002
+2726,Ahmednagar,Nashik,1,272601,Akole,272601
+2712,Gadchiroli,Nagpur,10,271206,Aheri,271206
+2724,Raigarh ,Konkan,27,272414,Tala,272414
+2724,Raigarh ,Konkan,27,272402,Karjat,272402
+2732,Ratnagiri,Konkan,28,273207,Rajapur,273207
+2710,Bhandara,Nagpur,6,271007,Pauni,271007
+2703,Jalgaon,Nashik,13,270301,Amalner,270301
+2709,Nagpur,Nagpur,19,270903,Kalmeshwar,270903
+2730,Solapur,Pune,32,273006,Mangalwedha,273006
+2709,Nagpur,Nagpur,19,270913,Bhiwapur,270913
+2719,Aurangabad,Aurangabad,4,271901,Aurangabad,271901
+2709,Nagpur,Nagpur,19,270914,Urc 1,270914
+2720,Nashik,Nashik,22,272008,Nandgaon,272008
+2722,Mumbai (BMC),Konkan,17,272205,Urc-5 (Santacruz),272201
+2714,Yavatmal,Amravati,36,271402,Babhulgaon,271402
+2731,Satara,Pune,30,273101,Jaoli,273101
+2730,Solapur,Pune,32,273004,Madha,273004
+2727,Beed,Aurangabad,5,272710,Shirur,272710
+2715,Nanded,Aurangabad,20,271501,Nanded,271501
+2704,Buldana,Amravati,7,270401,Buldana,270401
+2712,Gadchiroli,Nagpur,10,271212,Desaiganj,271212
+2731,Satara,Pune,30,273105,Khandala,273105
+2703,Jalgaon,Nashik,13,270307,Dharangaon,270307
+2709,Nagpur,Nagpur,19,270906,Ramtek,270906
+2727,Beed,Aurangabad,5,272706,Kaij,272706
+2725,Pune,Pune,26,272513,Velhe,272513
+2722,Mumbai (BMC),Konkan,17,272211,Urc-11(Dadar),272203
+2714,Yavatmal,Amravati,36,271404,Digras,271404
+2714,Yavatmal,Amravati,36,271410,Pandharkawada,271410
+2727,Beed,Aurangabad,5,272701,Ambajogai,272701
+2735,Sangli,Pune,29,273501,Atpadi,273501
+2734,Kolhapur,Pune,15,273405,Karveer,273405
+2719,Aurangabad,Aurangabad,4,271907,Soegaon,271907
+2720,Nashik,Nashik,22,272007,Malegaon,272007
+2724,Raigarh ,Konkan,27,272407,Murud,272407
+2705,Akola,Amravati,2,270503,Balapur,270503
+2721,Thane,Konkan,33,272101,Bhiwandi,272101
+2704,Buldana,Amravati,7,270405,Motala,270405
+2716,Hingoli,Aurangabad,12,271604,Kalamnuri,271604
+2728,Latur,Aurangabad,16,272803,Ausa,272803
+2720,Nashik,Nashik,22,272014,Trimbak,272014
+2709,Nagpur,Nagpur,19,270911,Umred,270911
+2709,Nagpur,Nagpur,19,270916,Urc 3,270914
+2736,Palghar,Konkan,24,273603,Dahanu,273603
+2707,Amravati,Amravati,3,270712,Nandgaon Kh,270712
+2733,Sindhudurg,Konkan,31,273305,Malvan,273305
+2713,Chandrapur,Nagpur,8,271305,Rajura,271305
+2703,Jalgaon,Nashik,13,270309,Jalgaon,270309
+2714,Yavatmal,Amravati,36,271403,Darwha,271403
+2708,Wardha,Amravati,34,270807,Seloo,270807
+2715,Nanded,Aurangabad,20,271511,Bhokar,271511
+2730,Solapur,Pune,32,273010,Solapur North,273010
+2714,Yavatmal,Amravati,36,271414,Wani,271414
+2705,Akola,Amravati,2,270508,Akola Mc,270508
+2724,Raigarh ,Konkan,27,272405,Mangaon,272405
+2711,Gondia,Nagpur,11,271101,Arjuni Mor,271101
+2712,Gadchiroli,Nagpur,10,271210,Korchi,271210
+2714,Yavatmal,Amravati,36,271405,Ghatanji,271405
+2730,Solapur,Pune,32,273013,Solapur Urc-2,273012
+2735,Sangli,Pune,29,273508,Tasgaon,273508
+2707,Amravati,Amravati,3,270706,Chikhaldara,270706
+2728,Latur,Aurangabad,16,272806,Devani,272806
+2734,Kolhapur,Pune,15,273410,Aajara,273410
+2734,Kolhapur,Pune,15,273404,Shirol,273404
+2710,Bhandara,Nagpur,6,271003,Tumsar,271003
+2715,Nanded,Aurangabad,20,271510,Dharmabad,271510
+2718,Jalna,Aurangabad,14,271803,Ambad,271803
+2709,Nagpur,Nagpur,19,270910,Hingna,270910
+2731,Satara,Pune,30,273102,Karad,273102
+2728,Latur,Aurangabad,16,272802,Renapur,272802
+2720,Nashik,Nashik,22,272002,Chandwad,272002
+2724,Raigarh ,Konkan,27,272412,Sudhagad,272412
+2709,Nagpur,Nagpur,19,270905,Kamptee,270905
+2726,Ahmednagar,Nashik,1,272614,Shrirampoor,272614
+2726,Ahmednagar,Nashik,1,272613,Shrigonda,272614
+2704,Buldana,Amravati,7,270412,Shegaon,270412
+2734,Kolhapur,Pune,15,273406,Gaganbawada,273406
+2706,Washim,Amravati,35,270605,Risod,270605
+2729,Osmanabad,Aurangabad,23,272903,Lohara,272903
+2714,Yavatmal,Amravati,36,271412,Ralegaon,271412
+2718,Jalna,Aurangabad,14,271807,Bhokardan,271807
+2725,Pune,Pune,26,272504,Daund,272504
+2715,Nanded,Aurangabad,20,271516,Mahoor,271516
+2707,Amravati,Amravati,3,270703,Anjangaon Surji,270703
+2732,Ratnagiri,Konkan,28,273205,Lanja,273205
+2711,Gondia,Nagpur,11,271108,Tiroda,271108
+2729,Osmanabad,Aurangabad,23,272908,Washi,272908
+2726,Ahmednagar,Nashik,1,272610,Rahata,272610
+2704,Buldana,Amravati,7,270402,Chikhali,270402
+2702,Dhule,Nashik,9,270205,Dhule M.N.P.,270205
+2724,Raigarh ,Konkan,27,272411,Roha,272411
+2703,Jalgaon,Nashik,13,270312,Pachora,270312
+2712,Gadchiroli,Nagpur,10,271203,Kurkheda,271203
+2704,Buldana,Amravati,7,270408,Mehakar,270408
+2707,Amravati,Amravati,3,270708,Daryapur,270708
+2713,Chandrapur,Nagpur,8,271306,Gondpipari,271306
+2725,Pune,Pune,26,272510,Mulshi,272510
+2715,Nanded,Aurangabad,20,271509,Naigaon,271509
+2710,Bhandara,Nagpur,6,271004,Sakoli,271004
+2709,Nagpur,Nagpur,19,270917,Urc 4,270914
+2732,Ratnagiri,Konkan,28,273209,Sangmeshwar,273209
+2721,Thane,Konkan,33,272102,Bhivandi Mnc-Urc1,272102
+2736,Palghar,Konkan,24,273604,Jawhar,273604
+2704,Buldana,Amravati,7,270409,Jalgaon Jamod,270409
+2727,Beed,Aurangabad,5,272703,Beed,272703
+2725,Pune,Pune,26,272512,Shirur,272512
+2722,Mumbai (BMC),Konkan,17,272208,Urc-8 (Chembur),272202
+2715,Nanded,Aurangabad,20,271507,Degloor,271507
+2708,Wardha,Amravati,34,270805,Karanja,270805
+2708,Wardha,Amravati,34,270808,Wardha,270808
+2730,Solapur,Pune,32,273009,Sangola,273009
+2730,Solapur,Pune,32,273003,Karmala,273003
+2711,Gondia,Nagpur,11,271105,Goregaon,271105
+2728,Latur,Aurangabad,16,272805,Shirur Anantpal,272805
+2727,Beed,Aurangabad,5,272712,Urc Beed,272712
+2704,Buldana,Amravati,7,270413,Sindkhed Raja,270413
+2701,Nandurbar,Nashik,21,270103,Shahada,270103
+2718,Jalna,Aurangabad,14,271802,Badnapur,271802
+2714,Yavatmal,Amravati,36,271408,Maregaon,271408
+2718,Jalna,Aurangabad,14,271805,Partur,271805
+2720,Nashik,Nashik,22,272017,Malegaon Mc,272017
+2725,Pune,Pune,26,272507,Junnar,272507
+2729,Osmanabad,Aurangabad,23,272904,Omerga,272904
+2721,Thane,Konkan,33,272109,Murbad,272109
+2736,Palghar,Konkan,24,273608,Mokhada,273608
+2722,Mumbai (BMC),Konkan,17,272201,Urc-1 (Borivali),272201
+2725,Pune,Pune,26,272520,Akurdi,272519
+2725,Pune,Pune,26,272516,Bibwewadi,272518
+2734,Kolhapur,Pune,15,273408,Kagal,273408
+2722,Mumbai (BMC),Konkan,17,272204,Urc-4 (Andheri),272201
+2710,Bhandara,Nagpur,6,271005,Lakhani,271005
+2728,Latur,Aurangabad,16,272804,Nilanga,272804
+2712,Gadchiroli,Nagpur,10,271209,Mulchera,271209
+2703,Jalgaon,Nashik,13,270308,Erandol,270308
+2731,Satara,Pune,30,273104,Khatav,273104
+2709,Nagpur,Nagpur,19,270902,Katol,270902
+2716,Hingoli,Aurangabad,12,271602,Sengaon,271602
+2715,Nanded,Aurangabad,20,271513,Hadgaon,271513
+2713,Chandrapur,Nagpur,8,271303,Warora,271303
+2708,Wardha,Amravati,34,270801,Arvi,270801
+2730,Solapur,Pune,32,273002,Barshi,273002
+2703,Jalgaon,Nashik,13,270306,Chopda,270306
+2729,Osmanabad,Aurangabad,23,272902,Kallamb,272902
+2724,Raigarh ,Konkan,27,272410,Poladpur,272410
+2706,Washim,Amravati,35,270603,Mangrulpir,270603
+2734,Kolhapur,Pune,15,273403,Hatkalangle,273403
+2707,Amravati,Amravati,3,270704,Bhatkuli,270704
+2728,Latur,Aurangabad,16,272801,Latur,272801
+2706,Washim,Amravati,35,270606,Washim,270606
+2725,Pune,Pune,26,272518,Pune City,272518
+2732,Ratnagiri,Konkan,28,273206,Mandangad,273206
+2736,Palghar,Konkan,24,273617,Vasai,273617
+2736,Palghar,Konkan,24,273618,Vikramgad,273618
+2703,Jalgaon,Nashik,13,270311,Muktainagar,270311
+2707,Amravati,Amravati,3,270702,Amravati,270702
+2705,Akola,Amravati,2,270501,Akola Ps,270501
+2731,Satara,Pune,30,273108,Patan,273108
+2726,Ahmednagar,Nashik,1,272612,Sangamner,272612
+2724,Raigarh ,Konkan,27,272403,Khalapur,272403
+2728,Latur,Aurangabad,16,272812,Latur Urc2,272812
+2722,Mumbai (BMC),Konkan,17,272206,Urc-6 (Bhandup),272202
+2713,Chandrapur,Nagpur,8,271313,Saoli,271313
+2728,Latur,Aurangabad,16,272808,Jalkot,272808
+2709,Nagpur,Nagpur,19,270901,Narkhed,270901
+2722,Mumbai (BMC),Konkan,17,272210,Urc-10 (Parel),272203
+2733,Sindhudurg,Konkan,31,273304,Kudal,273304
+2714,Yavatmal,Amravati,36,271413,Umarkhed,271413
+2714,Yavatmal,Amravati,36,271401,Arni,271401
+2727,Beed,Aurangabad,5,272704,Dharur,272704
+2734,Kolhapur,Pune,15,273402,Panhala,273402
+2725,Pune,Pune,26,272514,Aundh,272514
+2733,Sindhudurg,Konkan,31,273301,Devgad,273301
+2712,Gadchiroli,Nagpur,10,271202,Armori,271202
+2726,Ahmednagar,Nashik,1,272604,Karjat,272604
+2733,Sindhudurg,Konkan,31,273302,Dodamarg,273302
+2712,Gadchiroli,Nagpur,10,271205,Chamorshi,271205
+2715,Nanded,Aurangabad,20,271515,Kinwat,271515
+2720,Nashik,Nashik,22,272010,Niphad,272010
+2733,Sindhudurg,Konkan,31,273307,Vaibhavwadi,273307
+2726,Ahmednagar,Nashik,1,272605,Nagar,272605
+2719,Aurangabad,Aurangabad,4,271910,Urc1,271910
+2729,Osmanabad,Aurangabad,23,272901,Bhoom,272901
+2713,Chandrapur,Nagpur,8,271307,Korpana,271307
+2703,Jalgaon,Nashik,13,270310,Jamner,270310
+2714,Yavatmal,Amravati,36,271415,Yavatmal,271415
+2704,Buldana,Amravati,7,270404,Deulgaon Raja,270404
+2728,Latur,Aurangabad,16,272811,Latur Urc1,272811
+2713,Chandrapur,Nagpur,8,271315,Jiwati,271315
+2701,Nandurbar,Nashik,21,270105,Akkalkuwa,270105
+2714,Yavatmal,Amravati,36,271406,Kalamb,271406
+2717,Parbhani,Aurangabad,25,271708,Sailu,271708
+2718,Jalna,Aurangabad,14,271806,Mantha,271806
+2719,Aurangabad,Aurangabad,4,271902,Gangapur,271902
+2725,Pune,Pune,26,272506,Indapur,272506
+2725,Pune,Pune,26,272501,Ambegaon,272501
+2715,Nanded,Aurangabad,20,271506,Mukhed,271506
+2716,Hingoli,Aurangabad,12,271601,Hingoli,271601
+2708,Wardha,Amravati,34,270803,Deoli,270803
+2722,Mumbai (BMC),Konkan,17,272209,Urc-9 (Kurla),272202
+2719,Aurangabad,Aurangabad,4,271905,Paithan,271905

@@ -1,0 +1,3 @@
+DepartmentCode,DepartmentDescription,SubDepartmentCode,SubDepartmentDescription,SubDepartmentWeightage,SubDepartmentDisplayOrder
+OP,OP,PT,PT,20,1
+OP,OP,FY,FY,30,2

@@ -1,14 +1,14 @@
 FROM node:alpine
 
-RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
+RUN mkdir -p /usr/src/mh-survey && chown -R node:node /usr/src/mh-survey
 
-WORKDIR /usr/src/node-app
+WORKDIR /usr/src/mh-survey
 
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 USER node
 
-RUN yarn install --pure-lockfile
+RUN npm install --pure-lockfile
 
 COPY --chown=node:node . .
 

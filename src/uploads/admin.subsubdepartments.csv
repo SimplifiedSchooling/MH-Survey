@@ -1,0 +1,9 @@
+DepartmentCode,DepartmentDescription,SubDepartmentCode,SubDepartmentDescription,SubSubDepartmentCode,SubSubDepartmentDescription,SubSubDepartmentWeightage,SubSubDepartmentDisplayOrder
+OP,OP ,PT,PT ,NA,PT,30,1
+OP,OP ,FY,FY  ,SU,SU ,15,2
+OP,OP ,FY,FY ,AN,AN ,30,3
+OP,OP ,FY,FY ,CA,CA ,20,4
+OP,OP ,FY,FY ,ME,ME,35,3
+OP,OP ,FY,FY,HE,HE,40,4
+OP,OP ,FY,FY,HC,HC,50,5
+OP,OP ,PT,PT ,SU,SU,30,6
