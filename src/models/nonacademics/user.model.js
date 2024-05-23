@@ -59,21 +59,21 @@ const nonAcademicUserSchema = mongoose.Schema(
       type: String,
     },
     password: {
-        type: String,
-        // required: true,
-        trim: true,
-        minlength: 8,
-        // validate(value) {
-        //   if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-        //     // throw new Error('Password must contain at least one letter and one number');
-        //     return false;
-        //   }
-        // },
-        private: true, // used by the toJSON plugin
+      type: String,
+      // required: true,
+      trim: true,
+      minlength: 8,
+      // validate(value) {
+      //   if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+      //     // throw new Error('Password must contain at least one letter and one number');
+      //     return false;
+      //   }
+      // },
+      private: true, // used by the toJSON plugin
     },
     userLocationCode: {
-      type: String
-    }
+      type: String,
+    },
   },
   {
     timestamps: true,

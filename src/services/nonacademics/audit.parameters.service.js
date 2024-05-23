@@ -422,7 +422,7 @@ const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
           freq: frequency,
           date: dueDate,
           finalSubmit: auditAnswers ? auditAnswers.finalSubmit : false,
-          status: status,
+          status,
         };
 
         uniqueQuestions.set(key, formattedQuestion);
