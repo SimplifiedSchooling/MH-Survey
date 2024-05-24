@@ -18,8 +18,10 @@ const createAuditAnswer = async (auditAnswerBody) => {
  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
  */
 const createOrUpdateAuditAnswer = async (filter, data) => {
+
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
+    console.log("auditAnswer data",data)
     auditAnswer = await AuditAnswer.create(data);
   } else {
     if (Array.isArray(data.answers)) {
@@ -107,9 +109,10 @@ const getAuditAnswersByFilters = async (filters) => {
     deptCode: filters.departmentCode,
     subDeptCode: filters.subDepartmentCode,
     subSubDeptCode: filters.subSubDepartmentCode,
-    roleCode: filters.roleCode,
+    // roleCode: filters.roleCode,
+    level:filters.level,
     frequency: filters.frequency,
-    userId: filters.userId,
+    // userId: filters.userId,
   };
   const auditAnswers = await AuditAnswer.find(query).lean();
 
@@ -140,6 +143,7 @@ const getAuditAnswersByFilters = async (filters) => {
         subSubDeptCode: auditAnswers[0].subSubDeptCode,
         frequency: auditAnswers[0].frequency,
         roleCode: auditAnswers[0].roleCode,
+        level:auditAnswers[0].level,
         userId: auditAnswers[0].userId,
         finalSubmit: auditAnswers[0].finalSubmit,
       }

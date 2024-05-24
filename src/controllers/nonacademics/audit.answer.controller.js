@@ -10,9 +10,11 @@ const createAuditAnswer = catchAsync(async (req, res) => {
 });
 
 const createOrUpdateAuditAnswer = catchAsync(async (req, res) => {
-  const { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, finalSubmit, userId, answers } = req.body;
-  const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, userId };
-  const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, finalSubmit, userId, answers };
+  console.log("level",req.body)
+  const { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode,level, finalSubmit, userId, answers } = req.body;
+  const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode,level, userId };
+  const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, level,finalSubmit, userId, answers };
+  console.log("data",data,"filter",filter)
   const auditAnswer = await AuditAnswerService.createOrUpdateAuditAnswer(filter, data);
   res.status(httpStatus.OK).json(auditAnswer);
 });
@@ -60,8 +62,9 @@ const deleteistrictById = catchAsync(async (req, res) => {
 });
 
 const getAuditAnswers = catchAsync(async (req, res) => {
-  const { departmentCode, subDepartmentCode, subSubDepartmentCode, frequency, roleCode, userId, schoolId } = req.body;
-  const filters = { departmentCode, subDepartmentCode, subSubDepartmentCode, frequency, roleCode, userId, schoolId };
+  const { departmentCode, subDepartmentCode, subSubDepartmentCode, frequency, level, userId, schoolId } = req.body;
+  // roleCode
+  const filters = { departmentCode, subDepartmentCode, subSubDepartmentCode, frequency, level, userId, schoolId };
   const groupedAnswers = await AuditAnswerService.getAuditAnswersByFilters(filters);
   res.status(httpStatus.OK).send(groupedAnswers);
 });

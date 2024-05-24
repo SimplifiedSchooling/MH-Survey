@@ -31,7 +31,9 @@ router
   .delete(validate(auditParametersValidation.deleteAuditParameterById), auditParameterController.deleteistrictById);
 
 router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuestionsByRoleCode);
-router.route('/departmentlist/byrolecode/:roleCode/:schoolId').get(auditParameterController.getDepartmentByRoleCode);
+
+router.route('/departmentlist/byrolecode/:roleCode/:schoolId/:level').get(auditParameterController.getDepartmentByRoleCode);
+// router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
 router.route('/data/filter').post(auditParameterController.filterDataByParameters);
 
 module.exports = router;

@@ -125,7 +125,8 @@ const getQuestionsByRoleCode = catchAsync(async (req, res) => {
 });
 
 const getDepartmentByRoleCode = catchAsync(async (req, res) => {
-  const { roleCode, schoolId } = req.params;
+  const { roleCode,level, schoolId } = req.params;
+  // console.log("level",level)
   const options = {
     sortBy: req.query.sortBy,
     limit: req.query.limit ? parseInt(req.query.limit, 10) : undefined,
@@ -135,7 +136,8 @@ const getDepartmentByRoleCode = catchAsync(async (req, res) => {
     SubSubDepartmentCode: req.query.SubSubDepartmentCode ? req.query.SubSubDepartmentCode : undefined,
     freq:req.query.freq ? req.query.freq : undefined,
   };
-  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode, schoolId, options);
+  console.log("eeeeeeeeeeeeeeeeeeeeeeeee")
+  const questions = await auditParameterService.getDepartmentByRoleCode(roleCode,level, schoolId, options);
   res.status(httpStatus.OK).json(questions);
 });
 const filterDataByParameters = catchAsync(async (req, res) => {

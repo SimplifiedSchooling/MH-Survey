@@ -92,6 +92,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
     ).lean();
 
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
+    console.log("categories",categories)
     const groupedQuestions = {};
     questions.forEach((question) => {
       if (!groupedQuestions[question.Category]) {
@@ -324,63 +325,63 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
  * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const getDepartmentByRoleCode = async (roleCode, schoolId, options) => {
+
+const getDepartmentByRoleCode = async (roleCode, level,schoolId, options) => {
   try {
-    console.log("DepartmentCode",options)
-    let response=[];
-    const auditParameters = await AuditParameter.find({ 'roles.roleCode': roleCode });
+    const conditional = {};
+    if(options?.DepartmentCode && options?.DepartmentCode!=='undefined'){
+      conditional.DepartmentCode=options.DepartmentCode;
+    }
+    if(options?.SubDepartmentCode && options?.SubDepartmentCode!=='undefined'){
+      conditional.SubDepartmentCode=options.SubDepartmentCode;
+    }
+    if(options?.SubSubDepartmentCode && options?.SubSubDepartmentCode!=='undefined'){
+      conditional.SubSubDepartmentCode=options.SubSubDepartmentCode;
+    }
+    
+    let frequencyParams;
+    if(options?.freq && options?.freq!=undefined){
+      frequencyParams=options?.freq;
+    }
+    const query={
+      'roles.roleCode':roleCode,
+      ...conditional
+    }
+    console.log("query",query)
+    const auditParameters = await AuditParameter.find(query);
 
     const uniqueQuestions = new Map();
     for (const auditParam of auditParameters) {
-      let frequency = options?.freq || null;
-      let DepartmentCode = options?.DepartmentCode || auditParam.DepartmentCode;
-      let SubDepartmentCode = options?.SubDepartmentCode || auditParam.SubDepartmentCode;
-      let SubSubDepartmentCode = options?.SubSubDepartmentCode || auditParam.SubSubDepartmentCode;
-
-
+      let frequency = null;
       for (const role of auditParam.roles) {
         if (role.roleCode === roleCode) {
-          frequency = frequency ?? role.freq;
+          frequency = role.freq;
           break;
         }
       }
-      console.log("fffff",frequency)
-
-        // const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
-        const key = `${DepartmentCode}-${SubDepartmentCode}-${SubSubDepartmentCode}-${frequency}`;
+      if(frequencyParams && frequencyParams!=='undefined'){
+      if(frequency != frequencyParams){
+        continue;
+      }
+    }
+      const key = `${auditParam.DepartmentCode}-${auditParam.SubDepartmentCode}-${auditParam.SubSubDepartmentCode}-${frequency}`;
       if (!uniqueQuestions.has(key)) {
-         response=await Promise.all([
-          await Department.findOne({ DepartmentCode: DepartmentCode }),
-          await SubDepartment.findOne({
-          DepartmentCode: DepartmentCode,
-          SubDepartmentCode: SubDepartmentCode,
-        }),
-         await SubSubDepartment.findOne({
-          DepartmentCode: DepartmentCode,
-          SubDepartmentCode: SubDepartmentCode,
-          SubSubDepartmentCode: SubSubDepartmentCode,
-        })])
-        // console.log("response",response)
-        // const department = await Department.findOne({ DepartmentCode: DepartmentCode });
-        // const subDepartment = await SubDepartment.findOne({
-        //   DepartmentCode: DepartmentCode,
-        //   SubDepartmentCode: SubDepartmentCode,
-        // });
-        // const subSubDepartment = await SubSubDepartment.findOne({
-        //   DepartmentCode: DepartmentCode,
-        //   SubDepartmentCode: SubDepartmentCode,
-        //   SubSubDepartmentCode: SubSubDepartmentCode,
-        // });
-        if (response.some(item => item === null)) {
-          response = []; // Make the array empty if it contains null values
-        }
-        const [department,subDepartment,subSubDepartment]=response
+        const department = await Department.findOne({ DepartmentCode: auditParam.DepartmentCode });
+        const subDepartment = await SubDepartment.findOne({
+          DepartmentCode: auditParam.DepartmentCode,
+          SubDepartmentCode: auditParam.SubDepartmentCode,
+        });
+        const subSubDepartment = await SubSubDepartment.findOne({
+          DepartmentCode: auditParam.DepartmentCode,
+          SubDepartmentCode: auditParam.SubDepartmentCode,
+          SubSubDepartmentCode: auditParam.SubSubDepartmentCode,
+        });
 
         let dueDate = '';
         let startDate = '';
         let endDate = '';
         const currentDate = moment();
-console.log("ffffff",frequency)
+
         if (frequency) {
           if (frequency.toUpperCase() === 'DAILY') {
             startDate = currentDate.clone().startOf('day').format('DD/MM/YYYY');
@@ -421,14 +422,16 @@ console.log("ffffff",frequency)
             dueDate = endDate;
           }
         }
+        
 
         const auditAnswers = await AuditAnswer.findOne({
           schoolId,
-          deptCode: DepartmentCode,
-          subDeptCode: SubDepartmentCode,
-          subSubDeptCode: SubSubDepartmentCode,
+          deptCode: auditParam.DepartmentCode,
+          subDeptCode: auditParam.SubDepartmentCode,
+          subSubDeptCode: auditParam.SubSubDepartmentCode,
           frequency,
-          roleCode,
+          // roleCode,
+          level,
           createdAt: { $gte: moment(startDate, 'DD/MM/YYYY').toDate(), $lte: moment(endDate, 'DD/MM/YYYY').toDate() },
         });
         let status = 'To Do';
@@ -448,15 +451,13 @@ console.log("ffffff",frequency)
           freq: frequency,
           date: dueDate,
           finalSubmit: auditAnswers ? auditAnswers.finalSubmit : false,
-          status: status,
+          status,
         };
-
         uniqueQuestions.set(key, formattedQuestion);
+       
       }
     }
-
     const formattedQuestions = Array.from(uniqueQuestions.values());
-
     const { sortBy = 'createdAt:desc', limit, page } = options;
     const sort = {};
     if (sortBy) {
@@ -484,10 +485,6 @@ console.log("ffffff",frequency)
       totalResults,
     };
 
-    let noRecord={message:'No Data Found'};
-    if(response.length==0){
-      return noRecord;
-    }
     return result;
   } catch (error) {
     throw new Error(`Error fetching questions: ${error.message}`);

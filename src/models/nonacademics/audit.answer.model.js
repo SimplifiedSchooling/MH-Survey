@@ -86,6 +86,10 @@ const auditAnswers = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    level: {
+      type: String,
+      required: true,
+    },
     userId: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'User',
