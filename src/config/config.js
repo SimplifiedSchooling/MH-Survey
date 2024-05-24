@@ -61,4 +61,12 @@ module.exports = {
     },
     from: envVars.EMAIL_FROM,
   },
+  plivoVar: {
+    authId: process.env.PLIVO_AUTH_ID,
+    authToken: process.env.PLIVO_AUTH_TOKEN,
+    entityId: process.env.PLIVO_ENTITY_ID,
+    templateID: process.env.PLIVO_TEMPLATE_ID,
+    templateCategory: process.env.PLIVO_TEMPLATE_CATEGORY,
+    smsHeader: process.env.PLIVO_SENDER_HEADER
+  }
 };
