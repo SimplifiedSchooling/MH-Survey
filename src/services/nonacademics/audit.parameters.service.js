@@ -82,7 +82,7 @@ const getAuditList = async (query) => {
     if (query.freq) {
       filterObj['roles.freq'] = query.freq;
     }
-  const auditParameters = await AuditParameter.aggregate([
+    const auditParameters = await AuditParameter.aggregate([
       { $match: filterObj },
       // {
       //   $lookup: {
