@@ -23,7 +23,6 @@ const bulkUploadNonAcademicFile = catchAsync(async (req, res) => {
     const csvFilePath = join(req.file.path);
     const csvJsonArray = await csv().fromFile(csvFilePath);
     const jsonArray = [];
-    console.log('csvJsonArray ', csvJsonArray.length);
     for (const csvData of csvJsonArray) {
       const normalizedData = {};
       for (const key in csvData) {
@@ -32,8 +31,6 @@ const bulkUploadNonAcademicFile = catchAsync(async (req, res) => {
       jsonArray.push(normalizedData);
     }
     // const csvJsonArray = await parseCsvFile(csvFilePath);
-    console.log('jsonArray ==> ', jsonArray);
-
     const user = await userService.bulkUploadNonAcademicUsers(null, jsonArray);
     res.status(httpStatus.CREATED).send(user);
   } else {

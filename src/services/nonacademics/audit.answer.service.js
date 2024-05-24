@@ -39,7 +39,6 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
         }
       }
     } else {
-      console.error('Data.answers is not iterable');
     }
     if (data.finalSubmit !== undefined) {
       auditAnswer.finalSubmit = data.finalSubmit;
@@ -132,18 +131,19 @@ const getAuditAnswersByFilters = async (filters) => {
       });
     });
   });
-  const additionalProperties = auditAnswers.length > 0
-    ? {
-        schoolId: auditAnswers[0].schoolId,
-        deptCode: auditAnswers[0].deptCode,
-        subDeptCode: auditAnswers[0].subDeptCode,
-        subSubDeptCode: auditAnswers[0].subSubDeptCode,
-        frequency: auditAnswers[0].frequency,
-        roleCode: auditAnswers[0].roleCode,
-        userId: auditAnswers[0].userId,
-        finalSubmit: auditAnswers[0].finalSubmit,
-      }
-    : {};
+  const additionalProperties =
+    auditAnswers.length > 0
+      ? {
+          schoolId: auditAnswers[0].schoolId,
+          deptCode: auditAnswers[0].deptCode,
+          subDeptCode: auditAnswers[0].subDeptCode,
+          subSubDeptCode: auditAnswers[0].subSubDeptCode,
+          frequency: auditAnswers[0].frequency,
+          roleCode: auditAnswers[0].roleCode,
+          userId: auditAnswers[0].userId,
+          finalSubmit: auditAnswers[0].finalSubmit,
+        }
+      : {};
 
   return { ...additionalProperties, groupedAnswers };
 };

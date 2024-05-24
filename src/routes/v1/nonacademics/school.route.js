@@ -26,7 +26,7 @@ module.exports = router;
  *         schema:
  *           type: string
  *         required: true
-  *       - in: query
+ *       - in: query
  *         name: level
  *         schema:
  *           type: string

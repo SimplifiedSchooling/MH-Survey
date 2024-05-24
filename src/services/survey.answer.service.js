@@ -2,27 +2,25 @@ const httpStatus = require('http-status');
 const { SurveyAnswers } = require('../models');
 const ApiError = require('../utils/ApiError');
 const surveyUpdate = require('./add.new.survey.service');
+
 /**
  * Create a survey answer
  * @param {Object} reqBody
  * @returns {Promise<SurveyAnswers>}
  */
-// Update surveyLocations document
 
 const createSurveyAnswers = async (reqBody) => {
-  // await SurveyLocation.findOneAndUpdate(
-  //   {
-  //     masterProjectId: reqBody.masterProjectId,
-  //     'surveyLocations.udise_sch_code': reqBody.udise_sch_code,
-  //   },
-  //   { $set: { 'surveyLocations.$.status': 'Surveyed' } },
-  //   { new: true }
-  // );
-  const data = SurveyAnswers.create(reqBody);
-  const { masterProjectId, surveyId, surveyFormId } = reqBody;
+  const { masterProjectId, surveyId, surveyFormId, udise_sch_code } = reqBody;
+  const filter = { masterProjectId, surveyId, surveyFormId, udise_sch_code };
+  const survey = await SurveyAnswers.findOne(filter);
+  if (survey) {
+    throw new Error('Survey already filled for this location ');
+  }
+  const data = await SurveyAnswers.create(reqBody);
   await surveyUpdate.updateActualDatesForSurvey(masterProjectId, surveyId, surveyFormId);
   return data;
 };
+
 
 /**
  * Query for survey answer
@@ -91,16 +89,6 @@ const filterSurveyAnswers = async (surveyId, masterProjectId, surveyFormId, udis
   const surveyAnswers = await SurveyAnswers.find(filter);
   return surveyAnswers;
 };
-
-// /**
-//  * Get survey answer by id
-//  * @param {ObjectId} id
-//  * @returns {Promise<SurveyAnswers>}
-//  */
-// const getSurveyStatus = async (surveyId, masterProjectId, udise_sch_code) => {
-//   return SurveyAnswers.find({ surveyId, masterProjectId, udise_sch_code });
-// };
-// /* eslint-enable camelcase */
 
 module.exports = {
   createSurveyAnswers,

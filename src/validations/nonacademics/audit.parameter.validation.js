@@ -114,6 +114,12 @@ const getAuditAnswers = {
   }),
 };
 
+const deleteAuditParameterByDepartmentCode = {
+  params: Joi.object().keys({
+    auditparameterDepartmentCode: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   createAuditParameter,
   getAllAuditParameter,
@@ -123,4 +129,6 @@ module.exports = {
   getDepartmentByRoleCode,
   getQuestionList,
   departmentDataFilter,
+  deleteAuditParameterByDepartmentCode,
+  getAuditAnswers,
 };

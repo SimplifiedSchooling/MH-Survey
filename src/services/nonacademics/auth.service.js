@@ -28,8 +28,8 @@ const loginUserWithEmailAndPassword = async (email, password) => {
       centreCode: userCopy.centreCode,
       level: userCopy.level,
       cluster: userCopy.cluster,
-      id: userCopy._id
-    }
+      id: userCopy._id,
+    };
     return user;
   } catch (err) {
     throw new Error(`Login failed: ${err.message}`);
