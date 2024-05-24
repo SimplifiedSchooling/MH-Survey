@@ -9,6 +9,10 @@ const getUserByEmail = async (email) => {
   return NonAcademicsUser.findOne({ email });
 };
 
+const getUserByMobNumber = async (number) => {
+  return NonAcademicsUser.findOne({ contact: number });
+};
+
 const bulkUploadNonAcademicUserRoles = async (userArray, csvFilePath = []) => {
   let modifiedUseRolesrArray = userArray;
   if (csvFilePath.length) {
@@ -49,4 +53,5 @@ module.exports = {
   getUserByEmail,
   bulkUploadNonAcademicUserRoles,
   findUserRoleDetail,
+  getUserByMobNumber
 };

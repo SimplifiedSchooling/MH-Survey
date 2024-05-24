@@ -5,6 +5,7 @@ const authController = require('../../../controllers/nonacademics/auth.controlle
 const validate = require('../../../middlewares/validate');
 const authValidation = require('../../../validations/auth.validation');
 const userController = require('../../../controllers/nonacademics/user.controller');
+const { loginWithOtpParameter, loginWithOtpValidationParameter } = require('../../../validations/nonacademics/auth.validation');
 
 const router = express.Router();
 
@@ -23,6 +24,8 @@ const uploads = multer({ storage });
 router.post('/roles/bulkupload', uploads.single('file'), userController.bulkUploadUserRoleFile);
 router.post('/auth/login', validate(authValidation.login), authController.login);
 router.get('/user-role/info', userController.getUserRoleInfo);
+router.post('/auth/login/otp', validate(loginWithOtpParameter), authController.loginWithOtp);
+router.post('/auth/login/otp-verify', validate(loginWithOtpValidationParameter), authController.validateOtp)
 
 module.exports = router;
 
@@ -128,4 +131,95 @@ module.exports = router;
  *         description: Details Fetched Successfully
  *       404:
  *         description: Details Not Fetched
+ */
+
+/**
+ * @swagger
+ * /nonAcademic/auth/login/otp:
+ *   post:
+ *     summary: Login With OTP
+ *     tags: [NonAcademicUser]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - mobNumber
+ *             properties:
+ *               mobNumber:
+ *                 type: number
+ *                 format: number
+ *             example:
+ *               mobNumber: 8207457846
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
+ */
+
+/**
+ * @swagger
+ * /nonAcademic/auth/login/otp-verify:
+ *   post:
+ *     summary: OTP Verification
+ *     tags: [NonAcademicUser]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - mobNumber
+ *               - otp
+ *             properties:
+ *               mobNumber:
+ *                 type: number
+ *                 format: number
+ *               otp:
+ *                 type: number
+ *                 format: number
+ *             example:
+ *                mobNumber: 8207457846
+ *                otp: 685789
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 tokens:
+ *                   $ref: '#/components/schemas/AuthTokens'
+ *       "401":
+ *         description: Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               code: 401
+ *               message: Invalid email or password
  */
