@@ -41,12 +41,12 @@ const bulkUploadUserRoleFile = catchAsync(async (req, res) => {
 });
 
 const getUserRoleInfo = catchAsync(async (req, res) => {
-    const getUserDetails = await userService.findUserRoleDetail(req.query.uniqRoleCode, req.query.centreCode);
-    if (!getUserDetails) {
-        throw new ApiError(httpStatus.NOT_FOUND, 'No Details Found.');
-    }
-    res.send(getUserDetails);
-})
+  const getUserDetails = await userService.findUserRoleDetail(req.query.uniqRoleCode, req.query.centreCode);
+  if (!getUserDetails) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No Details Found.');
+  }
+  res.send(getUserDetails);
+});
 
 module.exports = {
   bulkUploadUserRoleFile,

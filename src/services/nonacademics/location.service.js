@@ -3,21 +3,21 @@ const csv = require('csvtojson');
 const { Location } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
-
 const normalizeHeaders = (header) => {
   // return header.trim().toLowerCase();
-  const words = header.trim().toLowerCase().split(/[\s_-]+/);
+  const words = header
+    .trim()
+    .toLowerCase()
+    .split(/[\s_-]+/);
   const camelCaseHeader = words.map((word, index) => {
     if (index === 0) {
       return word;
-    } else {
-      return word.charAt(0).toUpperCase() + word.slice(1); // Capitalize the first letter of each word
     }
+    return word.charAt(0).toUpperCase() + word.slice(1); // Capitalize the first letter of each word
   });
 
   return camelCaseHeader.join('');
 };
-
 
 /**
  * Create a Location
@@ -36,13 +36,13 @@ const createLocation = async (schoolArray, csvFilePath = null) => {
     }
     const jsonArray = await csv().fromFile(modifiedSchoolArray);
     const modifiedLocationArray = [];
-    for(const csvData of jsonArray) {
+    for (const csvData of jsonArray) {
       const normalizedData = {};
-      for (let key in csvData) {
+      for (const key in csvData) {
         normalizedData[normalizeHeaders(key)] = csvData[key];
       }
       modifiedLocationArray.push(normalizedData);
-    }  
+    }
     // Split the array into batches
     for (let i = 0; i < modifiedLocationArray.length; i += batchSize) {
       const batch = modifiedLocationArray.slice(i, i + batchSize);

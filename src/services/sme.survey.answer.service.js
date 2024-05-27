@@ -8,16 +8,14 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<SMESurveyAnswers>}
  */
 const createSurveyAnswers = async (reqBody) => {
-  // await SurveyLocation.findOneAndUpdate(
-  //   {
-  //     masterProjectId: reqBody.masterProjectId,
-  //     'surveyLocations.udise_sch_code': reqBody.udise_sch_code,
-  //   },
-  //   { $set: { 'surveyLocations.$.status': 'Audited' } },
-  //   { new: true }
-  // );
+  const { masterProjectId, surveyId, surveyFormId, udise_sch_code } = reqBody;
+  const filter = { masterProjectId, surveyId, surveyFormId, udise_sch_code };
+  const survey = await SMESurveyAnswers.findOne(filter);
+  if (survey) {
+    throw new Error('Audit already filled for this location ');
+  }
+  return await SMESurveyAnswers.create(reqBody);
 
-  return SMESurveyAnswers.create(reqBody);
 };
 
 /**

@@ -24,6 +24,8 @@ router
   .post(uploads.single('file'), auditParameterController.createAuditParameter)
   .get(validate(auditParametersValidation.getAllAuditParameter), auditParameterController.getAllAuditParameter);
 
+router.route('/:auditparameterdepartmentcode').delete(auditParameterController.deletebasedonDepartmentCode);
+
 router
   .route('/:auditparameterid')
   .get(validate(auditParametersValidation.getAuditParameterById), auditParameterController.getAuditParameterById)
@@ -35,6 +37,8 @@ router.route('/getquestionlist/byrolcode').get(auditParameterController.getQuest
 router.route('/departmentlist/byrolecode/:roleCode/:schoolId/:level').get(auditParameterController.getDepartmentByRoleCode);
 // router.route('/departmentlist/byrolecode').get(auditParameterController.getDepartmentByRoleCode);
 router.route('/data/filter').post(auditParameterController.filterDataByParameters);
+
+router.route('/auditList/byrolecode').get(auditParameterController.getAuditList);
 
 module.exports = router;
 
@@ -270,6 +274,27 @@ module.exports = router;
  *         description: Invalid request body
  *       '500':
  *         description: Internal server error
+ */
+
+/**
+ *  @swagger
+ * /auditparameter/{auditparameterdepartmentcode}:
+ *   delete:
+ *     summary: Delete a multiple AuditParameter by Departmentcode
+ *     tags: [AuditParameter]
+ *     parameters:
+ *       - in: query
+ *         name: auditparameterdepartmentcode
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Departmentcode of the AuditParameter
+ *     responses:
+ *       204:
+ *         description: No content
+ *       404:
+ *         description: AuditParameter not found
+ 
  */
 
 /**

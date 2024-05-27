@@ -28,6 +28,7 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
       for (const newData of data.answers) {
         const existingAnswerIndex = auditAnswer.answers.findIndex(
           (existingAnswer) =>
+            existingAnswer.QuestionNumber === newData.QuestionNumber &&
             existingAnswer.question === newData.question &&
             existingAnswer.category === newData.category &&
             existingAnswer.subCategory === newData.subCategory &&
@@ -41,7 +42,6 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
         }
       }
     } else {
-      console.error('Data.answers is not iterable');
     }
     if (data.finalSubmit !== undefined) {
       auditAnswer.finalSubmit = data.finalSubmit;

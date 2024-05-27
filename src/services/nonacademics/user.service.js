@@ -1,4 +1,4 @@
-const { NonAcademicsUser, NonAcademicsUserRole, Location } = require('../../models')
+const { NonAcademicsUser, NonAcademicsUserRole, Location } = require('../../models');
 
 /**
  * Get user by email
@@ -7,6 +7,10 @@ const { NonAcademicsUser, NonAcademicsUserRole, Location } = require('../../mode
  */
 const getUserByEmail = async (email) => {
   return NonAcademicsUser.findOne({ email });
+};
+
+const getUserByMobNumber = async (number) => {
+  return NonAcademicsUser.findOne({ contact: number });
 };
 
 const bulkUploadNonAcademicUserRoles = async (userArray, csvFilePath = []) => {
@@ -35,18 +39,19 @@ const bulkUploadNonAcademicUserRoles = async (userArray, csvFilePath = []) => {
   return { nonduplicates, duplicates };
 };
 
-const findUserRoleDetail = async(uniqueRoleCode, centreCode) => {
-    const locationData = await Location.findOne({ centreCode }).exec()
-    const roleData = await NonAcademicsUserRole.findOne({ uniqueRoleCode }).exec();
+const findUserRoleDetail = async (uniqueRoleCode, centreCode) => {
+  const locationData = await Location.findOne({ centreCode }).exec();
+  const roleData = await NonAcademicsUserRole.findOne({ uniqueRoleCode }).exec();
 
-    return {
-        locationData,
-        roleData
-    }
-}
+  return {
+    locationData,
+    roleData,
+  };
+};
 
 module.exports = {
   getUserByEmail,
   bulkUploadNonAcademicUserRoles,
   findUserRoleDetail,
+  getUserByMobNumber
 };
