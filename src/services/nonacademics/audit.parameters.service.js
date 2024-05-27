@@ -118,7 +118,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
     };
     const questions = await AuditParameter.find(
       query,
-      'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite roles.crit'
+      'Question AllowedResponse Category SubCategory DisplayOrder OnsiteorOffsite QuestionNumber roles.crit'
     ).lean();
 
     const categories = await Category.find(query2, 'CategoryDescription CategoryDisplayOrder').lean();
@@ -136,6 +136,7 @@ const getQuestionsByRoleCode = async (roleCode, freq, departmentCode, subDepartm
         DisplayOrder: question.DisplayOrder,
         Crit: question.roles[0].crit,
         OnsiteorOffsite: question.OnsiteorOffsite,
+        QuestionNumber: question.QuestionNumber,
       });
     });
     categories.sort((a, b) => a.CategoryDisplayOrder - b.CategoryDisplayOrder);
