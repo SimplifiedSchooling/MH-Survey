@@ -408,9 +408,6 @@ module.exports = router;
  *     Answer:
  *       type: object
  *       properties:
- *         QuestionNumber:
- *           type: string
- *           description: The QuestionNumber being audited.
  *         question:
  *           type: string
  *           description: The question being audited.
@@ -436,7 +433,6 @@ module.exports = router;
  *           type: string
  *           description: The sub-category of the audit.
  *       required:
- *         - QuestionNumber
  *         - question
  *         - answer
  *         - imageLink
