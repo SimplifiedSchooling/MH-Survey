@@ -47,7 +47,7 @@ const loginWithNumber = async ({ mobNumber }) => {
       };
       const src = plivoVar.smsHeader;
       const dst = `+91${mobNumber}`;
-      const text = `${otp} is your OTP for verification on Hubblehox -VIBGYOR`;
+      const text = `${otp} is the ${'OTP'} to Login into School Audit App. ${'OTP'} is valid for 5 Mins -VIBGYOR`;
       // const url = 'Webhook Endpoint';
       const dlt_entity_id = plivoVar.entityId;
       const dlt_template_id = plivoVar.templateID;
