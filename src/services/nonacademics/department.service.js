@@ -26,8 +26,10 @@ const createDepartment = async (schoolArray, csvFilePath = null) => {
       // eslint-disable-next-line no-await-in-loop
       await Department.bulkWrite(
         batch.map((doc) => ({
-          insertOne: {
-            document: doc,
+          updateOne: {
+            filter: { DepartmentCode: doc.DepartmentCode },
+            update: { $set: doc },
+            upsert: true,
           },
         }))
       );
