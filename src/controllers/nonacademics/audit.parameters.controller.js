@@ -136,7 +136,6 @@ const getDepartmentByRoleCode = catchAsync(async (req, res) => {
     SubSubDepartmentCode: req.query.SubSubDepartmentCode ? req.query.SubSubDepartmentCode : undefined,
     freq:req.query.freq ? req.query.freq : undefined,
   };
-  console.log("eeeeeeeeeeeeeeeeeeeeeeeee")
   const questions = await auditParameterService.getDepartmentByRoleCode(roleCode,level, schoolId, options);
   res.status(httpStatus.OK).json(questions);
 });

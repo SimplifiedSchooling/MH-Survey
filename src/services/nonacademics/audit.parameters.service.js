@@ -277,7 +277,7 @@ const getDepartmentByRoleCode = async (roleCode, level,schoolId, options) => {
             dueDate = endDate;
           }
         }
-        
+        console.log(auditParam);
 
         const auditAnswers = await AuditAnswer.findOne({
           schoolId,
