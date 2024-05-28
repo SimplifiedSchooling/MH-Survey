@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const csv = require('csvtojson');
+const xlsx = require('xlsx');
 const { SubSubDepartment } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
@@ -8,34 +9,36 @@ const ApiError = require('../../utils/ApiError');
  * @param {Object} SubSubDepartmentBody
  * @returns {Promise<SubSubDepartment>}
  */
-const createSubSubDepartment = async (schoolArray, csvFilePath = null) => {
-  try {
-    let modifiedSchoolArray = schoolArray;
-    if (csvFilePath) {
-      modifiedSchoolArray = csvFilePath;
+const createSubSubDepartment = async (xlsxFilePath) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const workbook = xlsx.readFile(xlsxFilePath);
+      const sheetName = 'Sub Sub Department';
+      if (!workbook.SheetNames.includes(sheetName)) {
+        reject(`Bulk upload failed: Sheet ${sheetName} not found.`)
+      }
+      const index = workbook.SheetNames.indexOf(sheetName);
+      const sheet = workbook.SheetNames[index];
+      const jsonArray = xlsx.utils.sheet_to_json(workbook.Sheets[sheet]);
+      const batchSize = 1000;
+      for (let i = 0; i < jsonArray.length; i += batchSize) {
+        const batch = jsonArray.slice(i, i + batchSize);
+        // eslint-disable-next-line no-await-in-loop
+        await SubSubDepartment.bulkWrite(
+          batch.map((doc) => ({
+            updateOne: {
+              filter: { DepartmentCode: doc.DepartmentCode, SubDepartmentCode: doc.SubDepartmentCode, SubSubDepartmentCode: doc.SubSubDepartmentCode },
+              update: { $set: doc },
+              upsert: true,
+            },
+          }))
+        );
+      }
+      resolve(true);
+    } catch (error) {
+      reject(`Bulk upload failed: ${error.message}`);
     }
-    const batchSize = 1000;
-    if (!modifiedSchoolArray || !modifiedSchoolArray.length) {
-      throw new Error('Missing array');
-    }
-    const jsonArray = await csv().fromFile(modifiedSchoolArray);
-
-    for (let i = 0; i < jsonArray.length; i += batchSize) {
-      const batch = jsonArray.slice(i, i + batchSize);
-      // eslint-disable-next-line no-await-in-loop
-      await SubSubDepartment.bulkWrite(
-        batch.map((doc) => ({
-          updateOne: {
-            filter: { DepartmentCode: doc.DepartmentCode, SubDepartmentCode: doc.SubDepartmentCode, SubSubDepartmentCode: doc.SubSubDepartmentCode },
-            update: { $set: doc },
-            upsert: true,
-          },
-        }))
-      );
-    }
-  } catch (error) {
-    throw new Error(`Bulk upload failed: ${error.message}`);
-  }
+  })
 };
 
 /**

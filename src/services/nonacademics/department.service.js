@@ -1,42 +1,46 @@
 const httpStatus = require('http-status');
 const csv = require('csvtojson');
+const xlsx = require('xlsx');
 const { Department } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 
 /**
  * Create a Department
  * @param {Object} DepartmentBody
- * @returns {Promise<Department>}
+ * @returns {Promise<boolean>}
  */
-const createDepartment = async (schoolArray, csvFilePath = null) => {
-  try {
-    let modifiedSchoolArray = schoolArray;
-    if (csvFilePath) {
-      modifiedSchoolArray = csvFilePath;
+const createDepartment = async (xlsxFilePath) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const workbook = xlsx.readFile(xlsxFilePath);
+      const sheetName = 'Department';
+      if (!workbook.SheetNames.includes(sheetName)) {
+        reject(`Bulk upload failed: Sheet ${sheetName} not found.`);
+      }
+      const index = workbook.SheetNames.indexOf(sheetName);
+      const sheet = workbook.SheetNames[index];
+      const jsonArray = xlsx.utils.sheet_to_json(workbook.Sheets[sheet]);
+      const batchSize = 1000;
+      // Split the array into batches
+      for (let i = 0; i < jsonArray.length; i += batchSize) {
+        const batch = jsonArray.slice(i, i + batchSize);
+        // eslint-disable-next-line no-await-in-loop
+        await Department.bulkWrite(
+          batch.map((doc) => ({
+            updateOne: {
+              filter: { DepartmentCode: doc.DepartmentCode },
+              update: { $set: doc },
+              upsert: true,
+            },
+          }))
+        );
+      }
+      resolve(true);
+    } catch (error) {
+      reject(`Bulk upload failed: ${error.message}`);
     }
-    const batchSize = 1000;
-    if (!modifiedSchoolArray || !modifiedSchoolArray.length) {
-      throw new Error('Missing array');
-    }
-    const jsonArray = await csv().fromFile(modifiedSchoolArray);
 
-    // Split the array into batches
-    for (let i = 0; i < jsonArray.length; i += batchSize) {
-      const batch = jsonArray.slice(i, i + batchSize);
-      // eslint-disable-next-line no-await-in-loop
-      await Department.bulkWrite(
-        batch.map((doc) => ({
-          updateOne: {
-            filter: { DepartmentCode: doc.DepartmentCode },
-            update: { $set: doc },
-            upsert: true,
-          },
-        }))
-      );
-    }
-  } catch (error) {
-    throw new Error(`Bulk upload failed: ${error.message}`);
-  }
+  })
 };
 
 /**

@@ -12,7 +12,7 @@ const subSubDepartmentSchema = mongoose.Schema(
     },
     DepartmentDescription: {
       type: String,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
     },
@@ -24,7 +24,7 @@ const subSubDepartmentSchema = mongoose.Schema(
     },
     SubDepartmentDescription: {
       type: String,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
     },
@@ -38,7 +38,7 @@ const subSubDepartmentSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubSubDepartmentWeightage: {
       type: Number,

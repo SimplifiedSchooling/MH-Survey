@@ -16,7 +16,7 @@ const createAuditParameter = catchAsync(async (req, res) => {
       throw new Error('No file uploaded');
     }
     const filePath = req.file.path;
-    const sheetName = 'Sheet1'; // Use the available sheet name
+    const sheetName = 'Audit parameters'; // Use the available sheet name
     const rows = await xlsxFile(filePath, { sheet: sheetName });
 
     const auditParams = [];

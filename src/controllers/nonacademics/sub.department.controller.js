@@ -11,14 +11,14 @@ const uploadsFolder = join(staticFolder, 'uploads');
 const createSubDepartment = catchAsync(async (req, res) => {
   try {
     if (req.file) {
-      if (req.file.mimetype !== 'text/csv') {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'Uploaded file must be in CSV format.');
+      if (req.file.mimetype !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Uploaded file must be in xlsx format.');
       }
-
-      const csvFilePath = join(uploadsFolder, req.file.filename);
-
-      await SubDepartmentService.createSubDepartment(null, csvFilePath);
-
+      const xlsxFilePath = join(uploadsFolder, req.file.filename);
+      const data = await SubDepartmentService.createSubDepartment(xlsxFilePath);
+      if(!data) {
+        res.status(400).send({ message: data.message });
+      }
       res.status(httpStatus.CREATED).send({ message: 'Data uploaded successfully.' });
     } else {
       throw new ApiError(httpStatus.NOT_FOUND, 'Missing file');

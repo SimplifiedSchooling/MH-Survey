@@ -30,6 +30,10 @@ router
   .patch(validate(departmentValidation.updatedepartmentbyId), departmentcontroller.updateDepartmentById)
   .delete(validate(departmentValidation.deleteDepartmentById), departmentcontroller.deleteistrictById);
 
+router
+  .route('/bulkupload-all')
+  .post(uploads.single('file'), departmentcontroller.createAllHierarchy);
+
 module.exports = router;
 
 /**
@@ -215,4 +219,28 @@ module.exports = router;
  *         DepartmentCode: HR
  *         DepartmentDescription: Human Resources and Development
  *         DepartmentWeightage: 20
+ */
+
+
+/**
+ * @swagger
+ * /department/bulkupload-all:
+ *   post:
+ *     summary: Create a new Hierarchy Data
+ *     tags: [Department]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Successfully added CSV file
+ *       404:
+ *         description: Missing file
  */

@@ -49,24 +49,24 @@ const auditParameterSchema = mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubCategory: {
       type: String,
       trim: true,
       required: true,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     SubSubCategory: {
       type: String,
       trim: true,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     OnsiteorOffsite: {
       type: String,
       trim: true,
       required: true,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
     },
     roles: [
       {

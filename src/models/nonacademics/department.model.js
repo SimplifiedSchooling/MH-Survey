@@ -12,7 +12,7 @@ const departmentSchema = mongoose.Schema(
     },
     DepartmentDescription: {
       type: String,
-      set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
+      // set: (value) => _.startCase(_.toLower(value.replace(/_/g, ' '))),
       required: true,
       trim: true,
     },
