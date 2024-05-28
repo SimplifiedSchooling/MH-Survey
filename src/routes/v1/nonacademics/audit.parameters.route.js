@@ -299,7 +299,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /auditparameter/departmentlist/byrolecode/{roleCode}/{schoolId}:
+ * /auditparameter/departmentlist/byrolecode/{roleCode}/{schoolId}/{level}:
  *   get:
  *     summary: Get questions by role code
  *     tags: [AuditParameter]
@@ -314,6 +314,10 @@ module.exports = router;
  *         name: schoolId
  *         required: true
  *         description: School ID to filter questions
+ *       - in: path
+ *         name: level
+ *         required: true
+ *         description: level to filter questions
  *         schema:
  *           type: string
  *       - in: query

@@ -28,8 +28,8 @@ const createOrUpdateAuditAnswer = async (filter, data) => {
       for (const newData of data.answers) {
         const existingAnswerIndex = auditAnswer.answers.findIndex(
           (existingAnswer) =>
-
-          existingAnswer.question === newData.question &&
+            existingAnswer.QuestionNumber === newData.QuestionNumber &&
+            existingAnswer.question === newData.question &&
             existingAnswer.category === newData.category &&
             existingAnswer.subCategory === newData.subCategory &&
             existingAnswer.OnsiteorOffsite === newData.OnsiteorOffsite &&
