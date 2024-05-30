@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 
-const nonAcademicUserOTPSchema = mongoose.Schema({
+const nonAcademicUserOTPSchema = mongoose.Schema(
+  {
     mobNumber: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     otp: {
-        type: Number,
-        required: true
-    }
+      type: Number,
+      required: true,
     },
-    {
-        timestamps: true,
-    }
-)
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const NonAcademicUserOTP = mongoose.model('NonAcademicUserOTP', nonAcademicUserOTPSchema);
 module.exports = NonAcademicUserOTP;

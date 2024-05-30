@@ -1,12 +1,11 @@
-const { plivoVar } = require('../config/config');
 const plivo = require('plivo');
+const { plivoVar } = require('./config');
 
-const authId = plivoVar.authId;
-const authToken = plivoVar.authToken;
+const { authId } = plivoVar;
+const { authToken } = plivoVar;
 
 const plivoClient = new plivo.Client(authId, authToken);
 
-
 module.exports = {
-    plivoClient
-}
+  plivoClient,
+};

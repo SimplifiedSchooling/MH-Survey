@@ -18,10 +18,8 @@ const createAuditAnswer = async (auditAnswerBody) => {
  * @returns {Promise<AuditAnswer>} - Updated or created audit answer object
  */
 const createOrUpdateAuditAnswer = async (filter, data) => {
-
   let auditAnswer = await AuditAnswer.findOne(filter);
   if (!auditAnswer) {
-    console.log("auditAnswer data",data)
     auditAnswer = await AuditAnswer.create(data);
   } else {
     if (Array.isArray(data.answers)) {
@@ -110,7 +108,7 @@ const getAuditAnswersByFilters = async (filters) => {
     subDeptCode: filters.subDepartmentCode,
     subSubDeptCode: filters.subSubDepartmentCode,
     // roleCode: filters.roleCode,
-    level:filters.level,
+    level: filters.level,
     frequency: filters.frequency,
     // userId: filters.userId,
   };
@@ -135,19 +133,20 @@ const getAuditAnswersByFilters = async (filters) => {
       });
     });
   });
-  const additionalProperties = auditAnswers.length > 0
-    ? {
-        schoolId: auditAnswers[0].schoolId,
-        deptCode: auditAnswers[0].deptCode,
-        subDeptCode: auditAnswers[0].subDeptCode,
-        subSubDeptCode: auditAnswers[0].subSubDeptCode,
-        frequency: auditAnswers[0].frequency,
-        roleCode: auditAnswers[0].roleCode,
-        level:auditAnswers[0].level,
-        userId: auditAnswers[0].userId,
-        finalSubmit: auditAnswers[0].finalSubmit,
-      }
-    : {};
+  const additionalProperties =
+    auditAnswers.length > 0
+      ? {
+          schoolId: auditAnswers[0].schoolId,
+          deptCode: auditAnswers[0].deptCode,
+          subDeptCode: auditAnswers[0].subDeptCode,
+          subSubDeptCode: auditAnswers[0].subSubDeptCode,
+          frequency: auditAnswers[0].frequency,
+          roleCode: auditAnswers[0].roleCode,
+          level: auditAnswers[0].level,
+          userId: auditAnswers[0].userId,
+          finalSubmit: auditAnswers[0].finalSubmit,
+        }
+      : {};
 
   return { ...additionalProperties, groupedAnswers };
 };

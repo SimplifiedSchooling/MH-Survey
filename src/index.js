@@ -6,15 +6,17 @@ const logger = require('./config/logger');
 mongoose.set('strictQuery', false);
 
 let server;
-mongoose.connect(config.mongoose.url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  logger.info('Connected to MongoDB');
-   server = app.listen(config.port, () => {
-    logger.info(`Listening to port ${config.port}`);
-});
-});
+mongoose
+  .connect(config.mongoose.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    logger.info('Connected to MongoDB');
+    server = app.listen(config.port, () => {
+      logger.info(`Listening to port ${config.port}`);
+    });
+  });
 
 const exitHandler = () => {
   if (server) {

@@ -67,6 +67,6 @@ module.exports = {
     entityId: process.env.PLIVO_ENTITY_ID,
     templateID: process.env.PLIVO_TEMPLATE_ID,
     templateCategory: process.env.PLIVO_TEMPLATE_CATEGORY,
-    smsHeader: process.env.PLIVO_SENDER_HEADER
-  }
+    smsHeader: process.env.PLIVO_SENDER_HEADER,
+  },
 };

@@ -15,7 +15,6 @@ const createSurveyAnswers = async (reqBody) => {
     throw new Error('Audit already filled for this location ');
   }
   return await SMESurveyAnswers.create(reqBody);
-
 };
 
 /**
