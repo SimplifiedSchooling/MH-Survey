@@ -21,7 +21,6 @@ const createSurveyAnswers = async (reqBody) => {
   return data;
 };
 
-
 /**
  * Query for survey answer
  * @param {Object} filter - Mongo filter

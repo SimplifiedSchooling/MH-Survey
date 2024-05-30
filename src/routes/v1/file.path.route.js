@@ -1,12 +1,9 @@
 const express = require('express');
-// const validate = require('../../middlewares/validate');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('node-uuid');
-// const auth = require('../../middlewares/auth');
 const { filePathController } = require('../../controllers');
 const { uploadFileMiddleware } = require('../../middlewares/bucket');
-// const { divisionValidation } = require('../../validations');
 
 const storageMulter = multer.diskStorage({
   destination: '/home/ubuntu/MH-Survey/src/uploads',
@@ -16,7 +13,10 @@ const storageMulter = multer.diskStorage({
   },
 });
 
-const upload = multer({ storageMulter });
+const upload = multer({
+  storage: storageMulter,
+  limits: { fileSize: 15 * 1024 * 1024 },
+});
 
 const router = express.Router();
 

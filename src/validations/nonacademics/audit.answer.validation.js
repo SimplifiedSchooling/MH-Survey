@@ -9,7 +9,7 @@ const getAuditAnswers = {
     frequency: Joi.string().required(),
     schoolId: Joi.string().required(),
     roleCode: Joi.string(),
-    level:Joi.string().required(),
+    level: Joi.string().required(),
     userId: Joi.required().custom(objectId),
   }),
 };

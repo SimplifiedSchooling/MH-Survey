@@ -5,7 +5,10 @@ const authController = require('../../../controllers/nonacademics/auth.controlle
 const validate = require('../../../middlewares/validate');
 const authValidation = require('../../../validations/auth.validation');
 const userController = require('../../../controllers/nonacademics/user.controller');
-const { loginWithOtpParameter, loginWithOtpValidationParameter } = require('../../../validations/nonacademics/auth.validation');
+const {
+  loginWithOtpParameter,
+  loginWithOtpValidationParameter,
+} = require('../../../validations/nonacademics/auth.validation');
 
 const router = express.Router();
 
@@ -25,7 +28,7 @@ router.post('/roles/bulkupload', uploads.single('file'), userController.bulkUplo
 router.post('/auth/login', validate(authValidation.login), authController.login);
 router.get('/user-role/info', userController.getUserRoleInfo);
 router.post('/auth/login/otp', validate(loginWithOtpParameter), authController.loginWithOtp);
-router.post('/auth/login/otp-verify', validate(loginWithOtpValidationParameter), authController.validateOtp)
+router.post('/auth/login/otp-verify', validate(loginWithOtpValidationParameter), authController.validateOtp);
 
 module.exports = router;
 

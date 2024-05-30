@@ -53,5 +53,5 @@ module.exports = {
   getUserByEmail,
   bulkUploadNonAcademicUserRoles,
   findUserRoleDetail,
-  getUserByMobNumber
+  getUserByMobNumber,
 };

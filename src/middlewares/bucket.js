@@ -1,5 +1,6 @@
 const { Storage } = require('@google-cloud/storage');
 const path = require('path');
+const retry = require('async-retry');
 const logger = require('../config/logger');
 
 // Initialize Google Cloud Storage
@@ -22,33 +23,45 @@ async function setDefaultObjectAcl() {
     ],
   });
 }
-
-// Middleware function for file upload
 const uploadFileMiddleware = async (req, res, next) => {
   if (!req.file) {
     logger.error('No file uploaded');
+    return res.status(400).send('No file uploaded');
   }
-  const { file } = req;
-  const blob = bucket.file(file.originalname);
-  const blobStream = blob.createWriteStream({
-    resumable: false,
-    metadata: {
-      contentType: file.mimetype,
-    },
-  });
-  blobStream.on('error', (err) => {
-    logger.error('Error uploading file:', err);
-  });
 
-  blobStream.on('finish', async () => {
-    // File upload successful
-    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-    req.fileUrl = publicUrl;
+  const { file } = req;
+
+  try {
+    await retry(
+      async () => {
+        const blob = bucket.file(file.originalname);
+        await new Promise((resolve, reject) => {
+          const blobStream = blob.createWriteStream({
+            resumable: false,
+            metadata: {
+              contentType: file.mimetype,
+            },
+          });
+          blobStream.on('error', reject);
+          blobStream.on('finish', resolve);
+          blobStream.end(file.buffer);
+        });
+      },
+      {
+        retries: 5,
+        minTimeout: 1000,
+        maxTimeout: 5000,
+      }
+    );
 
     await setDefaultObjectAcl();
-    next();
-  });
-  blobStream.end(file.buffer);
-};
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${file.originalname}`;
+    req.fileUrl = publicUrl;
 
+    next();
+  } catch (error) {
+    logger.error('Error uploading file:', error);
+    res.status(500).send('Error uploading file');
+  }
+};
 module.exports = { uploadFileMiddleware };

@@ -10,11 +10,12 @@ const createAuditAnswer = catchAsync(async (req, res) => {
 });
 
 const createOrUpdateAuditAnswer = catchAsync(async (req, res) => {
-  console.log("level",req.body)
-  const { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode,level, finalSubmit, userId, answers } = req.body;
-  const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode,level, userId };
-  const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, level,finalSubmit, userId, answers };
-  console.log("data",data,"filter",filter)
+  console.log('level', req.body);
+  const { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, level, finalSubmit, userId, answers } =
+    req.body;
+  const filter = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, level, userId };
+  const data = { schoolId, deptCode, subDeptCode, subSubDeptCode, frequency, roleCode, level, finalSubmit, userId, answers };
+  console.log('data', data, 'filter', filter);
   const auditAnswer = await AuditAnswerService.createOrUpdateAuditAnswer(filter, data);
   res.status(httpStatus.OK).json(auditAnswer);
 });
