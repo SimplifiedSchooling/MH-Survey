@@ -13,44 +13,31 @@ const storageMulter = multer.diskStorage({
   },
 });
 
+
 const upload = multer({
   storage: storageMulter,
   limits: { fileSize: 15 * 1024 * 1024 },
 });
 
+
 const router = express.Router();
+
+router.use(express.json({ limit: '800mb' }));
+router.use(express.urlencoded({ limit: '800mb', extended: true }));
 
 router
   .route('/')
   .post(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    upload.single('file'),
+   upload.single('file'),
     uploadFileMiddleware,
-    // validate(divisionValidation.createDivision),
     filePathController.createFilePath
   )
-  .get(
-    // auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-    // validate(divisionValidation.getDivisions),
+.get(
     filePathController.queryFilePath
   );
-
 router.route('/:questionId').get(
-  //   auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-  // validate(divisionValidation.getDivision),
   filePathController.getFilepath
 );
-//   .put(
-//     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     // validate(divisionValidation.updateDivision),
-//     filePathController.updateFilePath
-//   )
-//   .delete(
-//     auth('surveyadmin', 'district', 'division', 'block', 'SME', 'superadmin'),
-//     // validate(divisionValidation.deleteDivision),
-//     filePathController.deleteFilePath
-//   );
-
 module.exports = router;
 
 /**
