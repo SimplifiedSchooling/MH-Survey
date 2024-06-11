@@ -32,6 +32,38 @@ router
     uploadFileMiddleware,
     filePathController.createFilePath
   )
+// const express = require('express');
+// const multer = require('multer');
+// const path = require('path');
+// const { v4: uuidv4 } = require('uuid'); // Correct package name
+// const { filePathController } = require('../../controllers');
+// const { uploadFileMiddleware } = require('../../middlewares/bucket');
+
+// const storageMulter = multer.diskStorage({
+//   destination: '/home/ubuntu/MH-Survey/src/uploads',
+//   filename: (req, file, callback) => {
+//     const uniqueFileName = `${uuidv4()}${path.extname(file.originalname)}`;
+//     callback(null, uniqueFileName);
+//   },
+// });
+
+// const upload = multer({
+//   storage: storageMulter,
+//   limits: { fileSize: 15 * 1024 * 1024 }, // 15 MB limit
+// });
+
+// const router = express.Router();
+
+// router.use(express.json({ limit: '800mb' }));
+// router.use(express.urlencoded({ limit: '800mb', extended: true }));
+
+// router
+//   .route('/')
+//   .post(
+//     upload.array('files', 50), // Allow multiple files, max 10 files at a time
+//     uploadFileMiddleware,
+//     filePathController.createFilePath
+//   )
 .get(
     filePathController.queryFilePath
   );

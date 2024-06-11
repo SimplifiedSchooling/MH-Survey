@@ -12,7 +12,7 @@ const extractFilePath = (fileUrl) => {
 };
 
 const createFilePath = catchAsync(async (req, res) => {
-  req.body.file = extractFilePath(req.fileUrl);
+  req.body.file = await extractFilePath(req.fileUrl);
   const filePath = await filePathService.createFilePath(req.body);
   res.status(httpStatus.CREATED).send(filePath);
 });
